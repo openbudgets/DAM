@@ -7,6 +7,12 @@ This repository hosts implementation of the OBEU Data Analysis and Mining (The t
 Currently, it has three branches: master, staging, and production.
 OBEU Partners are encouraged to creat their own branches for doing testing (Python, Java, etc.), better just use their personal name as the branch name. 
 
+# Work flow
+<p align="center">
+  <img src="doc/pic/DAM_WF_example.png" width="350"/>
+
+</p>
+
 
 # Three main sub-tasks
 
