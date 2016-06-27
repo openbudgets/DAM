@@ -9,7 +9,7 @@ OBEU Partners are encouraged to creat their own branches for doing testing (Pyth
 
 # Work flow
 <p align="center">
-  <img src="doc/pic/DAM_WF_example.png" width="450"/>
+  <img src="doc/pic/DAM_WF_example.png" width="600"/>
 
 </p>
 
