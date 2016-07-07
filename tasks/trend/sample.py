@@ -25,4 +25,5 @@ flow = flow['1945-01':]
 res = sm.tsa.seasonal_decompose(flow)
 #res.trend, res.observed, res.seasonal, res.resid, res.nobs
 fig = res.plot()  
-plt.show()  
+plt.show()
+
