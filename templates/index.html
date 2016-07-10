@@ -6,30 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.css">
+  <link rel="stylesheet" href={{ url_for('static', filename='main.css') }}>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
+   
+  <script src={{ url_for('static', filename='main.js') }}></script> 
   <script type="text/javascript">
     var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
-  <style>
-    .custom {
-    width: 180px !important;
-    }
-
-    .dataset_width {
-    width: 240px !important;
-    }
- </style>
+   
 </head>
 <body>
 
 <div class="container">
-  <h1><span class="label label-primary dataset_width" id="cdata">Choose dataset</span></h1>
   <div>
-
-    <select class="form-control dataset_width" id="data_select">
-      <option value="None"></option>
+  <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="cdata">Choose dataset</span></label></h1>
+  <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="cdim">Dimensions</span></label></h1>
+  <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="ccode">Code-list</span></label></h1> 
+  <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="cremark">Remark</span></label></h1>
+  </div>
+  <div> 
+    <select class="form-control dataset_width side" id="data_select"  value="None">
+      <option value="None" ></option>
       <option value="Aragon">Aragon</option>
       <option value="Bonn">Bonn</option>
       <option value="ESIF_Sample">ESIF Sample</option>
@@ -40,8 +41,63 @@
       $('#data_select').on('change', function () {
       var selectVal = $("#data_select option:selected").val();
       document.getElementById("cdata").innerHTML = selectVal;
-      });
+      $.ajax({
+			 type: "GET",
+			 url: $SCRIPT_ROOT + "/observe_dim",
+			 contentType: "text/json; charset=utf-8",
+			 data: {city: $('#cdata').text() },
+			 success: function(data) { 
+				 console.log(data.result);
+				 jsonData = data.result;
+				 if (data.result){
+					 var dimContainer = document.getElementById('observe_dimension');
+					 remove_options(dimContainer);
+					 add_options_to_selection(dimContainer, jsonData);
+					 console.log(jsonData);
+					 }
+			 },
+				 
+			 error: function(jqXHR, textStatus, errorThrown) {
+		            alert(errorThrown);
+			 }
+      });     
+      })
     </script>
+    <!--  ****************************** -->
+    <select class="form-control dataset_width side" id="observe_dimension"> 
+  	</select>
+  	<script>
+      $('#observe_dimension').on('change', function () {
+      var selectVal = $("#observe_dimension option:selected").val();
+      if (selectVal){
+	      $.ajax({
+				 type: "GET",
+				 url: $SCRIPT_ROOT + "/code_list",
+				 contentType: "text/json; charset=utf-8",
+			 	 data: {dim: selectVal },
+			 	 success: function(data) { 
+					 console.log(data.result);
+				 	 jsonData = data.result;
+				 	 if (data.result){
+						 var dimContainer = document.getElementById('code_list');
+						 remove_options(dimContainer);
+					 	 add_options_to_selection(dimContainer, jsonData);
+					 	 console.log(jsonData);
+					 	}
+			 	},
+				 
+				 error: function(jqXHR, textStatus, errorThrown) {
+		        	    alert(errorThrown);
+			 	}
+      	});
+      }
+      })
+    </script>
+  	<select class="form-control dataset_width side" id="code_list"> 
+  	</select>
+  	<select class="form-control dataset_width side" id="code_remark"> 
+  	</select>	
+    
     <p><p>
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info btn-lg dataset_width" data-toggle="modal" data-target="#damModal">Data Analysis & Mining</button>
@@ -88,8 +144,15 @@
 
   <!-- output area -->
   <strong><div id="echoResult"></div></strong>
-  <div id="visualization"></div>
   
+  <div id="visualization"></div>
+ 
+   <!-- 
+   <div id="f31056422"></div>
+   <script type="text/javascript">
+    mpld3.draw_figure("f31056422", {"width": 640.0, "axes": [{"xlim": [0.0, 1.0], "yscale": "linear", "axesbg": "#EAEAF2", "texts": [], "zoomable": true, "images": [], "xdomain": [0.0, 1.0], "ylim": [0.10000000000000001, 1.0], "paths": [{"edgecolor": "#FFFFFF", "facecolor": "#EAEAF2", "edgewidth": 0.3, "pathcodes": ["M", "L", "L", "L", "Z"], "yindex": 1, "coordinates": "axes", "dasharray": "10,0", "zorder": 1000001.0, "alpha": 1, "xindex": 0, "data": "data02", "id": "363454617730896"}], "sharey": [], "sharex": [], "axesbgalpha": null, "axes": [{"grid": {"color": "#FFFFFF", "alpha": 1.0, "dasharray": "10,0", "gridOn": true}, "position": "bottom", "nticks": 6, "tickvalues": null, "tickformat": null}, {"grid": {"color": "#FFFFFF", "alpha": 1.0, "dasharray": "10,0", "gridOn": true}, "position": "left", "nticks": 10, "tickvalues": null, "tickformat": null}], "lines": [{"color": "#4C72B0", "yindex": 1, "coordinates": "data", "dasharray": "10,0", "zorder": 2, "alpha": 1, "xindex": 0, "linewidth": 1.4, "data": "data01", "id": "363454617729168"}], "markers": [], "id": "363454616431568", "ydomain": [0.10000000000000001, 1.0], "collections": [], "xscale": "linear", "bbox": [0.125, 0.099999999999999978, 0.77500000000000002, 0.80000000000000004]}], "data": {"data02": [[0.8975694444444445, 0.9305555555555556], [0.9887992831541218, 0.9305555555555556], [0.9887992831541218, 0.9842171717171717], [0.8975694444444445, 0.9842171717171717]], "data01": [[0.7884709865986378, 0.8710796390880277], [0.6256711247135093, 0.2566109715010527], [0.3359447878854377, 0.8765248121061339], [0.6728601761695596, 0.5975763820467942], [0.18684948786574185, 0.6041075199829672], [0.19491972941282099, 0.9398912219119647], [0.9267704471973628, 0.12385185006121469], [0.6768653956251186, 0.22580041359511138], [0.40356197033368935, 0.12709640992649407], [0.017945334425159887, 0.912858451972148]]}, "id": "363454571411408", "toolbar": ["reset", "move"], "height": 440.0});
+	</script>
+	 -->
   
   <!-- Task1 Modal content -->
   <div class="modal fade" id="task1Modal" role="dialog">
@@ -248,49 +311,39 @@
 		 $(function() {
 
 		 $("#submitBtn6").click(function() {
-		 $("#damModal").modal("hide");
-		 $("#task6Modal").modal("hide");
+			 $("#damModal").modal("hide");
+			 $("#task6Modal").modal("hide");
 		 
-		 $.ajax({
-		 type: "GET",
-		 url: $SCRIPT_ROOT + "/statistics/",
-		 contentType: "application/xml; charset=utf-8",
-		 data: {city: $('#cdata').text() },
-		 success: function(data) {
-
-		 var container = document.getElementById('visualization');
-		 var items = data.result['d'];
-		 var ymean = data.result['m'];
-		 var ystd = data.result['s'];
-		 console.log('data:', items['d']);
-		 
-		 var dataset = new vis.DataSet(items);
-		 var options = {
-		 width:  '100%',
-		 height: '400px',
-		 defaultGroup: 'amount',
-		 legend: true
-		 };
-		 
-		 var graph2d = new vis.Graph2d(container, dataset, options);
-		 
-		 },
-		 error: function(jqXHR, textStatus, errorThrown) {
-                 alert(errorThrown);
-		 }
-		 });     
-		 });
-		 });
+			 $.ajax({
+				 type: "GET",
+				 url: $SCRIPT_ROOT + "/statistics",
+				 contentType: "text/json; charset=utf-8",
+				 data: {city: $('#cdata').text() },
+				 success: function(data) { 
+					 //show_statistics_graph('visualization', data);
+					 jsonData = JSON.parse(data)
+					 mpld3.draw_figure("visualization", jsonData['fig']) ;
+					 
+					 },
+					 
+				 error: function(jqXHR, textStatus, errorThrown) {
+     		            alert(errorThrown);
+						 }
+					 });     
+				 });
+			 });
 	       </script>
-	       <strong>Enter a value to echo back:</strong>
-	       <input size="10" id="echoText" name="echoText" type="text">
+	       <strong>Introduction to Statistics</strong>
+	       <p mean, std, >
+	       <!-- <input size="10" id="echoText" name="echoText" type="text">
+	         -->
 	      <br><br>
 	       
 	       {% endblock %}
              </div>
              <div class="modal-footer">
-	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn6" name="submitBtn6">Submit</button>
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn6" name="submitBtn6">Execute</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
              </div>
 	   </div>
     </div>

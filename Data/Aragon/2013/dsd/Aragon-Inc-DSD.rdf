@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:aragon="http://data.openbudgets.eu/ontology/aragon-budget/"
+	xmlns:aragon-attribute="http://data.openbudgets.eu/ontology/dsd/aragon-budget/attribute/"
+	xmlns:aragon-dimension="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/"
+	xmlns:obeu="http://data.openbudgets.eu/ontology/"
+	xmlns:obeu-attribute="http://data.openbudgets.eu/ontology/dsd/attribute/"
+	xmlns:obeu-dimension="http://data.openbudgets.eu/ontology/dsd/dimension/"
+	xmlns:obeu-measure="http://data.openbudgets.eu/ontology/dsd/measure/"
+	xmlns:org="http://www.w3.org/ns/org#"
+	xmlns:qb="http://purl.org/linked-data/cube#"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#DataStructureDefinition"/>
+	<rdfs:label xml:lang="en">Data structure definition for the expenditure part of the Aragonian budget (autonomous community in northeastern Spain).</rdfs:label>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx1">
+	<qb:dimension rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/budgetaryUnit"/>
+	<qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx2">
+	<qb:dimension rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/operationCharacter"/>
+	<qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx2"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx3">
+	<qb:dimension rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/fiscalYear"/>
+	<qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx3"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx4">
+	<qb:dimension rdf:resource="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/administrativeClassification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx4"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx5">
+	<qb:dimension rdf:resource="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/economicClassification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx5"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx6">
+	<qb:dimension rdf:resource="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/fundingClassification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx6"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx7">
+	<qb:attribute rdf:resource="http://data.openbudgets.eu/ontology/dsd/attribute/currency"/>
+	<qb:componentRequired rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</qb:componentRequired>
+	<qb:componentAttachment rdf:resource="http://purl.org/linked-data/cube#DataSet"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx7"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1anbcouplx8">
+	<qb:measure rdf:resource="http://data.openbudgets.eu/ontology/dsd/measure/amount"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013">
+	<qb:component rdf:nodeID="node1anbcouplx8"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/administrativeClassification">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#CodedProperty"/>
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#DimensionProperty"/>
+	<rdf:type rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/administrativeClassification"/>
+	<rdfs:label xml:lang="en">Organization managing the planned budget</rdfs:label>
+	<rdfs:comment xml:lang="en">The administrative classification is organized hierarchical in four levels.</rdfs:comment>
+	<rdfs:subPropertyOf rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/classification"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<qb:codeList rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_organica_aragon_2013/"/>
+	<rdfs:isDefinedBy rdf:resource="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/economicClassification">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#CodedProperty"/>
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#DimensionProperty"/>
+	<rdf:type rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/economicClassification"/>
+	<rdfs:label xml:lang="en">Economic Classification</rdfs:label>
+	<rdfs:comment xml:lang="en">Identifies the type of expenditure incurred or source of revenues. The economic classification is organized hierarchical into chapters, articles, concepts, and sub-concepts. This dimension is used for both, expenditure and revenue.</rdfs:comment>
+	<rdfs:subPropertyOf rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/classification"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<qb:codeList rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_economica_i_aragon_2013/"/>
+	<rdfs:isDefinedBy rdf:resource="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013/dimension/fundingClassification">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#CodedProperty"/>
+	<rdf:type rdf:resource="http://purl.org/linked-data/cube#DimensionProperty"/>
+	<rdfs:label xml:lang="en">Funding Classification</rdfs:label>
+	<rdfs:comment xml:lang="en">Describes the origin of the funding. The funding classification is organized hierarchical into origin, fund, and program. This dimension is used for both, expenditure and revenue.</rdfs:comment>
+	<rdfs:subPropertyOf rdf:resource="http://data.openbudgets.eu/ontology/dsd/dimension/classification"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<qb:codeList rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_financiacion_i_aragon_2013/"/>
+	<rdfs:isDefinedBy rdf:resource="http://data.openbudgets.eu/ontology/dsd/aragon-budget-inc-2013"/>
+</rdf:Description>
+
+</rdf:RDF>

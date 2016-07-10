@@ -1,71 +1,66 @@
-var app = angular.module('damTask', ['angularModalService']);
+/**
+ * 
+ */
 
-app.controller('taskController', ["$scope", "ModalService",
-				  function($scope, ModalService) {
-				      
-				      $scope.configTA = function() {
-					  ModalService.showModal({
-					      templateUrl: 'modal.html',
-					      controller: "ModalController",
-					      inputs:{
-						  name: "Fry",
-						  year: 3001
-					      }
-					  }).then(function(modal) {
-					  //    modal.element.modal();
-					      modal.close.then(function(result) {
-						  $scope.message = "You said " + result;
-					      });
-					  });
-				      };
-				      
-				  }]);
+function remove_options(selectbox)
+{
+    var i;
+    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }
+}
 
-app.controller('ModalController', function($scope, close) {
-    $scope.close = function(result) {
- 	close(result,500); // close, but give 500ms for bootstrap to animate
-    };
-});
+function add_options_to_selection(select, opLst){
+	var option = document.createElement("option");
+	option.text = "";
+	select.appendChild(option);
+	for (var i=0; i < opLst.length; i++){
+		op = opLst[i];
+		console.log(op);
+		var option = document.createElement("option");
+		option.text = op.split('/').slice(-1)[0];
+		select.appendChild(option);
+	} 
+}
 
-/*
-(function () {
-    'use strict';
-    angular.module('damTask', ['angularModalService'])
-	.controller('taskController',
-		    ['$scope', '$log', '$http', '$timeout', 
-
-		     function($scope, ModalService) {
-			 $scope.configTA = function() {
-			     ModalService.showModal({
-				 templateUrl: 'modal.html',
-				 controller: "ModalController"
-			     }).then(function(modal) {
-				 modal.element.modal();
-				 modal.close.then(function(result) {
-				     $scope.message = "You said ";
-				 });
-			     });
-			 };	 
-		     },
-		     
-		     function($scope, $log, $http, $timeout) {
-			 $scope.trendAnalysis = function() {
-			     $log.log('in controller, trendAnalysis');
-			     // get the URL from the input
-			     var userInput = $scope.startYear;
-			     // fire the API request
-			     $log.log(userInput);
-			     $http.post('/trend_analysis', {"taJson": startYear}).
-				 success(function(results) {
-				     $log.log(results);
-				 }).
-				 error(function(error) {
-				     $log.log(error);
-				 });
-			 };
-		  
-		     }
-		    ]);
-}());
-
-*/
+function show_statistics_graph(container, data){
+	figjson = data;//.result;
+	console.log(figjson);
+	mpld3.draw_figure(container,figjson) ;
+	/*var names = ['centripetal', 'chordal', 'uniform', 'disabled'];
+	var items = data.result['d'];
+	var ymean = data.result['m'];
+	var ystd = data.result['s'];
+	console.log(ymean, ystd);
+		 
+	var groups = new vis.DataSet();
+	groups.add({
+		  id: 0,
+	        content: names[0],
+	        options: {
+	            drawPoints: false,
+	            interpolation: {
+	                parametrization: 'centripetal'
+	            }
+	        }});
+	var dataset = new vis.DataSet(items);
+	var options = {
+			sort: false,
+		      sampling:false,
+		      style:'points',
+		       
+		      drawPoints: {
+		          enabled: true,
+		          size: 6,
+		          style: 'circle' // square, circle
+		      },
+		      defaultGroup: 'Scatterplot',
+		      height: '600px',
+		      legend: true
+		};
+		 
+	var graph2d = new vis.Graph2d(container, dataset,  options);
+	*/
+ 
+}

@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:sesame="http://www.openrdf.org/schema/sesame#">
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/0111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Amortización y Gastos Financieros de la Deuda</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">0111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Amortiz. y gastos Deuda</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/011"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cortes de Aragón (Actividad Legislativa)</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cortes de Aragón</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/111"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1112">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones del Justicia de Aragón</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1112</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones del Justicia</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/111"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1113">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Aljafería</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1113</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Aljafería</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/111"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1114">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones de la Cámara de Cuentas de Aragón</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1114</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Act. Cámara de Cuentas</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/111"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1121">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Presidencia y Órganos de la Presidencia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1121</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Presidencia y Órg Presid</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/112"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1122">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Vicepresidencia y Órganos de la Vicepresidencia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1122</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Vicepresid. y Órg. Vicep.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/112"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1125">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Comisión Jurídica Asesora</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1125</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Comisión Jurídica Asesora</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/112"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1211">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Presidencia y Relaciones Institucionales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1211</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales PRI</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1212">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Centrales, Edificios e Instalaciones</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1212</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv.Centr,Edif e Instal.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1213">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Seguridad y Protección Civil</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1213</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv.Seg y Protec Civil</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1214">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Ordenación Administrativa</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1214</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Ordenación Administrativa</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1215">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Interior</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1215</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Interior</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1216">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Comunidades Aragonesas del Exterior</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1216</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Com.Aragonesas Exterior</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1217">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Relaciones Institucionales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1217</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Relac. Institucionales</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1219">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Unidad de la Policía Nacional adscrita a la Comunidad Autónoma</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1219</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">U.Policía Nacional ads.CA</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/121"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1221">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Dirección y Administración de la Función Pública</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1221</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Direc y Adm Func. Pública</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/122"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1231">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Selección, Formación y Perfeccionamiento del Personal</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1231</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Selec, Form y Perf Person</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/123"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1251">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo a la Administración Local</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1251</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo a la Admón. Local</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/125"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1252">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Política Territorial</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1252</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Política Territorial</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/125"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1253">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Estrategias Territoriales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1253</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Estrategias Territoriales</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/125"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1259">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cooperación con la Policía Local</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1259</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cooperación Policía Local</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/125"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1261">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Coordinación Administrativa en Huesca</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1261</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv.Coord.Admva.Huesca</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1262">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Coordinación Administrativa en Teruel</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1262</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv.Coord.Admva.Teruel</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1263">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Jurídicos</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1263</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Jurídicos</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1264">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Información Ciudadana y Documentación Administrativa</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1264</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Inform.Ciud y Docum Admva</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1265">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Telemáticos</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1265</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Telemáticos</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1266">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Televisión y Radio Autonómicas</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1266</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">TV y Radio Autonómicas</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1267">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones Relativas al Desarrollo Estatutario</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1267</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Act. Rel.Dllo.Estatutario</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1268">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Información y Participación Ciudadana</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1268</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Inform. Partic. Ciudadana</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1269">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Política Territorial, Justicia e Interior</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1269</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv.Gen.P.T. Just. e Int</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/126"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1311">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones de Relaciones Exteriores</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1311</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Act. Relac. Exteriores</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/131"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1341">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cooperación al Desarrollo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1341</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cooperación al Desarrollo</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/134"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/1421">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Administración de Justicia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">1421</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv. Admon. Justicia</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/142"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Servicios Sociales y Familia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv. G. S.Social y Fam.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/311"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3131">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prestaciones Asistenciales y Servicios Sociales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3131</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prest. Asist y Serv Soc</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/313"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3132">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión y Desarrollo de la Acción Social</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3132</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión y Dllo Acción Soc</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/313"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3133">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Política Integral de Apoyo a la Familia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3133</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Política  Apoyo Familia</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/313"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3134">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Atención a la dependencia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3134</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Atención a la dependencia</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/313"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3135">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Acción Social en Favor del Personal</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3135</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Acc Social a favor person</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/313"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3151">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Relaciones Laborales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3151</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Relaciones Laborales</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/315"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3221">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento del Empleo. Instituto Aragonés de Empleo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3221</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento del Empleo. INAEM</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/322"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3222">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento del Empleo. Escuelas Taller</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3222</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento del Empleo EE.TT.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/322"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3225">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento del Empleo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3225</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento del Empleo</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/322"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3229">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Consejo Económico y Social de Aragón</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3229</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Consejo Econom y Social</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/322"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3231">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción de la Juventud</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3231</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción de la Juventud</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/323"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3232">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción de la Mujer</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3232</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción de la Mujer</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/323"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/3241">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo a la Inmigración</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">3241</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo a la Inmigración</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/324"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Salud y Consumo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Svcios G. Salud y Consumo</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/411"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4121">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Asistencia Sanitaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4121</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Asistencia Sanitaria</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/412"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4124">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Producción de componentes sanguíneos y de tejidos para uso sanitario</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4124</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prod.comp.sanguín. y tej.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/412"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4131">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Protección y Promoción de la Salud</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4131</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Protecc y Promoción Salud</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/413"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4132">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios de Atención al Usuario</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4132</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Serv. Atención Usuario</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/413"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4133">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Formación, Investigación, Asesoría y Cooperación en materia de Salud</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4133</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Form,Invest, Ases. y Coop</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/413"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4134">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Salud Pública</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4134</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Salud Pública</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/413"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4211">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Educación, Cultura y Deporte</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4211</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Svcios G. Educ,Cult y Dep</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/421"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4212">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión de Personal</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4212</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión de Personal</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/421"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4221">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Infantil y Primaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4221</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educ Infantil y Primaria</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4222">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Secundaria y Formación Profesional</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4222</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educ Secundaria y FP</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4223">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Especial</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4223</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Especial</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4224">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Enseńanzas Artísticas</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4224</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Enseńanzas Artísticas</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4225">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Permanente</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4225</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Permanente</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4226">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Plan Aragonés de Formación Profesional</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4226</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Plan Aragonés de F.P.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4227">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Formación del Profesorado</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4227</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Formación del Profesorado</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4228">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Universitaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4228</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Educación Universitaria</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4229">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Evaluación de la calidad de la Enseńanza Superior</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4229</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Eval. Calidad Enseńanza S</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/422"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4231">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Planificación y Ordenación Educativa</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4231</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Plan. y Ordción Educativa</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/423"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4311">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción y Administración de Viviendas</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4311</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prom y Admón.Viviendas</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/431"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4321">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Urbanismo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4321</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Urbanismo</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/432"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4323">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Arquitectura y Rehabilitación</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4323</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Arquitectura y Rehabil.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/432"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4421">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Medio Ambiente</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4421</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Srvcios G. Medio Ambiente</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/442"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4422">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Protección y Mejora del Medio Ambiente</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4422</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Protecc y Mejor Medio Amb</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/442"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4423">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión Ambiental</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4423</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión Ambiental</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/442"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4431">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Control del Consumo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4431</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Control del Consumo</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/443"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4521">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Archivos y Museos</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4521</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Archivos y Museos</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/452"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4522">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión de Bibliotecas</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4522</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión de Bibliotecas</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/452"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4553">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción y Acción Cultural</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4553</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prom y Acción Cultural</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/455"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4571">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento y apoyo a la Actividad Deportiva</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4571</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fom y apoyo Activ. Depor</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/457"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4581">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Protección y Difusión del Patrimonio Cultural</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4581</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prot Difusión Patrim Cult</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/458"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/4631">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Eleccciones Institucionales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">4631</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Elecc. Institucionales</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/463"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Obras Publicas, Urbanismo y Transportes</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">S Grales, OP, Urb.y Ttes.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/511"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5121">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión e Infraestructura de Recursos Hidráulicos</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5121</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gest e Infr Recur Hidrául</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/512"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5131">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Carreteras</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5131</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Carreteras</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/513"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5132">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Transportes</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5132</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Transportes</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/513"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5311">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Mejora de Estructuras Agrarias y Desarrollo Rural</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5311</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Mej Estr Agrar y Dllo Rur</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/531"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5331">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Protección y mejora del Medio Natural</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5331</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Prot y mejora Medio Nat.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/533"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5332">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Conservación de la Biodiversidad y Desarrollo Sostenible</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5332</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cons. Biodiv. y Des.Sost</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/533"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5411">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Ciencia, Tecnología  y Universidad</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5411</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Svcios G. Cienc,Tecn,Univ</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/541"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5421">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Investigación Agroalimentaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5421</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Invest Agroalimentaria</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/542"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5422">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Investigación y Tecnología Aplicada a la Industria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5422</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Inv Tecnolog Aplic Indust</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/542"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5423">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Investigación, Desarrollo e Innovación Tecnológica</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5423</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Inves, Dllo e Innovac Tec</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/542"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5424">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Investigación y Desarrollo para la Sociedad de la Información</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5424</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Inves y Dllo Soc Infor</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/542"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/5511">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Elaboración y Difusión Estadística</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">5511</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Elab y difus Estadística</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/551"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Economía, Hacienda y Empleo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Svcios G. Ec,Hcda y Empl</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/611"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6121">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Planificación y Dirección Presupuestaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6121</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Planific.y Direcc Presup</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6122">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción y Desarrollo Económico</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6122</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Promoción y Dllo Económ.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6123">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Plan Minería del Carbón y Desarrollo Alternativo de las Comarcas Mineras</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6123</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Plan Minería del Carbón</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6124">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Corporación Empresarial Pública de Aragón</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6124</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Corp. Empr. Públ. Aragón</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6126">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo al Desarrollo Económico y Social</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6126</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo Dllo Econ y Social</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6127">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Relaciones Económicas Internacionales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6127</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Rel. Econom. Internac.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6129">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gastos no clasificados</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6129</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gastos no clasificados</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/612"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6152">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones relativas a Programas Europeos</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6152</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Act Programas Europeos</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/615"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6221">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Ordenación y Promoción Comercial</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6221</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Ordción y Prom Comercial</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/622"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6231">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Comercio Exterior y Relaciones Económicas Internacionales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6231</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Comer Ext y Rel Ec. Int.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/623"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6311">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión e Inspección de Tributos</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6311</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión e Inspec Tributos</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/631"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6312">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Control Interno y Contabilidad</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6312</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Control Interno y Contab</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/631"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6313">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión del Patrimonio</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6313</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión del Patrimonio</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/631"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6314">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión de Tesorería</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6314</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Gestión de Tesorería</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/631"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6315">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Estudios Económicos y Documentación</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6315</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Estudios Econ y Document</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/631"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6411">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Junta Consultiva de Contratación Administrativa de la Comunidad Autónoma</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6411</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Junta Consult. Contrat.Ad</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/641"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/6421">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones en materia de Defensa de Competencia</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">6421</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Acts. Defensa Competencia</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/642"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Agricultura y Alimentación</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Svcios G. Agricult y Alim</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/711"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7121">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Desarrollo Agroalimentario y Fomento Asociativo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7121</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Dllo Agroalim y Fmto Asoc</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/712"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7122">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Coordinación y  Gestión de Servicios Agroalimentar</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7122</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Coord y Gest Serv. Agroal</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/712"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7123">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Producción Agraria y Gestión de Ayudas</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7123</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Producc Agr y Gest Ayudas</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/712"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7128">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Política Agraria Comunitaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7128</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Política Agraria Comunita</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/712"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7161">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Calidad y Seguridad Alimentaria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7161</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Calidad y Segur Alimentar</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/716"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7211">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Servicios Generales de Industria, Comercio y Turismo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7211</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Svcios G. Ind,Com. y Tur.</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/721"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7221">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Actuaciones Administrativas sobre Industria</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7221</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Act Admtva sobre Industr</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/722"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7231">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento Industrial</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7231</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento Industrial</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/723"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7311">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fomento y Gestión Energética</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7311</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Fmto y Gestión Energética</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/731"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7312">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo a la Minería</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7312</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Apoyo a la Minería</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/731"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/7511">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Ordenación, Promoción y Fomento del Turismo</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">7511</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Ordción y Prom y Fmto Tur</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/751"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/9111">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Transferencias a Administraciones Comarcales</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">9111</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Transfer AA.PP. Comarcal</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/911"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/9112">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cohesión Comarcal</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">9112</note>
+	<prefLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Cohesión Comarcal</prefLabel>
+	<broader xmlns="http://www.w3.org/2004/02/skos/core#" rdf:resource="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/911"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://data.openbudgets.eu/resource/codelist/estructura_funcional_aragon_2007/0">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<altLabel xmlns="http://www.w3.org/2004/02/skos/core#" xml:lang="es">Deuda Pública</altLabel>
+	<note xmlns="http://www.w3.org/2004/02/skos/core#">0</note>
+	<prefLabel xmlns="http://www.w3.org/
