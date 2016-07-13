@@ -3,6 +3,7 @@ from flask import Flask, jsonify, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
 import datasets as ds
 import tasks.statistics as statis 
+import tasks.outlier_detection as outlier
 import tasks.myutil as mutil
 
 import numpy as np 
@@ -32,6 +33,8 @@ def echo():
     ret_data = {"value": request.args.get('echoValue')}
     print(ret_data)
     return jsonify(ret_data)
+
+
 
 
 @app.route('/clustering', methods=['GET'])
@@ -66,6 +69,27 @@ def get_code_list_of_dimension():
     else:
         return jsonify(result='')
 
+
+@app.route('/outlier_detection', methods=['GET'])
+def do_outlier_detection():  
+    data = request.args.get('city')
+    print(data)
+    ret_data = {}
+    """
+    print(data)
+    cityName = data.get('city')
+    print(cityName)
+    if cityName != 'None':
+        ret_data = {}
+    else:
+        ttlDataset = ds.datasets.get(cityName, '')[0]
+        print(request.args.get('dim'))
+        dimList = request.args.get('dim')
+        print(dimList)
+        ret_data = {}#outlier.detect_outliers(city=cityName, dim=dimList, outliers_fraction = 0.25)
+    """
+    return ret_data
+
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
     cityName = request.args.get('city')
@@ -84,28 +108,7 @@ def trend_analysis(taJson):
     hstr = '<h1>in trend_analysis with parameter {}</h1>'.format(taJson)
     return hstr
     
-
-def build_plot():
-    x_deets = np.random.random(10)
-    y_deets = np.random.random(10)
-    fig, ax = plt.subplots()
-    indata = pd.DataFrame(x_deets, y_deets,)
-    indata.plot(ax=ax)
-    output = dumps(mpld3.fig_to_dict(fig))
-    return output
-
-# Define our URLs and pages.
-@app.route('/fig')
-def render_plot():
-    sample_list = list(np.random.randint(1,99999999,size=1))
-    dict_of_plots = list()
-    for i in sample_list:
-        single_chart = dict()
-        single_chart['id'] = 'fig_'+str(i)
-        single_chart['json'] = build_plot()     
-        dict_of_plots.append(single_chart)
-    return render_template('plots.html', dict_of_plots=dict_of_plots)#snippet=plot_snippet)
-
+ 
 if __name__ == '__main__':
     app.run(debug=true)
 

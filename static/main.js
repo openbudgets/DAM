@@ -2,6 +2,9 @@
  * 
  */
 
+dimensionLst = [] 
+checkedDimDict = {}
+
 function remove_options(selectbox)
 {
     var i;
@@ -12,16 +15,68 @@ function remove_options(selectbox)
 }
 
 function add_options_to_selection(select, opLst){
+	dimensionLst = opLst;
 	var option = document.createElement("option");
 	option.text = "";
 	select.appendChild(option);
 	for (var i=0; i < opLst.length; i++){
+		
 		op = opLst[i];
-		console.log(op);
+		checkedDimDict[op] = false;
+		console.log('checkedDimDict',op);
 		var option = document.createElement("option");
 		option.text = op.split('/').slice(-1)[0];
 		select.appendChild(option);
 	} 
+}
+
+function create_dim_checkboxes(idStr) {
+
+    var container = document.getElementById(idStr);
+
+    for (var i = 0; i < dimensionLst.length; i++) {
+
+        var dim1 = dimensionLst[i];
+        console.log(dim1);
+
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.name = "chk" + dimensionLst[i];
+        checkbox.value = "value";
+        checkbox.id = "chk" + dimensionLst[i];
+
+        checkbox.onclick = (function(ele) {
+            return function () {
+                console.log(ele);
+                console.log('checkedDimDict['+ele+']',checkedDimDict[ele])
+                checkedDimDict[ele] = !checkedDimDict[ele];
+                console.log('checkedDimDict['+ele+']',checkedDimDict[ele]);
+            };
+        }(dim1))
+ 
+
+        var label = document.createElement('label')
+        label.htmlFor = "chk" + dimensionLst[i];
+        label.appendChild(document.createTextNode(dimensionLst[i]));
+
+        container.appendChild(checkbox);
+        container.appendChild(label);
+        var nline = document.createElement('br')
+		container.appendChild(nline);
+    }
+
+}
+ 
+function get_selected_dims(){
+	var lst = []
+	console.log(checkedDimDict);
+	for (var key in checkedDimDict){
+		var value=checkedDimDict[key]; 
+		if (value){ 
+			lst.push(key.split('/').slice(-1)[0]);
+		}
+	} 
+	return lst;
 }
 
 function show_statistics_graph(container, data){

@@ -54,6 +54,9 @@
 					 remove_options(dimContainer);
 					 add_options_to_selection(dimContainer, jsonData);
 					 console.log(jsonData);
+					  
+					 var div = document.getElementById("checkboxOfTask1");	
+					 create_dim_checkboxes("checkboxOfTask1");
 					 }
 			 },
 				 
@@ -162,57 +165,49 @@
                <button type="button" class="close" data-dismiss="modal">&times;</button>
                <h4 class="modal-title">  <div id="od_task"> Outlier Detection </div></h4>
              </div>
+             
              <div class="modal-body">
-	       {% block content %}
+	       {% block content1 %}
 	       <script type="text/javascript">
-		 $(function() {
-
-		 $("#submitBtn1").click(function() {
-		 $("#damModal").modal("hide");
-		 $("#task1Modal").modal("hide");
-		 
-		 $.ajax({
-		 type: "GET",
-		 url: $SCRIPT_ROOT + "/echo/",
-		 contentType: "application/xml; charset=utf-8",
-		 data: { echoValue: $('#cdata').text() },
-		 success: function(data) {
-                 $('#echoResult').text(data.value);
-		 var container = document.getElementById('visualization');
-		 var items = [
-		 {x: '2014-06-11', y: 10},
-		 {x: '2014-06-12', y: 25},
-		 {x: '2014-06-13', y: 30},
-		 {x: '2014-06-14', y: 10},
-		 {x: '2014-06-15', y: 15},
-		 {x: '2014-06-16', y: 30}
-		 ];
-		 
-		 var dataset = new vis.DataSet(items);
-		 var options = {
-		 start: '2014-06-10',
-		 end: '2014-06-18'
-		 };
-		 var graph2d = new vis.Graph2d(container, dataset, options);
-		 
-		 },
-		 error: function(jqXHR, textStatus, errorThrown) {
-                 alert(errorThrown);
-		 }
-		 });     
-		 });
-		 });
+			 $(function() { 
+			  $("#submitBtn1").click(function() { 
+			 		$("#damModal").modal("hide");
+		 	 		$("#task1Modal").modal("hide"); 
+		 	 		var selectedDimLst = get_selected_dims();
+		 	 		//var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};   
+		 	 	  $.ajax({
+					 type: "GET",
+					 url: $SCRIPT_ROOT + "/outlier_detection",
+					 contentType: "text/json; charset=utf-8",
+					 data: {city: $('#cdata').text() }, 
+					 success: function(data) { 
+						 var div = document.getElementById('visualization');
+						 while(div.firstChild){
+						     div.removeChild(div.firstChild);
+						 }
+						 jsonData = JSON.parse(data)
+					 	 
+						 },
+						 
+					 error: function(jqXHR, textStatus, errorThrown) {
+	     		            alert(errorThrown);
+							 }
+					}); //ajax     
+					});
+				 });//click #submitBtn1 
+				 
 	       </script>
-	       <strong>Enter a value to echo back:</strong>
-	       <input size="10" id="echoText" name="echoText" type="text">
+	        <strong>Choose dimensions:</strong> 
+	        <div id="checkboxOfTask1"></div>  
+             	
+ 	       
 	      <br><br>
-	       
-	       {% endblock %}
-             </div>
+	       </div>
+	       {% endblock %} 
              <div class="modal-footer">
-	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
-		<button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
-             </div>
+	        	<button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
+				<button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
+            </div>
 	   </div>
     </div>
   </div>
@@ -227,13 +222,56 @@
                <h4 class="modal-title">Pattern Mining</h4>
              </div>
              <div class="modal-body">
-             
-	     
-             </div>
-             <div class="modal-footer">
-	       <button type="button" class="btn btn-info btn-lg custom" id="submitBtn2" name="submitBtn2">Submit</button>
-               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-             </div>
+              {% block content %}
+	       <script type="text/javascript">
+			 $(function() {
+
+			 $("#submitBtn2").click(function() {
+			 	$("#damModal").modal("hide");
+		 	 	$("#task1Modal").modal("hide");
+		 
+			 	$.ajax({
+			 		type: "GET",
+		 			url: $SCRIPT_ROOT + "/echo/",
+		 			contentType: "application/xml; charset=utf-8",
+		 			data: { echoValue: $('#cdata').text() },
+		 			success: function(data) {
+                		 $('#echoResult').text(data.value);
+		 				var container = document.getElementById('visualization');
+		 				var items = [
+		 					{x: '2014-06-11', y: 10},
+		 					{x: '2014-06-12', y: 25},
+		 					{x: '2014-06-13', y: 30},
+		 					{x: '2014-06-14', y: 10},
+		 					{x: '2014-06-15', y: 15},
+		 					{x: '2014-06-16', y: 30}
+		 					];
+		 
+			 			var dataset = new vis.DataSet(items);
+			 			var options = {
+					 		start: '2014-06-10',
+		 					end: '2014-06-18'
+		 					};
+		 				var graph2d = new vis.Graph2d(container, dataset, options);
+		 
+			 		},
+		 			error: function(jqXHR, textStatus, errorThrown) {
+          	    	   alert(errorThrown);
+			 		}
+		 		}); //$.ajax     
+			 });
+		 		});//click #submitBtn2 
+	       </script>
+	       <strong>Enter a value to echo back:</strong>
+	       <input size="10" id="echoText" name="echoText" type="text">
+	      <br><br>
+	       
+	       {% endblock %}
+          </div>
+          <div class="modal-footer">
+	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn2" name="submitBtn2">Submit</button>
+			<button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
+          </div> 
 	   </div>
     </div>
   </div>
@@ -321,6 +359,10 @@
 				 data: {city: $('#cdata').text() },
 				 success: function(data) { 
 					 //show_statistics_graph('visualization', data);
+					 var div = document.getElementById('visualization');
+					 while(div.firstChild){
+					     div.removeChild(div.firstChild);
+					 }
 					 jsonData = JSON.parse(data)
 					 mpld3.draw_figure("visualization", jsonData['fig']) ;
 					 
