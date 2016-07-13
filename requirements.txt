@@ -1,6 +1,7 @@
 alembic==0.8.6
 beautifulsoup4==4.4.1
 cycler==0.10.0
+Cython==0.24
 Flask==0.10.1
 Flask-Migrate==1.8.0
 Flask-Script==2.0.5
