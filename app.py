@@ -1,4 +1,4 @@
-import os
+import os 
 from flask import Flask, jsonify, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
 import datasets as ds
@@ -36,15 +36,6 @@ def echo():
 
 
 
-
-@app.route('/clustering', methods=['GET'])
-def do_clustering():
-    cityName = {"value": request.args.get('city')}
-    
-    ret_data = {}
-    print(ret_data)
-    return jsonify(ret_data)
-
 @app.route('/observe_dim', methods=['GET'])
 def get_dimensions_of_observation():
     cityName = request.args.get('city')
@@ -72,27 +63,22 @@ def get_code_list_of_dimension():
 
 @app.route('/outlier_detection', methods=['GET'])
 def do_outlier_detection():  
-    data = request.args.get('city')
-    print(data)
-    ret_data = {}
-    """
-    print(data)
-    cityName = data.get('city')
-    print(cityName)
-    if cityName != 'None':
+    cityName = request.args.get('city')
+    print('city name', cityName)  
+    if cityName == 'None':
         ret_data = {}
     else:
-        ttlDataset = ds.datasets.get(cityName, '')[0]
-        print(request.args.get('dim'))
-        dimList = request.args.get('dim')
+        ttlDataset = ds.datasets.get(cityName, '')[0] 
+        dimList = request.args.get('dim').split(',')
         print(dimList)
-        ret_data = {}#outlier.detect_outliers(city=cityName, dim=dimList, outliers_fraction = 0.25)
-    """
+        
+        ret_data = outlier.detect_outliers(dtable=ttlDataset, dim=dimList, outliers_fraction = 0.25)
+    
     return ret_data
 
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
-    cityName = request.args.get('city')
+    cityName = request.args.get('city') 
     print(cityName)
     if cityName != 'None':
         ttlDataset = ds.datasets.get(cityName, '')[0]
@@ -100,6 +86,16 @@ def do_statistics():
         ret_data = statis.simple_stats(ttlDataset)
     else:
         ret_data = {}
+    return ret_data #jsonify(result=ret_data)
+
+@app.route('/clustering', methods=['GET']) 
+def do_clustering(): 
+    print("in /clustering")
+    #mydata = request.get_json()
+    cityName = request.args.get('city') 
+    print('city Name', cityName)
+    
+    ret_data = {}
     return ret_data #jsonify(result=ret_data)
 
 @app.route('/trend_analysis/<taJson>', methods=['GET'])

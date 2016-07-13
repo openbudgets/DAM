@@ -68,15 +68,15 @@ function create_dim_checkboxes(idStr) {
 }
  
 function get_selected_dims(){
-	var lst = []
-	console.log(checkedDimDict);
+	var lst = [] 
 	for (var key in checkedDimDict){
 		var value=checkedDimDict[key]; 
 		if (value){ 
-			lst.push(key.split('/').slice(-1)[0]);
+			lst.push(key);
 		}
 	} 
-	return lst;
+	console.log('selected dims: ', lst);
+	return lst
 }
 
 function show_statistics_graph(container, data){

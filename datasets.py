@@ -1,6 +1,6 @@
 datasets={"Aragon":["Data/aragon-2006-income.rdf"],
-    "ESIF_Sample": ["Data/ESIF_Sample.csv"],
-       "Bonn": ["Data/BonnBudget2016_Sample10000.ttl", "https://github.com/openbudgets/datasets/blob/master/Bonn/dataset/BonnBudget2016_Sample10000.ttl"],
+          "ESIF_Sample": ["Data/ESIF_Sample.csv"],
+          "Bonn": ["Data/BonnBudget2016_Sample10000.ttl", "https://github.com/openbudgets/datasets/blob/master/Bonn/dataset/BonnBudget2016_Sample10000.ttl"],
           "ESIF":["https://github.com/openbudgets/datasets/blob/master/ESIF/2014/dataset/ESIF-2014-2020.ttl"],
           "Thessaloniki": ["https://github.com/openbudgets/datasets/blob/master/greek-municipalities/municipality-of-thessaloniki/dataset/budget-thessaloniki-expenditure-2011.ttl",
                            "https://github.com/openbudgets/datasets/blob/master/greek-municipalities/municipality-of-thessaloniki/dataset/budget-thessaloniki-expenditure-2012.ttl",

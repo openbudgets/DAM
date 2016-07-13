@@ -10,6 +10,18 @@ from sklearn.covariance import EllipticEnvelope
 
 # Example settings
 
+def detect_outliers(dtable='', dim=[], outliers_fraction = 0.25): 
+    """
+    dtable must be a rdf file
+    """
+    g = rdflib.Graph()
+    print(dtable)
+    g.parse(dtable)
+    df = construct_data_frame(g, dim)
+    
+    
+    
+
 def sample_outlier_detection():
     n_samples = 200 
     outliers_fraction = 0.25
@@ -158,10 +170,7 @@ def outlier_detection_for_2D(measure, x_num, y_num, x_range=[],  y_range=[],
 
     plt.show()
 
-def detect_outliers(city='', dim=[], outliers_fraction = 0.25):
-    
-    
-    {'city':cityName, 'dim': dimList}
+
 
 if __name__ == "__main__":
     sample_outlier_detection()

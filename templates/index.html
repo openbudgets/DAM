@@ -150,12 +150,7 @@
   
   <div id="visualization"></div>
  
-   <!-- 
-   <div id="f31056422"></div>
-   <script type="text/javascript">
-    mpld3.draw_figure("f31056422", {"width": 640.0, "axes": [{"xlim": [0.0, 1.0], "yscale": "linear", "axesbg": "#EAEAF2", "texts": [], "zoomable": true, "images": [], "xdomain": [0.0, 1.0], "ylim": [0.10000000000000001, 1.0], "paths": [{"edgecolor": "#FFFFFF", "facecolor": "#EAEAF2", "edgewidth": 0.3, "pathcodes": ["M", "L", "L", "L", "Z"], "yindex": 1, "coordinates": "axes", "dasharray": "10,0", "zorder": 1000001.0, "alpha": 1, "xindex": 0, "data": "data02", "id": "363454617730896"}], "sharey": [], "sharex": [], "axesbgalpha": null, "axes": [{"grid": {"color": "#FFFFFF", "alpha": 1.0, "dasharray": "10,0", "gridOn": true}, "position": "bottom", "nticks": 6, "tickvalues": null, "tickformat": null}, {"grid": {"color": "#FFFFFF", "alpha": 1.0, "dasharray": "10,0", "gridOn": true}, "position": "left", "nticks": 10, "tickvalues": null, "tickformat": null}], "lines": [{"color": "#4C72B0", "yindex": 1, "coordinates": "data", "dasharray": "10,0", "zorder": 2, "alpha": 1, "xindex": 0, "linewidth": 1.4, "data": "data01", "id": "363454617729168"}], "markers": [], "id": "363454616431568", "ydomain": [0.10000000000000001, 1.0], "collections": [], "xscale": "linear", "bbox": [0.125, 0.099999999999999978, 0.77500000000000002, 0.80000000000000004]}], "data": {"data02": [[0.8975694444444445, 0.9305555555555556], [0.9887992831541218, 0.9305555555555556], [0.9887992831541218, 0.9842171717171717], [0.8975694444444445, 0.9842171717171717]], "data01": [[0.7884709865986378, 0.8710796390880277], [0.6256711247135093, 0.2566109715010527], [0.3359447878854377, 0.8765248121061339], [0.6728601761695596, 0.5975763820467942], [0.18684948786574185, 0.6041075199829672], [0.19491972941282099, 0.9398912219119647], [0.9267704471973628, 0.12385185006121469], [0.6768653956251186, 0.22580041359511138], [0.40356197033368935, 0.12709640992649407], [0.017945334425159887, 0.912858451972148]]}, "id": "363454571411408", "toolbar": ["reset", "move"], "height": 440.0});
-	</script>
-	 -->
+ 
   
   <!-- Task1 Modal content -->
   <div class="modal fade" id="task1Modal" role="dialog">
@@ -179,7 +174,7 @@
 					 type: "GET",
 					 url: $SCRIPT_ROOT + "/outlier_detection",
 					 contentType: "text/json; charset=utf-8",
-					 data: {city: $('#cdata').text() }, 
+					 data: {city: $('#cdata').text(), dim: selectedDimLst.toString() }, 
 					 success: function(data) { 
 						 var div = document.getElementById('visualization');
 						 while(div.firstChild){
@@ -206,7 +201,7 @@
 	       {% endblock %} 
              <div class="modal-footer">
 	        	<button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
-				<button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
+				<button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
             </div>
 	   </div>
     </div>
@@ -348,7 +343,7 @@
 	       <script type="text/javascript">
 		 $(function() {
 
-		 $("#submitBtn6").click(function() {
+		 	$("#submitBtn6").click(function() {
 			 $("#damModal").modal("hide");
 			 $("#task6Modal").modal("hide");
 		 
@@ -438,7 +433,43 @@
                <h4 class="modal-title">Clustering </h4>
              </div>
              <div class="modal-body">
-             
+              {% block content9 %}
+	       <script type="text/javascript">
+		 $(function() {
+
+		 	$("#submitBtn9").click(function() {
+			 $("#damModal").modal("hide");
+			 $("#task9Modal").modal("hide");
+			 var selectedDimLst = get_selected_dims();
+			 $.ajax({
+				 type: "GET",
+				 url: $SCRIPT_ROOT + "/clustering",
+				 contentType:"text/json; charset=utf-8",
+				 data: {city: $('#cdata').text()},
+				 success: function(data) { 
+					 //show_statistics_graph('visualization', data);
+					 var div = document.getElementById('visualization');
+					 while(div.firstChild){
+					     div.removeChild(div.firstChild);
+					 }
+					 jsonData = JSON.parse(data)
+					  
+					 },
+					 
+				 error: function(jqXHR, textStatus, errorThrown) {
+     		            alert(errorThrown);
+						 }
+					 });     
+				 });
+			 });
+	       </script>
+	       <strong>Introduction to Statistics</strong>
+	       <p mean, std, >
+	       <!-- <input size="10" id="echoText" name="echoText" type="text">
+	         -->
+	      <br><br>
+	       
+	       {% endblock %}
              </div>
              <div class="modal-footer">
 	       <button type="button" class="btn btn-info btn-lg custom" id="submitBtn9" name="submitBtn9">Submit</button>
