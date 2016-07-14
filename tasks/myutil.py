@@ -1,4 +1,5 @@
 import rdflib
+import pandas as pd
 
 
 def construct_data_frame(g,dim=[]): 
@@ -9,7 +10,7 @@ def construct_data_frame(g,dim=[]):
         dim = get_all_dimensions(g)
     qstr = qstr_for_rdf_to_one_table(g, dim=dim)
     cols = ['ObservationID'] + dim + ['Measure']
-    qrlt = get_query_result_toPython(g, qstr) 
+    matrix = get_query_result_toPython(g, qstr) 
     """
     qrlt is a list of column values -- 'observation-id, dim[0], dim[1], ...,dim[n], 'measure'
     one row of get_query_result(g, qstr) looks as follows
@@ -20,12 +21,13 @@ def construct_data_frame(g,dim=[]):
     one row of get_query_result_toPython(g, qstr) looks as follows
                 [42, 91003, 370004, 20000.0]
     """
-    
-    
-    
-    
-    
-    return dimLst
+    data = {}
+    i = 0
+    for col in cols:
+        data[col] = get_column(matrix, i)
+        i += 1
+    frame = pd.DataFrame(data)
+    return frame 
     
 def qstr_for_rdf_to_one_table(g, dim=[]):
     qstr='select ?s '+ create_str_of_vars('?d', len(dim)) +' ?o   \
@@ -141,14 +143,15 @@ def is_a_string_float(aString):
   except ValueError:
     return False
 
+def get_column(matrix, i):
+    return [row[i] for row in matrix]
+
 if __name__ == "__main__":
     rdffile = '../Data/aragon-2006-income.rdf'
     g = rdflib.Graph()
     g.parse(rdffile)  
     dim = ["fundingClassification", "economicClassification"] 
-    qstr = qstr_for_rdf_to_one_table(g, dim=dim)
-    print(qstr)
-    rlt = get_query_result_toPython(g, qstr)
-    for row in rlt:
-        print(row)
+    frame = construct_data_frame(g, dim)
+    print(frame)
+    
     

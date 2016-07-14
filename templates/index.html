@@ -180,8 +180,8 @@
 						 while(div.firstChild){
 						     div.removeChild(div.firstChild);
 						 }
-						 jsonData = JSON.parse(data)
-					 	 
+						 jsonData = JSON.parse(data);
+						 mpld3.draw_figure("visualization", jsonData['fig']) ;
 						 },
 						 
 					 error: function(jqXHR, textStatus, errorThrown) {
