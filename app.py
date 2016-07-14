@@ -71,8 +71,8 @@ def do_outlier_detection():
         ttlDataset = ds.datasets.get(cityName, '')[0] 
         dimList = request.args.get('dim').split(',')
         print(dimList)
-        
-        ret_data = outlier.detect_outliers(dtable=ttlDataset, dim=dimList, outliers_fraction = 0.25)
+        per = float(request.args.get('per'))/100
+        ret_data = outlier.detect_outliers(dtable=ttlDataset, dim=dimList, outliers_fraction = per)
     
     return ret_data
 

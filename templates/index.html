@@ -169,12 +169,21 @@
 			 		$("#damModal").modal("hide");
 		 	 		$("#task1Modal").modal("hide"); 
 		 	 		var selectedDimLst = get_selected_dims();
+		 	 		var percent = $('#outlierPercent').val()
+		 	 		if (isNaN(percent)){
+		 	 			percent = 25}
+		 	 		else{
+		 	 			percent = parseFloat(percent)
+		 	 			if (percent >25 || percent <= 0){
+		 	 				percent = 25
+		 	 			}
+		 	 		}
 		 	 		//var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};   
 		 	 	  $.ajax({
 					 type: "GET",
 					 url: $SCRIPT_ROOT + "/outlier_detection",
 					 contentType: "text/json; charset=utf-8",
-					 data: {city: $('#cdata').text(), dim: selectedDimLst.toString() }, 
+					 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), per: percent}, 
 					 success: function(data) { 
 						 var div = document.getElementById('visualization');
 						 while(div.firstChild){
@@ -192,6 +201,8 @@
 				 });//click #submitBtn1 
 				 
 	       </script>
+	        <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
+		       <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
 	        <strong>Choose dimensions:</strong> 
 	        <div id="checkboxOfTask1"></div>  
              	

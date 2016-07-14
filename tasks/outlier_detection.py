@@ -33,9 +33,7 @@ def detect_outliers(dtable='', dim=[], outliers_fraction = 0.25):
         x_min, x_max = x_ar.min(), x_ar.max()
         x_len = x_max - x_min
         x_ar = (x_ar - (x_max + x_min)/2) /x_len
-         
-        
-        
+          
         y_ar = frame.Measure.values
         y_num = len(y_ar)
         y_min, y_max = y_ar.min(), y_ar.max()
@@ -117,26 +115,23 @@ def outlier_detection_for_2D(measure, x_num, y_num, x_range=[],  y_range=[],
             subplot.contourf(xx, yy, Z, levels=np.linspace(Z.min(), threshold, 7),
                              cmap=plt.cm.Blues_r)
             
-            a = subplot.contour(xx, yy, Z, levels=[threshold], linewidths=2, colors='red')
-            print('here 2')
-            subplot.contourf(xx, yy, Z, levels=[threshold, Z.max()], colors='orange')
-            
-            print('here 3')
+            a = subplot.contour(xx, yy, Z, levels=[threshold], linewidths=2, colors='red') 
+            subplot.contourf(xx, yy, Z, levels=[threshold, Z.max()], colors='orange') 
         
-            b = subplot.scatter(mutil.get_column(inliersLst,0), mutil.get_column(inliersLst,1), marker='+', c='red', label='inliers')
-            c = subplot.scatter(mutil.get_column(outliersLst,0), mutil.get_column(outliersLst,1), marker='>', c='black',label='outliers') 
+            b = subplot.scatter(mutil.get_column(inliersLst,0), mutil.get_column(inliersLst,1), c='green' )
+            c = subplot.scatter(mutil.get_column(outliersLst,0), mutil.get_column(outliersLst,1), marker='+', c='red') 
             
         
             subplot.axis('tight')
             subplot.legend(#loc='lower right', numpoints=1, ncol=3, fontsize=8, bbox_to_anchor=(0, 0))
                            (a.collections[0], b, c),
-                           ('learned decision function', str(len(inliersLst)) +' true inliers', str(len(outliersLst)) +' true outliers'),
-                           prop=matplotlib.font_manager.FontProperties(size=11))
+                           ('decision function', str(len(inliersLst)) +' true inliers', str(len(outliersLst)) +' true outliers'))#,
+                           #prop=matplotlib.font_manager.FontProperties(size=11))
             
             subplot.set_xlabel("%d. %s " % (i + 1, clf_name))
             subplot.set_xlim(x_range)
             subplot.set_ylim(y_range)
-        plt.subplots_adjust(0.04, 0.1, 0.96, 0.94, 0.1, 0.26)
+        #plt.subplots_adjust(0.04, 0.1, 0.96, 0.94, 0.1, 0.26)
         
     output = mpld3.fig_to_dict(fig) 
     return output
