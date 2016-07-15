@@ -2,15 +2,21 @@ import rdflib
 import pandas as pd
 
 
-def construct_data_frame(g,dim=[]): 
+def construct_data_frame(g,dim=[], withObservationId = True): 
     """
     if dim=[], take the whole dimensions
     """
     if dim==[]:
         dim = get_all_dimensions(g)
-    qstr = qstr_for_rdf_to_one_table(g, dim=dim)
-    cols = ['ObservationID'] + dim + ['Measure']
-    matrix = get_query_result_toPython(g, qstr) 
+    if  withObservationId :
+        qstr = qstr_for_rdf_to_one_table(g, dim=dim, withObservationId = True)
+        cols = ['ObservationID'] + dim + ['Measure']
+    else:
+        qstr = qstr_for_rdf_to_one_table(g, dim=dim, withObservationId = False)
+        cols =  dim + ['Measure']
+    
+    print(qstr, cols)
+    matrix = get_query_result_toPython(g, qstr)  
     """
     qrlt is a list of column values -- 'observation-id, dim[0], dim[1], ...,dim[n], 'measure'
     one row of get_query_result(g, qstr) looks as follows
@@ -26,11 +32,21 @@ def construct_data_frame(g,dim=[]):
     for col in cols:
         data[col] = get_column(matrix, i)
         i += 1
-    frame = pd.DataFrame(data)
+    frame = pd.DataFrame(data) 
     return frame 
+ 
+     
     
-def qstr_for_rdf_to_one_table(g, dim=[]):
-    qstr='select ?s '+ create_str_of_vars('?d', len(dim)) +' ?o   \
+def qstr_for_rdf_to_one_table(g, dim=[], withObservationId = True):
+    if withObservationId:
+        qstr='select ?s '+ create_str_of_vars('?d', len(dim)) +' ?o   \
+             where { '+ create_str_of_spo_vars('?s', varStems=['?p','?d'], num=len(dim)) +'\
+                         ?s ?m ?o .  \
+                         filter(contains(str(?s), "observation")   '+  create_filter_conditions('?p', dim) +'\
+                               && contains(str(?m),  "measure")   \
+                                   )  }'
+    else:
+        qstr='select '+ create_str_of_vars('?d', len(dim)) +' ?o   \
              where { '+ create_str_of_spo_vars('?s', varStems=['?p','?d'], num=len(dim)) +'\
                          ?s ?m ?o .  \
                          filter(contains(str(?s), "observation")   '+  create_filter_conditions('?p', dim) +'\
@@ -93,18 +109,18 @@ def get_code_list_of_dim(g, dim):
 
 
 def get_query_result_toPython(g, qstr):
-    rlt = []
-    qres = g.query(qstr)
-    for row in qres:
+    rlt = [] 
+    qres = g.query(qstr) 
+    for row in qres: 
         newRow=[]
         for ele in row:
-            pele = ele.toPython() 
+            pele = ele.toPython()  
             if isinstance(pele, str):
                 codeStr = pele.split('/')[-1]
                 newRow.append(try_to_turn_string_num(codeStr))
             else:
                 newRow.append(float(pele))
-        rlt.append(newRow)
+        rlt.append(newRow) 
     return rlt
 
 def get_query_result(g, qstr):

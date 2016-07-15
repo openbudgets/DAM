@@ -33,12 +33,10 @@ function add_options_to_selection(select, opLst){
 function create_dim_checkboxes(idStr) {
 
     var container = document.getElementById(idStr);
-
+    
     for (var i = 0; i < dimensionLst.length; i++) {
 
-        var dim1 = dimensionLst[i];
-        console.log(dim1);
-
+        var dim1 = dimensionLst[i]; 
         var checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.name = "chk" + dimensionLst[i];
@@ -77,6 +75,13 @@ function get_selected_dims(){
 	} 
 	console.log('selected dims: ', lst);
 	return lst
+}
+
+
+function plot_graph(container, data, classes=[]){
+	//{'data': X, 'cluster': labels}
+	
+	
 }
 
 function show_statistics_graph(container, data){

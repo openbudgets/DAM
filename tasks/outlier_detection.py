@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager
 from json import dumps, loads 
 from scipy import stats
-
 from sklearn import svm
 from sklearn.covariance import EllipticEnvelope
 
@@ -125,7 +124,8 @@ def outlier_detection_for_2D(measure, x_num, y_num, x_range=[],  y_range=[],
             subplot.axis('tight')
             subplot.legend(#loc='lower right', numpoints=1, ncol=3, fontsize=8, bbox_to_anchor=(0, 0))
                            (a.collections[0], b, c),
-                           ('decision function', str(len(inliersLst)) +' true inliers', str(len(outliersLst)) +' true outliers'))#,
+                           ('decision function', str(len(inliersLst)) +' true inliers', str(len(outliersLst)) +' true outliers'),
+                           framealpha=0)
                            #prop=matplotlib.font_manager.FontProperties(size=11))
             
             subplot.set_xlabel("%d. %s " % (i + 1, clf_name))

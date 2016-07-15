@@ -4,6 +4,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import datasets as ds
 import tasks.statistics as statis 
 import tasks.outlier_detection as outlier
+import tasks.clustering as cluster
 import tasks.myutil as mutil
 
 import numpy as np 
@@ -90,12 +91,17 @@ def do_statistics():
 
 @app.route('/clustering', methods=['GET']) 
 def do_clustering(): 
-    print("in /clustering")
-    #mydata = request.get_json()
+    print("in /clustering") 
     cityName = request.args.get('city') 
     print('city Name', cityName)
-    
-    ret_data = {}
+    if cityName != 'None':
+        ttlDataset = ds.datasets.get(cityName, '')[0]
+        dimList = request.args.get('dim').split(',')
+        print(ttlDataset,dimList)
+        n_clusters = int(request.args.get('n_clusters'))
+        ret_data = cluster.clustering(dtable=ttlDataset, dim=dimList, n_clusters = n_clusters) 
+    else:
+        ret_data = {}
     return ret_data #jsonify(result=ret_data)
 
 @app.route('/trend_analysis/<taJson>', methods=['GET'])
