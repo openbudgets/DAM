@@ -32,11 +32,23 @@
   <div> 
     <select class="form-control dataset_width side" id="data_select"  value="None">
       <option value="None" ></option>
-      <option value="Aragon">Aragon</option>
-      <option value="Bonn">Bonn</option>
+      <option value="Aragon-2006-income">Aragon-2006-income</option>
+      <option value="Aragon-2007-income">Aragon-2007-income</option>
+      <option value="Aragon-2008-income">Aragon-2008-income</option>
+      <option value="Aragon-2009-income">Aragon-2009-income</option>
+      <option value="Aragon-2010-income">Aragon-2010-income</option>
+      <option value="Aragon-2011-income">Aragon-2011-income</option>
+      <option value="Aragon-2012-income">Aragon-2012-income</option>
+      <option value="Aragon-2013-income">Aragon-2013-income</option>
+      <option value="Aragon-2014-income">Aragon-2014-income</option>
+      <option value="Aragon-2015-income">Aragon-2015-income</option>
+      <option value="Aragon-2016-income">Aragon-2016-income</option>
+      
+      <!-- option value="Bonn">Bonn</option>
       <option value="ESIF_Sample">ESIF Sample</option>
       <option value="ESIF">ESIF</option>
       <option value="Thessaloniki">Thessaloniki</option>
+       -->
     </select>
     <script>
       $('#data_select').on('change', function () {
@@ -198,7 +210,7 @@
 							 }
 
 							 jsonData = JSON.parse(data); 
-							 plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
+							// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
 							 mpld3.draw_figure("visualization", jsonData['fig']) ;
 							 },
 						 
