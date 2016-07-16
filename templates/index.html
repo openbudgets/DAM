@@ -47,19 +47,18 @@
 			 url: $SCRIPT_ROOT + "/observe_dim",
 			 contentType: "text/json; charset=utf-8",
 			 data: {city: $('#cdata').text() },
-			 success: function(data) { 
-				 console.log(data.result);
+			 success: function(data) {  
 				 jsonData = data.result;
 				 if (data.result){
 					 var dimContainer = document.getElementById('observe_dimension');
 					 remove_options(dimContainer);
 					 add_options_to_selection(dimContainer, jsonData);
 					 console.log(jsonData);
-					  
+					 
 					 var div = document.getElementById("checkboxOfTask1");	
-					 create_dim_checkboxes("checkboxOfTask1");
+					 create_dim_checkboxes("checkboxOfTask1", checkedDimDict1);
 					 var div = document.getElementById("checkboxOfTask9");	
-					 create_dim_checkboxes("checkboxOfTask9");
+					 create_dim_checkboxes("checkboxOfTask9", checkedDimDict9);
 					 }
 			 },
 				 
@@ -166,13 +165,15 @@
              
              <div class="modal-body">
 	       {% block content1 %}
-	       <script type="text/javascript">
+	       <script type="text/javascript"> 
 			 $(function() { 
 				 
 				  $("#submitBtn1").click(function() { 
 			 		$("#damModal").modal("hide");
 		 	 		$("#task1Modal").modal("hide"); 
-		 	 		var selectedDimLst = get_selected_dims();
+		 	 
+		 	 		var selectedDimLst = get_selected_dims(checkedDimDict1);
+		 	 		
 		 	 		var percent = $('#outlierPercent').val()
 		 	 		if (isNaN(percent)){
 		 	 			percent = 25}
@@ -183,34 +184,39 @@
 		 	 			}
 		 	 		}
 		 	 		//var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};   
-		 	 	  $.ajax({
-					 type: "GET",
-					 url: $SCRIPT_ROOT + "/outlier_detection",
-					 contentType: "text/json; charset=utf-8",
-					 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), per: percent}, 
-					 success: function(data) { 
-						 var div = document.getElementById('visualization');
-						 while(div.firstChild){
-						     div.removeChild(div.firstChild);
-						 }
-						 jsonData = JSON.parse(data);
-						 checkedDimDict = {}
-						 plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
-						 mpld3.draw_figure("visualization", jsonData['fig']) ;
-						 },
-						 
-					 error: function(jqXHR, textStatus, errorThrown) {
-						 	checkedDimDict = {}
-	     		            alert(errorThrown);
+		 	 		if (selectedDimLst.length == 1){
+			 	 	  $.ajax({
+						 type: "GET",
+						 url: $SCRIPT_ROOT + "/outlier_detection",
+						 contentType: "text/json; charset=utf-8",
+						 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), per: percent}, 
+						 success: function(data) { 
+							 $('#visualization').empty();
+							 var div = document.getElementById('visualization'); 
+							 while (div.hasChildNodes()) {
+							     div.removeChild(div.lastChild);
 							 }
-					}); //ajax     
+
+							 jsonData = JSON.parse(data); 
+							 plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
+							 mpld3.draw_figure("visualization", jsonData['fig']) ;
+							 },
+						 
+					 	error: function(jqXHR, textStatus, errorThrown) {
+							 	checkedDimDict = {}
+	     		            	alert(errorThrown);
+							 }
+						}); //ajax
+		 	 		}else{
+		 	 			alert('Please choose one dimension')
+		 	 		}
 					});
 				 });//click #submitBtn1 
 				 
 	       </script>
 	        <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
 		       <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
-	        <strong>Choose dimensions:</strong> 
+	        <strong>Choose one dimension:</strong> 
 	        <div id="checkboxOfTask1"></div>  
              	
  	       
@@ -373,6 +379,7 @@
 				 success: function(data) { 
 					 //show_statistics_graph('visualization', data);
 					 var div = document.getElementById('visualization');
+					 $('#visualization').empty();
 					 while(div.firstChild){
 					     div.removeChild(div.firstChild);
 					 }
@@ -453,41 +460,47 @@
              <div class="modal-body">
               {% block content9 %}
 	       <script type="text/javascript">
-		 $(function() {
-			 
+		 $(function() { 
  		 	 $("#submitBtn9").click(function() {
 			   $("#damModal").modal("hide");
 			   $("#task9Modal").modal("hide");
-			   var selectedDimLst = get_selected_dims();
-			   var numOfClusters = $('#NumOfClusters').val()
-			   $.ajax({
-				 type: "GET",
-				 url: $SCRIPT_ROOT + "/clustering",
-				 contentType:"text/json; charset=utf-8",
-				 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), n_clusters: numOfClusters},
-				 success: function(data) { 
-					 //show_statistics_graph('visualization', data);
-					 var div = document.getElementById('visualization');
-					 while(div.firstChild){
-					     div.removeChild(div.firstChild);
-					 }
-					 checkedDimDict = {}
-					 jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
-					 plot_graph("visualization", jsonData['data'], jsonData['cluster'])
-					 //mpld3.draw_figure("visualization", jsonData['fig']) ;
-					 },
+			   var selectedDimLst = get_selected_dims(checkedDimDict9);
+			  
+			   if (selectedDimLst.length === 2){
+				   var numOfClusters = $('#NumOfClusters').val()
+				   $.ajax({
+					 type: "GET",
+					 url: $SCRIPT_ROOT + "/clustering",
+					 contentType:"text/json; charset=utf-8",
+					 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), n_clusters: numOfClusters},
+				 	success: function(data) { 
+						 //show_statistics_graph('visualization', data);
+					 	var div = document.getElementById('visualization');
+					 	$('#visualization').empty();
+						while(div.firstChild){
+					    	 div.removeChild(div.firstChild);
+						 } 
+					 	jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
+					 	plot_graph("visualization", jsonData['data'], jsonData['cluster'])
+					 	//mpld3.draw_figure("visualization", jsonData['fig']) ;
+					 	},
 					 
-				 error: function(jqXHR, textStatus, errorThrown) {
+				 	error: function(jqXHR, textStatus, errorThrown) {
 					 	checkedDimDict = {}
      		            alert(errorThrown);
 						 }
-					 });     
+					 });
+				   }
+			   else{
+				   alert("Please choose 2 dimensions.")
+			   }
 				 });
 			 });
 	       </script>
 	       <strong>Introduction to Clustering</strong>
-	       <strong>How many clusters should the data be grouped?</strong>
+	       <strong>How many clusters should the data be grouped? (between two and ten groups) </strong>
 		       <input size="10" id="NumOfClusters" name="NumOfClusters" type="text"><br>
+		   <strong>Choose two dimensions:</strong>
 	       <div id="checkboxOfTask9"></div> 
 	      <br><br>
 	       

@@ -3,7 +3,8 @@
  */
 
 dimensionLst = [] 
-checkedDimDict = {}
+checkedDimDict1 = {}
+checkedDimDict9 = {}
 
 function remove_options(selectbox)
 {
@@ -22,15 +23,17 @@ function add_options_to_selection(select, opLst){
 	for (var i=0; i < opLst.length; i++){
 		
 		op = opLst[i];
-		checkedDimDict[op] = false;
-		console.log('checkedDimDict',op);
+		checkedDimDict1[op] = false;
+		checkedDimDict9[op] = false;
+		console.log('checkedDimDict1',op);
+		console.log('checkedDimDict9',op);
 		var option = document.createElement("option");
 		option.text = op.split('/').slice(-1)[0];
 		select.appendChild(option);
 	} 
 }
 
-function create_dim_checkboxes(idStr) {
+function create_dim_checkboxes(idStr, checkboxVar) {
 
     var container = document.getElementById(idStr);
     
@@ -46,9 +49,9 @@ function create_dim_checkboxes(idStr) {
         checkbox.onclick = (function(ele) {
             return function () {
                 console.log(ele);
-                console.log('checkedDimDict['+ele+']',checkedDimDict[ele])
-                checkedDimDict[ele] = !checkedDimDict[ele];
-                console.log('checkedDimDict['+ele+']',checkedDimDict[ele]);
+                console.log(checkboxVar[ele])
+                checkboxVar[ele] = !checkboxVar[ele];
+                console.log(checkboxVar[ele]);
             };
         }(dim1))
  
@@ -65,10 +68,11 @@ function create_dim_checkboxes(idStr) {
 
 }
  
-function get_selected_dims(){
+function get_selected_dims(checkboxVar){
 	var lst = [] 
-	for (var key in checkedDimDict){
-		var value=checkedDimDict[key]; 
+	console.log('in get_selected_dims ', checkboxVar)
+	for (var key in checkboxVar){
+		var value=checkboxVar[key]; 
 		if (value){ 
 			lst.push(key);
 		}
@@ -83,7 +87,10 @@ function plot_graph(containerId, matrix, labels){
 	var clusters = new Set(labels); 
 	clusters = Array.from(clusters);
 	console.log('clusters ', clusters);
-	var colors = ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)']
+	var colors = ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)',
+	              'rgb(228,126,28)','rgb(55,126,84)','rgb(177,175,74)',
+	              'rgb(28,126,28)','rgb(155,126,84)','rgb(177,75,74)',
+	              'rgb(128,126,28)','rgb(255,126,84)','rgb(277,75,74)']
 	
 	function select_data_in_cluster(rows, cluster){ 
 		rlt = []
@@ -99,29 +106,27 @@ function plot_graph(containerId, matrix, labels){
         return rows.map(function(row) { return row[col]; });
     }
 	
-	
+	var data=[]
 	for (var i=0; i < clusters.length; i++ ){
-		clusteredMatrix = select_data_in_cluster(matrix, clusters[i]); 
-		var data = [{
-	        x: unpack(clusteredMatrix, '0'),
-	        y: unpack(clusteredMatrix, '1'),
-	        z: unpack(clusteredMatrix, '2'),
-	        mode: 'markers',
-	        type: 'scatter3d',
-	        marker: {
-	          color: colors[i],//'rgb(23, 190, 207)', //depend on labels! 
-	          size: 2
-	        }
-	    },{
-	        alphahull: 7,
-	        opacity: 0.1,
-	        type: 'mesh3d',
-	        x: unpack(clusteredMatrix, 'x'),
-	        y: unpack(clusteredMatrix, 'y'),
-	        z: unpack(clusteredMatrix, 'z')
-	    }];
-
+		clusteredMatrix = select_data_in_cluster(matrix, clusters[i]);  
+		var trace = {
+		        x: unpack(clusteredMatrix, '0'),
+		        y: unpack(clusteredMatrix, '1'),
+		        z: unpack(clusteredMatrix, '2'),
+		        mode: 'markers',
+		        type: 'scatter3d',
+		        name: 'Cluster '+ i.toString(),
+		        marker: {
+		          color: colors[i],//'rgb(23, 190, 207)', //depend on labels! 
+		          size: 2
+		        }
+		    };
+		console.log(trace);
+		data.push(trace)
+	}
+	console.log(data);
 	    var layout = {
+	    	title: 'Clustering',
 	        autosize: true,
 	        height: 480,
 	        scene: {
@@ -148,24 +153,27 @@ function plot_graph(containerId, matrix, labels){
 	                }
 	            },
 	            xaxis: {
+	            	title: 'x Axis',
 	                type: 'linear',
 	                zeroline: false
 	            },
 	            yaxis: {
+	            	title: 'y Axis',
 	                type: 'linear',
 	                zeroline: false
 	            },
 	            zaxis: {
+	            	title: 'Measure',
 	                type: 'linear',
 	                zeroline: false
 	            }
 	        },
-	        title: '3d point clustering',
+	        title: 'My Title',
 	        width: 477
-	    };
+	};
 
-	    Plotly.plot(containerId, data, layout);//newPlot(containerId, data, layout);
-	}
+	 Plotly.newPlot(containerId, data, layout);//newPlot(containerId, data, layout);
+	
 	/*
 	var data = [{
 	        x: unpack(matrix, '0'),
