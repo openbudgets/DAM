@@ -78,10 +78,159 @@ function get_selected_dims(){
 }
 
 
-function plot_graph(container, data, classes=[]){
-	//{'data': X, 'cluster': labels}
+function plot_graph(containerId, matrix, labels){
+	//{'data': X, 'cluster': labels} 
+	var clusters = new Set(labels); 
+	clusters = Array.from(clusters);
+	console.log('clusters ', clusters);
+	var colors = ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)']
+	
+	function select_data_in_cluster(rows, cluster){ 
+		rlt = []
+		for (var i=0; i<rows.length; i++){
+			if (labels[i] === cluster){
+				rlt.push(rows[i])
+			}
+		}
+		return rlt
+	}
+	
+	function unpack(rows, col) {
+        return rows.map(function(row) { return row[col]; });
+    }
 	
 	
+	for (var i=0; i < clusters.length; i++ ){
+		clusteredMatrix = select_data_in_cluster(matrix, clusters[i]); 
+		var data = [{
+	        x: unpack(clusteredMatrix, '0'),
+	        y: unpack(clusteredMatrix, '1'),
+	        z: unpack(clusteredMatrix, '2'),
+	        mode: 'markers',
+	        type: 'scatter3d',
+	        marker: {
+	          color: colors[i],//'rgb(23, 190, 207)', //depend on labels! 
+	          size: 2
+	        }
+	    },{
+	        alphahull: 7,
+	        opacity: 0.1,
+	        type: 'mesh3d',
+	        x: unpack(clusteredMatrix, 'x'),
+	        y: unpack(clusteredMatrix, 'y'),
+	        z: unpack(clusteredMatrix, 'z')
+	    }];
+
+	    var layout = {
+	        autosize: true,
+	        height: 480,
+	        scene: {
+	            aspectratio: {
+	                x: 1,
+	                y: 1,
+	                z: 1
+	            },
+	            camera: {
+	                center: {
+	                    x: 0,
+	                    y: 0,
+	                    z: 0
+	                },
+	                eye: {
+	                    x: 1.25,
+	                    y: 1.25,
+	                    z: 1.25
+	                },
+	                up: {
+	                    x: 0,
+	                    y: 0,
+	                    z: 1
+	                }
+	            },
+	            xaxis: {
+	                type: 'linear',
+	                zeroline: false
+	            },
+	            yaxis: {
+	                type: 'linear',
+	                zeroline: false
+	            },
+	            zaxis: {
+	                type: 'linear',
+	                zeroline: false
+	            }
+	        },
+	        title: '3d point clustering',
+	        width: 477
+	    };
+
+	    Plotly.plot(containerId, data, layout);//newPlot(containerId, data, layout);
+	}
+	/*
+	var data = [{
+	        x: unpack(matrix, '0'),
+	        y: unpack(matrix, '1'),
+	        z: unpack(matrix, '2'),
+	        mode: 'markers',
+	        type: 'scatter3d',
+	        marker: {
+	          color: 'rgb(23, 190, 207)', //depend on labels! 
+	          size: 2
+	        }
+	    },{
+	        alphahull: 7,
+	        opacity: 0.1,
+	        type: 'mesh3d',
+	        x: unpack(matrix, 'x'),
+	        y: unpack(matrix, 'y'),
+	        z: unpack(matrix, 'z')
+	    }];
+
+	    var layout = {
+	        autosize: true,
+	        height: 480,
+	        scene: {
+	            aspectratio: {
+	                x: 1,
+	                y: 1,
+	                z: 1
+	            },
+	            camera: {
+	                center: {
+	                    x: 0,
+	                    y: 0,
+	                    z: 0
+	                },
+	                eye: {
+	                    x: 1.25,
+	                    y: 1.25,
+	                    z: 1.25
+	                },
+	                up: {
+	                    x: 0,
+	                    y: 0,
+	                    z: 1
+	                }
+	            },
+	            xaxis: {
+	                type: 'linear',
+	                zeroline: false
+	            },
+	            yaxis: {
+	                type: 'linear',
+	                zeroline: false
+	            },
+	            zaxis: {
+	                type: 'linear',
+	                zeroline: false
+	            }
+	        },
+	        title: '3d point clustering',
+	        width: 477
+	    };
+
+	    Plotly.plot(containerId, data, layout);//newPlot(containerId, data, layout);
+	 	*/
 }
 
 function show_statistics_graph(container, data){

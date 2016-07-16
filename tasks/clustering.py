@@ -32,9 +32,9 @@ def clustering(dtable='', dim=[], n_clusters = 2):
     estimator = KMeans(n_clusters = n_clusters) 
     estimator.fit(X) 
     labels = estimator.labels_
-    print(X)
+    print(frame.as_matrix().tolist())
     if len(dim)==2 :
-        return dumps({'data': X, 'cluster': labels})
+        return dumps({'data': frame.as_matrix().tolist(), 'cluster': labels.tolist()})
     else:
         return  dumps({'data': [], 'cluster': []})
     

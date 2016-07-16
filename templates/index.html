@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
   <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
    
@@ -57,6 +58,8 @@
 					  
 					 var div = document.getElementById("checkboxOfTask1");	
 					 create_dim_checkboxes("checkboxOfTask1");
+					 var div = document.getElementById("checkboxOfTask9");	
+					 create_dim_checkboxes("checkboxOfTask9");
 					 }
 			 },
 				 
@@ -165,7 +168,8 @@
 	       {% block content1 %}
 	       <script type="text/javascript">
 			 $(function() { 
-			  $("#submitBtn1").click(function() { 
+				 
+				  $("#submitBtn1").click(function() { 
 			 		$("#damModal").modal("hide");
 		 	 		$("#task1Modal").modal("hide"); 
 		 	 		var selectedDimLst = get_selected_dims();
@@ -190,10 +194,13 @@
 						     div.removeChild(div.firstChild);
 						 }
 						 jsonData = JSON.parse(data);
+						 checkedDimDict = {}
+						 plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
 						 mpld3.draw_figure("visualization", jsonData['fig']) ;
 						 },
 						 
 					 error: function(jqXHR, textStatus, errorThrown) {
+						 	checkedDimDict = {}
 	     		            alert(errorThrown);
 							 }
 					}); //ajax     
@@ -447,37 +454,41 @@
               {% block content9 %}
 	       <script type="text/javascript">
 		 $(function() {
-
-		 	$("#submitBtn9").click(function() {
-			 $("#damModal").modal("hide");
-			 $("#task9Modal").modal("hide");
-			 var selectedDimLst = get_selected_dims();
-			 $.ajax({
+			 
+ 		 	 $("#submitBtn9").click(function() {
+			   $("#damModal").modal("hide");
+			   $("#task9Modal").modal("hide");
+			   var selectedDimLst = get_selected_dims();
+			   var numOfClusters = $('#NumOfClusters').val()
+			   $.ajax({
 				 type: "GET",
 				 url: $SCRIPT_ROOT + "/clustering",
 				 contentType:"text/json; charset=utf-8",
-				 data: {city: $('#cdata').text()},
+				 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), n_clusters: numOfClusters},
 				 success: function(data) { 
 					 //show_statistics_graph('visualization', data);
 					 var div = document.getElementById('visualization');
 					 while(div.firstChild){
 					     div.removeChild(div.firstChild);
 					 }
-					 jsonData = JSON.parse(data)
-					  
+					 checkedDimDict = {}
+					 jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
+					 plot_graph("visualization", jsonData['data'], jsonData['cluster'])
+					 //mpld3.draw_figure("visualization", jsonData['fig']) ;
 					 },
 					 
 				 error: function(jqXHR, textStatus, errorThrown) {
+					 	checkedDimDict = {}
      		            alert(errorThrown);
 						 }
 					 });     
 				 });
 			 });
 	       </script>
-	       <strong>Introduction to Statistics</strong>
-	       <p mean, std, >
-	       <!-- <input size="10" id="echoText" name="echoText" type="text">
-	         -->
+	       <strong>Introduction to Clustering</strong>
+	       <strong>How many clusters should the data be grouped?</strong>
+		       <input size="10" id="NumOfClusters" name="NumOfClusters" type="text"><br>
+	       <div id="checkboxOfTask9"></div> 
 	      <br><br>
 	       
 	       {% endblock %}
