@@ -35,8 +35,7 @@ def construct_data_frame(g,dim=[], withObservationId = True):
     frame = pd.DataFrame(data) 
     return frame 
  
-     
-    
+
 def qstr_for_rdf_to_one_table(g, dim=[], withObservationId = True):
     if withObservationId:
         qstr='select ?s '+ create_str_of_vars('?d', len(dim)) +' ?o   \
@@ -54,6 +53,7 @@ def qstr_for_rdf_to_one_table(g, dim=[], withObservationId = True):
                                    )  }'
     return qstr
 
+
 def create_str_of_spo_vars(headStem, varStems=['?p','?d'], num=1):
     """
     function example: create_str_of_spo_vars(?s, varStems=['?p',?d], 3) ==> '?s ?p1 ?d1 . ?s ?p2 ?d2 . ?s ?p3 ?d3 . '
@@ -63,6 +63,7 @@ def create_str_of_spo_vars(headStem, varStems=['?p','?d'], num=1):
         rlt +=headStem +' ' + ' '.join(map(lambda s:s+str(i), varStems))+ " . "
     return rlt
 
+
 def create_filter_conditions(stem, dim):
     """
     function example: create_filter_conditions(?p, dim=["a", "b"]) ==> '&& contains(str(?p1), "a") && contains(str(?p2), "b")'
@@ -71,6 +72,7 @@ def create_filter_conditions(stem, dim):
     for i in range(1, len(dim)+1):
         rlt +=' && contains(str(' +stem+str(i)+ '), "'+ dim[i-1] + '")'
     return rlt
+
 
 def create_str_of_vars(stem, num):
     """
@@ -86,6 +88,7 @@ def get_all_dimensions(g):
     qstr_d = "select distinct ?s where {?s ?p ?o . filter (contains(str(?s), 'dimension'))  }"
     return get_query_result_column_n(g,  qstr_d, col= 0)
 
+
 def get_all_observation_ids(g):
     qstr_o = 'select distinct ?s ?p ?o where {?s ?p ?o. filter(contains(str(?s), "observation"))} order by asc(UCASE(str(?s)))'
     return get_query_result_column_n(g, qstr_o,col= 0)
@@ -94,14 +97,17 @@ def get_all_observations(g):
     qstr_o = 'select distinct ?s ?p ?o where {?s ?p ?o. filter(contains(str(?s), "observation"))} order by asc(UCASE(str(?s)))'
     return get_query_result(g, qstr_o)
 
+
 def get_dimensions_of_observations(g):
     qstr = 'select distinct ?p where {?s ?p ?o. filter(contains(str(?s), "observation") && contains(str(?p), "dimension"))} order by asc(UCASE(str(?s)))'
     return get_query_result_column_n(g, qstr, col=0)
+
 
 def get_dimensions_of_observations_from_rdf(rdf):
     g = rdflib.Graph()
     g.parse(rdf)
     return get_dimensions_of_observations(g)
+
 
 def get_code_list_of_dim(g, dim):
     qstr = 'select distinct ?o where {?s ?p ?o. filter(contains(str(?p), "'+dim+'") && contains(str(?o), "/codelist"))} order by asc(UCASE(str(?o)))'
@@ -123,6 +129,7 @@ def get_query_result_toPython(g, qstr):
         rlt.append(newRow) 
     return rlt
 
+
 def get_query_result(g, qstr):
     rlt = []
     qres = g.query(qstr)
@@ -131,12 +138,14 @@ def get_query_result(g, qstr):
         rlt.append(row)
     return rlt
 
+
 def get_query_result_column_n(g, qstr, col=0):
     rlt = []
     qres = g.query(qstr)
     for row in qres:
         rlt.append(row[col])
     return rlt
+
 
 def try_to_turn_string_num(aString):
     if is_a_string_int(aString):
@@ -146,22 +155,26 @@ def try_to_turn_string_num(aString):
     else:
         return aString
 
+
 def is_a_string_int(aString):
-  try:
-    int(aString)
-    return True
-  except ValueError:
-    return False
+    try:
+        int(aString)
+        return True
+    except ValueError:
+        return False
+
 
 def is_a_string_float(aString):
-  try:
-    float(aString)
-    return True
-  except ValueError:
-    return False
+    try:
+        float(aString)
+        return True
+    except ValueError:
+        return False
+
 
 def get_column(matrix, i):
     return [row[i] for row in matrix]
+
 
 if __name__ == "__main__":
     rdffile = '../Data/aragon-2006-income.rdf'

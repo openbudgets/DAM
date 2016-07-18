@@ -27,7 +27,6 @@ from models import Triples
 currentRDFFile = ''
 
 
-
 @app.route('/', methods=['GET','POST'])
 def index():
     return render_template('index.html')
@@ -38,7 +37,6 @@ def echo():
     ret_data = {"value": request.args.get('echoValue')}
     print(ret_data)
     return jsonify(ret_data)
-
 
 
 @app.route('/observe_dim', methods=['GET'])
@@ -56,6 +54,7 @@ def get_dimensions_of_observation():
         return jsonify(result=ret_data)
     else:
         return jsonify(result='')
+
 
 @app.route('/code_list', methods=['GET'])
 def get_code_list_of_dimension():
@@ -76,18 +75,19 @@ def get_code_list_of_dimension():
 @cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection():  
     print('in outlier detection')
-    cityName = request.args.get('city')
-    print('city name', cityName)  
-    if cityName == 'None':
+    city_name = request.args.get('city')
+    print('city name', city_name)
+    if city_name == 'None':
         ret_data = {}
     else:
-        ttlDataset = ds.datasets.get(cityName, '')[0] 
-        dimList = request.args.get('dim').split(',')
-        print(dimList)
+        ttl_dataset = ds.datasets.get(city_name, '')[0]
+        dim_list = request.args.get('dim').split(',')
+        print(dim_list)
         per = float(request.args.get('per'))/100
-        ret_data = outlier.detect_outliers(dtable=ttlDataset, dim=dimList, outliers_fraction = per)
+        ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
     
     return ret_data
+
 
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
@@ -100,6 +100,7 @@ def do_statistics():
     else:
         ret_data = {}
     return ret_data #jsonify(result=ret_data)
+
 
 @app.route('/clustering', methods=['GET']) 
 @cache.cached(timeout=300, key_prefix='all_comments')
@@ -117,9 +118,9 @@ def do_clustering():
         ret_data = {}
     return ret_data #jsonify(result=ret_data)
 
+
 @app.route('/trend_analysis/<taJson>', methods=['GET'])
 def trend_analysis(taJson):
-#    print('in app', taJson)
     hstr = '<h1>in trend_analysis with parameter {}</h1>'.format(taJson)
     return hstr
     

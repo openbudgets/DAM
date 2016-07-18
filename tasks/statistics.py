@@ -9,7 +9,6 @@ import tasks.myutil as mutil
 from collections import Counter
 
 
-
 def perform_statistics(rdf):
     points=[]
     ylst = []

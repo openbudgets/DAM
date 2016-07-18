@@ -103,7 +103,6 @@ def outlier_detection_for_2D(measure,x_len,x_mid, x_num, y_len, y_mid, y_num, x_
     return dumps({'in_x':inliersLst_x, 'in_y': inliersLst_y, 'out_x':outliersLst_x, 'out_y': outliersLst_y})
 
 
-
 def detect_outliers_output_fig(dtable='', dim=[], outliers_fraction = 0.25): 
     """
     dtable must be a rdf file
@@ -157,7 +156,7 @@ def outlier_detection_for_2D_with_plot(measure, x_num, y_num, x_range=[],  y_ran
     classifiers = {
                    "One-Class SVM": svm.OneClassSVM(nu=0.95 * outliers_fraction + 0.05,
                                                     kernel="rbf", gamma=0.1)}#,
-#                   "robust covariance estimator": EllipticEnvelope(contamination=.1)}
+    #              "robust covariance estimator": EllipticEnvelope(contamination=.1)}
     
     # Compare given classifiers under given settings
    
