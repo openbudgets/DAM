@@ -1,6 +1,7 @@
 import os 
 from flask import Flask, jsonify, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.cache import Cache
 import datasets as ds
 import tasks.statistics as statis 
 import tasks.outlier_detection as outlier
@@ -14,14 +15,17 @@ import pandas as pd
 import rdflib
 from json import dumps, loads 
 
+cache = Cache(config={'CACHE_TYPE':'simple'})
 app = Flask(__name__)
+cache.init_app(app)
+
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from models import Triples
+currentRDFFile = ''
 
-myGraph = rdflib.Graph()
 
 
 @app.route('/', methods=['GET','POST'])
@@ -39,11 +43,14 @@ def echo():
 
 @app.route('/observe_dim', methods=['GET'])
 def get_dimensions_of_observation():
+    global currentRDFFile
     cityName = request.args.get('city')
     print(cityName)
     if cityName != 'None':
         rdfDataset = ds.datasets.get(cityName, '')[0]
-        print(rdfDataset)
+        currentRDFFile = rdfDataset
+        print(rdfDataset) 
+        myGraph = rdflib.Graph()
         myGraph.parse(rdfDataset)
         ret_data =  mutil.get_dimensions_of_observations(myGraph)
         return jsonify(result=ret_data)
@@ -52,10 +59,13 @@ def get_dimensions_of_observation():
 
 @app.route('/code_list', methods=['GET'])
 def get_code_list_of_dimension():
+    global currentRDFFile
     dimName = request.args.get('dim')
-    print(dimName)
+    print(dimName, currentRDFFile)
     
-    if dimName != '' and myGraph: 
+    if dimName != '' and currentRDFFile != '': 
+        myGraph = rdflib.Graph()
+        myGraph.parse(currentRDFFile)
         ret_data =  mutil.get_code_list_of_dim(myGraph, dimName)
         return jsonify(result=ret_data)
     else:
@@ -63,7 +73,9 @@ def get_code_list_of_dimension():
 
 
 @app.route('/outlier_detection', methods=['GET'])
+@cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection():  
+    print('in outlier detection')
     cityName = request.args.get('city')
     print('city name', cityName)  
     if cityName == 'None':
@@ -84,12 +96,13 @@ def do_statistics():
     if cityName != 'None':
         ttlDataset = ds.datasets.get(cityName, '')[0]
         print(ttlDataset)
-        ret_data = statis.simple_stats(ttlDataset)
+        ret_data = statis.perform_statistics(ttlDataset)
     else:
         ret_data = {}
     return ret_data #jsonify(result=ret_data)
 
 @app.route('/clustering', methods=['GET']) 
+@cache.cached(timeout=300, key_prefix='all_comments')
 def do_clustering(): 
     print("in /clustering") 
     cityName = request.args.get('city') 

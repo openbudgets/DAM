@@ -127,6 +127,7 @@ def get_query_result(g, qstr):
     rlt = []
     qres = g.query(qstr)
     for row in qres:
+        print(row)
         rlt.append(row)
     return rlt
 

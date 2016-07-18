@@ -14,7 +14,97 @@ import tasks.myutil as mutil
 
 # Example settings
 
+
 def detect_outliers(dtable='', dim=[], outliers_fraction = 0.25): 
+    """
+    dtable must be a rdf file
+    """
+    g = rdflib.Graph()
+    print(dtable)
+    print(dim)
+    g.parse(dtable)
+    frame = mutil.construct_data_frame(g, dim) 
+    if len(dim) == 1:
+        
+        observations = frame.ObservationID.values
+        num = len(observations)
+        x_ar = frame[dim[0]].values
+        x_num = len(x_ar)
+        x_min, x_max = x_ar.min(), x_ar.max()
+        x_len = x_max - x_min
+        x_ar = (x_ar - (x_max + x_min)/2) /x_len
+        x_mid = (x_max + x_min)/2
+          
+        y_ar = frame.Measure.values
+        y_num = len(y_ar)
+        y_min, y_max = y_ar.min(), y_ar.max()
+        y_len = y_max - y_min
+        y_ar = (y_ar - (y_max + y_min)/2) /y_len
+        y_mid = (y_max + y_min)/2
+        measure = np.dstack((y_ar, x_ar))[0,:,:]
+                 
+        return outlier_detection_for_2D(measure, x_len,x_mid, x_num, y_len, y_mid, y_num, x_range=[-2,2], y_range=[-2, 2],
+                                        n_samples = num, outliers_fraction = outliers_fraction) 
+    return dumps({'in':[], 'out':[]})
+
+
+def outlier_detection_for_2D(measure,x_len,x_mid, x_num, y_len, y_mid, y_num, x_range=[],  y_range=[], 
+                            n_samples=200, outliers_fraction=0.25):  
+   
+    """
+    2D: two dimensions
+    xx range of one dimension
+    yy range of one dimension
+    sample:    xx, yy = np.meshgrid(np.linspace(-7, 7, 500), np.linspace(-7, 7, 500))
+    xx,yy  = np.meshgrid(np.linspace(*x_range, x_num), np.linspace(*y_range, y_num))
+    """
+    xx,yy = np.meshgrid(np.linspace(*x_range, x_num), np.linspace(*y_range, y_num))
+    clusters_separation = [0] #, 1, 2]
+
+    # define two outlier detection tools to be compared
+    classifiers = {
+                   "One-Class SVM": svm.OneClassSVM(nu=0.95 * outliers_fraction + 0.05,
+                                                    kernel="rbf", gamma=0.1)}#,
+#                   "robust covariance estimator": EllipticEnvelope(contamination=.1)}
+    
+    # Compare given classifiers under given settings
+    n_inliers = int((1. - outliers_fraction) * n_samples)
+    n_outliers = int(outliers_fraction * n_samples) 
+
+    # Fit the problem with varying cluster separation
+    for i, offset in enumerate(clusters_separation):
+        np.random.seed(42)
+        # Data generation 
+        # Fit the model with the One-Class SVM
+        fig = plt.figure(figsize=(10, 5))
+        for i, (clf_name, clf) in enumerate(classifiers.items()):
+            # fit the data and tag outliers
+            clf.fit(measure)
+            y_pred = clf.decision_function(measure).ravel()
+            threshold = stats.scoreatpercentile(y_pred,
+                                                100 * outliers_fraction) 
+            flagLst = y_pred - threshold
+            inliersLst = []
+            outliersLst = []
+            for j in range(x_num):
+                if flagLst[j] > 0:
+                    inliersLst.append(list(measure[j]))
+                else:
+                    outliersLst.append(list(measure[j]))
+            print('number inliersLst', len(inliersLst))
+            inliersLst_x = list(map(lambda ele: ele * x_len + x_mid, mutil.get_column(inliersLst,0)))
+            inliersLst_y = list(map(lambda ele: ele * y_len + y_mid, mutil.get_column(inliersLst,1)))
+            outliersLst_x = list(map(lambda ele: ele * x_len + x_mid, mutil.get_column(outliersLst,0)))
+            outliersLst_y = list(map(lambda ele: ele * y_len + y_mid, mutil.get_column(outliersLst,1)))
+    print(inliersLst_x)
+    print(inliersLst_y)
+    print(outliersLst_x)
+    print(outliersLst_y)
+    return dumps({'in_x':inliersLst_x, 'in_y': inliersLst_y, 'out_x':outliersLst_x, 'out_y': outliersLst_y})
+
+
+
+def detect_outliers_output_fig(dtable='', dim=[], outliers_fraction = 0.25): 
     """
     dtable must be a rdf file
     """
@@ -45,7 +135,7 @@ def detect_outliers(dtable='', dim=[], outliers_fraction = 0.25):
         return  dumps({'fig':output})
     
     
-def outlier_detection_for_2D(measure, x_num, y_num, x_range=[],  y_range=[], 
+def outlier_detection_for_2D_with_plot(measure, x_num, y_num, x_range=[],  y_range=[], 
                             n_samples=200, outliers_fraction=0.25):  
     print('measure', measure)
     print('x_num', x_num)

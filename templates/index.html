@@ -65,11 +65,17 @@
 					 var dimContainer = document.getElementById('observe_dimension');
 					 remove_options(dimContainer);
 					 add_options_to_selection(dimContainer, jsonData);
-					 console.log(jsonData);
+					 console.log('jsonData',jsonData);
 					 
 					 var div = document.getElementById("checkboxOfTask1");	
+					 while(div.firstChild){
+					    	div.removeChild(div.firstChild);
+						 }
 					 create_dim_checkboxes("checkboxOfTask1", checkedDimDict1);
 					 var div = document.getElementById("checkboxOfTask9");	
+					 while(div.firstChild){
+					    	div.removeChild(div.firstChild);
+						 }
 					 create_dim_checkboxes("checkboxOfTask9", checkedDimDict9);
 					 }
 			 },
@@ -162,7 +168,7 @@
   <!-- output area -->
   <strong><div id="echoResult"></div></strong>
   
-  <div id="visualization"></div>
+  <div id="visualization" style="width: 960px; height: 800px;"></div>
  
  
   
@@ -210,8 +216,9 @@
 							 }
 
 							 jsonData = JSON.parse(data); 
+							 plot_2Dgraph("visualization", jsonData)
 							// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
-							 mpld3.draw_figure("visualization", jsonData['fig']) ;
+							 //mpld3.draw_figure("visualization", jsonData['fig']) ;
 							 },
 						 
 					 	error: function(jqXHR, textStatus, errorThrown) {
@@ -226,6 +233,7 @@
 				 });//click #submitBtn1 
 				 
 	       </script>
+	       
 	        <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
 		       <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
 	        <strong>Choose one dimension:</strong> 
@@ -389,15 +397,16 @@
 				 contentType: "text/json; charset=utf-8",
 				 data: {city: $('#cdata').text() },
 				 success: function(data) { 
-					 //show_statistics_graph('visualization', data);
-					 var div = document.getElementById('visualization');
+					 jsonData = JSON.parse(data)
+					 show_statistics_graph('visualization', jsonData);
+					 /*var div = document.getElementById('visualization');
 					 $('#visualization').empty();
 					 while(div.firstChild){
 					     div.removeChild(div.firstChild);
 					 }
 					 jsonData = JSON.parse(data)
 					 mpld3.draw_figure("visualization", jsonData['fig']) ;
-					 
+					 */
 					 },
 					 
 				 error: function(jqXHR, textStatus, errorThrown) {

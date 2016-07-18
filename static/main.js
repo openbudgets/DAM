@@ -8,6 +8,19 @@ checkedDimDict9 = {}
 
 function remove_options(selectbox)
 {
+	while(selectbox.firstChild){
+		selectbox.removeChild(selectbox.firstChild);
+	 }/*
+    var i;
+    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }*/
+}
+
+function remove_options_of_selectboxId(selectboxId)
+{
+	var selectbox = document.getElementById(selectboxId);
     var i;
     for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
     {
@@ -16,7 +29,7 @@ function remove_options(selectbox)
 }
 
 function add_options_to_selection(select, opLst){
-	dimensionLst = opLst;
+	dimensionLst = opLst; 
 	var option = document.createElement("option");
 	option.text = "";
 	select.appendChild(option);
@@ -35,8 +48,7 @@ function add_options_to_selection(select, opLst){
 
 function create_dim_checkboxes(idStr, checkboxVar) {
 
-    var container = document.getElementById(idStr);
-    
+    var container = document.getElementById(idStr); 
     for (var i = 0; i < dimensionLst.length; i++) {
 
         var dim1 = dimensionLst[i]; 
@@ -128,7 +140,7 @@ function plot_graph(containerId, matrix, labels){
 	    var layout = {
 	    	title: 'Clustering',
 	        autosize: true,
-	        height: 480,
+	        height: 960,
 	        scene: {
 	            aspectratio: {
 	                x: 1,
@@ -169,115 +181,80 @@ function plot_graph(containerId, matrix, labels){
 	            }
 	        },
 	        title: 'My Title',
-	        width: 477
+	        width: 800
 	};
 
-	 Plotly.newPlot(containerId, data, layout);//newPlot(containerId, data, layout);
-	
-	/*
-	var data = [{
-	        x: unpack(matrix, '0'),
-	        y: unpack(matrix, '1'),
-	        z: unpack(matrix, '2'),
-	        mode: 'markers',
-	        type: 'scatter3d',
-	        marker: {
-	          color: 'rgb(23, 190, 207)', //depend on labels! 
-	          size: 2
-	        }
-	    },{
-	        alphahull: 7,
-	        opacity: 0.1,
-	        type: 'mesh3d',
-	        x: unpack(matrix, 'x'),
-	        y: unpack(matrix, 'y'),
-	        z: unpack(matrix, 'z')
-	    }];
-
-	    var layout = {
-	        autosize: true,
-	        height: 480,
-	        scene: {
-	            aspectratio: {
-	                x: 1,
-	                y: 1,
-	                z: 1
-	            },
-	            camera: {
-	                center: {
-	                    x: 0,
-	                    y: 0,
-	                    z: 0
-	                },
-	                eye: {
-	                    x: 1.25,
-	                    y: 1.25,
-	                    z: 1.25
-	                },
-	                up: {
-	                    x: 0,
-	                    y: 0,
-	                    z: 1
-	                }
-	            },
-	            xaxis: {
-	                type: 'linear',
-	                zeroline: false
-	            },
-	            yaxis: {
-	                type: 'linear',
-	                zeroline: false
-	            },
-	            zaxis: {
-	                type: 'linear',
-	                zeroline: false
-	            }
-	        },
-	        title: '3d point clustering',
-	        width: 477
-	    };
-
-	    Plotly.plot(containerId, data, layout);//newPlot(containerId, data, layout);
-	 	*/
+	 Plotly.newPlot(containerId, data, layout);//newPlot(containerId, data, layout);	 
 }
 
-function show_statistics_graph(container, data){
-	figjson = data;//.result;
-	console.log(figjson);
-	mpld3.draw_figure(container,figjson) ;
-	/*var names = ['centripetal', 'chordal', 'uniform', 'disabled'];
-	var items = data.result['d'];
-	var ymean = data.result['m'];
-	var ystd = data.result['s'];
-	console.log(ymean, ystd);
-		 
-	var groups = new vis.DataSet();
-	groups.add({
-		  id: 0,
-	        content: names[0],
-	        options: {
-	            drawPoints: false,
-	            interpolation: {
-	                parametrization: 'centripetal'
-	            }
-	        }});
-	var dataset = new vis.DataSet(items);
-	var options = {
-			sort: false,
-		      sampling:false,
-		      style:'points',
-		       
-		      drawPoints: {
-		          enabled: true,
-		          size: 6,
-		          style: 'circle' // square, circle
-		      },
-		      defaultGroup: 'Scatterplot',
-		      height: '600px',
-		      legend: true
-		};
-		 
-	var graph2d = new vis.Graph2d(container, dataset,  options);
-	*/
+function plot_2Dgraph(containerId, jsonData){
+	//{'in_x':inliersLst_x, 'in_y': inliersLst_y, 'out_x':outliersLst_x, 'out_y': outliersLst_y}
+	var d3 = Plotly.d3
+	var x_in = jsonData['in_x'];
+	var y_in  = jsonData['in_y'];
+	var x_out = jsonData['out_x'];
+	var y_out = jsonData['out_y'];
+	var data= [{
+					x: jsonData['in_x'],
+					y: jsonData['in_y'],
+					mode: 'markers'
+				},
+				{
+					x: jsonData['out_x'],
+					y: jsonData['out_y'],
+					mode: 'markers'
+				}];
+	
+	var layout = {
+		    shapes: [
+		        {
+		            type: 'circle',
+		            xref: 'x',
+		            yref: 'y',
+		            x0: d3.min(x_in),
+		            y0: d3.min(y_in),
+		            x1: d3.max(x_in),
+		            y1: d3.max(y_in),
+		            opacity: 0.2,
+		            fillcolor: 'blue',
+		            line: {
+		                color: 'blue'
+		            }
+		        },
+		        {
+		            type: 'circle',
+		            xref: 'x',
+		            yref: 'y',
+		            x0: d3.min(x_out),
+		            y0: d3.min(y_out),
+		            x1: d3.max(x_out),
+		            y1: d3.max(y_out),
+		            opacity: 0.4,
+		            fillcolor: 'red',
+		            line: {
+		                color: 'red'
+		            }
+		        } 
+		    ],
+		    height: 800,
+		    width: 960,
+		    showlegend: false
+		}
+	
+	Plotly.newPlot(containerId, data);
+}
+
+function show_statistics_graph(containerId, jsonData){
+	//jsonData: {'xlst':xlst,'ylst':ylst, 'mean': ymean, 'std':ystd, 'min': ymin, 'max': ymax, 'dimlst': dimlst}
+	//containerId
+	console.log('jsonData', jsonData);
+	var trace1 = {
+			x: jsonData['xlst'],
+			y: jsonData['ylst'],
+			type: 'scatter'
+	};
+	var data = [trace1];
+
+	Plotly.newPlot(containerId, data);
  
 }
