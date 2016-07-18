@@ -54,6 +54,9 @@
       $('#data_select').on('change', function () {
       var selectVal = $("#data_select option:selected").val();
       document.getElementById("cdata").innerHTML = selectVal;
+      checkedDimDict1 = {}
+	  checkedDimDict9 = {}
+      $('#visualization').empty();
       $.ajax({
 			 type: "GET",
 			 url: $SCRIPT_ROOT + "/observe_dim",
@@ -167,10 +170,10 @@
 
   <!-- output area -->
   <strong><div id="echoResult"></div></strong>
-  
-  <div id="visualization" style="width: 960px; height: 800px;"></div>
- 
- 
+  <div id="loaderDiv" hidden> 
+  	<img class="col-sm-3 col-sm-offset-4" src="{{ url_for('static', filename='spinner.gif') }}"> 
+  </div>
+ <div id="visualization" style="width: 960px; height: 800px;"></div>
   
   <!-- Task1 Modal content -->
   <div class="modal fade" id="task1Modal" role="dialog">
@@ -189,7 +192,7 @@
 				  $("#submitBtn1").click(function() { 
 			 		$("#damModal").modal("hide");
 		 	 		$("#task1Modal").modal("hide"); 
-		 	 
+		 	 		$('#visualization').empty();
 		 	 		var selectedDimLst = get_selected_dims(checkedDimDict1);
 		 	 		
 		 	 		var percent = $('#outlierPercent').val()
@@ -208,7 +211,11 @@
 						 url: $SCRIPT_ROOT + "/outlier_detection",
 						 contentType: "text/json; charset=utf-8",
 						 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), per: percent}, 
+						 beforeSend: function(){
+						    	$('#loaderDiv').show();
+						    },
 						 success: function(data) { 
+							 $('#loaderDiv').hide();
 							 $('#visualization').empty();
 							 var div = document.getElementById('visualization'); 
 							 while (div.hasChildNodes()) {
@@ -220,8 +227,11 @@
 							// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
 							 //mpld3.draw_figure("visualization", jsonData['fig']) ;
 							 },
-						 
+						
+					   
+						
 					 	error: function(jqXHR, textStatus, errorThrown) {
+					 		
 							 	checkedDimDict = {}
 	     		            	alert(errorThrown);
 							 }
@@ -396,7 +406,11 @@
 				 url: $SCRIPT_ROOT + "/statistics",
 				 contentType: "text/json; charset=utf-8",
 				 data: {city: $('#cdata').text() },
+				 beforeSend: function(){
+				    	$('#loaderDiv').show();
+				    },
 				 success: function(data) { 
+					 $('#loaderDiv').hide();
 					 jsonData = JSON.parse(data)
 					 show_statistics_graph('visualization', jsonData);
 					 /*var div = document.getElementById('visualization');
@@ -485,24 +499,28 @@
  		 	 $("#submitBtn9").click(function() {
 			   $("#damModal").modal("hide");
 			   $("#task9Modal").modal("hide");
+			   $('#visualization').empty();
 			   var selectedDimLst = get_selected_dims(checkedDimDict9);
-			  
-			   if (selectedDimLst.length === 2){
-				   var numOfClusters = $('#NumOfClusters').val()
-				   $.ajax({
-					 type: "GET",
-					 url: $SCRIPT_ROOT + "/clustering",
-					 contentType:"text/json; charset=utf-8",
-					 data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), n_clusters: numOfClusters},
-				 	success: function(data) { 
-						 //show_statistics_graph('visualization', data);
-					 	var div = document.getElementById('visualization');
-					 	$('#visualization').empty();
-						while(div.firstChild){
-					    	 div.removeChild(div.firstChild);
-						 } 
-					 	jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
-					 	plot_graph("visualization", jsonData['data'], jsonData['cluster'])
+			   var numOfClusters = $('#NumOfClusters').val()
+			   if (selectedDimLst.length === 2 && numOfClusters > 1 && numOfClusters < 13){
+				    
+				   $.ajax({ 
+					   type: "GET",
+					 	url: $SCRIPT_ROOT + "/clustering",
+						contentType:"text/json; charset=utf-8",
+					 	data: {city: $('#cdata').text(), dim: selectedDimLst.toString(), n_clusters: numOfClusters},
+					 	beforeSend: function(){
+					    	$('#loaderDiv').show();
+					    },
+					    success: function(data) { 
+						    $('#loaderDiv').hide(); 
+					 		var div = document.getElementById('visualization');
+					 		$('#visualization').empty();
+							while(div.firstChild){
+					    		 div.removeChild(div.firstChild);
+						 	} 
+					 		jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
+					 		plot_graph("visualization", jsonData['data'], jsonData['cluster'])
 					 	//mpld3.draw_figure("visualization", jsonData['fig']) ;
 					 	},
 					 
@@ -513,7 +531,7 @@
 					 });
 				   }
 			   else{
-				   alert("Please choose 2 dimensions.")
+				   alert("Please choose 2 dimensions. 1 < Clusters < 13 ")
 			   }
 				 });
 			 });

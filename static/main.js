@@ -60,10 +60,10 @@ function create_dim_checkboxes(idStr, checkboxVar) {
 
         checkbox.onclick = (function(ele) {
             return function () {
-                console.log(ele);
-                console.log(checkboxVar[ele])
+                console.log('in create checkboxes', ele);
+                console.log(checkboxVar,checkboxVar[ele])
                 checkboxVar[ele] = !checkboxVar[ele];
-                console.log(checkboxVar[ele]);
+                console.log(checkboxVar,checkboxVar[ele]);
             };
         }(dim1))
  
@@ -197,11 +197,13 @@ function plot_2Dgraph(containerId, jsonData){
 	var data= [{
 					x: jsonData['in_x'],
 					y: jsonData['in_y'],
+					name: "Inliers",
 					mode: 'markers'
 				},
 				{
 					x: jsonData['out_x'],
 					y: jsonData['out_y'],
+					name: "Outliers",
 					mode: 'markers'
 				}];
 	
