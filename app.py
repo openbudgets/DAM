@@ -72,7 +72,7 @@ def get_code_list_of_dimension():
 
 
 @app.route('/outlier_detection', methods=['GET'])
-@cache.cached(timeout=50, key_prefix='all_comments')
+#@cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection():  
     print('in outlier detection')
     city_name = request.args.get('city')
