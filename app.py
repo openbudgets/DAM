@@ -5,6 +5,7 @@ from flask.ext.cache import Cache
 import datasets as ds
 import tasks.statistics as statis 
 import tasks.outlier_detection as outlier
+import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.myutil as mutil
 
@@ -89,6 +90,20 @@ def do_outlier_detection():
     return ret_data
 
 
+@app.route('/trend_analysis', methods=['GET'])
+# @cache.cached(timeout=50, key_prefix='all_comments')
+def do_trend_analysis():
+    print('in trend analysis')
+    city_name = request.args.get('city')
+    print('city name', city_name)
+    if city_name == 'None':
+        ret_data = {}
+    else:
+        #dim_list = request.args.get('dim').split(',')
+        #print(dim_list)
+        ret_data = trend.analyse_trend(dtable=city_name)
+    return ret_data
+
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
     cityName = request.args.get('city') 
@@ -117,12 +132,6 @@ def do_clustering():
     else:
         ret_data = {}
     return ret_data #jsonify(result=ret_data)
-
-
-@app.route('/trend_analysis/<taJson>', methods=['GET'])
-def trend_analysis(taJson):
-    hstr = '<h1>in trend_analysis with parameter {}</h1>'.format(taJson)
-    return hstr
     
  
 if __name__ == '__main__':

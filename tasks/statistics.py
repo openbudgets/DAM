@@ -69,7 +69,7 @@ def simple_stats(rdf):
     print(points)
     dimlst = mutil.get_dimensions_of_observations(g)
     output = build_plot(points, Title= title, mean=ymean,  mode=ydata.most_common(), std=ystd, min=ymin, max=ymax)
-    return  dumps({'fig':output, 'dimlst':dimlst})
+    return dumps({'fig':output, 'dimlst':dimlst})
 
     
 # Define a function that will return an HTML snippet.

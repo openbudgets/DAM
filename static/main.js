@@ -2,10 +2,11 @@
  * 
  */
 
+/*
 var dimensionLst = [];
 var checkedDimDict1 = {};
 var checkedDimDict9 = {};
-
+*/
 
 function load_dimensions() {
 
@@ -64,7 +65,7 @@ function get_all_names_of_options(select_box_ID){
 	return rlt
 }
 
-function create_dim_checkboxes(idStr, checkboxVar) {
+function create_dim_checkboxes(idStr) {
 
     var container = document.getElementById(idStr);
 	var dimensionLst = get_all_names_of_options("observe_dimension");
@@ -290,6 +291,107 @@ function plot_2Dgraph(containerId, jsonData, dataset_name, dim){
 	Plotly.newPlot(containerId, data, layout);
 }
 
+function plot_2D_trend_graph(containerId, jsonData, dataset_name){
+	var trend_data = jsonData['trend'];
+	var observed_data = jsonData['observed'];
+	var seasonal_data = jsonData['seasonal'];
+	var residual_data = jsonData['residual'];
+
+	var trend_xlst = new Array();
+	var trend_ylst = new Array();
+
+	var observed_xlst = new Array();
+	var observed_ylst = new Array();
+
+	var seasonal_xlst = new Array();
+	var seasonal_ylst = new Array();
+
+	var residual_xlst = new Array();
+	var residual_ylst = new Array();
+
+	for (var key in trend_data) {
+		trend_xlst.push(key);
+		trend_ylst.push(trend_data[key]);
+	}
+
+	for (var key in observed_data) {
+		observed_xlst.push(key);
+		observed_ylst.push(observed_data[key]);
+	}
+
+	for (var key in seasonal_data) {
+		seasonal_xlst.push(key);
+		seasonal_ylst.push(seasonal_data[key]);
+	}
+
+	for (var key in residual_data) {
+		residual_xlst.push(key);
+		residual_ylst.push(residual_data[key]);
+	}
+
+	var trace_trend = {
+		x: trend_xlst,
+		y: trend_ylst,
+		type: 'scatter',
+		name: 'trend'
+	};
+
+	var trace_observed = {
+		x: observed_xlst,
+		y: observed_ylst,
+		xaxis: 'x2',
+		yaxis: 'y2',
+		type: 'scatter',
+		name: 'observed'
+	};
+
+	var trace_seasonal = {
+		x: seasonal_xlst,
+		y: seasonal_ylst,
+		xaxis: 'x3',
+		yaxis: 'y3',
+		type: 'scatter',
+		name: 'seasonal'
+	};
+
+	var trace_residual = {
+		x: residual_xlst,
+		y: residual_ylst,
+		xaxis: 'x4',
+		yaxis: 'y4',
+		type: 'scatter',
+		name: 'residual'
+	};
+
+
+	var data = [trace_trend, trace_observed, trace_seasonal, trace_residual];
+
+	var layout = {
+		xaxis: {domain: [0, 0.45]},
+		yaxis: {domain: [0, 0.45]},
+		xaxis4: {
+			domain: [0.55, 1],
+			anchor: 'y4'
+		},
+		xaxis3: {
+			domain: [0, 0.45],
+			anchor: 'y3'
+		},
+		xaxis2: {domain: [0.55, 1]},
+		yaxis2: {
+			domain: [0, 0.45],
+			anchor: 'x2'
+		},
+		yaxis3: {domain: [0.55, 1]},
+		yaxis4: {
+			domain: [0.55, 1],
+			anchor: 'x4'
+		}
+	};
+
+	Plotly.newPlot(containerId, data, layout)
+}
+
 function show_statistics_graph(containerId, jsonData, my_title){
 	//jsonData: {'xlst':xlst,'ylst':ylst, 'mean': ymean, 'std':ystd, 'min': ymin, 'max': ymax, 'dimlst': dimlst}
 	//containerId
@@ -317,19 +419,19 @@ function show_statistics_graph(containerId, jsonData, my_title){
 	var trace2 = {
 		x: jsonData['xlst'],
 		y: ymlst,
-		name: 'mean',
+		name: 'mean ' + jsonData['mean'].toString(),
 		type: 'scatter'
 	};
 	var trace3 = {
 		x: jsonData['xlst'],
 		y: yminlst,
-		name: 'minimum',
+		name: 'minimum ' + jsonData['min'].toString(),
 		type: 'scatter'
 	};
 	var trace4 = {
 		x: jsonData['xlst'],
 		y: ymaxlst,
-		name: 'maximum',
+		name: 'maximum ' + jsonData['max'].toString(),
 		type: 'scatter'
 	};
 	var data = [trace1, trace2, trace3, trace4];

@@ -1,5 +1,36 @@
 import rdflib
 import pandas as pd
+import datasets as ds
+import numpy as np
+
+
+def get_dataset_all_temporal(dtable):
+    references = [ele for ele in dtable.split('-') if not ele.isdigit()]
+    result = []
+    for key in ds.datasets.keys():
+        lst = [ele for ele in key.split('-') if not ele.isdigit()]
+        if (set(references).issubset(set(lst))):
+            result.append(key)
+    return result
+
+
+def get_time_from_filename(dtable_name):
+    lst = [ele for ele in dtable_name.split('-') if ele.isdigit()]
+    if len(lst) > 0:
+        return int(lst[0])
+    else:
+        return 0
+
+def get_mean_of_observations(dtable_name):
+    rdfDataset = ds.datasets.get(dtable_name, '')[0]
+    myGraph = rdflib.Graph()
+    myGraph.parse(rdfDataset)
+    qstr = "select ?s ?o where {?s obeu-measure:amount ?o . }"
+    qres = myGraph.query(qstr)
+    ylst = []
+    for row in qres.result:
+        ylst.append(float(row[1].toPython()))
+    return float(np.mean(ylst))
 
 
 def construct_data_frame(g,dim=[], withObservationId = True): 
@@ -174,6 +205,8 @@ def is_a_string_float(aString):
 
 def get_column(matrix, i):
     return [row[i] for row in matrix]
+
+
 
 
 if __name__ == "__main__":

@@ -12,8 +12,8 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-  <!--script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
-  -->
+  <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
+
 
   <script src={{ url_for('static', filename='main.js') }}></script>
   <script type="text/javascript">
@@ -69,12 +69,19 @@
                       while (div.firstChild) {
                           div.removeChild(div.firstChild);
                       }
-                      create_dim_checkboxes("checkboxOfTask1", checkedDimDict1);
+                      create_dim_checkboxes("checkboxOfTask1");
+
+                      /*var div = document.getElementById("checkboxOfTask3");
+                      while (div.firstChild) {
+                          div.removeChild(div.firstChild);
+                      }
+                      create_dim_checkboxes("checkboxOfTask3");
+                      */
                       var div = document.getElementById("checkboxOfTask9");
                       while (div.firstChild) {
                           div.removeChild(div.firstChild);
                       }
-                      create_dim_checkboxes("checkboxOfTask9", checkedDimDict9);
+                      create_dim_checkboxes("checkboxOfTask9");
 
                   }
               },
@@ -224,13 +231,9 @@
 							// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
 							 //mpld3.draw_figure("visualization", jsonData['fig']) ;
 							 },
-						
-					   
-						
+
 					 	error: function(jqXHR, textStatus, errorThrown) {
-					 		
-							 	checkedDimDict = {}
-	     		            	alert(errorThrown);
+					 		    alert(errorThrown);
 							 }
 						}); //ajax
 		 	 		}else{
@@ -332,10 +335,57 @@
                <h4 class="modal-title">Trend Analysis </h4>
              </div>
              <div class="modal-body">
-               <p>parameter for task 3 </p>
+                 {% block content3 %}
+                 <script type="text/javascript">
+                     $(function() {
+
+                         $("#submitBtn3").click(function() {
+                             $("#damModal").modal("hide");
+                             $("#task3Modal").modal("hide");
+                             $('#visualization').empty();
+                             //var selectedDimLst = get_selected_dims("checkboxOfTask3");
+                             var dataset_name = $("#data_select option:selected").val();
+
+                             $.ajax({
+                                     type: "GET",
+                                     url: $SCRIPT_ROOT + "/trend_analysis",
+                                     contentType: "text/json; charset=utf-8",
+                                     //data: {city: dataset_name, dim: selectedDimLst.toString()},
+                                     data: {city: dataset_name},
+                                     beforeSend: function(){
+                                         $('#loaderDiv').show();
+                                     },
+                                     success: function(data) {
+                                         $('#loaderDiv').hide();
+                                         $('#visualization').empty();
+
+                                          var jsonData = JSON.parse(data)
+                     					  mpld3.draw_figure("visualization", jsonData['fig']) ;
+                                         //var jsonData = JSON.parse(data);
+                                         //console.log(jsonData);
+                                         //plot_2D_trend_graph("visualization", jsonData, dataset_name)
+                                     },
+
+                                     error: function(jqXHR, textStatus, errorThrown) {
+                                            alert(errorThrown);
+                                     }
+                                 }); //ajax
+                         });
+                     });//click #submitBtn3
+
+                 </script>
+                 <!--
+                 <strong>Choose dimensions:</strong>
+                 <div id="checkboxOfTask3"></div>
+                 -->
+
+
+                 <br><br>
              </div>
-             <div class="modal-footer">
-               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           {% endblock %}
+           <div class="modal-footer">
+               <button type="button" class="btn btn-info btn-lg custom" id="submitBtn3" name="submitBtn3">Submit</button>
+               <button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
              </div>
 	   </div>
     </div>
@@ -517,14 +567,13 @@
 							while(div.firstChild){
 					    		 div.removeChild(div.firstChild);
 						 	} 
-					 		jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
+					 		var jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
 					 		plot_graph("visualization", jsonData['data'], jsonData['cluster'], data_set_name, selectedDimLst)
-					 	//mpld3.draw_figure("visualization", jsonData['fig']) ;
+					 	    //mpld3.draw_figure("visualization", jsonData['fig']) ;
 					 	},
 					 
 				 	error: function(jqXHR, textStatus, errorThrown) {
-					 	checkedDimDict = {}
-     		            alert(errorThrown);
+                            alert(errorThrown);
 						 }
 					 });
 				   }
