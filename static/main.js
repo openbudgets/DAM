@@ -41,7 +41,7 @@ function add_options_to_selection(select, opLst){
 	option.text = "";
 	select.appendChild(option);
 	for (var i=0; i < opLst.length; i++){
-		
+
 		var op = opLst[i];
 		//checkedDimDict1[op] = false;
 		//checkedDimDict9[op] = false;
@@ -50,7 +50,7 @@ function add_options_to_selection(select, opLst){
 		var option = document.createElement("option");
 		option.text = op.split('/').slice(-1)[0];
 		select.appendChild(option);
-	} 
+	}
 }
 
 function get_all_names_of_options(select_box_ID){
@@ -72,7 +72,7 @@ function create_dim_checkboxes(idStr) {
 	console.log('create_dim_checkboxes', dimensionLst);
     for (var i = 0; i < dimensionLst.length; i++) {
 
-        var dim1 = dimensionLst[i]; 
+        var dim1 = dimensionLst[i];
         var checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.name = "chk" + dimensionLst[i];
@@ -100,7 +100,7 @@ function create_dim_checkboxes(idStr) {
     }
 
 }
- 
+
 function get_selected_dims(checkboxID){
 	var lst = [];
 	console.log('in get_selected_dims ', checkboxID);
@@ -122,15 +122,15 @@ function get_selected_dims(checkboxID){
 
 function plot_graph(containerId, matrix, labels, my_title, dim){
 	//{'data': X, 'cluster': labels, 'my_title': 'data set name', dim: ['functinalClassification']}
-	var clusters = new Set(labels); 
+	var clusters = new Set(labels);
 	clusters = Array.from(clusters);
 	console.log('clusters ', clusters);
 	var colors = ['rgb(228,26,28)','rgb(55,126,184)','rgb(77,175,74)',
 	              'rgb(228,126,28)','rgb(55,126,84)','rgb(177,175,74)',
 	              'rgb(28,126,28)','rgb(155,126,84)','rgb(177,75,74)',
 	              'rgb(128,126,28)','rgb(255,126,84)','rgb(277,75,74)'];
-	
-	function select_data_in_cluster(rows, cluster){ 
+
+	function select_data_in_cluster(rows, cluster){
 		rlt = [];
 		for (var i=0; i<rows.length; i++){
 			if (labels[i] === cluster){
@@ -139,11 +139,11 @@ function plot_graph(containerId, matrix, labels, my_title, dim){
 		}
 		return rlt
 	}
-	
+
 	function unpack(rows, col) {
         return rows.map(function(row) { return row[col]; });
     }
-	
+
 	var data=[];
 	for (var i=0; i < clusters.length; i++ ){
 		var clusteredMatrix = select_data_in_cluster(matrix, clusters[i]);
@@ -155,7 +155,7 @@ function plot_graph(containerId, matrix, labels, my_title, dim){
 		        type: 'scatter3d',
 		        name: 'Cluster '+ i.toString(),
 		        marker: {
-		          color: colors[i],//'rgb(23, 190, 207)', //depend on labels! 
+		          color: colors[i],//'rgb(23, 190, 207)', //depend on labels!
 		          size: 2
 		        }
 		    };
@@ -210,7 +210,7 @@ function plot_graph(containerId, matrix, labels, my_title, dim){
 	        width: 800
 	};
 
-	 Plotly.newPlot(containerId, data, layout);//newPlot(containerId, data, layout);	 
+	 Plotly.newPlot(containerId, data, layout);//newPlot(containerId, data, layout);
 }
 
 function plot_2Dgraph(containerId, jsonData, dataset_name, dim){
@@ -232,7 +232,7 @@ function plot_2Dgraph(containerId, jsonData, dataset_name, dim){
 					name: "Outliers",
 					mode: 'markers'
 				}];
-	
+
 	var layout = {
 			title: dataset_name,
 		    shapes: [
@@ -263,7 +263,7 @@ function plot_2Dgraph(containerId, jsonData, dataset_name, dim){
 		            line: {
 		                color: 'red'
 		            }
-		        } 
+		        }
 		    ],
 		    height: 800,
 		    width: 960,
@@ -287,7 +287,7 @@ function plot_2Dgraph(containerId, jsonData, dataset_name, dim){
 			}
 
 		};
-	
+
 	Plotly.newPlot(containerId, data, layout);
 }
 
@@ -457,5 +457,5 @@ function show_statistics_graph(containerId, jsonData, my_title){
 	};
 
 	Plotly.newPlot(containerId, data, layout)
- 
+
 }

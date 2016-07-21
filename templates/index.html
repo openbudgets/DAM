@@ -27,10 +27,10 @@
   <div>
   <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="cdata">Choose dataset</span></label></h1>
   <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="cdim">Dimensions</span></label></h1>
-  <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="ccode">Code-list</span></label></h1> 
+  <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="ccode">Code-list</span></label></h1>
   <h1 class="side"><label class="dataset_width"><span class="label label-primary full-width" id="cremark">Remark</span></label></h1>
   </div>
-  <div> 
+  <div>
     <select class="form-control dataset_width side" id="data_select"  value="None">
       <option value="None" ></option>
       <option value="Aragon-2006-income">Aragon-2006-income</option>
@@ -49,6 +49,8 @@
           $('#data_select').on('change', function () {
           var selectVal = $("#data_select option:selected").val();
           document.getElementById("cdata").innerHTML = selectVal.split('-')[0];
+          //checkedDimDict1 = {};
+          //checkedDimDict9 = {};
           $('#visualization').empty();
           $.ajax({
               type: "GET",
@@ -62,22 +64,24 @@
                       remove_options(dimContainer);
                       add_options_to_selection(dimContainer, jsonData);
                       console.log('jsonData', jsonData);
-
                       var div = document.getElementById("checkboxOfTask1");
                       while (div.firstChild) {
                           div.removeChild(div.firstChild);
                       }
-                      create_dim_checkboxes("checkboxOfTask1")
-
+                      create_dim_checkboxes("checkboxOfTask1");
+                      /*var div = document.getElementById("checkboxOfTask3");
+                      while (div.firstChild) {
+                          div.removeChild(div.firstChild);
+                      }
+                      create_dim_checkboxes("checkboxOfTask3");
+                      */
                       var div = document.getElementById("checkboxOfTask9");
                       while (div.firstChild) {
                           div.removeChild(div.firstChild);
                       }
                       create_dim_checkboxes("checkboxOfTask9");
-
                   }
               },
-
               error: function (jqXHR, textStatus, errorThrown) {
                   alert(errorThrown);
               }
@@ -106,7 +110,6 @@
                               console.log(jsonData);
                           }
                       },
-
                       error: function(jqXHR, textStatus, errorThrown) {
                           alert(errorThrown);
                       }
@@ -115,11 +118,11 @@
           });
       </script>
 
-  	<select class="form-control dataset_width side" id="code_list"> 
+  	<select class="form-control dataset_width side" id="code_list">
   	</select>
-  	<select class="form-control dataset_width side" id="code_remark"> 
-  	</select>	
-    
+  	<select class="form-control dataset_width side" id="code_remark">
+  	</select>
+
     <p><p>
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info btn-lg dataset_width" data-toggle="modal" data-target="#damModal">Data Analysis & Mining</button>
@@ -127,7 +130,7 @@
   <!-- Modal -->
   <div class="modal fade" id="damModal" role="dialog">
     <div class="modal-dialog">
-      
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -136,7 +139,7 @@
         </div>
         <div class="modal-body">
 	  <div>
-	   <button type="button" class="btn btn-info btn-lg custom " data-toggle="modal" data-target="#task1Modal"> Outlier Detection</button> 
+	   <button type="button" class="btn btn-info btn-lg custom " data-toggle="modal" data-target="#task1Modal"> Outlier Detection</button>
 	   <button type="button" class="btn btn-info btn-lg custom " data-toggle="modal" data-target="#task2Modal">  Pattern Mining  </button>
 	   <button type="button" class="btn btn-info btn-lg custom " data-toggle="modal" data-target="#task3Modal">  Trend Analysis  </button>
 	  </div>
@@ -151,26 +154,26 @@
 	   <button type="button" class="btn btn-info btn-lg custom" data-toggle="modal" data-target="#task7Modal">   Pattern Matching </button>
 	   <button type="button" class="btn btn-info btn-lg custom" data-toggle="modal" data-target="#task8Modal">    Comparison      </button>
 	   <button type="button" class="btn btn-info btn-lg custom" data-toggle="modal" data-target="#task9Modal">    Clustering      </button>
-	  </div> 
+	  </div>
 
-	   
+
 	</div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default"  name="closeBtn" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+
     </div>
   </div>
 
 
   <!-- output area -->
   <strong><div id="echoResult"></div></strong>
-  <div id="loaderDiv" hidden> 
-  	<img class="col-sm-3 col-sm-offset-4" src="{{ url_for('static', filename='spinner.gif') }}"> 
+  <div id="loaderDiv" hidden>
+  	<img class="col-sm-3 col-sm-offset-4" src="{{ url_for('static', filename='spinner.gif') }}">
   </div>
  <div id="visualization" style="width: 960px; height: 800px;"></div>
-  
+
   <!-- Task1 Modal content -->
   <div class="modal fade" id="task1Modal" role="dialog">
     <div class="modal-dialog">
@@ -179,15 +182,15 @@
                <button type="button" class="close" data-dismiss="modal">&times;</button>
                <h4 class="modal-title">  <div id="od_task"> Outlier Detection </div></h4>
              </div>
-             
+
              <div class="modal-body">
 	       {% block content1 %}
-	       <script type="text/javascript"> 
-			 $(function() { 
-				 
-				  $("#submitBtn1").click(function() { 
+	       <script type="text/javascript">
+			 $(function() {
+
+				  $("#submitBtn1").click(function() {
 			 		$("#damModal").modal("hide");
-		 	 		$("#task1Modal").modal("hide"); 
+		 	 		$("#task1Modal").modal("hide");
 		 	 		$('#visualization').empty();
 		 	 		var selectedDimLst = get_selected_dims("checkboxOfTask1");
                     var dataset_name = $("#data_select option:selected").val();
@@ -200,6 +203,7 @@
 		 	 				percent = 25
 		 	 			}
 		 	 		}
+		 	 		//var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};
 		 	 		if (selectedDimLst.length == 1){
 			 	 	  $.ajax({
 						 type: "GET",
@@ -209,18 +213,18 @@
 						 beforeSend: function(){
 						    	$('#loaderDiv').show();
 						    },
-						 success: function(data) { 
+						 success: function(data) {
 							 $('#loaderDiv').hide();
 							 $('#visualization').empty();
-							 var div = document.getElementById('visualization'); 
+							 var div = document.getElementById('visualization');
 							 while (div.hasChildNodes()) {
 							     div.removeChild(div.lastChild);
 							 }
-
 							 var jsonData = JSON.parse(data);
 							 plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
-                         },
-
+							// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
+							 //mpld3.draw_figure("visualization", jsonData['fig']) ;
+							 },
 					 	error: function(jqXHR, textStatus, errorThrown) {
 					 		    alert(errorThrown);
 							 }
@@ -229,28 +233,28 @@
 		 	 			alert('Please choose one dimension')
 		 	 		}
 					});
-				 });//click #submitBtn1 
-				 
+				 });//click #submitBtn1
+
 	       </script>
-	       
+
 	        <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
 		       <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
-	        <strong>Choose one dimension:</strong> 
-	        <div id="checkboxOfTask1"></div>  
-             	
- 	       
+	        <strong>Choose one dimension:</strong>
+	        <div id="checkboxOfTask1"></div>
+
+
 	      <br><br>
 	       </div>
-	       {% endblock %} 
+	       {% endblock %}
              <div class="modal-footer">
 	        	<button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
-				<button type="button" class="btn btn-info btn-lg custom" data-dismiss="modal">Close</button>
+				<button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
             </div>
 	   </div>
     </div>
   </div>
 
-  
+
   <!-- Task2 Modal content -->
   <div class="modal fade" id="task2Modal" role="dialog">
     <div class="modal-dialog">
@@ -263,11 +267,10 @@
               {% block content %}
 	       <script type="text/javascript">
 			 $(function() {
-
 			 $("#submitBtn2").click(function() {
 			 	$("#damModal").modal("hide");
 		 	 	$("#task1Modal").modal("hide");
-		 
+
 			 	$.ajax({
 			 		type: "GET",
 		 			url: $SCRIPT_ROOT + "/echo/",
@@ -284,37 +287,37 @@
 		 					{x: '2014-06-15', y: 15},
 		 					{x: '2014-06-16', y: 30}
 		 					];
-		 
+
 			 			var dataset = new vis.DataSet(items);
 			 			var options = {
 					 		start: '2014-06-10',
 		 					end: '2014-06-18'
 		 					};
 		 				var graph2d = new vis.Graph2d(container, dataset, options);
-		 
+
 			 		},
 		 			error: function(jqXHR, textStatus, errorThrown) {
           	    	   alert(errorThrown);
 			 		}
-		 		}); //$.ajax     
+		 		}); //$.ajax
 			 });
-		 		});//click #submitBtn2 
+		 		});//click #submitBtn2
 	       </script>
 	       <strong>Enter a value to echo back:</strong>
 	       <input size="10" id="echoText" name="echoText" type="text">
 	      <br><br>
-	       
+
 	       {% endblock %}
           </div>
           <div class="modal-footer">
 	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn2" name="submitBtn2">Submit</button>
 			<button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
-          </div> 
+          </div>
 	   </div>
     </div>
   </div>
 
-  
+
   <!-- Task3 Modal content -->
   <div class="modal fade" id="task3Modal" role="dialog">
     <div class="modal-dialog">
@@ -327,19 +330,17 @@
                  {% block content3 %}
                  <script type="text/javascript">
                      $(function() {
-
                          $("#submitBtn3").click(function() {
                              $("#damModal").modal("hide");
                              $("#task3Modal").modal("hide");
                              $('#visualization').empty();
-
+                             //var selectedDimLst = get_selected_dims("checkboxOfTask3");
                              var dataset_name = $("#data_select option:selected").val();
-
                              $.ajax({
                                      type: "GET",
                                      url: $SCRIPT_ROOT + "/trend_analysis",
                                      contentType: "text/json; charset=utf-8",
-
+                                     //data: {city: dataset_name, dim: selectedDimLst.toString()},
                                      data: {city: dataset_name},
                                      beforeSend: function(){
                                          $('#loaderDiv').show();
@@ -347,19 +348,18 @@
                                      success: function(data) {
                                          $('#loaderDiv').hide();
                                          $('#visualization').empty();
-
                                           var jsonData = JSON.parse(data)
                      					  mpld3.draw_figure("visualization", jsonData['fig']) ;
-
+                                         //var jsonData = JSON.parse(data);
+                                         //console.log(jsonData);
+                                         //plot_2D_trend_graph("visualization", jsonData, dataset_name)
                                      },
-
                                      error: function(jqXHR, textStatus, errorThrown) {
                                             alert(errorThrown);
                                      }
                                  }); //ajax
                          });
                      });//click #submitBtn3
-
                  </script>
                  <!--
                  <strong>Choose dimensions:</strong>
@@ -387,7 +387,7 @@
                <h4 class="modal-title">Graph Analysis </h4>
              </div>
              <div class="modal-body">
-	     
+
 
              </div>
              <div class="modal-footer">
@@ -397,7 +397,7 @@
     </div>
   </div>
 
-  
+
 
   <!-- Task5 Modal content -->
   <div class="modal fade" id="task5Modal" role="dialog">
@@ -417,7 +417,7 @@
     </div>
   </div>
 
-  
+
   <!-- Task6 Modal content -->
   <div class="modal fade" id="task6Modal" role="dialog">
     <div class="modal-dialog">
@@ -430,7 +430,6 @@
                  {% block content6 %}
 	       <script type="text/javascript">
 		 $(function() {
-
 		 	$("#submitBtn6").click(function() {
 			 $("#damModal").modal("hide");
 			 $("#task6Modal").modal("hide");
@@ -443,7 +442,7 @@
 				 beforeSend: function(){
 				    	$('#loaderDiv').show();
 				    },
-				 success: function(data) { 
+				 success: function(data) {
 					 $('#loaderDiv').hide();
 					 jsonData = JSON.parse(data)
 					 show_statistics_graph('visualization', jsonData, dataset_name);
@@ -456,11 +455,11 @@
 					 mpld3.draw_figure("visualization", jsonData['fig']) ;
 					 */
 					 },
-					 
+
 				 error: function(jqXHR, textStatus, errorThrown) {
      		            alert(errorThrown);
 						 }
-					 });     
+					 });
 				 });
 			 });
 	       </script>
@@ -469,18 +468,18 @@
 	       <!-- <input size="10" id="echoText" name="echoText" type="text">
 	         -->
 	      <br><br>
-	       
+
 	       {% endblock %}
              </div>
              <div class="modal-footer">
 	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn6" name="submitBtn6">Execute</button>
-			<button type="button" class="btn btn-info btn-lg custom" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
              </div>
 	   </div>
     </div>
   </div>
 
-  
+
   <!-- Task7 Modal content -->
   <div class="modal fade" id="task7Modal" role="dialog">
     <div class="modal-dialog">
@@ -517,7 +516,7 @@
     </div>
   </div>
 
-  
+
    <!-- Task9 Modal content -->
   <div class="modal fade" id="task9Modal" role="dialog">
     <div class="modal-dialog">
@@ -529,7 +528,7 @@
              <div class="modal-body">
               {% block content9 %}
 	       <script type="text/javascript">
-		 $(function() { 
+		 $(function() {
  		 	 $("#submitBtn9").click(function() {
 			   $("#damModal").modal("hide");
 			   $("#task9Modal").modal("hide");
@@ -538,8 +537,8 @@
                var data_set_name =  $("#data_select option:selected").val();
 			   var numOfClusters = $('#NumOfClusters').val()
 			   if (selectedDimLst.length === 2 && numOfClusters > 1 && numOfClusters < 13){
-				    
-				   $.ajax({ 
+
+				   $.ajax({
 					   type: "GET",
 					 	url: $SCRIPT_ROOT + "/clustering",
 						contentType:"text/json; charset=utf-8",
@@ -547,18 +546,18 @@
 					 	beforeSend: function(){
 					    	$('#loaderDiv').show();
 					    },
-					    success: function(data) { 
-						    $('#loaderDiv').hide(); 
+					    success: function(data) {
+						    $('#loaderDiv').hide();
 					 		var div = document.getElementById('visualization');
 					 		$('#visualization').empty();
 							while(div.firstChild){
 					    		 div.removeChild(div.firstChild);
-						 	} 
+						 	}
 					 		var jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
 					 		plot_graph("visualization", jsonData['data'], jsonData['cluster'], data_set_name, selectedDimLst)
 					 	    //mpld3.draw_figure("visualization", jsonData['fig']) ;
 					 	},
-					 
+
 				 	error: function(jqXHR, textStatus, errorThrown) {
                             alert(errorThrown);
 						 }
@@ -574,20 +573,19 @@
 	       <strong>How many clusters should the data be grouped? (between two and ten groups) </strong>
 		       <input size="10" id="NumOfClusters" name="NumOfClusters" type="text"><br>
 		   <strong>Choose two dimensions:</strong>
-	       <div id="checkboxOfTask9"></div> 
+	       <div id="checkboxOfTask9"></div>
 	      <br><br>
-	       
+
 	       {% endblock %}
              </div>
              <div class="modal-footer">
-	            <button type="button" class="btn btn-info btn-lg custom" id="submitBtn9" name="submitBtn9">Submit</button>
-                <button type="button" class="btn btn-info btn-lg custom" data-dismiss="modal">Close</button>
+	       <button type="button" class="btn btn-info btn-lg custom" id="submitBtn9" name="submitBtn9">Submit</button>
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
              </div>
 	   </div>
     </div>
   </div>
-  
-  
 </body>
 </html>
+
 

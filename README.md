@@ -50,7 +50,7 @@ $ echo "source `which activate.sh`" >> ~/.bashrc
 
 * Afterwards create a virtual environment for your project and go to the project's folder
 ```
-$ virtualenv venv
+$ virtualenv env
 $ cd DAM
 ```
 
