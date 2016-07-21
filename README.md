@@ -21,6 +21,12 @@ OBEU Partners are encouraged to create their own branches for doing testing (Pyt
 To consistent with OpenSpending, we use Flask + Python at the backend, Angularjs at the frontend.
 
 # How to run
+
+* install R
+** using brew
+    brew tap homebrew/science
+    brew install r
+
 * Clone the GitHub repository: `git clone https://github.com/openbudgets/DAM`
 
 * Install python 3.5 (see <https://www.python.org/downloads/>)
@@ -61,4 +67,5 @@ $ cd DAM
 `python manage.py runserver`
 
 * Go to <http://localhost:5000>
+
 

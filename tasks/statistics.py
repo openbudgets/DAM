@@ -23,7 +23,7 @@ def perform_statistics(rdf):
     for row in qres.result: 
         xvalue = row[0].split('/')[-1]
         title = '/'.join(row[0].split('/')[:-1])
-        yvalue =  float(row[1].toPython()) / 1000
+        yvalue =  float(row[1].toPython())
         points.append([int(xvalue), yvalue])
         ylst.append(yvalue)
         if ymin > yvalue:

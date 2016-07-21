@@ -49,8 +49,6 @@
           $('#data_select').on('change', function () {
           var selectVal = $("#data_select option:selected").val();
           document.getElementById("cdata").innerHTML = selectVal.split('-')[0];
-          //checkedDimDict1 = {};
-          //checkedDimDict9 = {};
           $('#visualization').empty();
           $.ajax({
               type: "GET",
@@ -69,14 +67,8 @@
                       while (div.firstChild) {
                           div.removeChild(div.firstChild);
                       }
-                      create_dim_checkboxes("checkboxOfTask1");
+                      create_dim_checkboxes("checkboxOfTask1")
 
-                      /*var div = document.getElementById("checkboxOfTask3");
-                      while (div.firstChild) {
-                          div.removeChild(div.firstChild);
-                      }
-                      create_dim_checkboxes("checkboxOfTask3");
-                      */
                       var div = document.getElementById("checkboxOfTask9");
                       while (div.firstChild) {
                           div.removeChild(div.firstChild);
@@ -208,7 +200,6 @@
 		 	 				percent = 25
 		 	 			}
 		 	 		}
-		 	 		//var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};   
 		 	 		if (selectedDimLst.length == 1){
 			 	 	  $.ajax({
 						 type: "GET",
@@ -228,9 +219,7 @@
 
 							 var jsonData = JSON.parse(data);
 							 plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
-							// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
-							 //mpld3.draw_figure("visualization", jsonData['fig']) ;
-							 },
+                         },
 
 					 	error: function(jqXHR, textStatus, errorThrown) {
 					 		    alert(errorThrown);
@@ -255,7 +244,7 @@
 	       {% endblock %} 
              <div class="modal-footer">
 	        	<button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
-				<button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-info btn-lg custom" data-dismiss="modal">Close</button>
             </div>
 	   </div>
     </div>
@@ -343,14 +332,14 @@
                              $("#damModal").modal("hide");
                              $("#task3Modal").modal("hide");
                              $('#visualization').empty();
-                             //var selectedDimLst = get_selected_dims("checkboxOfTask3");
+
                              var dataset_name = $("#data_select option:selected").val();
 
                              $.ajax({
                                      type: "GET",
                                      url: $SCRIPT_ROOT + "/trend_analysis",
                                      contentType: "text/json; charset=utf-8",
-                                     //data: {city: dataset_name, dim: selectedDimLst.toString()},
+
                                      data: {city: dataset_name},
                                      beforeSend: function(){
                                          $('#loaderDiv').show();
@@ -361,9 +350,7 @@
 
                                           var jsonData = JSON.parse(data)
                      					  mpld3.draw_figure("visualization", jsonData['fig']) ;
-                                         //var jsonData = JSON.parse(data);
-                                         //console.log(jsonData);
-                                         //plot_2D_trend_graph("visualization", jsonData, dataset_name)
+
                                      },
 
                                      error: function(jqXHR, textStatus, errorThrown) {
@@ -487,7 +474,7 @@
              </div>
              <div class="modal-footer">
 	        <button type="button" class="btn btn-info btn-lg custom" id="submitBtn6" name="submitBtn6">Execute</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-info btn-lg custom" data-dismiss="modal">Close</button>
              </div>
 	   </div>
     </div>
@@ -593,8 +580,8 @@
 	       {% endblock %}
              </div>
              <div class="modal-footer">
-	       <button type="button" class="btn btn-info btn-lg custom" id="submitBtn9" name="submitBtn9">Submit</button>
-               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	            <button type="button" class="btn btn-info btn-lg custom" id="submitBtn9" name="submitBtn9">Submit</button>
+                <button type="button" class="btn btn-info btn-lg custom" data-dismiss="modal">Close</button>
              </div>
 	   </div>
     </div>

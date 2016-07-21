@@ -66,7 +66,7 @@ def get_code_list_of_dimension():
     if dimName != '' and currentRDFFile != '': 
         myGraph = rdflib.Graph()
         myGraph.parse(currentRDFFile)
-        ret_data =  mutil.get_code_list_of_dim(myGraph, dimName)
+        ret_data = mutil.get_code_list_of_dim(myGraph, dimName)
         return jsonify(result=ret_data)
     else:
         return jsonify(result='')

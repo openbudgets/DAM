@@ -38,7 +38,6 @@ def analyse_trend(dtable=''):
     return dumps({'fig':output})
 
 
-
 def sample_function():
     # Import the sample streamflow dataset
     data = urllib.request.urlopen('https://raw.github.com/mps9506/Sample-Datasets/master/Streamflow/USGS-Monthly_Streamflow_Bend_OR.tsv')
