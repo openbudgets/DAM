@@ -20,7 +20,7 @@ pandas==0.18.1
 patsy==0.4.1
 plotly==1.12.4
 psycopg2==2.6.1
-pyparsing==2.1.5
+pyparsing==2.0.1
 python-dateutil==2.5.3
 python-editor==1.0.1
 pytz==2016.4
