@@ -12,7 +12,7 @@ OBEU Partners are encouraged to create their own branches for doing testing (Pyt
 
 * A OBEU lib for data analysis and mining
 
-* Web page developement for each task
+* Web page development for each task
 
 * Communication with other modules/system (Visualization, Triple store, Openspending)
 
@@ -57,11 +57,6 @@ $ cd DAM
 * Install all application requirements by executing
 `pip install -r requirements.txt`
 
-* Install npm
-`sudo apt-get install npm`
-
-* Install node modules
-`npm install`
 
 * Start your application by executing
 `python manage.py runserver`
@@ -94,7 +89,7 @@ export PYTHONHOME=$ENV
 exec $PYTHON "$@"
 ```
 
- instead of runnung `python manage.py runserver`, run `frameworkpython manage.py runserver`
+ instead of running `python manage.py runserver`, run `frameworkpython manage.py runserver`
 
 
 
