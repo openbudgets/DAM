@@ -68,10 +68,16 @@ $ cd DAM
 
 * Go to <http://localhost:5000>
 
-#Possible error and Solutions
-* RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework. See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try one of the other backends. If you are Working with Matplotlib in a virtual enviroment see 'Working with Matplotlib in Virtual environments' in the Matplotlib FAQ
+# Possible error and Solutions
+* Error 1
 
-** touch `frameworkpython` file in the virtualenv bin directory with the following content:
+> RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework.
+> See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try
+> one of the other backends. If you are Working with Matplotlib in a virtual enviroment see 'Working with Matplotlib in Virtual environments' in the Matplotlib FAQ
+
+* Solution to Error 1
+
+ touch `frameworkpython` file in the virtualenv bin directory with the following content:
 ```
 #!/bin/bash
 
@@ -88,7 +94,7 @@ export PYTHONHOME=$ENV
 exec $PYTHON "$@"
 ```
 
-** instead of runnung `python manage.py runserver`, run `frameworkpython manage.py runserver``
+ instead of runnung `python manage.py runserver`, run `frameworkpython manage.py runserver`
 
 
 
