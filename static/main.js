@@ -8,10 +8,10 @@ var checkedDimDict1 = {};
 var checkedDimDict9 = {};
 */
 
-function load_dimensions() {
 
+$(document).ready(function() {
 
-}
+})
 
 
 function remove_options(selectbox)

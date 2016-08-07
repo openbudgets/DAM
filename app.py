@@ -27,6 +27,10 @@ db = SQLAlchemy(app)
 from models import Triples
 currentRDFFile = ''
 
+@app.route('/dam', methods=['GET','POST'])
+def dam():
+    return render_template('dam.html')
+
 
 @app.route('/', methods=['GET','POST'])
 def index():
