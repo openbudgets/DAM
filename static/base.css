@@ -1,7 +1,15 @@
 .full-width {
-    display:block;
+    display: block;
 }
 
 #dam{
     margin-top: 2rem;
+}
+
+.modal-dialog {
+    width: 700px;
+}
+
+.btn-modal{
+    margin: 0.25rem;
 }

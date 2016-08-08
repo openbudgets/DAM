@@ -20,7 +20,7 @@
 <!-- row 1 -->
 <div class="container">
     <div class="row">
-        <div id="dataset" class="col-sm-6 col-md-3">
+        <div id="dataset" class="col-sm-6 col-md-3 pull-left">
             <h1><label class="label label-primary control-label  full-width" id="cdata">Choose dataset</label></h1>
             <select class="form-control"  id="data_select"  multiple>
                 </select>
@@ -47,9 +47,68 @@
 <div class="container">
     <div class="row">
         <button id="dam" class="col-sm-12 col-md-6 btn btn-default"
-                data-toggle="modal" data-target="#dam">
+                data-toggle="modal" data-target="#damModal">
             <img src="{{ url_for('static', filename='datamining.gif') }}" class="img-responsive">
         </button>
+    </div>
+</div>
+
+<!-- row 3 -->
+<!-- output area -->
+<strong><div id="echoResult"></div></strong>
+<div id="loaderDiv" hidden>
+    <img class="col-sm-3 col-sm-offset-4 col-dm-3 col-dm-offset-4" src="{{ url_for('static', filename='spinner.gif') }}">
+</div>
+<div id="visualization" class="col-sm-6 col-sm-offset-2 col-dm-6 col-dm-offset-2"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="damModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Which computational service do you need?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div  class="col-md-8  ">
+                        <button type="button" class="btn btn-info btn-lg  col-md-3 btn-modal "
+                                data-toggle="modal" data-target="#task1Modal"> Outlier Detection</button>
+                        <button type="button" class="btn btn-info btn-lg col-md-3 btn-modal  "
+                                data-toggle="modal" data-target="#task2Modal">  Pattern Mining  </button>
+                        <button type="button" class="btn btn-info btn-lg col-md-3 btn-modal "
+                                data-toggle="modal" data-target="#task3Modal">  Trend Analysis  </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-info btn-lg   btn-modal col-md-3  "
+                                data-toggle="modal" data-target="#task4Modal">  Graph Analysis  </button>
+                        <button type="button" class="btn btn-info btn-lg   btn-modal col-md-3  "
+                                data-toggle="modal" data-target="#task5Modal">    Aggregation   </button>
+                        <button type="button" class="btn btn-info btn-lg  btn-modal col-md-3  "
+                                data-toggle="modal" data-target="#task6Modal">    Statistics    </button>
+                    </div>
+                        </div>
+                    <div class="row">
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-info btn-lg  btn-modal col-md-3"
+                                data-toggle="modal" data-target="#task7Modal">   Pattern Matching </button>
+                        <button type="button" class="btn btn-info btn-lg  btn-modal col-md-3"
+                                data-toggle="modal" data-target="#task8Modal">    Comparison      </button>
+                        <button type="button" class="btn btn-info btn-lg btn-modal col-md-3"
+                                data-toggle="modal" data-target="#task9Modal">    Clustering      </button>
+                    </div>
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"  name="closeBtn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
