@@ -10,7 +10,223 @@ var checkedDimDict9 = {};
 
 
 $(document).ready(function() {
+    $('#data_select').on('change', function () {
+        var selectVal = $("#data_select option:selected").val();
+        document.getElementById("cdata").innerHTML = selectVal.split('-')[0];
+        //checkedDimDict1 = {};
+        //checkedDimDict9 = {};
+        $('#visualization').empty();
+        $.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/observe_dim",
+            contentType: "text/json; charset=utf-8",
+            data: {city: selectVal},
+            success: function (data) {
+                var jsonData = data.result;
+                if (data.result) {
+                    var dimContainer = document.getElementById('observe_dimension');
+                    remove_options(dimContainer);
+                    add_options_to_selection(dimContainer, jsonData);
 
+                    /*
+                     *  create checkbox for Task1
+                     */
+                    var div = document.getElementById("checkboxOfTask1");
+                    while (div.firstChild) {
+                        div.removeChild(div.firstChild);
+                    }
+                    create_dim_checkboxes("checkboxOfTask1");
+
+                    /*
+                     *  create checkbox for Task9
+                     */
+                    var div = document.getElementById("checkboxOfTask9");
+                    while (div.firstChild) {
+                        div.removeChild(div.firstChild);
+                    }
+                    create_dim_checkboxes("checkboxOfTask9");
+
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    })
+
+    $('#observe_dimension').on('change', function () {
+        var selectVal = $("#observe_dimension option:selected").val();
+        if (selectVal){
+            $.ajax({
+                type: "GET",
+                url: $SCRIPT_ROOT + "/code_list",
+                contentType: "text/json; charset=utf-8",
+                data: {dim: selectVal },
+                success: function(data) {
+                    console.log(data.result);
+                    jsonData = data.result;
+                    if (data.result){
+                        var dimContainer = document.getElementById('code_list');
+                        remove_options(dimContainer);
+                        add_options_to_selection(dimContainer, jsonData);
+                        console.log(jsonData);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    });
+
+    $("#submitBtn1").on('click', function() {
+        $("#damModal").modal("hide");
+        $("#task1Modal").modal("hide");
+        $('#visualization').empty();
+        var selectedDimLst = get_selected_dims("checkboxOfTask1");
+        var dataset_name = $("#data_select option:selected").val();
+        var percent = $('#outlierPercent').val()
+        if (isNaN(percent)){
+            percent = 25}
+        else{
+            percent = parseFloat(percent)
+            if (percent >25 || percent <= 0){
+                percent = 25
+            }
+        }
+        //var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};
+        if (selectedDimLst.length == 1){
+            $.ajax({
+                type: "GET",
+                url: $SCRIPT_ROOT + "/outlier_detection",
+                contentType: "text/json; charset=utf-8",
+                data: {city: dataset_name, dim: selectedDimLst.toString(), per: percent},
+                beforeSend: function(){
+                    $('#loaderDiv').show();
+                },
+                success: function(data) {
+                    $('#loaderDiv').hide();
+                    $('#visualization').empty();
+                    var div = document.getElementById('visualization');
+                    while (div.hasChildNodes()) {
+                        div.removeChild(div.lastChild);
+                    }
+                    var jsonData = JSON.parse(data);
+                    plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
+                    // plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
+                    //mpld3.draw_figure("visualization", jsonData['fig']) ;
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            }); //ajax
+        }else{
+            alert('Please choose one dimension')
+        }
+    });//click #submitBtn1
+
+    $("#submitBtn3").on('click', function() {
+            $("#damModal").modal("hide");
+            $("#task3Modal").modal("hide");
+            $('#visualization').empty();
+            //var selectedDimLst = get_selected_dims("checkboxOfTask3");
+            var dataset_name = $("#data_select option:selected").val();
+            $.ajax({
+                type: "GET",
+                url: $SCRIPT_ROOT + "/trend_analysis",
+                contentType: "text/json; charset=utf-8",
+                //data: {city: dataset_name, dim: selectedDimLst.toString()},
+                data: {city: dataset_name},
+                beforeSend: function(){
+                    $('#loaderDiv').show();
+                },
+                success: function(data) {
+                    $('#loaderDiv').hide();
+                    $('#visualization').empty();
+                    var jsonData = JSON.parse(data)
+                    mpld3.draw_figure("visualization", jsonData['fig']) ;
+                    //var jsonData = JSON.parse(data);
+                    //console.log(jsonData);
+                    //plot_2D_trend_graph("visualization", jsonData, dataset_name)
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            }); //ajax
+        });//click #submitBtn3
+
+
+    $("#submitBtn6").on('click', function() {
+            $("#damModal").modal("hide");
+            $("#task6Modal").modal("hide");
+            $('#visualization').empty();
+            var dataset_name = $("#data_select option:selected").val();
+            $.ajax({
+                type: "GET",
+                url: $SCRIPT_ROOT + "/statistics",
+                contentType: "text/json; charset=utf-8",
+                data: {city: dataset_name },
+                beforeSend: function(){
+                    $('#loaderDiv').show();
+                },
+                success: function(data) {
+                    $('#loaderDiv').hide();
+                    var jsonData = JSON.parse(data);
+                    show_statistics_graph('visualization', jsonData, dataset_name);
+                    /*var div = document.getElementById('visualization');
+                     $('#visualization').empty();
+                     while(div.firstChild){
+                     div.removeChild(div.firstChild);
+                     }
+                     jsonData = JSON.parse(data)
+                     mpld3.draw_figure("visualization", jsonData['fig']) ;
+                     */
+                },
+
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            }); //ajax
+        });
+
+    $("#submitBtn9").on('click', function() {
+            $("#damModal").modal("hide");
+            $("#task9Modal").modal("hide");
+            $('#visualization').empty();
+            var selectedDimLst = get_selected_dims("checkboxOfTask9");
+            var data_set_name =  $("#data_select option:selected").val();
+            var numOfClusters = $('#NumOfClusters').val()
+            if (selectedDimLst.length === 2 && numOfClusters > 1 && numOfClusters < 13){
+
+                $.ajax({
+                    type: "GET",
+                    url: $SCRIPT_ROOT + "/clustering",
+                    contentType:"text/json; charset=utf-8",
+                    data: {city: data_set_name , dim: selectedDimLst.toString(), n_clusters: numOfClusters},
+                    beforeSend: function(){
+                        $('#loaderDiv').show();
+                    },
+                    success: function(data) {
+                        $('#loaderDiv').hide();
+                        var div = document.getElementById('visualization');
+                        $('#visualization').empty();
+                        while(div.firstChild){
+                            div.removeChild(div.firstChild);
+                        }
+                        var jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
+                        plot_graph("visualization", jsonData['data'], jsonData['cluster'], data_set_name, selectedDimLst)
+                        //mpld3.draw_figure("visualization", jsonData['fig']) ;
+                    },
+
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            }
+            else{
+                alert("Please choose 2 dimensions. 1 < Clusters < 13 ")
+            }
+        });
 })
 
 
@@ -457,5 +673,6 @@ function show_statistics_graph(containerId, jsonData, my_title){
 	};
 
 	Plotly.newPlot(containerId, data, layout)
+    document.querySelector('[data-title="Autoscale"]').click()
 
 }

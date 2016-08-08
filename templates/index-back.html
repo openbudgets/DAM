@@ -15,7 +15,7 @@
   <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
 
 
-  <script src={{ url_for('static', filename='main.js') }}></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
   <script type="text/javascript">
     var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
 </script>
@@ -444,7 +444,7 @@
 				    },
 				 success: function(data) {
 					 $('#loaderDiv').hide();
-					 jsonData = JSON.parse(data)
+					 var jsonData = JSON.parse(data)
 					 show_statistics_graph('visualization', jsonData, dataset_name);
 					 /*var div = document.getElementById('visualization');
 					 $('#visualization').empty();

@@ -15,6 +15,9 @@
             src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js">
     </script>
     <![endif]-->
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
 </head>
 <body>
 <!-- row 1 -->
@@ -22,22 +25,34 @@
     <div class="row">
         <div id="dataset" class="col-sm-6 col-md-3 pull-left">
             <h1><label class="label label-primary control-label  full-width" id="cdata">Choose dataset</label></h1>
-            <select class="form-control"  id="data_select"  multiple>
+            <select class="form-control"  id="data_select">
+                <option value="None" ></option>
+                <option value="Aragon-2006-income">Aragon-2006-income</option>
+                <option value="Aragon-2007-income">Aragon-2007-income</option>
+                <option value="Aragon-2008-income">Aragon-2008-income</option>
+                <option value="Aragon-2009-income">Aragon-2009-income</option>
+                <option value="Aragon-2010-income">Aragon-2010-income</option>
+                <option value="Aragon-2011-income">Aragon-2011-income</option>
+                <option value="Aragon-2012-income">Aragon-2012-income</option>
+                <option value="Aragon-2013-income">Aragon-2013-income</option>
+                <option value="Aragon-2014-income">Aragon-2014-income</option>
+                <option value="Aragon-2015-income">Aragon-2015-income</option>
+                <option value="Aragon-2016-income">Aragon-2016-income</option>
                 </select>
         </div>
         <div id="dimentions" class="col-sm-6 col-md-3">
             <h1><label  class="label label-primary control-label  full-width" id="cdim">  Dimensions </label></h1>
-            <select class="form-control"  id="observe_dimension"  multiple>
+            <select class="form-control"  id="observe_dimension" >
             </select>
         </div>
         <div id="codelist" class="col-sm-6 col-md-3">
             <h1><label class="label label-primary control-label  full-width" id="ccode">  Code-List </label></h1>
-            <select class="form-control"  id="code_list"  multiple>
+            <select class="form-control"  id="code_list"  >
             </select>
         </div>
         <div id="remark" class="col-sm-6 col-md-3">
             <h1><label class="label label-default control-label full-width" id="cremark">  Remark  </label></h1>
-            <select class="form-control"  id="code_remark"  multiple>
+            <select class="form-control"  id="code_remark"  >
             </select>
         </div>
     </div>
@@ -59,7 +74,7 @@
 <div id="loaderDiv" hidden>
     <img class="col-sm-3 col-sm-offset-4 col-dm-3 col-dm-offset-4" src="{{ url_for('static', filename='spinner.gif') }}">
 </div>
-<div id="visualization" class="col-sm-6 col-sm-offset-2 col-dm-6 col-dm-offset-2"></div>
+<div id="visualization" class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"></div>
 
 <!-- Modal -->
 <div class="modal fade" id="damModal" role="dialog">
@@ -113,6 +128,106 @@
 </div>
 
 
+<!-- Task1 Modal content : outlier detection-->
+<div class="modal fade" id="task1Modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  <div id="od_task"> Outlier Detection </div></h4>
+            </div>
+
+            <div class="modal-body">
+                {% block content1 %}
+                <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
+                <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
+                <strong>Choose one dimension:</strong>
+                <div id="checkboxOfTask1"></div>
+                <br><br>
+                {% endblock %}
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
+                <button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Task3 Modal content : trend analysis-->
+<div class="modal fade" id="task3Modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Trend Analysis </h4>
+            </div>
+            <div class="modal-body">
+                {% block content3 %}
+                {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn3" name="submitBtn3">Submit</button>
+                <button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Task6 Modal content : Statistics -->
+<div class="modal fade" id="task6Modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Statistics</h4>
+            </div>
+            <div class="modal-body">
+                {% block content6 %}
+                <strong>Introduction to Statistics</strong>
+                <br><br>
+                {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn6" name="submitBtn6">Execute</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Task9 Modal content : clustering-->
+<div class="modal fade" id="task9Modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Clustering </h4>
+            </div>
+            <div class="modal-body">
+                {% block content9 %}
+                <strong>Introduction to Clustering</strong>
+                <strong>How many clusters should the data be grouped? (between two and ten groups) </strong>
+                <input size="10" id="NumOfClusters" name="NumOfClusters" type="text"><br>
+                <strong>Choose two dimensions:</strong>
+                <div id="checkboxOfTask9"></div>
+                <br><br>
+                {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn9" name="submitBtn9">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
 <script src="{{ url_for('static', filename='tether.min.js') }}"></script>
 <script src="{{ url_for('static', filename='jquery-2.2.0.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>

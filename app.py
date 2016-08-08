@@ -27,14 +27,14 @@ db = SQLAlchemy(app)
 from models import Triples
 currentRDFFile = ''
 
-@app.route('/dam', methods=['GET','POST'])
+@app.route('/old', methods=['GET','POST'])
 def dam():
-    return render_template('dam.html')
+    return render_template('index-back.html')
 
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return render_template('index.html')
+    return render_template('dam.html')
 
 
 @app.route('/echo/', methods=['GET'])
@@ -111,13 +111,14 @@ def do_trend_analysis():
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
     cityName = request.args.get('city') 
-    print(cityName)
+    print('cityName',cityName)
     if cityName != 'None':
         ttlDataset = ds.datasets.get(cityName, '')[0]
         print(ttlDataset)
         ret_data = statis.perform_statistics(ttlDataset)
     else:
         ret_data = {}
+    print(ret_data)
     return ret_data #jsonify(result=ret_data)
 
 
