@@ -12,7 +12,7 @@ from json import dumps
 def analyse_trend(dtable=''):
     data_table_name_lst = mutil.get_dataset_all_temporal(dtable)
     data_table = []
-    city = [ele for ele in dtable.split('-') if not ele.isdigit()][0]
+    dataset_name = [ele for ele in dtable.split('-') if not ele.isdigit()][0]
     tmlst=[]
     for dtable_name in data_table_name_lst:
         row = {'Year': mutil.get_time_from_filename(dtable_name),
@@ -29,7 +29,7 @@ def analyse_trend(dtable=''):
     df = df.drop(['Year', 'Month', 'Day'], axis=1)
     print(df)
     fig, ax = plt.subplots(1, 1, figsize=(10, 6))
-    ax.set_title(city)
+    ax.set_title(dataset_name)
     flow = df['Mean']
     res = sm.tsa.seasonal_decompose(flow, freq=1)
     fig = res.plot()

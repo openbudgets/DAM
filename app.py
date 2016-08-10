@@ -80,17 +80,16 @@ def get_code_list_of_dimension():
 #@cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection():  
     print('in outlier detection')
-    city_name = request.args.get('city')
-    print('city name', city_name)
-    if city_name == 'None':
+    dataset_name = request.args.get('dataset_name')
+    print('dataset name', dataset_name)
+    if dataset_name == 'None':
         ret_data = {}
     else:
-        ttl_dataset = ds.datasets.get(city_name, '')[0]
+        ttl_dataset = ds.datasets.get(dataset_name, '')[0]
         dim_list = request.args.get('dim').split(',')
         print(dim_list)
         per = float(request.args.get('per'))/100
         ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
-    
     return ret_data
 
 
@@ -98,22 +97,22 @@ def do_outlier_detection():
 # @cache.cached(timeout=50, key_prefix='all_comments')
 def do_trend_analysis():
     print('in trend analysis')
-    city_name = request.args.get('city')
-    print('city name', city_name)
-    if city_name == 'None':
+    dataset_name = request.args.get('dataset_name')
+    print('dataset name', dataset_name)
+    if dataset_name == 'None':
         ret_data = {}
     else:
         #dim_list = request.args.get('dim').split(',')
         #print(dim_list)
-        ret_data = trend.analyse_trend(dtable=city_name)
+        ret_data = trend.analyse_trend(dtable=dataset_name)
     return ret_data
 
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
-    cityName = request.args.get('city') 
-    print('cityName',cityName)
-    if cityName != 'None':
-        ttlDataset = ds.datasets.get(cityName, '')[0]
+    dataset_name = request.args.get('dataset_name')
+    print('dataset name',dataset_name)
+    if dataset_name != 'None':
+        ttlDataset = ds.datasets.get(dataset_name, '')[0]
         print(ttlDataset)
         ret_data = statis.perform_statistics(ttlDataset)
     else:
@@ -126,10 +125,10 @@ def do_statistics():
 @cache.cached(timeout=300, key_prefix='all_comments')
 def do_clustering(): 
     print("in /clustering") 
-    cityName = request.args.get('city') 
-    print('city Name', cityName)
-    if cityName != 'None':
-        ttlDataset = ds.datasets.get(cityName, '')[0]
+    dataset_name = request.args.get('dataset_name')
+    print('dataset name', dataset_name)
+    if dataset_name != 'None':
+        ttlDataset = ds.datasets.get(dataset_name, '')[0]
         dimList = request.args.get('dim').split(',')
         print(ttlDataset,dimList)
         n_clusters = int(request.args.get('n_clusters'))

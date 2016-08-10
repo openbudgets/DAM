@@ -2,12 +2,6 @@
  * 
  */
 
-/*
-var dimensionLst = [];
-var checkedDimDict1 = {};
-var checkedDimDict9 = {};
-*/
-
 
 $(document).ready(function() {
     $('#data_select').on('change', function () {
@@ -100,7 +94,7 @@ $(document).ready(function() {
                 type: "GET",
                 url: $SCRIPT_ROOT + "/outlier_detection",
                 contentType: "text/json; charset=utf-8",
-                data: {city: dataset_name, dim: selectedDimLst.toString(), per: percent},
+                data: {dataset_name: dataset_name, dim: selectedDimLst.toString(), per: percent},
                 beforeSend: function(){
                     $('#loaderDiv').show();
                 },
@@ -136,7 +130,7 @@ $(document).ready(function() {
                 url: $SCRIPT_ROOT + "/trend_analysis",
                 contentType: "text/json; charset=utf-8",
                 //data: {city: dataset_name, dim: selectedDimLst.toString()},
-                data: {city: dataset_name},
+                data: {dataset_name: dataset_name},
                 beforeSend: function(){
                     $('#loaderDiv').show();
                 },
@@ -165,7 +159,7 @@ $(document).ready(function() {
                 type: "GET",
                 url: $SCRIPT_ROOT + "/statistics",
                 contentType: "text/json; charset=utf-8",
-                data: {city: dataset_name },
+                data: {dataset_name: dataset_name },
                 beforeSend: function(){
                     $('#loaderDiv').show();
                 },
@@ -202,7 +196,7 @@ $(document).ready(function() {
                     type: "GET",
                     url: $SCRIPT_ROOT + "/clustering",
                     contentType:"text/json; charset=utf-8",
-                    data: {city: data_set_name , dim: selectedDimLst.toString(), n_clusters: numOfClusters},
+                    data: {dataset_name: data_set_name , dim: selectedDimLst.toString(), n_clusters: numOfClusters},
                     beforeSend: function(){
                         $('#loaderDiv').show();
                     },
