@@ -58,3 +58,5 @@ ENV/
 
 # IDE files
 .idea/
+
+*.out
