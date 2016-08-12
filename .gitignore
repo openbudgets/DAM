@@ -58,3 +58,6 @@ ENV/
 
 # IDE files
 .idea/
+
+# dump
+dump.rdb

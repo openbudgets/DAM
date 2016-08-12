@@ -58,7 +58,7 @@ $(document).ready(function() {
                 data: {dim: selectVal },
                 success: function(data) {
                     console.log(data.result);
-                    jsonData = data.result;
+                    var jsonData = data.result;
                     if (data.result){
                         var dimContainer = document.getElementById('code_list');
                         remove_options(dimContainer);
@@ -98,15 +98,17 @@ $(document).ready(function() {
                 beforeSend: function(){
                     $('#loaderDiv').show();
                 },
-                success: function(data) {
+                success: function(dataJobId) {
                     $('#loaderDiv').hide();
                     $('#visualization').empty();
                     var div = document.getElementById('visualization');
                     while (div.hasChildNodes()) {
                         div.removeChild(div.lastChild);
                     }
-                    var jsonData = JSON.parse(data);
-                    plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
+					get_dam_result(dataJobId.jobid, dataset_name, plot_2Dgraph, selectedDimLst);
+					//var data = get_dam_result(dataJobId.jobid);
+                    //var jsonData = JSON.parse(data);
+                    //plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
                     // plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
                     //mpld3.draw_figure("visualization", jsonData['fig']) ;
                 },
@@ -163,10 +165,12 @@ $(document).ready(function() {
                 beforeSend: function(){
                     $('#loaderDiv').show();
                 },
-                success: function(data) {
+                success: function(dataJobId) {
                     $('#loaderDiv').hide();
-                    var jsonData = JSON.parse(data);
-                    show_statistics_graph('visualization', jsonData, dataset_name);
+					get_dam_result(dataJobId.jobid, dataset_name, show_statistics_graph, []);
+					//var data = get_dam_result(dataJobId.jobid);
+                    //var jsonData = JSON.parse(data);
+                    //show_statistics_graph('visualization', jsonData, dataset_name);
                     /*var div = document.getElementById('visualization');
                      $('#visualization').empty();
                      while(div.firstChild){
@@ -222,6 +226,43 @@ $(document).ready(function() {
             }
         });
 })
+
+
+function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
+
+	var timeout = "";
+	var poller = function() {
+		// fire another request
+		$.ajax({
+			type: "GET",
+			url: $SCRIPT_ROOT + '/results/'+jobID,
+			contentType:"text/json; charset=utf-8",
+			beforeSend: function(){
+				$('#loaderDiv').show();
+			},
+			success: function(data) {
+				if (data !== "Wait!") {
+					console.log(data)
+					$('#loaderDiv').hide();
+					clearTimeout(timeout);
+					var jsonData = JSON.parse(data);
+                    visual_func('visualization', jsonData, dataset_name, dimlst);
+				}else {
+					setTimeout(poller, 2000)
+				}
+			},
+			timeout: 2000,
+			error: function(jqXHR, textStatus, errorThrown) {
+					if(textStatus === "timeout") {
+						poller()
+					}else {
+            			alert(textStatus);
+        			}
+				}
+		});
+	};
+	poller();
+}
 
 
 function remove_options(selectbox)

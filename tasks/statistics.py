@@ -9,14 +9,14 @@ import tasks.myutil as mutil
 from collections import Counter
 
 
-def perform_statistics(rdf):
+def perform_statistics(dtable=''):
     points=[]
     ylst = []
     title = ''
     ymin = 1000000000
     ymax = 0
     g = rdflib.Graph()
-    g.parse(rdf)
+    g.parse(dtable)
     
     qstr = "select ?s ?o where {?s obeu-measure:amount ?o . }"
     qres = g.query( qstr  ) 
@@ -34,8 +34,8 @@ def perform_statistics(rdf):
     ystd = np.std(ylst) 
     ydata = Counter(ylst)
     sorted_by_x = sorted(points, key=lambda ele: ele[0])
-    llst  = list(zip(*sorted_by_x)) 
-    xlst,ylst = llst[0], llst[1]
+    llst = list(zip(*sorted_by_x))
+    xlst, ylst = llst[0], llst[1]
     dimlst = mutil.get_dimensions_of_observations(g)
     return dumps({'xlst':xlst,'ylst':ylst, 'mean': ymean, 'std':ystd, 'min': ymin, 'max': ymax, 'dimlst': dimlst})
     
@@ -50,7 +50,7 @@ def simple_stats(rdf):
     g.parse(rdf)
     
     qstr = "select ?s ?o where {?s obeu-measure:amount ?o . }"
-    qres = g.query( qstr  ) 
+    qres = g.query(qstr)
     for row in qres.result: 
         xvalue = row[0].split('/')[-1]
         title = '/'.join(row[0].split('/')[:-1])

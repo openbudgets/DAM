@@ -2,6 +2,9 @@ import os
 from flask import Flask, jsonify, render_template, request
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
+from rq import Queue
+from rq.job import Job
+from worker import conn
 import datasets as ds
 import tasks.statistics as statis 
 import tasks.outlier_detection as outlier
@@ -23,6 +26,8 @@ cache.init_app(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+q = Queue(connection=conn)
+
 
 from models import Triples
 currentRDFFile = ''
@@ -37,11 +42,31 @@ def index():
     return render_template('dam.html')
 
 
-@app.route('/echo/', methods=['GET'])
+@app.route('/echo', methods=['GET'])
 def echo():
     ret_data = {"value": request.args.get('echoValue')}
-    print(ret_data)
     return jsonify(ret_data)
+
+
+@app.route('/queue', methods=['POST'])
+def test_queue():
+    def say_hi(astring):
+        return astring
+    job = q.enqueue_call(func=say_hi, args=('hello from queue',), result_ttl=5000)
+    print('test_queue in job queue with id:', job.get_id())
+    return job.get_id()
+
+
+@app.route("/results/<job_key>", methods=['GET'])
+def get_results(job_key):
+    job = Job.fetch(job_key, connection=conn)
+    if job.is_finished:
+        #
+        # job.result shall be stored in User query database
+        #
+        return job.result
+    else:
+        return "Wait!"
 
 
 @app.route('/observe_dim', methods=['GET'])
@@ -89,8 +114,12 @@ def do_outlier_detection():
         dim_list = request.args.get('dim').split(',')
         print(dim_list)
         per = float(request.args.get('per'))/100
-        ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
-    return ret_data
+        # ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
+        mykwargs = {'dtable':ttl_dataset, 'dim':dim_list, 'outliers_fraction':per}
+        job = q.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
+        print('outlier detection in job queue with id:', job.get_id())
+    # return ret_data
+    return jsonify(jobid = job.get_id())
 
 
 @app.route('/trend_analysis', methods=['GET'])
@@ -107,6 +136,7 @@ def do_trend_analysis():
         ret_data = trend.analyse_trend(dtable=dataset_name)
     return ret_data
 
+
 @app.route('/statistics', methods=['GET'])
 def do_statistics():
     dataset_name = request.args.get('dataset_name')
@@ -114,11 +144,16 @@ def do_statistics():
     if dataset_name != 'None':
         ttlDataset = ds.datasets.get(dataset_name, '')[0]
         print(ttlDataset)
-        ret_data = statis.perform_statistics(ttlDataset)
+        mykwargs = {'dtable': ttlDataset}
+        # ret_data = statis.perform_statistics(dtable=ttlDataset)
+        job = q.enqueue_call(func=statis.perform_statistics, kwargs=mykwargs, result_ttl=5000)
+        print('statistics in job queue with id:', job.get_id())
+        return jsonify(jobid=job.get_id())
     else:
         ret_data = {}
-    print(ret_data)
-    return ret_data #jsonify(result=ret_data)
+    # print(ret_data)
+    # return ret_data #jsonify(result=ret_data)
+        return jsonify(jobid = 0)
 
 
 @app.route('/clustering', methods=['GET']) 
