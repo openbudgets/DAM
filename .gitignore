@@ -59,5 +59,9 @@ ENV/
 # IDE files
 .idea/
 
+#<<<<<<< HEAD
 # dump
 dump.rdb
+#=======
+*.out
+#>>>>>>> 5965edd7282e9565e6a0da16c4cebffd3b5332ba
