@@ -61,6 +61,10 @@ $ cd DAM
 * Start your application by executing
 `python manage.py runserver`
 
+in a new terminal, run 'redis-server'
+
+in a new terminal, run 'python3 worker.py'
+ 
 * Go to <http://localhost:5000>
 
 # Possible error and Solutions
