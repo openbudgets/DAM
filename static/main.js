@@ -136,11 +136,12 @@ $(document).ready(function() {
                 beforeSend: function(){
                     $('#loaderDiv').show();
                 },
-                success: function(data) {
+                success: function(dataJobId) {
                     $('#loaderDiv').hide();
-                    $('#visualization').empty();
-                    var jsonData = JSON.parse(data)
-                    mpld3.draw_figure("visualization", jsonData['fig']) ;
+					get_dam_result(dataJobId.jobid, dataset_name, mpld3.draw_figure, []);
+                    //$('#visualization').empty();
+                    //var jsonData = JSON.parse(data)
+                    //mpld3.draw_figure("visualization", jsonData['fig']) ;
                     //var jsonData = JSON.parse(data);
                     //console.log(jsonData);
                     //plot_2D_trend_graph("visualization", jsonData, dataset_name)
@@ -192,7 +193,7 @@ $(document).ready(function() {
             $("#task9Modal").modal("hide");
             $('#visualization').empty();
             var selectedDimLst = get_selected_dims("checkboxOfTask9");
-            var data_set_name =  $("#data_select option:selected").val();
+            var dataset_name =  $("#data_select option:selected").val();
             var numOfClusters = $('#NumOfClusters').val()
             if (selectedDimLst.length === 2 && numOfClusters > 1 && numOfClusters < 13){
 
@@ -200,19 +201,20 @@ $(document).ready(function() {
                     type: "GET",
                     url: $SCRIPT_ROOT + "/clustering",
                     contentType:"text/json; charset=utf-8",
-                    data: {dataset_name: data_set_name , dim: selectedDimLst.toString(), n_clusters: numOfClusters},
+                    data: {dataset_name: dataset_name , dim: selectedDimLst.toString(), n_clusters: numOfClusters},
                     beforeSend: function(){
                         $('#loaderDiv').show();
                     },
-                    success: function(data) {
+                    success: function(dataJobId) {
                         $('#loaderDiv').hide();
-                        var div = document.getElementById('visualization');
-                        $('#visualization').empty();
-                        while(div.firstChild){
-                            div.removeChild(div.firstChild);
-                        }
-                        var jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
-                        plot_graph("visualization", jsonData['data'], jsonData['cluster'], data_set_name, selectedDimLst)
+						get_dam_result(dataJobId.jobid, dataset_name, plot_graph, selectedDimLst);
+                        //var div = document.getElementById('visualization');
+                        //$('#visualization').empty();
+                        //while(div.firstChild){
+                        //    div.removeChild(div.firstChild);
+                        // }
+                        //var jsonData = JSON.parse(data) //{'data': X, 'cluster': labels}
+                        //plot_graph("visualization", jsonData['data'], jsonData['cluster'], dataset_name, selectedDimLst)
                         //mpld3.draw_figure("visualization", jsonData['fig']) ;
                     },
 
@@ -371,8 +373,10 @@ function get_selected_dims(checkboxID){
 }
 
 
-function plot_graph(containerId, matrix, labels, my_title, dim){
+function plot_graph(containerId, jsonData, my_title, dim){
 	//{'data': X, 'cluster': labels, 'my_title': 'data set name', dim: ['functinalClassification']}
+	var matrix = jsonData['data'];
+	var labels = jsonData['cluster'];
 	var clusters = new Set(labels);
 	clusters = Array.from(clusters);
 	console.log('clusters ', clusters);
@@ -382,7 +386,7 @@ function plot_graph(containerId, matrix, labels, my_title, dim){
 	              'rgb(128,126,28)','rgb(255,126,84)','rgb(277,75,74)'];
 
 	function select_data_in_cluster(rows, cluster){
-		rlt = [];
+		var rlt = [];
 		for (var i=0; i<rows.length; i++){
 			if (labels[i] === cluster){
 				rlt.push(rows[i])

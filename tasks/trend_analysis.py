@@ -35,7 +35,7 @@ def analyse_trend(dtable=''):
     fig = res.plot()
     output = mpld3.fig_to_dict(fig)
     #result = {'trend': res.trend.to_json(), 'observed': res.observed.to_json(), 'seasonal': res.seasonal.to_json(), 'residual': res.resid.to_json()}
-    return dumps({'fig':output})
+    return dumps(output)
 
 
 def sample_function():

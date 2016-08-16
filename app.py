@@ -117,7 +117,7 @@ def do_outlier_detection():
         # ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
         mykwargs = {'dtable':ttl_dataset, 'dim':dim_list, 'outliers_fraction':per}
         job = q.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
-        print('outlier detection in job queue with id:', job.get_id())
+        print('outlier detection with job id:', job.get_id())
     # return ret_data
     return jsonify(jobid = job.get_id())
 
@@ -128,13 +128,16 @@ def do_trend_analysis():
     print('in trend analysis')
     dataset_name = request.args.get('dataset_name')
     print('dataset name', dataset_name)
-    if dataset_name == 'None':
-        ret_data = {}
-    else:
+    if dataset_name != 'None':
         #dim_list = request.args.get('dim').split(',')
         #print(dim_list)
-        ret_data = trend.analyse_trend(dtable=dataset_name)
-    return ret_data
+        #ret_data = trend.analyse_trend(dtable=dataset_name)
+        mykwargs = {'dtable': dataset_name}
+        job = q.enqueue_call(func=trend.analyse_trend, kwargs=mykwargs, result_ttl=5000)
+        print('performing trend analysis with job id:', job.get_id())
+        return jsonify(jobid=job.get_id())
+    else:
+        return jsonify(jobid = 0)
 
 
 @app.route('/statistics', methods=['GET'])
@@ -151,8 +154,8 @@ def do_statistics():
         return jsonify(jobid=job.get_id())
     else:
         ret_data = {}
-    # print(ret_data)
-    # return ret_data #jsonify(result=ret_data)
+        # print(ret_data)
+        # return ret_data #jsonify(result=ret_data)
         return jsonify(jobid = 0)
 
 
@@ -167,12 +170,16 @@ def do_clustering():
         dimList = request.args.get('dim').split(',')
         print(ttlDataset,dimList)
         n_clusters = int(request.args.get('n_clusters'))
-        ret_data = cluster.clustering(dtable=ttlDataset, dim=dimList, n_clusters = n_clusters) 
+        #ret_data = cluster.clustering(dtable=ttlDataset, dim=dimList, n_clusters = n_clusters)
+        mykwars = {'dtable': ttlDataset, 'dim': dimList, 'n_clusters':n_clusters}
+        job = q.enqueue_call(func=cluster.clustering, kwargs=mykwars, result_ttl=5000)
+        print('performing clustering with job id:', job.get_id())
+        return jsonify(jobid=job.get_id())
     else:
-        ret_data = {}
-    return ret_data #jsonify(result=ret_data)
+        #ret_data = {}
+        return jsonify(jobid = 0)
     
  
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=true)
+    app.run(host='0.0.0.0', debug=True)
 

@@ -45,7 +45,7 @@ def detect_outliers(dtable='', dim=[], outliers_fraction = 0.25):
                  
         return outlier_detection_for_2D(measure, x_len,x_mid, x_num, y_len, y_mid, y_num, x_range=[-2,2], y_range=[-2, 2],
                                         n_samples = num, outliers_fraction = outliers_fraction) 
-    return dumps({'in':[], 'out':[]})
+    return dumps({'in_x':[], 'in_y':[],'out_x':[], 'out_y':[]})
 
 
 def outlier_detection_for_2D(measure,x_len,x_mid, x_num, y_len, y_mid, y_num, x_range=[],  y_range=[], 
