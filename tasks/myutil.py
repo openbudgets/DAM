@@ -33,7 +33,7 @@ def get_mean_of_observations(dtable_name):
     return float(np.mean(ylst))
 
 
-def construct_data_frame(g,dim=[], withObservationId = True): 
+def construct_data_frame(g, dim=[], withObservationId = True):
     """
     if dim=[], take the whole dimensions
     """
