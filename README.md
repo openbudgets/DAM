@@ -88,7 +88,7 @@ $ cd DAM
  then, `cd dam_env && chmod +x startContainers.sh && ./startContainers.sh`
 
  in the `config.py` file, change `USE_DOCKER_REDIS = True`
- 
+
 
 * Solution to Error 1
 
