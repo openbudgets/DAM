@@ -91,15 +91,6 @@ export DATABASE_URL=localhost/openbudges # or whatever you used above as postgre
  
 * Go to <http://localhost:5000>
 
-# Possible error and Solutions
-* Error 1
-
-> RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework.
-> See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try
-> one of the other backends. If you are Working with Matplotlib in a virtual enviroment see 'Working with Matplotlib in Virtual environments' in the Matplotlib FAQ
-
-<<<<<<< HEAD
-
 * How to use Redis in a docker container
 
  go to the directory where you want to install
@@ -110,11 +101,15 @@ export DATABASE_URL=localhost/openbudges # or whatever you used above as postgre
 
  in the `config.py` file, change `USE_DOCKER_REDIS = True`
 
+# Possible error and Solutions
+* Error 1
+
+> RuntimeError: Python is not installed as a framework. The Mac OS X backend will not be able to function correctly if Python is not installed as a framework.
+> See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try
+> one of the other backends. If you are Working with Matplotlib in a virtual enviroment see 'Working with Matplotlib in Virtual environments' in the Matplotlib FAQ
+
 
 * Solution to Error 1
-=======
-* Solution 1 to Error 1
->>>>>>> 802daf797e6cfbc0a356783697752fffe84d4133
 
  touch `frameworkpython` file in the virtualenv bin directory with the following content:
 ```
