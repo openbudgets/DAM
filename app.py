@@ -4,8 +4,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
 from rq import Queue
 from rq.job import Job
-from worker import conn, conn_uep
-from worker_main import conn_dm
+#from worker_3 import conn, conn_uep
+from worker import conn_dm
 import datasets as ds
 import tasks.statistics as statis 
 import tasks.outlier_detection as outlier
@@ -27,13 +27,14 @@ cache.init_app(app)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-q_iais = Queue(connection=conn)
+#q_iais = Queue(connection=conn)
 q_dm = Queue(connection=conn_dm)
-q_uep = Queue(connection=conn_uep)
+#q_uep = Queue(connection=conn_uep)
 
 
 from models import Triples
 currentRDFFile = ''
+
 
 @app.route('/old', methods=['GET','POST'])
 def dam():
@@ -58,7 +59,7 @@ def say_hi(astring):
 @app.route('/queue/<num>', methods=['GET','POST'])
 def test_queue(num):
     if num == '0':
-        job = q_iais.enqueue_call(func=say_hi, args=('hello from queue for local jobs',), result_ttl=5000)
+        job = q_dm.enqueue_call(func=say_hi, args=('hello from queue for local jobs',), result_ttl=5000)
         print('test_queue in job queue with id:', job.get_id())
         return job.get_id()
     elif num == '1':
@@ -66,7 +67,7 @@ def test_queue(num):
         print('test_queue in job queue with id:', job.get_id())
         return job.get_id()
     elif num == '2':
-        job = q_uep.enqueue_call(func=say_hi, args=('hello from queue for uep jobs',), result_ttl=5000)
+        job = q_dm.enqueue_call(func=say_hi, args=('hello from queue for uep jobs',), result_ttl=5000)
         print('test_queue in job queue with id:', job.get_id())
         return job.get_id()
     print('Usage: http://localhost:5000/queue/[0-2]')
@@ -75,7 +76,7 @@ def test_queue(num):
 
 @app.route("/results/<job_key>", methods=['GET'])
 def get_results(job_key):
-    job = Job.fetch(job_key, connection=conn)
+    job = Job.fetch(job_key, connection=conn_dm)
     if job.is_finished:
         #
         # job.result shall be stored in User query database
@@ -132,7 +133,7 @@ def do_outlier_detection():
         per = float(request.args.get('per'))/100
         # ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
         mykwargs = {'dtable':ttl_dataset, 'dim':dim_list, 'outliers_fraction':per}
-        job = q_iais.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
+        job = q_dm.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
         print('outlier detection with job id:', job.get_id())
     # return ret_data
     return jsonify(jobid = job.get_id())
@@ -149,7 +150,7 @@ def do_trend_analysis():
         #print(dim_list)
         #ret_data = trend.analyse_trend(dtable=dataset_name)
         mykwargs = {'dtable': dataset_name}
-        job = q_iais.enqueue_call(func=trend.analyse_trend, kwargs=mykwargs, result_ttl=5000)
+        job = q_dm.enqueue_call(func=trend.analyse_trend, kwargs=mykwargs, result_ttl=5000)
         print('performing trend analysis with job id:', job.get_id())
         return jsonify(jobid=job.get_id())
     else:
@@ -165,7 +166,7 @@ def do_statistics():
         print(ttlDataset)
         mykwargs = {'dtable': ttlDataset}
         # ret_data = statis.perform_statistics(dtable=ttlDataset)
-        job = q_iais.enqueue_call(func=statis.perform_statistics, kwargs=mykwargs, result_ttl=5000)
+        job = q_dm.enqueue_call(func=statis.perform_statistics, kwargs=mykwargs, result_ttl=5000)
         print('statistics in job queue with id:', job.get_id())
         return jsonify(jobid=job.get_id())
     else:
@@ -188,7 +189,7 @@ def do_clustering():
         n_clusters = int(request.args.get('n_clusters'))
         #ret_data = cluster.clustering(dtable=ttlDataset, dim=dimList, n_clusters = n_clusters)
         mykwars = {'dtable': ttlDataset, 'dim': dimList, 'n_clusters':n_clusters}
-        job = q_iais.enqueue_call(func=cluster.clustering, kwargs=mykwars, result_ttl=5000)
+        job = q_dm.enqueue_call(func=cluster.clustering, kwargs=mykwars, result_ttl=5000)
         print('performing clustering with job id:', job.get_id())
         return jsonify(jobid=job.get_id())
     else:

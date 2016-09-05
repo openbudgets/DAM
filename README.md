@@ -78,6 +78,18 @@ $ cd DAM
 > See the Python documentation for more information on installing Python as a framework on Mac OS X. Please either reinstall Python as a framework, or try
 > one of the other backends. If you are Working with Matplotlib in a virtual enviroment see 'Working with Matplotlib in Virtual environments' in the Matplotlib FAQ
 
+
+* How to use Redis in a docker container
+
+ go to the directory where you want to install
+
+ clone the Redis image by typing `git clone https://github.com/mlukasch/dam_env`
+
+ then, `cd dam_env && chmod +x startContainers.sh && ./startContainers.sh`
+
+ in the `config.py` file, change `USE_DOCKER_REDIS = True`
+ 
+
 * Solution to Error 1
 
  touch `frameworkpython` file in the virtualenv bin directory with the following content:
