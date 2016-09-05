@@ -9,7 +9,7 @@ def get_dataset_all_temporal(dtable):
     result = []
     for key in ds.datasets.keys():
         lst = [ele for ele in key.split('-') if not ele.isdigit()]
-        if (set(references).issubset(set(lst))):
+        if set(references).issubset(set(lst)):
             result.append(key)
     return result
 
@@ -20,6 +20,7 @@ def get_time_from_filename(dtable_name):
         return int(lst[0])
     else:
         return 0
+
 
 def get_mean_of_observations(dtable_name):
     rdfDataset = ds.datasets.get(dtable_name, '')[0]
@@ -207,8 +208,6 @@ def get_column(matrix, i):
     return [row[i] for row in matrix]
 
 
-
-
 if __name__ == "__main__":
     rdffile = '../Data/aragon-2006-income.rdf'
     g = rdflib.Graph()
@@ -216,5 +215,3 @@ if __name__ == "__main__":
     dim = ["fundingClassification", "economicClassification"] 
     frame = construct_data_frame(g, dim)
     print(frame)
-    
-    

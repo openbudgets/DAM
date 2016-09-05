@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Data Analysis and Mining</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <!--[if lt IE 9]>
     <script
             src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js">
@@ -63,7 +63,7 @@
     <div class="row">
         <button id="dam" class="col-sm-12 col-md-6 btn btn-default"
                 data-toggle="modal" data-target="#damModal">
-            <img src="{{ url_for('static', filename='datamining.gif') }}" class="img-responsive">
+            <img src="{{ url_for('static', filename='images/datamining.gif') }}" class="img-responsive">
         </button>
     </div>
 </div>
@@ -72,7 +72,7 @@
 <!-- output area -->
 <strong><div id="echoResult"></div></strong>
 <div id="loaderDiv" hidden>
-    <img class="col-sm-3 col-sm-offset-4 col-dm-3 col-dm-offset-4" src="{{ url_for('static', filename='spinner.gif') }}">
+    <img class="col-sm-3 col-sm-offset-4 col-dm-3 col-dm-offset-4" src="{{ url_for('static', filename='images/spinner.gif') }}">
 </div>
 <div id="visualization" class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"></div>
 
@@ -147,6 +147,7 @@
                 {% endblock %}
                 </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn_ce" name="submitBtn_ce">CE Function</button>
                 <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
                 <button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
             </div>
@@ -228,9 +229,9 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
-<script src="{{ url_for('static', filename='tether.min.js') }}"></script>
-<script src="{{ url_for('static', filename='jquery-2.2.0.js') }}"></script>
-<script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
-<script src="{{ url_for('static', filename='main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-2.2.0.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

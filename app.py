@@ -8,7 +8,7 @@ from rq.job import Job
 from worker import conn_dm
 import datasets as ds
 import tasks.statistics as statis 
-import tasks.outlier_detection as outlier
+import tasks.outlier_detection.outlier_detection as outlier
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.myutil as mutil
