@@ -9,7 +9,7 @@ OBEU Partners are encouraged to create their own branches for doing testing (Pyt
 
 # Work flow
 <p align="center">
-  <img src="doc/pic/DAM_Arch2.png" width="600"/>
+  <img src="doc/pic/DAM_Arch.png" width="600"/>
 </p>
 
 # Three main sub-tasks
