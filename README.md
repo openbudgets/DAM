@@ -91,7 +91,7 @@ export DATABASE_URL=localhost/openbudges # or whatever you used above as postgre
  
 * Go to <http://localhost:5000>
 
-* How to use Redis in a docker container
+# How to use Redis in a docker container
 
  go to the directory where you want to install
 
