@@ -12,6 +12,7 @@ import tasks.outlier_detection.outlier_detection as outlier
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.myutil as mutil
+import tasks.triplestore_util as tristore
 
 import numpy as np 
 import matplotlib.pyplot as plt
@@ -91,13 +92,20 @@ def get_dimensions_of_observation():
     global currentRDFFile
     cityName = request.args.get('city')
     print(cityName)
-    if cityName != 'None':
-        rdfDataset = ds.datasets.get(cityName, '')[0]
-        currentRDFFile = rdfDataset
-        print(rdfDataset) 
+    rdfDataset = ds.datasets.get(cityName, '')[0]
+    currentRDFFile = rdfDataset
+
+    if cityName != 'None' and 'fuseki' not in rdfDataset:
+        print('here, really here')
+
+        print(rdfDataset)
         myGraph = rdflib.Graph()
         myGraph.parse(rdfDataset)
         ret_data = mutil.get_dimensions_of_observations(myGraph)
+
+        return jsonify(result=ret_data)
+    elif 'fuseki' in rdfDataset:
+        ret_data = tristore.get_dimensions_from_triple_store(rdfDataset)
         return jsonify(result=ret_data)
     else:
         return jsonify(result='')
@@ -109,10 +117,12 @@ def get_code_list_of_dimension():
     dimName = request.args.get('dim')
     print(dimName, currentRDFFile)
     
-    if dimName != '' and currentRDFFile != '': 
+    if dimName != '' and currentRDFFile != '' and 'fuseki' not in currentRDFFile:
+
         myGraph = rdflib.Graph()
         myGraph.parse(currentRDFFile)
         ret_data = mutil.get_code_list_of_dim(myGraph, dimName)
+
         return jsonify(result=ret_data)
     else:
         return jsonify(result='')
@@ -121,22 +131,63 @@ def get_code_list_of_dimension():
 @app.route('/outlier_detection', methods=['GET'])
 #@cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection():  
+    """
+    first get the tab information
+    if tab == CE:
+        get parameter
+        create job
+        return job_id
+    elif tab == TD:
+        get parameter
+        create job
+        return job_id
+    elif tb == UEP:
+        get parameter
+        create job
+        return job_id
+    Returns {jobid = job.get_id()}
+    -------
+
+    """
     print('in outlier detection')
-    dataset_name = request.args.get('dataset_name')
-    print('dataset name', dataset_name)
-    if dataset_name == 'None':
-        ret_data = {}
-    else:
-        ttl_dataset = ds.datasets.get(dataset_name, '')[0]
-        dim_list = request.args.get('dim').split(',')
-        print(dim_list)
-        per = float(request.args.get('per'))/100
-        # ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
-        mykwargs = {'dtable':ttl_dataset, 'dim':dim_list, 'outliers_fraction':per}
-        job = q_dm.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
+    tab = request.args.get('tab')
+    print('tab', tab)
+    if tab == '#Outlier_LOF':
+        filename = request.args.get('filename')
+        output = request.args.get('output')
+        full_output = request.args.get('full_output')
+        delimiter = request.args.get('delimiter')
+        quotechar = request.args.get('quotechar')
+        limit = request.args.get('limit')
+        min_population_size = request.args.get('min_population_size')
+        threshold = request.args.get('threshold')
+        threshold_avg = request.args.get('threshold_avg')
+        num_outliers = request.args.get('num_outliers')
+        k = request.args.get('k')
+
+        print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
+              threshold_avg, num_outliers, k)
+
+        job = q_dm.enqueue_call(func=say_hi, args=['hi!'], result_ttl=5000)
         print('outlier detection with job id:', job.get_id())
-    # return ret_data
-    return jsonify(jobid = job.get_id())
+        return jsonify(jobid=job.get_id())
+
+
+    elif tab == '#Outlier_OneClassSVM':
+        dataset_name = request.args.get('dataset_name')
+        print('dataset name', dataset_name)
+
+        if dataset_name != 'None':
+            ttl_dataset = ds.datasets.get(dataset_name, '')[0]
+            dim_list = request.args.get('dim').split(',')
+            print(dim_list)
+            per = float(request.args.get('per'))/100
+            # ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
+            mykwargs = {'dtable':ttl_dataset, 'dim':dim_list, 'outliers_fraction':per}
+            job = q_dm.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
+            print('outlier detection with job id:', job.get_id())
+            return jsonify(jobid = job.get_id())
+
 
 
 @app.route('/trend_analysis', methods=['GET'])
