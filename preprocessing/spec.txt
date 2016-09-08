@@ -30,7 +30,7 @@ PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>
 
 
 # Input:
-1) PREFIX gr-dimension: <http://data.openbudgets.eu/ontology/dsd/greek-municipalities/dimension/>
+1) Prefixes: PREFIX gr-dimension: <http://data.openbudgets.eu/ontology/dsd/greek-municipalities/dimension/>
 
 2) Datasets:
     FROM <http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>
@@ -46,7 +46,7 @@ PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>
         ?budgetPhase
 => Grouping: GROUP BY ?economicClass ?adminClass ?year ?budgetPhase
 
-4) Where-Claus:
+4) Where-Clause:
       WHERE {
       ?observation obeu-measure:amount ?amount2 .
       ?observation qb:dataSet/obeu-dimension:fiscalYear ?year .
@@ -55,5 +55,10 @@ PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>
       ?slice gr-dimension:economicClassification ?economicClass .
       ?slice gr-dimension:administrativeClassification ?adminClass .
     }
+
+5) Mapping: Column -> Type
+ ID -> id
+ amount -> target
+ economicClass, adminClass, year. budgetPhase -> nominal
 
 
