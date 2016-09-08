@@ -5,20 +5,21 @@ _url = "http://eis-openbudgets.iais.fraunhofer.de/fuseki/sparql"
 _headers = {"Accept": "text/csv"}
 
 _dict_col2types = {'ID': 'id', 'observation': 'id', 'amount': 'target', 'economicClass': 'nominal',
-                  'adminClass': 'nominal',
-                  'year': 'nominal',
-                  'budgetPhase': 'nominal'}
+                   'adminClass': 'nominal',
+                   'year': 'nominal',
+                   'budgetPhase': 'nominal'}
 
 _dict_col2model = {'amount': '?observation obeu-measure:amount ?amount2 .',
-                  'year': '?observation qb:dataSet/obeu-dimension:fiscalYear ?year .',
-                  'budgetPhase': '?observation gr-dimension:budgetPhase ?budgetPhase .',
-                  'observation': '?slice qb:observation ?observation .',
-                  'economicClass': '?slice gr-dimension:economicClassification ?economicClass .',
-                  'adminClass': '?slice gr-dimension:administrativeClassification ?adminClass .'
+                   'year': '?observation qb:dataSet/obeu-dimension:fiscalYear ?year .',
+                   'budgetPhase': '?observation gr-dimension:budgetPhase ?budgetPhase .',
+                   'observation': '?slice qb:observation ?observation .',
+                   'economicClass': '?slice gr-dimension:economicClassification ?economicClass .',
+                   'adminClass': '?slice gr-dimension:administrativeClassification ?adminClass .'
                    }
 
-_dict_col2names = {'observation': 'ID', 'amount': 'amount', 'economicClass': 'economicClass', 'adminClass': 'adminClass',
-                  'year': 'year', 'budgetPhase': 'budgetPhase'}
+_dict_col2names = {'observation': 'ID', 'amount': 'amount', 'economicClass': 'economicClass',
+                   'adminClass': 'adminClass',
+                   'year': 'year', 'budgetPhase': 'budgetPhase'}
 
 _prefixes = [
     "PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>",
@@ -59,6 +60,20 @@ def _createTypeMappingLine(csvText):
 
 # Send Request:
 def create_csv_for_outlier_text(datasets, columns, dict_cols2aggr):
+    """Creates a Sparql-Query for the DM-outlier-algorithm of Christiane,
+    sends it to the Sparql-endpoint at FHG-server and returns the result in csv as a String.
+
+        :param datasets: list
+            list of the datasets which the Sparql-Query will query the results, for example ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>", "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
+        :param columns: list
+            list of columns OBEU-datamodel, for example ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
+        :param dict_cols2aggr: dict
+            dictionary containing the mapping between columns and their aggregation for example {"observation": "MIN", "amount": "SUM"}
+        :return: str
+            the content of the Sparql-Query-result in csv-format as a String
+        Raises:
+            todo
+    """
     query = _createSelect(datasets, columns, dict_cols2aggr)
     params = {"query": query}
     req = requests.get(_url, headers=_headers, params=params)
@@ -69,6 +84,22 @@ def create_csv_for_outlier_text(datasets, columns, dict_cols2aggr):
 
 
 def create_csv_for_outlier_file(datasets, columns, dict_cols2aggr, path_output_folder):
+    """Creates a Sparql-Query for the DM-outlier-algorithm of Christiane,
+    sends it to the Sparql-endpoint at FHG-server and returns the result in csv as a file named with the current timestamp in the specified folder.
+
+        :param datasets: list
+            list of the datasets which the Sparql-Query will query the results, for example ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>", "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
+        :param columns: list
+            list of columns OBEU-datamodel, for example ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
+        :param dict_cols2aggr: dict
+            dictionary containing the mapping between columns and their aggregation for example {"observation": "MIN", "amount": "SUM"}
+        :param path_output_folder: str
+            folder-path as a String where the CSV-file is placed for example /home/mluk
+        :return: str
+            the absolute file-path as String of the CSV-file which contains the Sparql-Query-result in csv-format
+        Raises:
+            todo
+    """
     csvText = create_csv_for_outlier_text(datasets, columns, dict_cols2aggr)
     fileName = str(datetime.datetime.utcnow()).replace(" ", "_").replace(".", "-").replace(":", "-")
     filePath = os.path.join(path_output_folder, "%s.csv" % fileName)
@@ -86,5 +117,5 @@ if __name__ == '__main__':
                       "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013>",
                       "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
     print(_createSelect(input_datasets, input_cols, input_dict_cols2aggr))
-    # print(create_csv_for_outlier_text(input_datasets, input_cols, input_dict_cols2aggr))
+    #print(create_csv_for_outlier_text(input_datasets, input_cols, input_dict_cols2aggr))
     print(create_csv_for_outlier_file(input_datasets, input_cols, input_dict_cols2aggr, os.path.expanduser("~")))
