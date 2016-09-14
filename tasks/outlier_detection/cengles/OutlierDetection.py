@@ -6,7 +6,7 @@ from sklearn.svm.classes import OneClassSVM
 from abc import abstractmethod, ABCMeta
 from numpy import median, average, mean, std
 import rpy2.robjects as ro
-from LOF import LOF
+from .LOF import LOF
 
 
 '''Apply the specified outlier detection method on the given vertex of the lattice.'''

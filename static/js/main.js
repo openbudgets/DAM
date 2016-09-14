@@ -321,7 +321,18 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 					$('#loaderDiv').hide();
 					clearTimeout(timeout);
 					var jsonData = JSON.parse(data);
-                    visual_func('visualization', jsonData, dataset_name, dimlst);
+					if (jsonData['filename'] !== undefined)
+					{
+						var filename = jsonData['filename'],
+							url = $SCRIPT_ROOT + '/static/output/' + filename
+
+						// hide the div, write the form
+						show_remote_csv(url, '#visualization')
+
+					}
+					else{
+						visual_func('visualization', jsonData, dataset_name, dimlst);
+					}
 				}else {
 					setTimeout(poller, 2000)
 				}
@@ -339,6 +350,25 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 	poller();
 }
 
+function show_remote_csv(url, vis_location){
+  	var xhttp = new XMLHttpRequest();
+	var filename = url.substring(url.lastIndexOf('/')+1);
+  	xhttp.onreadystatechange = function() {
+    	if (this.readyState == 4 && this.status == 200) {
+      		var data = this.responseText;
+			var csv = 'Item,Features,,,,Target,Score\n';
+			var hiddenElement = document.createElement('a');
+    		hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    		hiddenElement.target = '_blank';
+    		hiddenElement.download = filename;
+    		hiddenElement.click();
+			console.log(filename)
+			$(vis_location).CSVToTable(filename)
+    	}
+  	};
+  	xhttp.open("GET", url, true);
+  	xhttp.send();
+}
 
 function remove_options(selectbox)
 {

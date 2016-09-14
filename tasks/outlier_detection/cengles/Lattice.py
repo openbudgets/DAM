@@ -3,10 +3,11 @@
 '''
 
 import copy
-from Condition import NominalCondition, NumericalCondition
-from OutlierDetection import detect_outliers
+from .Condition import NominalCondition, NumericalCondition
+from .OutlierDetection import detect_outliers
 from numpy import ceil, Infinity, log10, average
 from pandas.tools.tile import cut
+
 
 class Lattice():
     '''

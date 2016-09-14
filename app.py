@@ -1,5 +1,5 @@
 import os 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
 from rq import Queue
@@ -7,8 +7,12 @@ from rq.job import Job
 #from worker_3 import conn, conn_uep
 from worker import conn_dm
 import datasets as ds
+import tasks.preprocessing.util as pre_util
+import tasks.postprocessing.util as post_util
+
 import tasks.statistics as statis 
 import tasks.outlier_detection.outlier_detection as outlier
+import tasks.outlier_detection.cengles.OutlierDetection_SubpopulationLattice as CE_outlier
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.myutil as mutil
@@ -40,6 +44,10 @@ currentRDFFile = ''
 @app.route('/old', methods=['GET','POST'])
 def dam():
     return render_template('index-back.html')
+
+@app.route('/output/<path:filename>', methods=['GET', 'POST'])
+def download_file(filename):
+    return send_from_directory(directory='output', filename=filename)
 
 
 @app.route('/', methods=['GET','POST'])
@@ -153,6 +161,9 @@ def do_outlier_detection():
     tab = request.args.get('tab')
     print('tab', tab)
     if tab == '#Outlier_LOF':
+        """
+        get user input
+        """
         filename = request.args.get('filename')
         output = request.args.get('output')
         full_output = request.args.get('full_output')
@@ -164,12 +175,30 @@ def do_outlier_detection():
         threshold_avg = request.args.get('threshold_avg')
         num_outliers = request.args.get('num_outliers')
         k = request.args.get('k')
-
         print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
               threshold_avg, num_outliers, k)
-
-        job = q_dm.enqueue_call(func=say_hi, args=['hi!'], result_ttl=5000)
-        print('outlier detection with job id:', job.get_id())
+        """
+        get/generate csv using filename
+        """
+        inputCSVFileName = pre_util.ce_from_file_names_query_fuseki_output_csv(filename, debug=True)
+        """
+        post processing
+        determine the directory where output file shall be saved
+        """
+        output_path = post_util.get_output_data_path()
+        """
+        set function parameters
+        """
+        cekwargs = {'min_population_size':30, 'output_path': output_path}
+        """
+        send to the job queue
+        """
+        if inputCSVFileName:
+            job = q_dm.enqueue_call(func=CE_outlier.detect_outliers_subpopulation_lattice,
+                                    args=[inputCSVFileName], kwargs=cekwargs, result_ttl=5000)
+            print('outlier detection with job id:', job.get_id())
+        else:
+            print('unvalid csv file')
         return jsonify(jobid=job.get_id())
 
 
