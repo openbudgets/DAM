@@ -7,15 +7,7 @@
 """
 
 import unittest
-import sys
-import os
-try:
-    from tasks.preprocessing.send_request import SparqlCEHelper
-except:
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    sys.path.append(os.path.join(os.path.abspath(dir_path), '..'))
-    from send_request import SparqlCEHelper
-
+from tasks.preprocessing.send_request import SparqlCEHelper
 
 """
 csvText ID,amount,economicClass,adminClass,year,budgetPhase
@@ -66,13 +58,14 @@ LIMIT 1"""
     def test_create_type_mapping_line(self):
         pass
 
-    @unittest.skip("do not run this")
-    def test_create_csv_for_outlier_text(self):
-        pass
+    def create_csv_for_outlier_text_test(self):
+        print("Run test for create_csv_for_outlier_text_test")
+        datasets
 
-    @unittest.skip("do not run this")
-    def test_create_csv_for_outlier_file(self):
-        pass
+
+    def create_csv_for_outlier_file_test(self):
+        print("Run test for create_csv_for_outlier_file_test")
+
 
 if __name__ == '__main__':
     unittest.main()

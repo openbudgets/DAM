@@ -6,17 +6,62 @@
     Python Version: 3.5
 """
 
-import requests, datetime, os
+import requests
+import datetime
+import os
+from abc import ABCMeta, abstractmethod
 
 
-class SparqlHelper(object):
-    pass
+class SparqlHelper(metaclass=ABCMeta):
+    __URL = "http://eis-openbudgets.iais.fraunhofer.de/fuseki/sparql"
+    __HEADERS = {"Accept": "text/csv"}
+
+    @abstractmethod
+    def _create_sparql_query(self, datasets, columns, dict_cols2aggr={}, limit=-1):
+        """Implemented by subclasses"""
+        pass
+
+    @abstractmethod
+    def _postprocess_sparql_result(self):
+        """Implemented by subclasses"""
+        pass
+
+    def __send_to_sparql_endpoint(self, sparql_query):
+        params = {"query": sparql_query}
+        response = requests.get(self.__URL, headers=self.__HEADERS, params=params)
+        return response.text
+
+    def create_csv_as_text(self, datasets, columns, dict_cols2aggr, limit=-1):
+        """
+        Creates a Sparql-Query & sends it to the Sparql-Fhg-endpoint & returning the result as csv text.
+        :return: The CSV Text as String for DataMining Input.
+        """
+        # (1) Create Sparql-Query: Needs to specified by subclasses
+        sparql_query = self._create_sparql_query(datasets, datasets, columns, dict_cols2aggr, limit=-1)
+        # (2) Send Sparql-Query to Endpoint:
+        sparql_result = self.__send_to_sparql_endpoint(sparql_query)
+        # (3) Posprocess Sparql-Query-result: Needs to specified by subclasses
+        csv_result = self._postprocess_sparql_result(sparql_result)
+        return csv_result
+
+    def create_csv_as_file(self, datasets, columns, dict_cols2aggr, path_output_folder, file_name=None, limit=-1):
+        """
+        Creates a Sparql-Query & sends it to the Sparql-Fhg-endpoint & returning the result as csv file.
+        :return: The CSV file path as String for DataMining Input.
+        """
+        file_name = file_name if file_name else \
+            str(datetime.datetime.utcnow()) \
+                .replace(" ", "_") \
+                .replace(".", "-") \
+                .replace(":", "-")
+        file_path = os.path.join(path_output_folder, "%s.csv" % file_name)
+        csv_result = self.create_csv_as_text()
+        with open(file_path, 'a') as file:
+            file.write(csv_result)
+        return file_path
 
 
 class SparqlCEHelper(SparqlHelper):
-    _url = "http://eis-openbudgets.iais.fraunhofer.de/fuseki/sparql"
-    _headers = {"Accept": "text/csv"}
-
     _dict_col2types = {'ID': 'id', 'observation': 'id', 'amount': 'target', 'economicClass': 'nominal',
                        'adminClass': 'nominal',
                        'year': 'nominal',
@@ -41,7 +86,6 @@ class SparqlCEHelper(SparqlHelper):
         "PREFIX rdfs:             <http://www.w3.org/2000/01/rdf-schema#>",
         "PREFIX gr-dimension: <http://data.openbudgets.eu/ontology/dsd/greek-municipalities/dimension/>"
     ]
-
 
     # Helper functions:
     def _create_select(self, datasets, columns, dict_cols2aggr, limit=-1):
@@ -71,7 +115,6 @@ class SparqlCEHelper(SparqlHelper):
         types = [SparqlCEHelper._dict_col2types[col] for col in tokens]
         return ",".join(types)
 
-
     # Send Request:
     def create_csv_for_outlier_text(self, datasets, columns, dict_cols2aggr, limit=-1):
         """Creates a Sparql-Query for the DM-outlier-algorithm of Christiane,
@@ -96,7 +139,6 @@ class SparqlCEHelper(SparqlHelper):
         csvLines = csvText.splitlines()
         csvLines.insert(1, SparqlCEHelper._create_type_mapping_line(csvText))
         return "\n".join(csvLines)
-
 
     def create_csv_for_outlier_file(self, datasets, columns, dict_cols2aggr, path_output_folder, limit=-1):
         """Creates a Sparql-Query for the DM-outlier-algorithm of Christiane,
@@ -132,6 +174,7 @@ if __name__ == '__main__':
                       "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013>",
                       "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
     SparqlHelperCE = SparqlCEHelper()
-    print(SparqlHelperCE._create_select(input_datasets, input_cols, input_dict_cols2aggr, limit = 1))
-    #print(create_csv_for_outlier_text(input_datasets, input_cols, input_dict_cols2aggr))
-    print(SparqlHelperCE.create_csv_for_outlier_file(input_datasets, input_cols, input_dict_cols2aggr, os.path.expanduser("~"), limit = 1))
+    print(SparqlHelperCE._create_select(input_datasets, input_cols, input_dict_cols2aggr, limit=1))
+    # print(create_csv_for_outlier_text(input_datasets, input_cols, input_dict_cols2aggr))
+    print(SparqlHelperCE.create_csv_for_outlier_file(input_datasets, input_cols, input_dict_cols2aggr,
+                                                     os.path.expanduser("~"), limit=1))
