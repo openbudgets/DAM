@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Data Analysis and Mining</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <!--[if lt IE 9]>
     <script
@@ -78,6 +79,7 @@
     <img class="col-sm-3 col-sm-offset-4 col-dm-3 col-dm-offset-4" src="{{ url_for('static', filename='images/spinner.gif') }}">
 </div>
 <div id="visualization" class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"></div>
+<table id="vis_table" class="display" width="100%"></table>
 
 <!-- Modal -->
 <div class="modal fade" id="damModal" role="dialog">
@@ -314,10 +316,10 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
-<script src="{{ url_for('static', filename='js/jquery.csvToTable.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery.tablesorter.dev.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery-2.2.0.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap-switch.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>

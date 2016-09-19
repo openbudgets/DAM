@@ -324,10 +324,10 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 					if (jsonData['filename'] !== undefined)
 					{
 						var filename = jsonData['filename'],
-							url = $SCRIPT_ROOT + '/static/output/' + filename
-
+							url_csv = $SCRIPT_ROOT + '/static/output/' + filename;
+						console.log(url_csv);
 						// hide the div, write the form
-						show_remote_csv(url, '#visualization')
+						show_remote_csv(url_csv, 'visualization')
 
 					}
 					else{
@@ -350,24 +350,71 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 	poller();
 }
 
+function downloadURL(url) {
+    var hiddenIFrameID = 'hiddenDownloader',
+        iframe = document.getElementById(hiddenIFrameID);
+    if (iframe === null) {
+        iframe = document.createElement('iframe');
+        iframe.id = hiddenIFrameID;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    iframe.src = url;
+};
+
+
+function getCSV(url) {
+        var link = url;
+        var rawFile = new XMLHttpRequest();
+        var allText;
+
+        rawFile.open("GET", link, false);
+        rawFile.onreadystatechange = function () {
+            if(rawFile.readyState === 4)
+                if(rawFile.status === 200 || rawFile.status == 0)
+                    allText = rawFile.responseText;
+					var dataSet = csv_string_to_matrix(allText); // data is the content of the csv file
+					$('#visualization').DataTable(
+					{
+						data:dataSet,
+						columns : [{title: 'Item'},{title:''},{title:'Features'},{title:''},{title:''},{title:''},
+								{title:'Target'},{title:'Score'}]
+					}
+				)
+        };
+        rawFile.send();
+}
+
+function csv_string_to_matrix(csvStr){
+	var matrix = [],
+		rows = csvStr.split('\n');
+	for (var i in rows){
+			matrix.push(rows[i].split(','))
+	}
+	return matrix
+}
+
 function show_remote_csv(url, vis_location){
-  	var xhttp = new XMLHttpRequest();
 	var filename = url.substring(url.lastIndexOf('/')+1);
-  	xhttp.onreadystatechange = function() {
-    	if (this.readyState == 4 && this.status == 200) {
-      		var data = this.responseText;
-			var csv = 'Item,Features,,,,Target,Score\n';
-			var hiddenElement = document.createElement('a');
-    		hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-    		hiddenElement.target = '_blank';
-    		hiddenElement.download = filename;
-    		hiddenElement.click();
-			console.log(filename)
-			$(vis_location).CSVToTable(filename)
-    	}
-  	};
-  	xhttp.open("GET", url, true);
-  	xhttp.send();
+	var link = url;
+	var rawFile = new XMLHttpRequest();
+	var allText;
+
+	rawFile.open("GET", link, false);
+	rawFile.onreadystatechange = function () {
+            if(rawFile.readyState === 4)
+                if(rawFile.status === 200 || rawFile.status == 0)
+                    allText = rawFile.responseText;
+					var dataSet = csv_string_to_matrix(allText); // data is the content of the csv file
+					$('#vis_table').DataTable(
+					{
+						data:dataSet,
+						columns : [{title: 'Item'},{title:''},{title:'Features'},{title:''},{title:''} ,
+								{title:'Target'},{title:'Score'}]
+					}
+				)
+        };
+	rawFile.send();
 }
 
 function remove_options(selectbox)
