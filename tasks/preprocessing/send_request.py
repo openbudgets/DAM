@@ -149,8 +149,8 @@ class SparqlCEHelper(SparqlHelper):
     @staticmethod
     def _create_type_mapping_line(csv_text):
         lines = csv_text.splitlines()
-        tokens = lines[0].split(",")
-        types = [SparqlCEHelper._DICT_COL_2_TYPES[col] for col in tokens]
+        header_items = [item.strip() for item in lines[0].split(",")]
+        types = [SparqlCEHelper._DICT_COL_2_TYPES.get(item, "") for item in header_items]
         return ",".join(types)
 
 

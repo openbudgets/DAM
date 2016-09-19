@@ -25,6 +25,7 @@ class SparqlHelperTest(unittest.TestCase):
     @patch("send_request_test.SparqlDummyHelper._create_sparql_query")
     @patch("send_request_test.SparqlDummyHelper._send_to_sparql_endpoint")
     @patch("send_request_test.SparqlDummyHelper._postprocess_sparql_result")
+    @unittest.skip
     def create_csv_as_text_test(self, mock_postprocess_sparql_result, mock_send_to_sparql_endpoint,
                                 mock_create_sparql_query):
         # Define Test input:
@@ -50,6 +51,7 @@ class SparqlHelperTest(unittest.TestCase):
 
     @patch("send_request_test.SparqlDummyHelper.create_csv_as_text")
     @patch("send_request_test.SparqlDummyHelper._write_csv_to_file")
+    @unittest.skip
     def create_csv_as_file_test(self, mock_write_csv_to_file, mock_create_csv_as_text):
         # Define Test input:
         mock_write_csv_to_file.return_value = "/a/b/c/d/test.csv"
@@ -79,7 +81,7 @@ class SparqlHelperTest(unittest.TestCase):
                          "Test result for expected result: %s" % expected_output_file_path)
 
 
-class TestSparqlCEHelper(unittest.TestCase):
+class SparqlCEHelperTest(unittest.TestCase):
     def setUp(self):
         self.input_cols = ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
         self.input_dict_cols2aggr = {"observation": "MIN", "amount": "SUM"}
@@ -108,16 +110,37 @@ WHERE { ?slice qb:observation ?observation .
 ?observation qb:dataSet/obeu-dimension:fiscalYear ?year .
 ?observation gr-dimension:budgetPhase ?budgetPhase . }
 GROUP BY ?economicClass ?adminClass ?year ?budgetPhase
-LIMIT 1"""
-        self.CEHelper = SparqlCEHelper()
+LIMIT 10"""
+        self.ce_helper = SparqlCEHelper()
 
-    def _create_sparql_query_test(self, datasets, columns, dict_cols2aggr={}, limit=-1):
-        """Implemented by subclasses"""
-        pass
+    def create_sparql_query_test(self):
+        result = self.ce_helper._create_sparql_query(self.input_datasets, self.input_cols, self.input_dict_cols2aggr,
+                                                     10)
+        self.assertEqual(result.strip(), result.strip(), "Überprüfung auf Gleichheit")
 
-    def _postprocess_sparql_result_test(self, sparql_result):
-        """Implemented by subclasses"""
-        pass
+    def postprocess_sparql_result_test(self):
+        input_csv = """ID,amount,economicClass,adminClass, year , budgetPhase
+        .1,.3,economicClass,adminClass,year,budgetPhase
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013/observation/80.8111/draft,49262.9,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/8111,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/80,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/draft
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014/observation/15.6235.0001/approved,6949.5,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6235,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/15,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/approved
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/70.6413/reserved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6413,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/70.7331.0000/revised,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7331,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/revised
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013/observation/70.6414/reserved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6414,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/25.6114approved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6114,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved
+http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/35.6213approved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6213,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/35,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved"""
+        postprocessed_csv = self.ce_helper._postprocess_sparql_result(input_csv)
+        expected_input_csv = """ID,amount,economicClass,adminClass,year,budgetPhase
+        id,target,nominal,nominal,nominal,nominal
+        .1,.3,economicClass,adminClass,year,budgetPhase
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013/observation/80.8111/draft,49262.9,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/8111,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/80,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/draft
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014/observation/15.6235.0001/approved,6949.5,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6235,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/15,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/approved
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/70.6413/reserved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6413,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/70.7331.0000/revised,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7331,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/revised
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013/observation/70.6414/reserved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6414,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/25.6114approved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6114,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved
+        http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012/observation/35.6213approved,0.0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6213,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/35,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved"""
+        self.assertEqual(postprocessed_csv.replace(" ", ""), expected_input_csv.replace(" ", ""),
+                         "Prüfe auf Gleichheit")
 
 
 if __name__ == '__main__':
