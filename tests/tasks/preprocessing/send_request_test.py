@@ -7,7 +7,8 @@
 """
 
 import unittest
-from tasks.preprocessing.send_request import SparqlCEHelper
+from tasks.preprocessing.send_request import SparqlDummyHelper, SparqlCEHelper
+from mock import patch
 
 """
 csvText ID,amount,economicClass,adminClass,year,budgetPhase
@@ -17,6 +18,67 @@ http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013/obser
 """
 
 
+class SparqlHelperTest(unittest.TestCase):
+    def setUp(self):
+        self.sparql_helper = SparqlDummyHelper()
+
+    @patch("send_request_test.SparqlDummyHelper._create_sparql_query")
+    @patch("send_request_test.SparqlDummyHelper._send_to_sparql_endpoint")
+    @patch("send_request_test.SparqlDummyHelper._postprocess_sparql_result")
+    def create_csv_as_text_test(self, mock_postprocess_sparql_result, mock_send_to_sparql_endpoint,
+                                mock_create_sparql_query):
+        # Define Test input:
+        mock_create_sparql_query.return_value = """Select ..."""
+        mock_send_to_sparql_endpoint.return_value = """a,b,c
+        1,2,3"""
+        mock_postprocess_sparql_result.return_value = """a,b,c,d
+        1,2,3,4"""
+        input_cols = ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
+        input_dict_cols2aggr = {"observation": "MIN", "amount": "SUM"}
+        input_datasets = ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>",
+                          "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013>",
+                          "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
+        # Run Test:
+        csv = self.sparql_helper.create_csv_as_text(input_datasets, input_cols, input_dict_cols2aggr)
+        # Assert results:
+        print("Result: %s" % csv)
+        mock_create_sparql_query.assert_called_once_with(input_datasets, input_cols, input_dict_cols2aggr, -1)
+        mock_send_to_sparql_endpoint.assert_called_once_with(mock_create_sparql_query.return_value)
+        mock_postprocess_sparql_result.assert_called_once_with(mock_send_to_sparql_endpoint.return_value)
+        self.assertEqual(csv, mock_postprocess_sparql_result.return_value,
+                         "Test result for expected result: %s" % mock_postprocess_sparql_result.return_value)
+
+    @patch("send_request_test.SparqlDummyHelper.create_csv_as_text")
+    @patch("send_request_test.SparqlDummyHelper._write_csv_to_file")
+    def create_csv_as_file_test(self, mock_write_csv_to_file, mock_create_csv_as_text):
+        # Define Test input:
+        mock_write_csv_to_file.return_value = "/a/b/c/d/test.csv"
+        mock_create_csv_as_text.return_value = """a,b,c,d
+        1,2,3,4
+        """
+        input_cols = ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
+        input_dict_cols2aggr = {"observation": "MIN", "amount": "SUM"}
+        input_datasets = ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>",
+                          "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013>",
+                          "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
+        input_path_output_folder = "/a/b/c/d"
+        input_filename = "test"
+        # Run Test:
+        file_path = self.sparql_helper.create_csv_as_file(input_datasets, input_cols, input_dict_cols2aggr,
+                                                          input_path_output_folder, input_filename)
+        # Assert results:
+        print("Result: file_path %s" % file_path)
+        mock_create_csv_as_text.assert_called_once_with(self.sparql_helper, input_datasets, input_cols,
+                                                        input_dict_cols2aggr, -1)
+        mock_write_csv_to_file.assert_called_once_with(self.sparql_helper, mock_create_csv_as_text.return_value,
+                                                       input_path_output_folder,
+                                                       input_filename)
+        expected_output_file_path = "%s/%s.csv" % (input_path_output_folder, input_filename)
+        print("expected output_file_path : %s" % expected_output_file_path)
+        self.assertEqual(file_path, expected_output_file_path,
+                         "Test result for expected result: %s" % expected_output_file_path)
+
+
 class TestSparqlCEHelper(unittest.TestCase):
     def setUp(self):
         self.input_cols = ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
@@ -24,7 +86,7 @@ class TestSparqlCEHelper(unittest.TestCase):
         self.input_datasets = ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>",
                                "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013>",
                                "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
-        self.result = result = """PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>
+        self.result = """PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>
 PREFIX obeu-dimension:   <http://data.openbudgets.eu/ontology/dsd/dimension/>
 PREFIX qb:               <http://purl.org/linked-data/cube#>
 PREFIX rdfs:             <http://www.w3.org/2000/01/rdf-schema#>
@@ -49,22 +111,13 @@ GROUP BY ?economicClass ?adminClass ?year ?budgetPhase
 LIMIT 1"""
         self.CEHelper = SparqlCEHelper()
 
-    def test__create_select(self):
-        self.assertEqual(self.result,
-                         self.CEHelper._create_select(self.input_datasets,
-                                                      self.input_cols, self.input_dict_cols2aggr, limit=1))
-
-    @unittest.skip("do not run this")
-    def test_create_type_mapping_line(self):
+    def _create_sparql_query_test(self, datasets, columns, dict_cols2aggr={}, limit=-1):
+        """Implemented by subclasses"""
         pass
 
-    def create_csv_for_outlier_text_test(self):
-        print("Run test for create_csv_for_outlier_text_test")
-        datasets
-
-
-    def create_csv_for_outlier_file_test(self):
-        print("Run test for create_csv_for_outlier_file_test")
+    def _postprocess_sparql_result_test(self, sparql_result):
+        """Implemented by subclasses"""
+        pass
 
 
 if __name__ == '__main__':

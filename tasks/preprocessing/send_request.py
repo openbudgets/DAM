@@ -27,12 +27,12 @@ class SparqlHelper(metaclass=ABCMeta):
         """Implemented by subclasses"""
         pass
 
-    def __send_to_sparql_endpoint(self, sparql_query):
+    def _send_to_sparql_endpoint(self, sparql_query):
         params = {"query": sparql_query}
         response = requests.get(self.__URL, headers=self.__HEADERS, params=params)
         return response.text
 
-    def __write_csv_to_file(self, text, path_output_folder, file_name=None):
+    def _write_csv_to_file(self, text, path_output_folder, file_name=None):
         file_name = file_name if file_name else \
             str(datetime.datetime.utcnow()) \
                 .replace(" ", "_") \
@@ -52,12 +52,11 @@ class SparqlHelper(metaclass=ABCMeta):
         sparql_query = self._create_sparql_query(datasets, columns, dict_cols2aggr, limit)
         print("Sparql-Query: %s" % sparql_query)
         # (2) Send Sparql-Query to Endpoint:
-        sparql_result = self.__send_to_sparql_endpoint(sparql_query)
+        sparql_result = self._send_to_sparql_endpoint(sparql_query)
         print("Sparql-Query-Result: %s" % sparql_result)
         # (3) Postprocess Sparql-Query-result: Needs to specified by subclasses
         csv_result = self._postprocess_sparql_result(sparql_result)
         print("CSV-Result: %s" % csv_result)
-
         return csv_result
 
     def create_csv_as_file(self, datasets, columns, dict_cols2aggr, path_output_folder, file_name=None, limit=-1):
@@ -66,27 +65,37 @@ class SparqlHelper(metaclass=ABCMeta):
         :return: The CSV file path as String for DataMining Input.
         """
         csv_result = self.create_csv_as_text(self, datasets, columns, dict_cols2aggr, limit)
-        file_path = self.__write_csv_to_file(self, csv_result, path_output_folder, file_name)
+        file_path = self._write_csv_to_file(self, csv_result, path_output_folder, file_name)
         return file_path
+
+
+class SparqlDummyHelper(SparqlHelper):
+    def _create_sparql_query(self, datasets, columns, dict_cols2aggr={}, limit=-1):
+        """Implemented by subclasses"""
+        pass
+
+    def _postprocess_sparql_result(self, sparql_result):
+        """Implemented by subclasses"""
+        pass
 
 
 class SparqlCEHelper(SparqlHelper):
     _DICT_COL_2_TYPES = {'ID': 'id', 'observation': 'id', 'amount': 'target', 'economicClass': 'nominal',
-                       'adminClass': 'nominal',
-                       'year': 'nominal',
-                       'budgetPhase': 'nominal'}
+                         'adminClass': 'nominal',
+                         'year': 'nominal',
+                         'budgetPhase': 'nominal'}
 
     _DICT_COL_2_MODEL = {'amount': '?observation obeu-measure:amount ?amount2 .',
-                       'year': '?observation qb:dataSet/obeu-dimension:fiscalYear ?year .',
-                       'budgetPhase': '?observation gr-dimension:budgetPhase ?budgetPhase .',
-                       'observation': '?slice qb:observation ?observation .',
-                       'economicClass': '?slice gr-dimension:economicClassification ?economicClass .',
-                       'adminClass': '?slice gr-dimension:administrativeClassification ?adminClass .'
-                       }
+                         'year': '?observation qb:dataSet/obeu-dimension:fiscalYear ?year .',
+                         'budgetPhase': '?observation gr-dimension:budgetPhase ?budgetPhase .',
+                         'observation': '?slice qb:observation ?observation .',
+                         'economicClass': '?slice gr-dimension:economicClassification ?economicClass .',
+                         'adminClass': '?slice gr-dimension:administrativeClassification ?adminClass .'
+                         }
 
     _DICT_COL_2_NAMES = {'observation': 'ID', 'amount': 'amount', 'economicClass': 'economicClass',
-                       'adminClass': 'adminClass',
-                       'year': 'year', 'budgetPhase': 'budgetPhase'}
+                         'adminClass': 'adminClass',
+                         'year': 'year', 'budgetPhase': 'budgetPhase'}
 
     _PREFIXES = [
         "PREFIX obeu-measure:     <http://data.openbudgets.eu/ontology/dsd/measure/>",
@@ -144,6 +153,7 @@ class SparqlCEHelper(SparqlHelper):
         types = [SparqlCEHelper._DICT_COL_2_TYPES[col] for col in tokens]
         return ",".join(types)
 
+
 # Tests:
 if __name__ == '__main__':
     # Parameters:
@@ -155,5 +165,5 @@ if __name__ == '__main__':
     sparql_helper_ce = SparqlCEHelper()
     print(sparql_helper_ce.create_csv_as_text(input_datasets, input_cols, input_dict_cols2aggr, limit=100))
     # print(create_csv_for_outlier_text(input_datasets, input_cols, input_dict_cols2aggr))
-    #print(sparql_helper_ce.create_csv_as_file(input_datasets, input_cols, input_dict_cols2aggr,
+    # print(sparql_helper_ce.create_csv_as_file(input_datasets, input_cols, input_dict_cols2aggr,
     #                                                 os.path.expanduser("~"), limit=1))
