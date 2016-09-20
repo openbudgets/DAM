@@ -19,12 +19,27 @@ class SparqlHelper(metaclass=ABCMeta):
 
     @abstractmethod
     def _create_sparql_query(self, datasets, columns, dict_cols2aggr={}, limit=-1):
-        """Implemented by subclasses"""
+        """
+                Must be implemented by the specific subclass.
+                This method should return the Sparql-Query which will be send then to the Fhg's Sparql endpoint.
+        :param datasets: list of datasets such as ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>",
+                          "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2013>",
+                          "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
+        :param columns: list of columns which ar selected in the SParql-Query such as ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
+        :param dict_cols2aggr: dictionary containing the mapping from columns to aggregation such as {"observation": "MIN", "amount": "SUM"}
+        :param limit: number of rows in the Sparql-query result
+        :return: String containing the Sparql-Query
+        """
         pass
 
     @abstractmethod
     def _postprocess_sparql_result(self, sparql_result):
-        """Implemented by subclasses"""
+        """
+        Must be implemented by specific subclasses.
+        This method retrieves the Sparql-result retrieved from the Sparql-endpoint as input and should return the csv-input for the DM-algorithm.
+        :param sparql_result: query-result in csv format from the Sparql-endpoint
+        :return: the csv-input for the DM-algorithm
+        """
         pass
 
     def _send_to_sparql_endpoint(self, sparql_query):
@@ -106,7 +121,14 @@ class SparqlCEHelper(SparqlHelper):
     ]
 
     def _create_sparql_query(self, datasets, columns, dict_cols2aggr={}, limit=-1):
-        """Implemented by subclasses"""
+        """
+            Subclass implementation for Christiane's outlier detection algorithm.
+        :param datasets:
+        :param columns:
+        :param dict_cols2aggr:
+        :param limit:
+        :return:
+        """
         result = "\n".join(SparqlCEHelper._PREFIXES)
         result += "\nSELECT"
         # columns:
@@ -128,17 +150,12 @@ class SparqlCEHelper(SparqlHelper):
         return result
 
     def _postprocess_sparql_result(self, sparql_result):
-        """Creates a Sparql-Query for the DM-outlier-algorithm of Christiane,
-        sends it to the Sparql-endpoint at FHG-server and returns the result in csv as a String.
+        """Subclass implementation for Christiane's outlier detection algorithm.
+        Adds an additional line for identifiers to the sparql-result for Christiane's outier detection algorithm.
 
-            :param datasets: list
-                list of the datasets which the Sparql-Query will query the results, for example ["<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2012>", "<http://data.openbudgets.eu/resource/dataset/budget-kilkis-expenditure-2014>"]
-            :param columns: list
-                list of columns OBEU-datamodel, for example ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
-            :param dict_cols2aggr: dict
-                dictionary containing the mapping between columns and their aggregation for example {"observation": "MIN", "amount": "SUM"}
+            :param sparql_result: Sparql-result in csv-format
             :return: str
-                the content of the Sparql-Query-result in csv-format as a String
+                the input for Christianes outlier detection algorithm
             Raises:
                 todo
         """
