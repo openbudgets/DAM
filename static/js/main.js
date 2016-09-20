@@ -6,6 +6,7 @@
 $(document).ready(function() {
     $('#data_select').on('change', function () {
         var selectVal = $("#data_select option:selected").val();
+		console.log(selectVal);
         document.getElementById("cdata").innerHTML = selectVal.split('-')[0];
         //checkedDimDict1 = {};
         //checkedDimDict9 = {};
@@ -48,6 +49,11 @@ $(document).ready(function() {
         });
     })
 
+	$('#algo-tabs a').click(function (e) {
+     	e.preventDefault()
+     	$(this).tab('show')
+		})
+
     $('#observe_dimension').on('change', function () {
         var selectVal = $("#observe_dimension option:selected").val();
         if (selectVal){
@@ -77,48 +83,115 @@ $(document).ready(function() {
         $("#damModal").modal("hide");
         $("#task1Modal").modal("hide");
         $('#visualization').empty();
-        var selectedDimLst = get_selected_dims("checkboxOfTask1");
-        var dataset_name = $("#data_select option:selected").val();
-        var percent = $('#outlierPercent').val()
-        if (isNaN(percent)){
-            percent = 25}
-        else{
-            percent = parseFloat(percent)
-            if (percent >25 || percent <= 0){
-                percent = 25
-            }
-        }
-        //var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};
-        if (selectedDimLst.length == 1){
-            $.ajax({
-                type: "GET",
-                url: $SCRIPT_ROOT + "/outlier_detection",
-                contentType: "text/json; charset=utf-8",
-                data: {dataset_name: dataset_name, dim: selectedDimLst.toString(), per: percent},
-                beforeSend: function(){
-                    $('#loaderDiv').show();
-                },
-                success: function(dataJobId) {
-                    $('#loaderDiv').hide();
-                    $('#visualization').empty();
-                    var div = document.getElementById('visualization');
-                    while (div.hasChildNodes()) {
-                        div.removeChild(div.lastChild);
-                    }
-					get_dam_result(dataJobId.jobid, dataset_name, plot_2Dgraph, selectedDimLst);
-					//var data = get_dam_result(dataJobId.jobid);
-                    //var jsonData = JSON.parse(data);
-                    //plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
-                    // plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
-                    //mpld3.draw_figure("visualization", jsonData['fig']) ;
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            }); //ajax
-        }else{
-            alert('Please choose one dimension')
-        }
+		var tab = $("#algo-tabs a").attr("href");
+		/* tab in {'#Outlier_LOF', '#Outlier_OneClassSVM'}
+		 */
+        if (tab === '#Outlier_LOF'){
+			/*
+				filename,
+                output='Result',
+                full_output=False,
+                delimiter=',',
+                quotechar='|',
+                limit=25000,
+                outlier_method='Outlier_LOF',
+                min_population_size=30,
+                threshold=3,
+                threshold_avg=3,
+                num_outliers=25,
+                # Method specific parameters:
+                k=5
+			 */
+			var filenames = '';
+			$('#data_select option:selected').each(function(i, selected){
+  				filenames = filenames+'+'+$(selected).text();
+				});
+			var output = $("#Outlier_LOF_output").val();
+			var full_output = $('#Outlier_LOF_full_output input:radio:checked').val();
+			var delimiter = $("#Outlier_LOF_delimiter").val();
+			var quotechar = $("#Outlier_LOF_quotechar").val();
+			var limit     = $("#Outlier_LOF_limit").val();
+			var min_population_size = $("#Outlier_LOF_min_population_size").val();
+			var threshold = $("#Outlier_LOF_threshold").val();
+			var threshold_avg = $("#Outlier_LOF_threshold_avg").val();
+			var num_outliers = $("#Outlier_LOF_num_outliers").val();
+			var k = $("#Outlier_LOF_k").val();
+
+			$.ajax({
+                	type: "GET",
+					url: $SCRIPT_ROOT + "/outlier_detection",
+                	contentType: "text/json; charset=utf-8",
+                	data: {tab: tab , filename: filenames, output: output, full_output: full_output, delimiter: delimiter,
+						quotechar: quotechar, limit: limit, min_population_size: min_population_size, threshold: threshold,
+						threshold_avg: threshold_avg, num_outliers: num_outliers, k:k},
+
+                	beforeSend: function(){
+						$('#loaderDiv').show();
+                	},
+                	success: function(dataJobId) {
+                    	$('#loaderDiv').hide();
+                    	$('#visualization').empty();
+                    	var div = document.getElementById('visualization');
+                    	while (div.hasChildNodes()) {
+                        	div.removeChild(div.lastChild);
+                    	}
+						get_dam_result(dataJobId.jobid, dataset_name, plot_2Dgraph, selectedDimLst);
+						//var data = get_dam_result(dataJobId.jobid);
+                    	//var jsonData = JSON.parse(data);
+                    	//plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
+                    	// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
+                    	//mpld3.draw_figure("visualization", jsonData['fig']) ;
+                	},
+                	error: function(jqXHR, textStatus, errorThrown) {
+                    	alert(errorThrown);
+                	}
+            	}); //ajax
+		}else if (tab === '#Outlier_OneClassSVM'){
+			var selectedDimLst = get_selected_dims("checkboxOfTask1");
+        	var dataset_name = $("#data_select option:selected").val();
+        	var percent = $('#outlierPercent').val()
+        	if (isNaN(percent)){
+            	percent = 25}
+        	else{
+            	percent = parseFloat(percent)
+            	if (percent >25 || percent <= 0){
+                	percent = 25
+            	}
+        	}
+
+        	//var userData = {'city': $('#cdata').text(), 'dim':selectedDimLst};
+        	if (selectedDimLst.length == 1){
+            	$.ajax({
+                	type: "GET",
+					url: $SCRIPT_ROOT + "/outlier_detection",
+                	contentType: "text/json; charset=utf-8",
+                	data: {tab: tab ,dataset_name: dataset_name, dim: selectedDimLst.toString(), per: percent},
+
+                	beforeSend: function(){
+						$('#loaderDiv').show();
+                	},
+                	success: function(dataJobId) {
+                    	$('#loaderDiv').hide();
+                    	$('#visualization').empty();
+                    	var div = document.getElementById('visualization');
+                    	while (div.hasChildNodes()) {
+                        	div.removeChild(div.lastChild);
+                    	}
+						get_dam_result(dataJobId.jobid, dataset_name, plot_2Dgraph, selectedDimLst);
+						//var data = get_dam_result(dataJobId.jobid);
+                    	//var jsonData = JSON.parse(data);
+                    	//plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
+                    	// plot_graph("visualization", jsonData['data'], classes=jsonData['cluster'])
+                    	//mpld3.draw_figure("visualization", jsonData['fig']) ;
+                	},
+                	error: function(jqXHR, textStatus, errorThrown) {
+                    	alert(errorThrown);
+                	}
+            	}); //ajax
+        	}else{
+            	alert('Please choose one dimension')
+        	}
+		}
     });//click #submitBtn1
 
     $("#submitBtn3").on('click', function() {
@@ -248,7 +321,18 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 					$('#loaderDiv').hide();
 					clearTimeout(timeout);
 					var jsonData = JSON.parse(data);
-                    visual_func('visualization', jsonData, dataset_name, dimlst);
+					if (jsonData['filename'] !== undefined)
+					{
+						var filename = jsonData['filename'],
+							url_csv = $SCRIPT_ROOT + '/static/output/' + filename;
+						console.log(url_csv);
+						// hide the div, write the form
+						show_remote_csv(url_csv, 'visualization')
+
+					}
+					else{
+						visual_func('visualization', jsonData, dataset_name, dimlst);
+					}
 				}else {
 					setTimeout(poller, 2000)
 				}
@@ -266,6 +350,72 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 	poller();
 }
 
+function downloadURL(url) {
+    var hiddenIFrameID = 'hiddenDownloader',
+        iframe = document.getElementById(hiddenIFrameID);
+    if (iframe === null) {
+        iframe = document.createElement('iframe');
+        iframe.id = hiddenIFrameID;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    iframe.src = url;
+};
+
+
+function getCSV(url) {
+        var link = url;
+        var rawFile = new XMLHttpRequest();
+        var allText;
+
+        rawFile.open("GET", link, false);
+        rawFile.onreadystatechange = function () {
+            if(rawFile.readyState === 4)
+                if(rawFile.status === 200 || rawFile.status == 0)
+                    allText = rawFile.responseText;
+					var dataSet = csv_string_to_matrix(allText); // data is the content of the csv file
+					$('#visualization').DataTable(
+					{
+						data:dataSet,
+						columns : [{title: 'Item'},{title:''},{title:'Features'},{title:''},{title:''},{title:''},
+								{title:'Target'},{title:'Score'}]
+					}
+				)
+        };
+        rawFile.send();
+}
+
+function csv_string_to_matrix(csvStr){
+	var matrix = [],
+		rows = csvStr.split('\n');
+	for (var i in rows){
+			matrix.push(rows[i].split(','))
+	}
+	return matrix
+}
+
+function show_remote_csv(url, vis_location){
+	var filename = url.substring(url.lastIndexOf('/')+1);
+	var link = url;
+	var rawFile = new XMLHttpRequest();
+	var allText;
+
+	rawFile.open("GET", link, false);
+	rawFile.onreadystatechange = function () {
+            if(rawFile.readyState === 4)
+                if(rawFile.status === 200 || rawFile.status == 0)
+                    allText = rawFile.responseText;
+					var dataSet = csv_string_to_matrix(allText); // data is the content of the csv file
+					$('#vis_table').DataTable(
+					{
+						data:dataSet,
+						columns : [{title: 'Item'},{title:''},{title:'Features'},{title:''},{title:''} ,
+								{title:'Target'},{title:'Score'}]
+					}
+				)
+        };
+	rawFile.send();
+}
 
 function remove_options(selectbox)
 {

@@ -1,13 +1,15 @@
 '''
-@author: cengels
+@author: cengels, tdong
 '''
 
-from Lattice import Lattice
-from InputOutput import write_csv, write_outlier, read_input_csv, write_top_outlier
+from .Lattice import Lattice
+from .InputOutput import write_csv, write_outlier, read_input_csv, write_top_outlier
 from _operator import attrgetter
+from json import dumps
 
 def detect_outliers_subpopulation_lattice(filename, 
                                           output='Result',
+                                          output_path = '',
                                           full_output=False,
                                           delimiter=',',
                                           quotechar='|',
@@ -53,6 +55,6 @@ def detect_outliers_subpopulation_lattice(filename,
         write_outlier(lattice, output + '_Outlier_Avg.csv', threshold_avg, 'avg_score')
     else:
         output_file = output + '_top' + num_outliers.__str__() + '.csv'
-        write_top_outlier(lattice, output_file, num_outliers)
-
+        filename = write_top_outlier(lattice, output_file, num_outliers, server_data_path=output_path)
+        return dumps({'filename': filename})
     return 0

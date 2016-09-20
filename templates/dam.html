@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Data Analysis and Mining</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <!--[if lt IE 9]>
     <script
@@ -25,7 +26,7 @@
     <div class="row">
         <div id="dataset" class="col-sm-6 col-md-3 pull-left">
             <h1><label class="label label-primary control-label  full-width" id="cdata">Choose dataset</label></h1>
-            <select class="form-control"  id="data_select">
+            <select class="form-control" multiple="multiple"  id="data_select">
                 <option value="None" ></option>
                 <option value="Aragon-2006-income">Aragon-2006-income</option>
                 <option value="Aragon-2007-income">Aragon-2007-income</option>
@@ -38,6 +39,9 @@
                 <option value="Aragon-2014-income">Aragon-2014-income</option>
                 <option value="Aragon-2015-income">Aragon-2015-income</option>
                 <option value="Aragon-2016-income">Aragon-2016-income</option>
+                <option value="budget-kilkis-expenditure-2012">Kilkis-expenditure-2012</option>
+                <option value="budget-kilkis-expenditure-2013">Kilkis-expenditure-2013</option>
+                <option value="budget-kilkis-expenditure-2014">Kilkis-expenditure-2014</option>
                 </select>
         </div>
         <div id="dimentions" class="col-sm-6 col-md-3">
@@ -75,6 +79,7 @@
     <img class="col-sm-3 col-sm-offset-4 col-dm-3 col-dm-offset-4" src="{{ url_for('static', filename='images/spinner.gif') }}">
 </div>
 <div id="visualization" class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"></div>
+<table id="vis_table" class="display col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2" width="100%"></table>
 
 <!-- Modal -->
 <div class="modal fade" id="damModal" role="dialog">
@@ -88,6 +93,7 @@
             </div>
             <div class="modal-body">
                 <div class="container">
+
                     <div class="row">
                         <div  class="col-md-8  ">
                         <button type="button" class="btn btn-info btn-lg  col-md-3 btn-modal "
@@ -118,6 +124,7 @@
                                 data-toggle="modal" data-target="#task9Modal">    Clustering      </button>
                     </div>
                         </div>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -138,18 +145,98 @@
             </div>
 
             <div class="modal-body">
-                {% block content1 %}
-                <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
-                <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
-                <strong>Choose one dimension:</strong>
-                <div id="checkboxOfTask1"></div>
+                {% block contentce %}
+                    <ul id="algo-tabs" class="nav nav-tabs nav-justified">
+                        <li role="presentation" class="active">
+                            <a href="#Outlier_LOF">Outlier_LOF</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#Outlier_OneClassSVM">Outlier_OneClassSVM</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="Outlier_LOF">
+                            <!--
+                                filename,
+                                output='Result',
+                                full_output=False,
+                                delimiter=',',
+                                quotechar='|',
+                                limit=25000,
+                                outlier_method='Outlier_LOF',
+                                min_population_size=30,
+                                threshold=3,
+                                threshold_avg=3,
+                                num_outliers=25,
+                                # Method specific parameters:
+                                k=5
+                            -->
+                            <strong>Outlier_LOF</strong><br>
+                            <br>
+                            <div class="btn-group" id="Outlier_LOF_full_output" data-toggle="buttons">
+                                <label class="radio-inline">
+                                    <input name="radioGroupOutput"  value="full_output" type="radio"> full output
+                                    </label>
+                                <label class="radio-inline">
+                                    <input name="radioGroupOutput"   value="partial_output"
+                                           checked="" type="radio"> partial output
+                                    </label>
+                            </div>
+
+                            <br>
+                            <strong>output</strong>
+                            <input size="10" id="Outlier_LOF_output" name="output" type="text" placeholder="Result" value="Result"><br>
+
+                            <strong>delimiter</strong>
+                            <input size="10" id="Outlier_LOF_delimiter" name="delimiter" type="text"
+                                   placeholder="," value=","><br>
+
+                            <strong>quotechar</strong>
+                            <input size="10" id="Outlier_LOF_quotechar" name="quotechar" type="text"
+                                   placeholder="|" value="|"><br>
+
+                            <strong>limit</strong>
+                            <input size="10" id="Outlier_LOF_limit" name="limit" type="text"
+                                   placeholder="2500" value="2500"><br>
+
+                            <strong>min_population_size</strong>
+                            <input size="10" id="Outlier_LOF_min_population_size" name="min_population_size" type="text"
+                                   placeholder="30" value="30"><br>
+
+                            <strong>threshold</strong>
+                            <input size="10" id="Outlier_LOF_threshold" name="threshold" type="text" placeholder="3" value="3"><br>
+
+                            <strong>threshold average</strong>
+                            <input size="10" id="Outlier_LOF_threshold_avg" name="threshold_avg" type="text" placeholder="3" value="3"><br>
+
+                            <strong>number of outliers</strong>
+                            <input size="10" id="Outlier_LOF_num_outliers" name="num_outliers" type="text" placeholder="25" value="25"><br>
+
+                            <strong>k:</strong>
+                            <input size="10" id="Outlier_LOF_k" name="k" type="text" value="5"><br>
+
+                            <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
+                            <button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
+
+                            </div>
+
+                        <div role="tabpanel" class="tab-pane" id="Outlier_OneClassSVM">
+                            <strong>Outlier_OneClassSVM</strong><br>
+                            <strong>Enter the percentage for outliers (value between 0 and 25, default=25):</strong>
+                            <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
+                            <strong>Choose one dimension:</strong>
+                            <div id="checkboxOfTask1"></div>
+                            <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
+                            <button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
+                            </div>
+                    </div>
                 <br><br>
                 {% endblock %}
                 </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn_ce" name="submitBtn_ce">CE Function</button>
-                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
-                <button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
+
             </div>
         </div>
     </div>
@@ -229,9 +316,12 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 <script type="text/javascript" src="http://mpld3.github.io/js/mpld3.v0.1.js"></script>
+<script src="{{ url_for('static', filename='js/jquery.tablesorter.dev.js') }}"></script>
 <script src="{{ url_for('static', filename='js/tether.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery-2.2.0.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap-switch.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

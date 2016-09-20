@@ -1,9 +1,10 @@
 '''
-@author: cengels
+@author: cengels, tdong
 '''
 from numpy import average
-from Items import Feature, Item
+from .Items import Feature, Item
 from sys import exit
+import os
 import plotly
 import plotly.plotly as py
 from plotly.tools import FigureFactory as FF
@@ -54,16 +55,20 @@ def header(features, conditions = None, write_condition=False):
     header2.append("")
     
     '''Scores'''
-    if(conditions):
+    if conditions:
         header1.append("Scores")
         for condition in conditions:
             header2.append(condition.__repr__())
     else:
-        if (write_condition):
+        if write_condition:
             header1.append("Condition")
-        header1.append("Score")        
+        header1.append("Score")
+
+    for i in range(len(header1) - len(header2)):
+        header2.append("")
     
     return [header1, header2]
+
     
 def write_item(item, num_scores = None):    
     row = list()
@@ -110,14 +115,21 @@ def write_outlier(lattice, filename = 'outlier.csv', threshold = 3, score_type='
                     row.append(avg_score)
                     writer.writerow(row)      
 
-def write_top_outlier(lattice, filename = 'top_outlier.csv', num_outliers = 25):
+
+def write_top_outlier(lattice, filename = 'top_outlier.csv', num_outliers = 25, server_data_path = ''):
     import csv
+    if os.path.isdir(server_data_path):
+        filename = os.path.join(server_data_path, filename)
+
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         
         csv_header = header(lattice.features)
-        writer.writerow(csv_header[0])
-        writer.writerow(csv_header[1])
+        if len(csv_header) > 1:
+            writer.writerow(csv_header[0])
+            writer.writerow(csv_header[1])
+        else:
+            writer.writerow(csv_header[0])
         
         #Calculate average scores.
         avg_scores = [(average([abs(score[2]) for score in item.scores]), item) for item in lattice.items]
@@ -126,7 +138,10 @@ def write_top_outlier(lattice, filename = 'top_outlier.csv', num_outliers = 25):
         for item in avg_scores[:num_outliers]:
             row = write_item(item[1])
             row.append(item[0])
-            writer.writerow(row) 
+            writer.writerow(row)
+    dir, filename = os.path.split(filename)
+    return filename
+
          
 def output_table(lattice, threshold = 3, score_type='all'):
     data = header(lattice.features)
@@ -151,9 +166,7 @@ def output_table(lattice, threshold = 3, score_type='all'):
     table = FF.create_table(data)
     table.layout.width=1000
     py.iplot(table, filename='output_table')
-             
-         
-         
+
            
 def create_item(row, rowcount, structure):
 
