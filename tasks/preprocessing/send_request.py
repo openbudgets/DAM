@@ -28,7 +28,7 @@ class SparqlHelper(metaclass=ABCMeta):
         :param columns: list of columns which ar selected in the SParql-Query such as ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
         :param dict_cols2aggr: dictionary containing the mapping from columns to aggregation such as {"observation": "MIN", "amount": "SUM"}
         :param limit: number of rows in the Sparql-query result
-        :return: String containing the Sparql-Query
+        :return: String containing the Sparql-Query which will be sent to the Sparql endpoint
         """
         pass
 
