@@ -25,7 +25,6 @@ class SparqlHelperTest(unittest.TestCase):
     @patch("send_request_test.SparqlDummyHelper._create_sparql_query")
     @patch("send_request_test.SparqlDummyHelper._send_to_sparql_endpoint")
     @patch("send_request_test.SparqlDummyHelper._postprocess_sparql_result")
-    @unittest.skip
     def create_csv_as_text_test(self, mock_postprocess_sparql_result, mock_send_to_sparql_endpoint,
                                 mock_create_sparql_query):
         # Define Test input:
@@ -51,7 +50,6 @@ class SparqlHelperTest(unittest.TestCase):
 
     @patch("send_request_test.SparqlDummyHelper.create_csv_as_text")
     @patch("send_request_test.SparqlDummyHelper._write_csv_to_file")
-    @unittest.skip
     def create_csv_as_file_test(self, mock_write_csv_to_file, mock_create_csv_as_text):
         # Define Test input:
         mock_write_csv_to_file.return_value = "/a/b/c/d/test.csv"
