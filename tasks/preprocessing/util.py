@@ -6,6 +6,7 @@
     Python Version: 3.5
 """
 import os
+from .send_request import SparqlCEHelper
 
 
 def ce_from_file_names_query_fuseki_output_csv(filenames, debug=True):
@@ -30,4 +31,14 @@ def ce_from_file_names_query_fuseki_output_csv(filenames, debug=True):
             print('no such path ', dataPath)
             return False
     else:
-        return False
+        fileNamesLst = filenames.split('+')[1:]
+        input_cols = ["observation", "amount", "economicClass", "adminClass", "year", "budgetPhase"]
+        input_dict_cols2aggr = {"observation": "MIN", "amount": "SUM"}
+        input_datasets = ["<http://data.openbudgets.eu/resource/dataset/"+fn+">" for fn in fileNamesLst]
+
+        path_output_folder = os.path.join(os.path.abspath(os.path.dirname(__file__) +'../../..'), 'Data')
+        SparqlHelperCE = SparqlCEHelper()
+        csvFile = SparqlHelperCE.create_csv_as_file(input_datasets, input_cols,
+                                                    input_dict_cols2aggr, path_output_folder, limit=100)
+
+        return csvFile

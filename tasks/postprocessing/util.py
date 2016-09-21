@@ -9,5 +9,5 @@ import os
 
 
 def get_output_data_path():
-    dataPath = os.path.join(os.path.abspath(os.path.dirname(__file__) +'../../..'), 'Static/output')
+    dataPath = os.path.join(os.path.abspath(os.path.dirname(__file__) +'../../..'), 'static/output')
     return dataPath

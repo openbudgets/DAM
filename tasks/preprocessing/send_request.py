@@ -30,7 +30,7 @@ class SparqlHelper(metaclass=ABCMeta):
         :param limit: number of rows in the Sparql-query result
         :return: String containing the Sparql-Query which will be sent to the Sparql endpoint
         """
-        pass
+        raise NotImplementedError('call to abstract method _create_sparql_query')
 
     @abstractmethod
     def _postprocess_sparql_result(self, sparql_result):
@@ -40,11 +40,13 @@ class SparqlHelper(metaclass=ABCMeta):
         :param sparql_result: query-result in csv format from the Sparql-endpoint
         :return: the csv-input for the DM-algorithm
         """
-        pass
+        raise NotImplementedError('call to abstract method _postprocess_sparql_result')
 
     def _send_to_sparql_endpoint(self, sparql_query):
+
         params = {"query": sparql_query}
         response = requests.get(self.__URL, headers=self.__HEADERS, params=params)
+
         return response.text
 
     def _write_csv_to_file(self, text, path_output_folder, file_name=None):
@@ -54,33 +56,9 @@ class SparqlHelper(metaclass=ABCMeta):
                 .replace(".", "-") \
                 .replace(":", "-")
         file_path = os.path.join(path_output_folder, "%s.csv" % file_name)
+        print('file_path', file_path)
         with open(file_path, 'a') as file:
             file.write(text)
-        return file_path
-
-    def create_csv_as_text(self, datasets, columns, dict_cols2aggr, limit=-1):
-        """
-        Creates a Sparql-Query & sends it to the Sparql-Fhg-endpoint & returning the result as csv text.
-        :return: The CSV Text as String for DataMining Input.
-        """
-        # (1) Create Sparql-Query: Needs to specified by subclasses
-        sparql_query = self._create_sparql_query(datasets, columns, dict_cols2aggr, limit)
-        print("Sparql-Query: %s" % sparql_query)
-        # (2) Send Sparql-Query to Endpoint:
-        sparql_result = self._send_to_sparql_endpoint(sparql_query)
-        print("Sparql-Query-Result: %s" % sparql_result)
-        # (3) Postprocess Sparql-Query-result: Needs to specified by subclasses
-        csv_result = self._postprocess_sparql_result(sparql_result)
-        print("CSV-Result: %s" % csv_result)
-        return csv_result
-
-    def create_csv_as_file(self, datasets, columns, dict_cols2aggr, path_output_folder, file_name=None, limit=-1):
-        """
-        Creates a Sparql-Query & sends it to the Sparql-Fhg-endpoint & returning the result as csv file.
-        :return: The CSV file path as String for DataMining Input.
-        """
-        csv_result = self.create_csv_as_text(self, datasets, columns, dict_cols2aggr, limit)
-        file_path = self._write_csv_to_file(self, csv_result, path_output_folder, file_name)
         return file_path
 
 
@@ -169,6 +147,31 @@ class SparqlCEHelper(SparqlHelper):
         header_items = [item.strip() for item in lines[0].split(",")]
         types = [SparqlCEHelper._DICT_COL_2_TYPES.get(item, "") for item in header_items]
         return ",".join(types)
+
+    def create_csv_as_text(self, datasets, columns, dict_cols2aggr, limit=-1):
+        """
+        Creates a Sparql-Query & sends it to the Sparql-Fhg-endpoint & returning the result as csv text.
+        :return: The CSV Text as String for DataMining Input.
+        """
+        # (1) Create Sparql-Query: Needs to specified by subclasses
+        sparql_query = self._create_sparql_query(datasets, columns, dict_cols2aggr, limit)
+        print("Sparql-Query: %s" % sparql_query)
+        # (2) Send Sparql-Query to Endpoint:
+        sparql_result = self._send_to_sparql_endpoint(sparql_query)
+        print("Sparql-Query-Result: %s" % sparql_result)
+        # (3) Postprocess Sparql-Query-result: Needs to specified by subclasses
+        csv_result = self._postprocess_sparql_result(sparql_result)
+        print("CSV-Result: %s" % csv_result)
+        return csv_result
+
+    def create_csv_as_file(self, datasets, columns, dict_cols2aggr, path_output_folder, file_name=None, limit=-1):
+        """
+        Creates a Sparql-Query & sends it to the Sparql-Fhg-endpoint & returning the result as csv file.
+        :return: The CSV file path as String for DataMining Input.
+        """
+        csv_result = self.create_csv_as_text(datasets, columns, dict_cols2aggr, limit=limit)
+        file_path = self._write_csv_to_file(csv_result, path_output_folder, file_name)
+        return file_path
 
 
 # Tests:

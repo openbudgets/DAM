@@ -180,7 +180,7 @@ def do_outlier_detection():
         """
         get/generate csv using filename
         """
-        inputCSVFileName = pre_util.ce_from_file_names_query_fuseki_output_csv(filename, debug=True)
+        inputCSVFileName = pre_util.ce_from_file_names_query_fuseki_output_csv(filename, debug=False)
         """
         post processing
         determine the directory where output file shall be saved

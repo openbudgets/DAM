@@ -1,27 +1,27 @@
 Item,Features,,,,Target,Score
-, year , adminClass , economicClass , budgetPhase ,,
-8492, 2013 , 30 , 7321 , revised ,3827221.13,11464015.2817
-8469, 2013 , 30 , 7322 , revised ,3398368.58,10072260.5362
-8512, 2015 , 30 , 7322 , revised ,1389606.57,4588146.42976
-11634, 2015 , 30 , 7322 , draft ,1389606.57,4498202.60854
-8488, 2015 , 30 , 7323 , revised ,1485653.82,4450217.74526
-7824, 2013 , 30 , 7312 , revised ,2854596.39,4416652.82576
-20865, 2013 , 30 , 7321 , reserved ,1299968.45,4062584.1684
-19700, 2013 , 30 , 7321 , executed ,1273523.19,4011912.82492
-1769, 2013 , 30 , 7321 , approved ,1273523.19,4011912.82291
-20878, 2015 , 30 , 7323 , reserved ,1259456.01,3835300.35512
-19669, 2013 , 30 , 7322 , executed ,1101590.58,3597370.3267
-1809, 2013 , 30 , 7322 , approved ,1101590.58,3597370.32224
-20834, 2013 , 30 , 7322 , reserved ,1113531.68,3515776.98178
-8545, 2013 , 30 , 7323 , revised ,1034425.16,3134055.16319
-11521, 2015 , 30 , 7323 , draft ,1001682.22,3109829.55223
-2541, 2013 , 30 , 7312 , approved ,1898192.46,3103466.55762
-18848, 2013 , 30 , 7312 , executed ,1898192.46,3103466.55761
-21848, 2013 , 30 , 7312 , reserved ,1898192.46,3103466.37259
-21026, 2015 , 30 , 7322 , reserved ,909148.23,3069891.82639
-11558, 2014 , 30 , 7323 , draft ,983207.79,2913589.92592
-8538, 2014 , 30 , 7322 , revised ,849148.23,2744510.06235
-8459, 2014 , 30 , 7323 , revised ,853668.16,2632840.75498
-11132, 2013 , 30 , 7412 , revised ,836839.93,2496478.52974
-8487, 2014 , 30 , 7324 , revised ,699367.69,2116540.51029
-14896, 2013 , 30 , 7412 , draft ,671812.85,2037403.46035
+,economicClass,adminClass,year,budgetPhase,,
+0,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/8111,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/80,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/draft,0.0,1.0
+1,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6235,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/15,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+2,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6413,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved,0.0,1.0
+3,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7331,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/revised,0.0,1.0
+4,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6414,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved,0.0,1.0
+5,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6114,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+6,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6213,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/35,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+7,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6115,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+8,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6654,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/45,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+9,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6653,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/45,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+10,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6411,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/20,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+11,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6412,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/20,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+12,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6266,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/revised,0.0,1.0
+13,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/8241,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/80,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/draft,0.0,1.0
+14,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6072,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/10,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/revised,0.0,1.0
+15,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6265,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/revised,0.0,1.0
+16,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7333,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/70,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/revised,0.0,1.0
+17,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7411,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/35,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+18,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/35,http://reference.data.gov.uk/id/year/2012,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+19,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7312,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25,http://reference.data.gov.uk/id/year/2013,http://data.openbudgets.eu/resource/codelist/budget-phase/approved,0.0,1.0
+20,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6671,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/20,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+21,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6661,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+22,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6651,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/40,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+23,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6641,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/50,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
+24,http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6662,http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30,http://reference.data.gov.uk/id/year/2014,http://data.openbudgets.eu/resource/codelist/budget-phase/executed,0.0,1.0
