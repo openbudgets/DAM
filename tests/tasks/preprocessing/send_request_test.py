@@ -68,9 +68,9 @@ class SparqlHelperTest(unittest.TestCase):
                                                           input_path_output_folder, input_filename)
         # Assert results:
         print("Result: file_path %s" % file_path)
-        mock_create_csv_as_text.assert_called_once_with(self.sparql_helper, input_datasets, input_cols,
-                                                        input_dict_cols2aggr, -1)
-        mock_write_csv_to_file.assert_called_once_with(self.sparql_helper, mock_create_csv_as_text.return_value,
+        mock_create_csv_as_text.assert_called_once_with(input_datasets, input_cols,
+                                                        input_dict_cols2aggr, limit=-1)
+        mock_write_csv_to_file.assert_called_once_with(mock_create_csv_as_text.return_value,
                                                        input_path_output_folder,
                                                        input_filename)
         expected_output_file_path = "%s/%s.csv" % (input_path_output_folder, input_filename)
