@@ -101,6 +101,8 @@ class SparqlCEHelper(SparqlHelper):
                          'year': 'nominal',
                          'budgetPhase': 'nominal'}
 
+    _DICT_COL_2_ALIAS = {'amount': 'amount2'}
+
     _DICT_COL_2_MODEL = {'amount': '?observation obeu-measure:amount ?amount2 .',
                          'year': '?observation qb:dataSet/obeu-dimension:fiscalYear ?year .',
                          'budgetPhase': '?observation gr-dimension:budgetPhase ?budgetPhase .',
@@ -136,7 +138,8 @@ class SparqlCEHelper(SparqlHelper):
         for col in columns:
             aggregation = dict_cols2aggr.get(col, "")
             if aggregation:
-                result += "\n(%s(?%s) AS ?%s)" % (aggregation, col, SparqlCEHelper._DICT_COL_2_NAMES[col])
+                result += "\n(%s(?%s) AS ?%s)" % (aggregation, SparqlCEHelper._DICT_COL_2_ALIAS.get(col, col),
+                                                  SparqlCEHelper._DICT_COL_2_NAMES[col])
             else:
                 result += "\n?%s" % col
         # datsets:

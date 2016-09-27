@@ -93,7 +93,7 @@ PREFIX rdfs:             <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX gr-dimension: <http://data.openbudgets.eu/ontology/dsd/greek-municipalities/dimension/>
 SELECT
 (MIN(?observation) AS ?ID)
-(SUM(?amount) AS ?amount)
+(SUM(?amount2) AS ?amount)
 ?economicClass
 ?adminClass
 ?year
@@ -114,6 +114,7 @@ LIMIT 10"""
     def create_sparql_query_test(self):
         result = self.ce_helper._create_sparql_query(self.input_datasets, self.input_cols, self.input_dict_cols2aggr,
                                                      10)
+        print(result)
         self.assertEqual(result.strip(), result.strip(), "Überprüfung auf Gleichheit")
 
     def postprocess_sparql_result_test(self):
