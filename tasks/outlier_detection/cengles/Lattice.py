@@ -120,7 +120,6 @@ class Vertex():
                     for it in range(0,len(bins)-1):                         
                         conditions.append(NumericalCondition(feature, bins[it], bins[it+1]))      
 
-          
         '''Generate children and branch - or prune.'''        
         for additional_condition in conditions:  
             child_items = [item for item in self.items if item.satisfy(additional_condition)]
@@ -130,8 +129,7 @@ class Vertex():
                 self.children.append(Vertex(child_items, child_condition))
                 child_features = [feature for feature in branching_features if feature > additional_condition.feature]
                 self.children[-1].branch(child_features, iteration + 1, max_iteration, min_population_size)   
-                    
-        
+
     def __str__ (self):    
         return "Conditions:\n{}\nItems:\n{}\nChildren:\n{}\n\n".format(
             self.conditions.__str__(), self.items.__str__(), 

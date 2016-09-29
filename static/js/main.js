@@ -373,23 +373,40 @@ function getCSV(url) {
             if(rawFile.readyState === 4)
                 if(rawFile.status === 200 || rawFile.status == 0)
                     allText = rawFile.responseText;
-					var dataSet = csv_string_to_matrix(allText); // data is the content of the csv file
+					var dataSet = csv_string_to_matrix(allText), // data is the content of the csv file
+						titleList =  dataSet.shift(),
+						col = make_columns(titleList);
+
 					$('#visualization').DataTable(
 					{
 						data:dataSet,
-						columns : [{title: 'Item'},{title:''},{title:'Features'},{title:''},{title:''},{title:''},
-								{title:'Target'},{title:'Score'}]
+						columns : col
 					}
 				)
         };
         rawFile.send();
 }
 
+function make_columns(lst){
+	var col = []
+	for (var i in lst) {
+		col.push({title: lst[i]})
+	}
+	return col
+}
+
 function csv_string_to_matrix(csvStr){
 	var matrix = [],
 		rows = csvStr.split('\n');
 	for (var i in rows){
+		var lst = rows[i].split('"');
+		if (lst.length === 3){
+			var secondEle = lst[1].replace(/,/g, ';');
+			var newRow = lst[0] + secondEle + lst[2];
+			matrix.push(newRow.split(','));
+		}else {
 			matrix.push(rows[i].split(','))
+		}
 	}
 	return matrix
 }
@@ -405,12 +422,14 @@ function show_remote_csv(url, vis_location){
             if(rawFile.readyState === 4)
                 if(rawFile.status === 200 || rawFile.status == 0)
                     allText = rawFile.responseText;
-					var dataSet = csv_string_to_matrix(allText); // data is the content of the csv file
+					var dataSet = csv_string_to_matrix(allText), // data is the content of the csv file
+						titleList =  dataSet.shift(),
+						col = make_columns(titleList);
+
 					$('#vis_table').DataTable(
 					{
 						data:dataSet,
-						columns : [{title: 'Item'},{title:''},{title:'Features'},{title:''},{title:''} ,
-								{title:'Target'},{title:'Score'}]
+						columns : col
 					}
 				)
         };

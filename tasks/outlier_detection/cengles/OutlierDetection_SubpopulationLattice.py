@@ -2,6 +2,7 @@
 @author: cengels, tdong
 '''
 
+import os
 from .Lattice import Lattice
 from .InputOutput import write_csv, write_outlier, read_input_csv, write_top_outlier
 from _operator import attrgetter
@@ -15,6 +16,7 @@ def detect_outliers_subpopulation_lattice(filename,
                                           quotechar='|',
                                           limit=25000,
                                           outlier_method='Outlier_LOF',
+                                          #LOF for local outlier factor https://de.wikipedia.org/wiki/Local_Outlier_Factor
                                           min_population_size=30,
                                           threshold=3, 
                                           threshold_avg=3,
@@ -35,7 +37,7 @@ def detect_outliers_subpopulation_lattice(filename,
            
     print(len(items), "items have been created.")
     
-    '''Create lattice.'''
+    """Create lattice."""
     lattice = Lattice(features, items)
     
     '''Generate subpopulations.'''
@@ -50,9 +52,11 @@ def detect_outliers_subpopulation_lattice(filename,
     '''InputOutput scores.'''
     print("Write CSV ...")
     if full_output:
-        write_csv(lattice, output + '_Scores.csv')
-        write_outlier(lattice, output + '_Outlier.csv', threshold)
-        write_outlier(lattice, output + '_Outlier_Avg.csv', threshold_avg, 'avg_score')
+        print('full output ', output_path, output)
+        write_csv(lattice, os.path.join(output_path, output + '_Scores.csv'))
+        filename = write_outlier(lattice, os.path.join(output_path, output + '_Outlier.csv'), threshold)
+        write_outlier(lattice, os.path.join(output_path, output + '_Outlier_Avg.csv'), threshold_avg, 'avg_score')
+        return dumps({'filename': filename})
     else:
         output_file = output + '_top' + num_outliers.__str__() + '.csv'
         filename = write_top_outlier(lattice, output_file, num_outliers, server_data_path=output_path)

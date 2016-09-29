@@ -9,7 +9,7 @@ import os
 from .send_request import SparqlCEHelper
 
 
-def ce_from_file_names_query_fuseki_output_csv(filenames, debug=True):
+def ce_from_file_names_query_fuseki_output_csv(filenames, debug=False):
     """
     if debug=True, we just use the already exising csv file
     Parameters
@@ -39,6 +39,6 @@ def ce_from_file_names_query_fuseki_output_csv(filenames, debug=True):
         path_output_folder = os.path.join(os.path.abspath(os.path.dirname(__file__) +'../../..'), 'Data')
         SparqlHelperCE = SparqlCEHelper()
         csvFile = SparqlHelperCE.create_csv_as_file(input_datasets, input_cols,
-                                                    input_dict_cols2aggr, path_output_folder, limit=100)
+                                                    input_dict_cols2aggr, path_output_folder, limit=10000)
 
         return csvFile

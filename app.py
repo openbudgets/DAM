@@ -166,7 +166,11 @@ def do_outlier_detection():
         """
         filename = request.args.get('filename')
         output = request.args.get('output')
-        full_output = request.args.get('full_output')
+        if request.args.get('full_output') == 'full_output':
+            full_output = True
+        else:
+            full_output = False
+
         delimiter = request.args.get('delimiter')
         quotechar = request.args.get('quotechar')
         limit = request.args.get('limit')
@@ -189,7 +193,9 @@ def do_outlier_detection():
         """
         set function parameters
         """
-        cekwargs = {'min_population_size':30, 'output_path': output_path}
+        cekwargs = {'min_population_size':30,
+                    'full_output': full_output,
+                    'output_path': output_path}
         """
         send to the job queue
         """
@@ -200,8 +206,6 @@ def do_outlier_detection():
         else:
             print('unvalid csv file')
         return jsonify(jobid=job.get_id())
-
-
     elif tab == '#Outlier_OneClassSVM':
         dataset_name = request.args.get('dataset_name')
         print('dataset name', dataset_name)

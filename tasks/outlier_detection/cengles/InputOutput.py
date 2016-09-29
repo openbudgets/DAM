@@ -33,7 +33,7 @@ def write_csv(lattice, filename = 'output.csv'):
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         
-        csv_header = header(lattice.features, lattice.conditions())
+        csv_header = header(lattice.features, conditions=lattice.conditions())
         writer.writerow(csv_header[0])
         writer.writerow(csv_header[1])
         
@@ -55,6 +55,7 @@ def header(features, conditions = None, write_condition=False):
     header2.append("")
     
     '''Scores'''
+    print('conditions ', conditions)
     if conditions:
         header1.append("Scores")
         for condition in conditions:
@@ -96,7 +97,7 @@ def write_outlier(lattice, filename = 'outlier.csv', threshold = 3, score_type='
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         
-        csv_header = header(lattice.features, score_type == 'all')
+        csv_header = header(lattice.features, write_condition = score_type == 'all')
         writer.writerow(csv_header[0])
         writer.writerow(csv_header[1])
         
@@ -113,7 +114,9 @@ def write_outlier(lattice, filename = 'outlier.csv', threshold = 3, score_type='
                 if avg_score > threshold:
                     row = write_item(item)
                     row.append(avg_score)
-                    writer.writerow(row)      
+                    writer.writerow(row)
+    dir, filename = os.path.split(filename)
+    return filename
 
 
 def write_top_outlier(lattice, filename = 'top_outlier.csv', num_outliers = 25, server_data_path = ''):
