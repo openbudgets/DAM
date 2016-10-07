@@ -55,6 +55,11 @@ def index():
     return render_template('dam.html')
 
 
+@app.route('/meta_data/<algo_id>', methods=['GET'])
+def algo_meta_data(algo_id):
+    job = q_dm.enqueue_call(func=get_meta_data_of_algorithm, args=(algo_id,), result_ttl=5000)
+    return job.get_id()
+
 @app.route('/echo', methods=['GET'])
 def echo():
     ret_data = {"value": request.args.get('echoValue')}
@@ -64,6 +69,19 @@ def echo():
 def say_hi(astring):
     return astring
 
+
+def get_meta_data_of_algorithm(algo_id):
+    """
+
+    Parameters
+    ----------
+    algo_id: the id of algorithm. if algo_id == 'all', returns the list of all ids. 
+
+    Returns:
+    -------
+
+    """
+    pass
 
 @app.route('/queue/<num>', methods=['GET','POST'])
 def test_queue(num):
@@ -105,15 +123,17 @@ def get_dimensions_of_observation():
 
     if cityName != 'None' and 'fuseki' not in rdfDataset:
         print('here, really here')
-
         print(rdfDataset)
         myGraph = rdflib.Graph()
         myGraph.parse(rdfDataset)
         ret_data = mutil.get_dimensions_of_observations(myGraph)
 
         return jsonify(result=ret_data)
+
     elif 'fuseki' in rdfDataset:
+
         ret_data = tristore.get_dimensions_from_triple_store(rdfDataset)
+
         return jsonify(result=ret_data)
     else:
         return jsonify(result='')

@@ -1,0 +1,72 @@
+{
+  "all" : [                //list of all algorithms names
+    "outlier-detection-lof"
+  ],
+  "outlier-detection-lof" :{
+    "note" : "the algorithm designed by Christiane Engles",
+
+    "input" : {
+      "choice" : {
+        "tpye": "single selection",
+        "values": ["full output", "partial output"]
+      },
+      "output" : {
+        "type" : "string input",
+        "values": {
+          "default" : "Result"
+        }
+      },
+      "delimiter" : {
+        "type" : "char input",
+        "values": {
+          "default" : ","
+        }
+      },
+      "quotechar" : {
+        "type" : "char input",
+        "values": {
+          "default" : "|"
+        }
+      },
+      "limit" : {
+        "type" : "number input",
+        "values": {
+          "default" : 2500
+        }
+      },
+      "min population size" : {
+        "type" : "number input",
+        "values": {
+          "default" : 30
+        }
+      },
+      "threshold" : {
+        "type" : "number input",
+        "values": {
+          "default" : 3
+        }
+      },
+      "threshold average" : {
+        "type" : "number input",
+        "values": {
+          "default" : 3
+        }
+      },
+      "number of outliers" : {
+        "type" : "number input",
+        "values": {
+          "default" : 25
+        }
+      },
+      "k" : {
+        "type" : "number input",
+        "values": {
+          "default" : 5
+        }
+      }
+    },
+    "output": {
+        ""
+      }
+  }
+}

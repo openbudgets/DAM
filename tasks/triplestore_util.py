@@ -14,5 +14,9 @@ def get_dimensions_from_triple_store(rdfDataset):
     -------
 
     """
+    dataSetName = rdfDataset.replace("fuseki-", "")
+    graphName = "http://data.openbudgets.eu/resource/datasets/"+dataSetName
+    qstr_d = "select distinct ?s from {} where {?s ?p ?o . filter (contains(str(?s), 'dimension'))  }".format(graphName)
+    #call curl fuseki func
     result = ['sample_dimension1', 'sample_dimension2', 'sample_dimension3']
     return result
