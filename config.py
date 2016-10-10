@@ -8,7 +8,7 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = 'this-will-be-changed'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
-
+    USE_DOCKER_REDIS = False
 
 
 class ProductionConfig(Config):

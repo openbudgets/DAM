@@ -9,6 +9,10 @@ datasets={"Aragon-2006-income":["Data/Aragon/2006/dataset/aragon-2006-income.rdf
           "Aragon-2014-income":["Data/Aragon/2014/dataset/aragon-2014-income.rdf"],
           "Aragon-2015-income":["Data/Aragon/2015/dataset/aragon-2015-income.rdf"],
           "Aragon-2016-income":["Data/Aragon/2016/dataset/aragon-2016-income.rdf"],
+          "budget-kilkis-expenditure-2012" : ['fuseki-budget-kilkis-expenditure-2012'],
+          "budget-kilkis-expenditure-2013" : ['fuseki-budget-kilkis-expenditure-2013'],
+          "budget-kilkis-expenditure-2014" : ['fuseki-budget-kilkis-expenditure-2014'],
+
           "ESIF_Sample": ["Data/ESIF_Sample.csv"],
           "Bonn": ["Data/BonnBudget2016_Sample10000.ttl", "https://github.com/openbudgets/datasets/blob/master/Bonn/dataset/BonnBudget2016_Sample10000.ttl"],
           "ESIF":["https://github.com/openbudgets/datasets/blob/master/ESIF/2014/dataset/ESIF-2014-2020.ttl"],
