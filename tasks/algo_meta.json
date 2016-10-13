@@ -1,72 +1,82 @@
 {
-  "all" : [                //list of all algorithms names
-    "outlier-detection-lof"
+  "list" : [
+    {
+      "name": "outlier-detection-lof",
+      "description": "Outlier detection based on Local Outlier Factor. This algorithm is implemented by Christiane Engles"
+    }
   ],
   "outlier-detection-lof" :{
-    "note" : "the algorithm designed by Christiane Engles",
-
-    "input" : {
-      "choice" : {
-        "tpye": "single selection",
-        "values": ["full output", "partial output"]
+    "input" : [
+      {
+        "name" : "choice",
+        "cardinality": ["full output", "partial output"],
+        "tpye": "parameter",
+        "note": "a radio choice. Users will choose either 'full output' or 'partial output' "
       },
-      "output" : {
-        "type" : "string input",
-        "values": {
-          "default" : "Result"
-        }
+      {
+        "name":"delimiter",
+        "cardinality":  "character",
+        "tpye": "parameter",
+        "default" : ",",
+        "note" : "User can specify the delimiter of CSV file. The default value is ',' "
       },
-      "delimiter" : {
-        "type" : "char input",
-        "values": {
-          "default" : ","
-        }
+      {
+        "name": "quotechar",
+        "cardinality": "character",
+        "tpye": "parameter",
+        "default" : "|",
+        "note" : "User can specify the quotechar of CSV file. The default value is '|' "
       },
-      "quotechar" : {
-        "type" : "char input",
-        "values": {
-          "default" : "|"
-        }
+      {
+        "name" :  "limit",
+        "cardinality": "number",
+        "tpye": "parameter",
+        "default" : 2500,
+        "note" : "Number of output records"
       },
-      "limit" : {
-        "type" : "number input",
-        "values": {
-          "default" : 2500
-        }
+      {
+        "name":"min population size" ,
+        "cardinality": "number",
+        "tpye": "parameter",
+        "default" : 30,
+        "note" : "Minimum population size for a sub-population in the lattice."
       },
-      "min population size" : {
-        "type" : "number input",
-        "values": {
-          "default" : 30
-        }
+      {
+        "name":"threshold",
+        "cardinality": "number",
+        "tpye": "parameter",
+        "default" : 3 ,
+        "note" : "Threshold for outputting an item as outlier (in a subpopulation)."
       },
-      "threshold" : {
-        "type" : "number input",
-        "values": {
-          "default" : 3
-        }
+      {
+        "name":"threshold average",
+        "cardinality": "number",
+        "tpye": "parameter",
+        "default" : 3 ,
+        "note" : "Threshold for outputting an item as outlier (average outlier score)."
       },
-      "threshold average" : {
-        "type" : "number input",
-        "values": {
-          "default" : 3
-        }
+      {
+        "name":"number of outliers",
+        "cardinality": "number",
+        "tpye": "parameter",
+        "default" : 3 ,
+        "note" : "compute densities of each points, sort them, the first <n> numbers will be considered as outliers"
       },
-      "number of outliers" : {
-        "type" : "number input",
-        "values": {
-          "default" : 25
-        }
-      },
-      "k" : {
-        "type" : "number input",
-        "values": {
-          "default" : 5
-        }
+      {
+        "name":"k",
+        "cardinality": "number",
+        "tpye": "parameter",
+        "default" : 5 ,
+        "note" : "LOF method specific parameter specifying the number of neighbors used to calculate the local densities."
       }
-    },
-    "output": {
-        ""
+    ],
+    "output": [
+      {
+        "name": "json",
+        "type": "csv data file",
+        "default": "{'filename': <csv file name>}",
+        "note": "the csv file with the name <csv file name> is located at '/static/output/' at the server side"
       }
+      ]
   }
 }

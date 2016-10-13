@@ -23,7 +23,7 @@ import matplotlib.pyplot as plt
 import mpld3
 import pandas as pd 
 import rdflib
-from json import dumps, loads 
+from json import dumps, loads, load
 
 cache = Cache(config={'CACHE_TYPE':'simple'})
 app = Flask(__name__)
@@ -55,10 +55,18 @@ def index():
     return render_template('dam.html')
 
 
-@app.route('/meta_data/<algo_id>', methods=['GET'])
+@app.route('/services/<algo_id>/meta', methods=['GET'])
 def algo_meta_data(algo_id):
-    job = q_dm.enqueue_call(func=get_meta_data_of_algorithm, args=(algo_id,), result_ttl=5000)
-    return job.get_id()
+    return get_meta_data_of_algorithm(algo_id)
+
+
+@app.route('/services', methods=['GET'])
+def get_all_services():
+    with open('tasks/algo_meta.json') as data_file:
+        meta_dic = load(data_file)
+        print(meta_dic)
+        return jsonify(meta_dic['list'])
+
 
 @app.route('/echo', methods=['GET'])
 def echo():
@@ -72,16 +80,22 @@ def say_hi(astring):
 
 def get_meta_data_of_algorithm(algo_id):
     """
-
     Parameters
     ----------
-    algo_id: the id of algorithm. if algo_id == 'all', returns the list of all ids. 
+    algo_id: the id of algorithm. if algo_id == '', returns the list of all ids.
 
     Returns:
     -------
-
     """
-    pass
+    with open('tasks/algo_meta.json') as data_file:
+        meta_dic = load(data_file)
+        print(meta_dic)
+    if algo_id == "":
+        return meta_dic["list"]
+    else:
+        info = meta_dic.get(algo_id, '')
+        return jsonify(info)
+
 
 @app.route('/queue/<num>', methods=['GET','POST'])
 def test_queue(num):
