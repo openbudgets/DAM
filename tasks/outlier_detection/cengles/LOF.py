@@ -12,11 +12,11 @@ class LOF():
         self.k = k               
         self.max = max_size 
     
-    def initialize(self, data):
+    def initialize(self, data): # TD: type of data? : list of measures.
         self.initialize_data(data)
         self.fill_neighbors()        
         
-    def initialize_data(self, data):
+    def initialize_data(self, data): # TD: global variable 'first', type of data?
         self.data = list()
         first = True
         for item in data:
@@ -36,7 +36,7 @@ class LOF():
             pred = item.pred
             succ = item.succ
             
-            #Find k nearest neighbors.
+            #Find k nearest neighbors. #TD: if (not pred) and (not succ) ...  #k < min_population_size
             while len(item.neighbors) < self.k:
                 if (not pred) and succ:
                     item.neighbors.append(succ)
@@ -52,19 +52,20 @@ class LOF():
                     succ = succ.succ                
                         
             #Add all neighbors in this range
-            item.kdist = d(item, item.neighbors[-1])            
+            item.kdist = d(item, item.neighbors[-1])
             while len(item.neighbors) < self.max and pred and d(item, pred) == item.kdist:
+                # TD: loop when d(item, pred) == d(item, pred.pred)
                 item.neighbors.append(pred)
                 pred = pred.pred
             while len(item.neighbors) < self.max and succ and d(item, succ) == item.kdist:
+                # TD: loop when d(item,succ) == d(item, succ.succ)
                 item.neighbors.append(succ)
                 succ = succ.succ      
     
     def scores(self):
         return [A.lof() for A in self.data]
     
-    
-    
+
 class LOF_Item():
     '''
     Data structure for 1D local outlier factor implementation.
@@ -84,10 +85,10 @@ class LOF_Item():
         self.neighbors = list()
         self.lrd = None
         
-    def distk(self, X):
+    def distk(self, X): #TD kdist not initialized
         return max(self.kdist, d(self, X))    
         
-    def get_lrd(self):
+    def get_lrd(self): #TD distk not initialized
         if not self.lrd:
             dist = sum([n.distk(self) for n in self.neighbors])
             if dist == 0:

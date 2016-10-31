@@ -163,8 +163,8 @@ def output_table(lattice, threshold = 3, score_type='all'):
                 row = write_item(item)
                 row.append(avg_score)
                 data.append(row)              
-                
-    plotly.tools.set_credentials_file(username='ChristianeEngels', api_key='wsvzka3dcb')            
+
+    #plotly.tools.set_credentials_file(username='ChristianeEngels', api_key='')
     
     table = FF.create_table(data)
     table.layout.width=1000

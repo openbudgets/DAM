@@ -1,0 +1,42 @@
+{
+  "name": "Exciting geek mining algorithm",
+  "endpoint": "http://tiansi.dong/dam/geeks",
+  "inputs": [
+    {
+      "name": "source_data",
+      "label": "Source data",
+      "type": "data_source",
+      "source_type": "sparql_results",
+      "query": "select ?observation from <%dataset> where { ?observation obeu:dimension ?x .  ?x  prefix:have-value %value1 .}",
+      "provided": true
+    },
+    {
+      "type": "query_parameter",
+      "name": "value1",
+      "label": "Value One",
+      "note": ""
+    },
+    {
+      "type": "query_parameter",
+      "name": "dataset",
+      "label": "Dataset"
+    },
+    {
+      "type": "execution_parameter",
+      "name": "geek_factor",
+      "label": "How much of a geek are you?"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "graph1",
+      "label": "Pre-rendered geek-ness gauge",
+      "type": "rendering"
+    },
+    {
+      "name": "output_data",
+      "label": "Output objects",
+      "type": "objects"
+    }
+  ]
+}

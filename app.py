@@ -45,6 +45,7 @@ currentRDFFile = ''
 def dam():
     return render_template('index-back.html')
 
+
 @app.route('/output/<path:filename>', methods=['GET', 'POST'])
 def download_file(filename):
     return send_from_directory(directory='output', filename=filename)
