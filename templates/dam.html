@@ -80,6 +80,8 @@
     <img class="col-sm-1 col-sm-offset-4 col-dm-1 col-dm-offset-4" src="{{ url_for('static', filename='images/spinner.gif') }}">
 </div>
 <div id="visualization" class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"></div>
+
+
 <table id="vis_table" class="display col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2" width="100%"></table>
 
 <!-- Modal -->
@@ -101,8 +103,8 @@
                                 data-toggle="modal" data-target="#task1Modal"> Outlier Detection</button>
                         <button type="button" class="btn btn-info btn-lg col-md-3 btn-modal  "
                                 data-toggle="modal" data-target="#task2Modal">  Pattern Mining  </button>
-                        <button type="button" class="btn btn-info btn-lg col-md-3 btn-modal "
-                                data-toggle="modal" data-target="#task3Modal">  Trend Analysis  </button>
+                        <button  type="button" class="btn btn-info btn-lg col-md-3 btn-modal"
+                                 data-toggle="modal" data-target="#task3Modal">  Trend Analysis</button>
                         </div>
                     </div>
                     <div class="row">
@@ -228,7 +230,7 @@
                             <input size="10" id="outlierPercent" name="outlierPercent" type="text"><br>
                             <strong>Choose one dimension:</strong>
                             <div id="checkboxOfTask1"></div>
-                            <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1" name="submitBtn1">Submit</button>
+                            <button type="button" class="btn btn-info btn-lg custom" id="submitBtn1td" name="submitBtn1td">Submit</button>
                             <button type="button" class="btn  btn-info" data-dismiss="modal">Close</button>
                             </div>
                     </div>
@@ -246,20 +248,23 @@
 
 <!-- Task3 Modal content : trend analysis-->
 <div class="modal fade" id="task3Modal" role="dialog">
-    <div class="modal-dialog">
+     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Trend Analysis </h4>
-            </div>
-            <div class="modal-body">
+
+               <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Trend Analysis </h4>
+               </div>
+                <div class="modal-body">
                 {% block content3 %}
+                    <strong>Trend Analysis</strong>
+                    <br><br>
                 {% endblock %}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn3" name="submitBtn3">Submit</button>
-                <button type="button" class="btn  btn-info btn-lg custom" data-dismiss="modal">Close</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-lg custom" id="submitBtn3" name="submitBtn3"> Submit </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"> Close </button>
+                </div>
         </div>
     </div>
 </div>
@@ -269,6 +274,7 @@
 <div class="modal fade" id="task6Modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"> Statistics</h4>

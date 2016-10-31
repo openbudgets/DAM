@@ -86,8 +86,7 @@ $(document).ready(function() {
 		var tab = $("#algo-tabs a").attr("href");
 		/* tab in {'#Outlier_LOF', '#Outlier_OneClassSVM'}
 		 */
-        if (tab === '#Outlier_LOF'){
-			/*
+       /*
 				filename,
                 output='Result',
                 full_output=False,
@@ -119,7 +118,7 @@ $(document).ready(function() {
 
 			$.ajax({
                 	type: "GET",
-					url: $SCRIPT_ROOT + "/outlier_detection",
+					url: $SCRIPT_ROOT + "/outlier_detection/LOF",
                 	contentType: "text/json; charset=utf-8",
                 	data: {tab: tab , filename: filenames, output: output, full_output: full_output, delimiter: delimiter,
 						quotechar: quotechar, limit: limit, min_population_size: min_population_size, threshold: threshold,
@@ -135,7 +134,7 @@ $(document).ready(function() {
                     	while (div.hasChildNodes()) {
                         	div.removeChild(div.lastChild);
                     	}
-						get_dam_result(dataJobId.jobid, dataset_name, plot_2Dgraph, selectedDimLst);
+						get_dam_result(dataJobId.jobid, "", plot_2Dgraph, []);
 						//var data = get_dam_result(dataJobId.jobid);
                     	//var jsonData = JSON.parse(data);
                     	//plot_2Dgraph("visualization", jsonData, dataset_name, selectedDimLst)
@@ -146,8 +145,17 @@ $(document).ready(function() {
                     	alert(errorThrown);
                 	}
             	}); //ajax
-		}else if (tab === '#Outlier_OneClassSVM'){
-			var selectedDimLst = get_selected_dims("checkboxOfTask1");
+
+    });//click #submitBtn1
+
+	$("#submitBtn1td").on('click', function() {
+        $("#damModal").modal("hide");
+        $("#task1Modal").modal("hide");
+        $('#visualization').empty();
+		var tab = $("#algo-tabs a").attr("href");
+		/* tab in {'#Outlier_LOF', '#Outlier_OneClassSVM'}
+		 */
+        var selectedDimLst = get_selected_dims("checkboxOfTask1");
         	var dataset_name = $("#data_select option:selected").val();
         	var percent = $('#outlierPercent').val()
         	if (isNaN(percent)){
@@ -163,7 +171,7 @@ $(document).ready(function() {
         	if (selectedDimLst.length == 1){
             	$.ajax({
                 	type: "GET",
-					url: $SCRIPT_ROOT + "/outlier_detection",
+					url: $SCRIPT_ROOT + "/outlier_detection/SVM",
                 	contentType: "text/json; charset=utf-8",
                 	data: {tab: tab ,dataset_name: dataset_name, dim: selectedDimLst.toString(), per: percent},
 
@@ -191,8 +199,7 @@ $(document).ready(function() {
         	}else{
             	alert('Please choose one dimension')
         	}
-		}
-    });//click #submitBtn1
+    });//click #submitBtn1td
 
     $("#submitBtn3").on('click', function() {
             $("#damModal").modal("hide");
@@ -877,7 +884,9 @@ function show_statistics_graph(containerId, jsonData, my_title){
 				size: 18,
 				color: '#7f7f7f'
 			}
-		}
+		},
+		width: 1000,
+        height: 600,
 	};
 
 	Plotly.newPlot(containerId, data, layout)

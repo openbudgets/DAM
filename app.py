@@ -171,9 +171,9 @@ def get_code_list_of_dimension():
         return jsonify(result='')
 
 
-@app.route('/outlier_detection', methods=['GET'])
+@app.route('/outlier_detection/LOF', methods=['GET'])
 #@cache.cached(timeout=50, key_prefix='all_comments')
-def do_outlier_detection():  
+def do_outlier_detection_lof():
     """
     first get the tab information
     if tab == CE:
@@ -192,60 +192,59 @@ def do_outlier_detection():
     -------
 
     """
-    print('in outlier detection')
+    print('in outlier detection LOF')
     tab = request.args.get('tab')
-    print('tab', tab)
-    if tab == '#Outlier_LOF':
-        """
-        get user input
-        """
-        filename = request.args.get('filename')
-        output = request.args.get('output')
-        if request.args.get('full_output') == 'full_output':
-            full_output = True
-        else:
-            full_output = False
+    filename = request.args.get('filename')
+    output = request.args.get('output')
+    if request.args.get('full_output') == 'full_output':
+        full_output = True
+    else:
+       full_output = False
 
-        delimiter = request.args.get('delimiter')
-        quotechar = request.args.get('quotechar')
-        limit = request.args.get('limit')
-        min_population_size = request.args.get('min_population_size')
-        threshold = request.args.get('threshold')
-        threshold_avg = request.args.get('threshold_avg')
-        num_outliers = request.args.get('num_outliers')
-        k = request.args.get('k')
-        print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
+    delimiter = request.args.get('delimiter')
+    quotechar = request.args.get('quotechar')
+    limit = request.args.get('limit')
+    min_population_size = request.args.get('min_population_size')
+    threshold = request.args.get('threshold')
+    threshold_avg = request.args.get('threshold_avg')
+    num_outliers = request.args.get('num_outliers')
+    k = request.args.get('k')
+    print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
               threshold_avg, num_outliers, k)
-        """
-        get/generate csv using filename
-        """
-        inputCSVFileName = pre_util.ce_from_file_names_query_fuseki_output_csv(filename, debug=False)
-        """
-        post processing
-        determine the directory where output file shall be saved
-        """
-        output_path = post_util.get_output_data_path()
-        """
-        set function parameters
-        """
-        cekwargs = {'min_population_size':30,
+    """
+    get/generate csv using filename
+    """
+    inputCSVFileName = pre_util.ce_from_file_names_query_fuseki_output_csv(filename, debug=False)
+    """
+    post processing
+    determine the directory where output file shall be saved
+    """
+    output_path = post_util.get_output_data_path()
+    """
+    set function parameters
+    """
+    cekwargs = {'min_population_size':30,
                     'full_output': full_output,
                     'output_path': output_path}
-        """
-        send to the job queue
-        """
-        if inputCSVFileName:
-            job = q_dm.enqueue_call(func=CE_outlier.detect_outliers_subpopulation_lattice,
+    """
+    send to the job queue
+    """
+    if inputCSVFileName:
+        job = q_dm.enqueue_call(func=CE_outlier.detect_outliers_subpopulation_lattice,
                                     args=[inputCSVFileName], kwargs=cekwargs, result_ttl=5000)
-            print('outlier detection with job id:', job.get_id())
-        else:
-            print('unvalid csv file')
-        return jsonify(jobid=job.get_id())
-    elif tab == '#Outlier_OneClassSVM':
-        dataset_name = request.args.get('dataset_name')
-        print('dataset name', dataset_name)
+        print('outlier detection with job id:', job.get_id())
+    else:
+        print('unvalid csv file')
+    return jsonify(jobid=job.get_id())
 
-        if dataset_name != 'None':
+
+@app.route('/outlier_detection/SVM', methods=['GET'])
+# @cache.cached(timeout=50, key_prefix='all_comments')
+def do_outlier_detection_svm():
+    dataset_name = request.args.get('dataset_name')
+    print('dataset name', dataset_name)
+
+    if dataset_name != 'None':
             ttl_dataset = ds.datasets.get(dataset_name, '')[0]
             dim_list = request.args.get('dim').split(',')
             print(dim_list)
