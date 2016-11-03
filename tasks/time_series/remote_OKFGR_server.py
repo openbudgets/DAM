@@ -10,6 +10,7 @@ def dm_okfgr(endpoint, **kwargs):
     for k in kwargs.keys():
         arglst += ["-d", str(k)+"="+str(kwargs[k])]
     cmd = ['curl'] + arglst + [OK_GREECE_ROOT+endpoint]
+    print(cmd)
     res = subprocess.check_output(cmd).decode("utf-8")
     result_endpoint = res.split('\n')[0]
     result = subprocess.check_output(['curl', OK_GREECE_ROOT+result_endpoint+'/print']).decode("utf-8")

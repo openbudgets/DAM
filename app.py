@@ -16,7 +16,7 @@ import tasks.outlier_detection.cengles.OutlierDetection_SubpopulationLattice as 
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.myutil as mutil
-import tasks.triplestore_util as tristore
+import tasks.preprocessing.virtuoso as virtuoso
 
 import numpy as np 
 import matplotlib.pyplot as plt
@@ -25,25 +25,44 @@ import pandas as pd
 import rdflib
 from json import dumps, loads, load
 
-cache = Cache(config={'CACHE_TYPE':'simple'})
 app = Flask(__name__)
+
+cache = Cache(config={'CACHE_TYPE':'simple'})
 cache.init_app(app)
 
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+from models import GraphNames
+
 #q_iais = Queue(connection=conn)
 q_dm = Queue(connection=conn_dm)
 #q_uep = Queue(connection=conn_uep)
 
-
-from models import Triples
 currentRDFFile = ''
 
+print(os.environ['VIRTUOSO_ENDPOINT'])
 
-@app.route('/old', methods=['GET','POST'])
-def dam():
-    return render_template('index-back.html')
+
+@app.route('/graphname', methods=['GET','POST'])
+@app.route('/graphname/<useCache>', methods=['GET','POST'])
+def graph_name(useCache='True'):
+    nlst = virtuoso.get_all_names_of_named_graph(db,  GraphNames, use_cache=useCache)
+    return jsonify({'names': nlst})
+
+
+@app.route('/codelist', methods=['GET','POST'])
+@app.route('/codelist/<useCache>', methods=['GET','POST'])
+def code_list_name(useCache='True'):
+    nlst = virtuoso.get_all_codelists_of_named_graph(db,  GraphNames, use_cache=useCache)
+    return jsonify({'codelist': nlst})
+
+
+@app.route('/dataset', methods=['GET','POST'])
+@app.route('/dataset/<useCache>', methods=['GET','POST'])
+def dataset_name(useCache='True'):
+    nlst = virtuoso.get_all_dataset_of_named_graph(db,  GraphNames, use_cache=useCache)
+    return jsonify({'dataset': nlst})
 
 
 @app.route('/output/<path:filename>', methods=['GET', 'POST'])
@@ -137,7 +156,6 @@ def get_dimensions_of_observation():
     currentRDFFile = rdfDataset
 
     if cityName != 'None' and 'fuseki' not in rdfDataset:
-        print('here, really here')
         print(rdfDataset)
         myGraph = rdflib.Graph()
         myGraph.parse(rdfDataset)

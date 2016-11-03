@@ -92,7 +92,7 @@ def create_str_of_spo_vars(headStem, varStems=['?p','?d'], num=1):
     """
     rlt = ""
     for i in range(1, num+1):
-        rlt +=headStem +' ' + ' '.join(map(lambda s:s+str(i), varStems))+ " . "
+        rlt += headStem +' ' + ' '.join(map(lambda s:s+str(i), varStems))+ " . "
     return rlt
 
 
