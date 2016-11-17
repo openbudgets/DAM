@@ -44,6 +44,22 @@ currentRDFFile = ''
 print(os.environ['VIRTUOSO_ENDPOINT'])
 
 
+##
+## decorator function which checks whether the data-mining task alreadys cached in Datablase
+##
+def check_data_mining_request(func, useCache=True):
+    def wrapper(func, useCache=useCache):
+        if not useCache:
+            return func()
+        else:
+            result = None
+            #result = try_get_result_from_db()
+            if result == None:
+                return func()
+            else:
+                return result
+
+
 @app.route('/graphname', methods=['GET','POST'])
 @app.route('/graphname/<useCache>', methods=['GET','POST'])
 def graph_name(useCache='True'):
@@ -72,7 +88,7 @@ def download_file(filename):
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    return render_template('dam.html')
+    return render_template('dam_nov24.html')
 
 
 @app.route('/services/<algo_id>/meta', methods=['GET'])
@@ -165,7 +181,7 @@ def get_dimensions_of_observation():
 
     elif 'fuseki' in rdfDataset:
 
-        ret_data = tristore.get_dimensions_from_triple_store(rdfDataset)
+        ret_data = virtuoso.get_dimensions_from_triple_store(rdfDataset)
 
         return jsonify(result=ret_data)
     else:
@@ -190,7 +206,7 @@ def get_code_list_of_dimension():
 
 
 @app.route('/outlier_detection/LOF', methods=['GET'])
-#@cache.cached(timeout=50, key_prefix='all_comments')
+@cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection_lof():
     """
     first get the tab information
@@ -213,20 +229,20 @@ def do_outlier_detection_lof():
     print('in outlier detection LOF')
     tab = request.args.get('tab')
     filename = request.args.get('filename')
-    output = request.args.get('output')
-    if request.args.get('full_output') == 'full_output':
+    output = request.args.get('output', 'Result')
+    if request.args.get('full_output', 'partial') == 'full_output':
         full_output = True
     else:
        full_output = False
 
-    delimiter = request.args.get('delimiter')
-    quotechar = request.args.get('quotechar')
-    limit = request.args.get('limit')
-    min_population_size = request.args.get('min_population_size')
-    threshold = request.args.get('threshold')
-    threshold_avg = request.args.get('threshold_avg')
-    num_outliers = request.args.get('num_outliers')
-    k = request.args.get('k')
+    delimiter = request.args.get('delimiter', ',')
+    quotechar = request.args.get('quotechar', '|')
+    limit = request.args.get('limit', 25000)
+    min_population_size = request.args.get('min_population_size', 30)
+    threshold = request.args.get('threshold', 3)
+    threshold_avg = request.args.get('threshold_avg', 3)
+    num_outliers = request.args.get('num_outliers', 25)
+    k = request.args.get('k', 5)
     print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
               threshold_avg, num_outliers, k)
     """

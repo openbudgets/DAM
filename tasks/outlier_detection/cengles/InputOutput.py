@@ -136,7 +136,7 @@ def write_top_outlier(lattice, filename = 'top_outlier.csv', num_outliers = 25, 
         
         #Calculate average scores.
         avg_scores = [(average([abs(score[2]) for score in item.scores]), item) for item in lattice.items]
-        avg_scores.sort(key=getKey, reverse=True)      
+        avg_scores.sort(key=getScore, reverse=True)
 
         for item in avg_scores[:num_outliers]:
             row = write_item(item[1])
@@ -231,5 +231,5 @@ class Structure:
         return features
     
     
-def getKey(item):
-    return item[0]    
+def getScore(item):
+    return item[0]

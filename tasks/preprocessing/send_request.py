@@ -14,7 +14,7 @@ from abc import ABCMeta, abstractmethod
 
 class SparqlHelper(metaclass=ABCMeta):
     # Constants:
-    __URL = "http://eis-openbudgets.iais.fraunhofer.de/fuseki/sparql"
+    __URL = "http://eis-openbudgets.iais.fraunhofer.de/virtuoso/sparql"
     __HEADERS = {"Accept": "text/csv"}
 
     @abstractmethod
@@ -66,10 +66,10 @@ class SparqlHelper(metaclass=ABCMeta):
         """
         # (1) Create Sparql-Query: Needs to specified by subclasses
         sparql_query = self._create_sparql_query(datasets, columns, dict_cols2aggr, limit)
-        print("Sparql-Query: %s" % sparql_query)
+        #print("Sparql-Query: %s" % sparql_query)
         # (2) Send Sparql-Query to Endpoint:
         sparql_result = self._send_to_sparql_endpoint(sparql_query)
-        print("Sparql-Query-Result: %s" % sparql_result)
+        #print("Sparql-Query-Result: %s" % sparql_result)
         # (3) Postprocess Sparql-Query-result: Needs to specified by subclasses
         csv_result = self._postprocess_sparql_result(sparql_result)
         print("CSV-Result: %s" % csv_result)
@@ -96,10 +96,10 @@ class SparqlDummyHelper(SparqlHelper):
 
 
 class SparqlCEHelper(SparqlHelper):
-    _DICT_COL_2_TYPES = {'ID': 'id', 'observation': 'id', 'amount': 'target', 'economicClass': 'nominal',
-                         'adminClass': 'nominal',
-                         'year': 'nominal',
-                         'budgetPhase': 'nominal'}
+    _DICT_COL_2_TYPES = {'"amount"': 'target', '"economicClass"': 'nominal',
+                         '"adminClass"': 'nominal',
+                         '"year"': 'nominal',
+                         '"budgetPhase"': 'nominal'}
 
     _DICT_COL_2_ALIAS = {'amount': 'amount2'}
 
@@ -171,6 +171,7 @@ class SparqlCEHelper(SparqlHelper):
     def _create_type_mapping_line(csv_text):
         lines = csv_text.splitlines()
         header_items = [item.strip() for item in lines[0].split(",")]
+        print(header_items)
         types = [SparqlCEHelper._DICT_COL_2_TYPES.get(item, "") for item in header_items]
         return ",".join(types)
 

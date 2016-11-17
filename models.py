@@ -1,5 +1,6 @@
 from app import db
 from sqlalchemy.dialects.postgresql import JSON
+from sqlalchemy.types import DateTime
 
 
 
@@ -35,4 +36,26 @@ class GraphNames(db.Model):
         self.gname = gname
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
+        return '<id {}: {}'.format(self.id, self.gname)
+
+
+class DataMiningCache(db.Model):
+    __tablename__ = 'dataminingcache'
+
+    id = db.Column(db.Integer, primary_key=True)
+    requestFrom = db.Column(JSON) # including from id, login-info
+    requestTime = db.Column(DateTime)
+    saasname = db.Column(db.String())
+    saaspar = db.Column(JSON)
+    saasresult = db.Column(JSON)
+
+    def __init__(self, id, requestFrom, requestTime, saasName, saasPar, saasResult):
+        self.id = id
+        self.requestFrom = requestFrom
+        self.requestTime = requestTime
+        self.saasname = saasName
+        self.saaspar = saasPar
+        self.saasresult = saasResult
+
+    def __rep__(self):
+        return '<id {} :{} :{} :{} :{}>'.format(self.id, self.requestFrom, self.saasname, self.saaspar, self.saasresult)

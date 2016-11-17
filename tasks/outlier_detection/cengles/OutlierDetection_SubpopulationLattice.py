@@ -8,6 +8,7 @@ from .InputOutput import write_csv, write_outlier, read_input_csv, write_top_out
 from _operator import attrgetter
 from json import dumps
 
+
 def detect_outliers_subpopulation_lattice(filename, 
                                           output='Result',
                                           output_path = '',
