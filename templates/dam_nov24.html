@@ -75,7 +75,7 @@
 
 <!-- row 3 -->
 <!-- output area -->
-<strong><div id="echoResult"></div></strong>
+<strong><div id="echoResult" ></div></strong>
 <div id="loaderDiv" hidden>
     <img class="col-sm-1 col-sm-offset-4 col-dm-1 col-dm-offset-4" src="{{ url_for('static', filename='images/spinner.gif') }}">
 </div>
@@ -264,6 +264,39 @@
 </div>
 
 
+<!-- Task5 Modal content : Time Series -->
+<div class="modal fade" id="task5Modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Time Series</h4>
+            </div>
+            <div class="modal-body">
+                {% block content5 %}
+                <strong>Data for time series</strong>
+                    <select class="form-control"  id="tsdata_select">
+                        <option value="None" ></option>
+                        <option value="Athens_draft_ts">Athens_draft_ts</option>
+                        <option value="Athens_approved_ts">Athens_approved_ts</option>
+                        <option value="Athens_executed_ts">Athens_executed_ts</option>
+                        <option value="Athens_reserved_ts">Athens_reserved_ts</option>
+                        <option value="Athens_revised_ts">Athens_revised_ts</option>
+                    </select>
+                <strong>Prediction steps</strong>
+                    <input size="10" id="prediction_steps" name="prediction_steps" type="number" placeholder=4 value=4><br>
+                <br><br>
+                {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-lg custom" id="submitBtn5" name="submitBtn5">Execute</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Task6 Modal content : Statistics -->
 <div class="modal fade" id="task6Modal" role="dialog">
     <div class="modal-dialog">
@@ -281,6 +314,33 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info btn-lg custom" id="submitBtn6" name="submitBtn6">Execute</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Task7 Modal content : Rule Mining -->
+<div class="modal fade" id="task7Modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Rule Mining</h4>
+            </div>
+            <div class="modal-body">
+                {% block content7 %}
+                <strong>Introduction to Rule Mining</strong>
+                    <select class="form-control"  id="rmdata_select">
+                        <option value="None" ></option>
+                        <option value="./Data/esif.csv">ESIF_sample</option>
+                    </select>
+                <br><br>
+                {% endblock %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info btn-lg custom" id="submitBtn7" name="submitBtn7">Execute</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -323,6 +383,7 @@
 <script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap-switch.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pretty-json-min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

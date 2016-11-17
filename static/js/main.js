@@ -232,6 +232,31 @@ $(document).ready(function() {
             }); //ajax
         });//click #submitBtn3
 
+	$("#submitBtn5").on('click', function() {
+            $("#damModal").modal("hide");
+            $("#task5Modal").modal("hide");
+            $('#visualization').empty();
+            var dataset_name = $("#tsdata_select option:selected").val();
+			var prediction_steps = $("#prediction_steps").val();
+
+            $.ajax({
+                type: "GET",
+                url: $SCRIPT_ROOT + "/time_series",
+                contentType: "text/json; charset=utf-8",
+                data: {tsdata: dataset_name , prediction_steps: prediction_steps},
+                beforeSend: function(){
+                    $('#loaderDiv').show();
+                },
+                success: function(dataJobId) {
+                    $('#loaderDiv').hide();
+					get_dam_result(dataJobId.jobid, dataset_name, show_json, []);
+                },
+
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            }); //ajax
+        });
 
     $("#submitBtn6").on('click', function() {
             $("#damModal").modal("hide");
@@ -267,6 +292,32 @@ $(document).ready(function() {
                 }
             }); //ajax
         });
+
+	$("#submitBtn7").on('click', function() {
+            $("#damModal").modal("hide");
+            $("#task7Modal").modal("hide");
+            $('#visualization').empty();
+            var dataset_name = $("#rmdata_select option:selected").val();
+
+            $.ajax({
+                type: "GET",
+                url: $SCRIPT_ROOT + "/rule_mining",
+                contentType: "text/json; charset=utf-8",
+                data: {rmdata: dataset_name},
+                beforeSend: function(){
+                    $('#loaderDiv').show();
+                },
+                success: function(dataJobId) {
+                    $('#loaderDiv').hide();
+					get_dam_result(dataJobId.jobid, dataset_name, show_json, []);
+                },
+
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            }); //ajax
+        });
+
 
     $("#submitBtn9").on('click', function() {
             $("#damModal").modal("hide");
@@ -821,6 +872,13 @@ function plot_2D_trend_graph(containerId, jsonData, dataset_name){
 	};
 
 	Plotly.newPlot(containerId, data, layout)
+}
+
+function show_json(containerId, jsonData){
+	console.log(jsonData)
+    var text = JSON.stringify(jsonData,null,1);
+	var container = document.getElementById(containerId);
+    container.innerText = text;
 }
 
 function show_statistics_graph(containerId, jsonData, my_title){

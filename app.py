@@ -15,6 +15,8 @@ import tasks.outlier_detection.outlier_detection as outlier
 import tasks.outlier_detection.cengles.OutlierDetection_SubpopulationLattice as CE_outlier
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
+import tasks.time_series.remote_OKFGR_server as time_series
+import tasks.rule_mining.remote_UEP_server as rule_mining
 import tasks.myutil as mutil
 import tasks.preprocessing.virtuoso as virtuoso
 
@@ -326,6 +328,25 @@ def do_statistics():
         # print(ret_data)
         # return ret_data #jsonify(result=ret_data)
         return jsonify(jobid = 0)
+
+
+@app.route('/time_series', methods=['GET'])
+def do_time_series():
+    tsdata = request.args.get('tsdata')
+    prediction_steps = request.args.get('prediction_steps')
+    OKFGR_TS = os.environ['OKFGR_TS']
+    tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
+    job = q_dm.enqueue_call(func=time_series.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
+    print('statistics in job queue with id:', job.get_id())
+    return jsonify(jobid=job.get_id())
+
+
+@app.route('/rule_mining', methods=['GET'])
+def do_rule_mining():
+    csvFile = request.args.get('rmdata')
+    job = q_dm.enqueue_call(func=rule_mining.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
+    print('statistics in job queue with id:', job.get_id())
+    return jsonify(jobid=job.get_id())
 
 
 @app.route('/clustering', methods=['GET']) 
