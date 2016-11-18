@@ -1,5 +1,7 @@
 
 import os
+import requests
+import json
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 
@@ -105,3 +107,13 @@ def get_dimensions_from_triple_store(rdfDataset):
     # call curl fuseki func
     result = ['sample_dimension1', 'sample_dimension2', 'sample_dimension3']
     return result
+
+
+def list_dataset_name():
+    endpoint = "http://eis-openbudgets.iais.fraunhofer.de/api/3/cubes/"
+    r = requests.get(endpoint)
+    if r.status_code == requests.codes.ok:
+        dic = json.loads(r.text)
+        return [ dataset_name['name'] for dataset_name in dic['data']]
+    else:
+        return ['not found!']

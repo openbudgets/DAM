@@ -72,6 +72,7 @@ class SparqlHelper(metaclass=ABCMeta):
         #print("Sparql-Query-Result: %s" % sparql_result)
         # (3) Postprocess Sparql-Query-result: Needs to specified by subclasses
         csv_result = self._postprocess_sparql_result(sparql_result)
+        print("CSV-Result length: %s" % len(csv_result))
         print("CSV-Result: %s" % csv_result)
         return csv_result
 
@@ -107,8 +108,10 @@ class SparqlCEHelper(SparqlHelper):
                          'year': '?observation qb:dataSet/obeu-dimension:fiscalYear ?year .',
                          'budgetPhase': '?observation gr-dimension:budgetPhase ?budgetPhase .',
                          'observation': '?slice qb:observation ?observation .',
-                         'economicClass': '?slice gr-dimension:economicClassification ?economicClass .',
-                         'adminClass': '?slice gr-dimension:administrativeClassification ?adminClass .'
+                         'economicClass': '?slice ?economicClassification ?economicClass . filter(contains(str(?economicClassification), "economicClassification")) .',
+                         'adminClass': '?slice ?administrativeClassification ?adminClass . filter(contains(str(?administrativeClassification), "administrativeClassification"))'
+                         #'economicClass': '?slice gr-dimension:economicClassification ?economicClass .',
+                         #'adminClass': '?slice gr-dimension:administrativeClassification ?adminClass .'
                          }
 
     _DICT_COL_2_NAMES = {'observation': 'ID', 'amount': 'amount', 'economicClass': 'economicClass',
@@ -151,6 +154,7 @@ class SparqlCEHelper(SparqlHelper):
         result += "\nGROUP BY %s" % " ".join(["?%s" % col for col in columns if col not in dict_cols2aggr.keys()])
         if limit > -1:
             result += "\nLIMIT " + str(limit)
+        print(result)
         return result
 
     def _postprocess_sparql_result(self, sparql_result):

@@ -4,12 +4,27 @@
 
 
 $(document).ready(function() {
+	$.ajax({
+            type: "GET",
+            url: $SCRIPT_ROOT + "/get_virtuoso_datasets",
+            contentType: "text/json; charset=utf-8",
+            success: function (data) {
+                var jsonData = data.names;
+                if (data.names) {
+                    var vdataContainer = document.getElementById('virtuoso_datasets');
+                    remove_options(vdataContainer);
+                    add_options_to_selection(vdataContainer, jsonData);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+
     $('#data_select').on('change', function () {
         var selectVal = $("#data_select option:selected").val();
 		console.log(selectVal);
         document.getElementById("cdata").innerHTML = selectVal.split('-')[0];
-        //checkedDimDict1 = {};
-        //checkedDimDict9 = {};
         $('#visualization').empty();
         $.ajax({
             type: "GET",
@@ -48,6 +63,7 @@ $(document).ready(function() {
             }
         });
     })
+
 
 	$('#algo-tabs a').click(function (e) {
      	e.preventDefault()
@@ -105,6 +121,18 @@ $(document).ready(function() {
 			$('#data_select option:selected').each(function(i, selected){
   				filenames = filenames+'+'+$(selected).text();
 				});
+
+			var virtuoso_filenames = '';
+			$('#virtuoso_datasets option:selected').each(function(i, selected){
+  				virtuoso_filenames = virtuoso_filenames+'+'+$(selected).text().split("__")[0];
+				});
+			if (virtuoso_filenames.length > 0){
+				filenames = virtuoso_filenames
+				$('#virtuoso_datasets option:selected').each(function(i, selected){
+  					$(selected).selected = false;
+				});
+			}
+
 			var output = $("#Outlier_LOF_output").val();
 			var full_output = $('#Outlier_LOF_full_output input:radio:checked').val();
 			var delimiter = $("#Outlier_LOF_delimiter").val();
@@ -523,10 +551,6 @@ function add_options_to_selection(select, opLst){
 	for (var i=0; i < opLst.length; i++){
 
 		var op = opLst[i];
-		//checkedDimDict1[op] = false;
-		//checkedDimDict9[op] = false;
-		//console.log('checkedDimDict1',op);
-		//console.log('checkedDimDict9',op);
 		var option = document.createElement("option");
 		option.text = op.split('/').slice(-1)[0];
 		select.appendChild(option);

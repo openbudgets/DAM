@@ -69,6 +69,12 @@ def graph_name(useCache='True'):
     return jsonify({'names': nlst})
 
 
+@app.route('/get_virtuoso_datasets', methods=['GET'])
+def get_dataset_name_in_triplestore():
+    nlst = virtuoso.list_dataset_name()
+    return jsonify({'names': nlst})
+
+
 @app.route('/codelist', methods=['GET','POST'])
 @app.route('/codelist/<useCache>', methods=['GET','POST'])
 def code_list_name(useCache='True'):
@@ -208,7 +214,7 @@ def get_code_list_of_dimension():
 
 
 @app.route('/outlier_detection/LOF', methods=['GET'])
-@cache.cached(timeout=50, key_prefix='all_comments')
+#@cache.cached(timeout=50, key_prefix='all_comments')
 def do_outlier_detection_lof():
     """
     first get the tab information
