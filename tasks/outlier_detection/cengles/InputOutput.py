@@ -109,6 +109,7 @@ def write_outlier(lattice, filename = 'outlier.csv', threshold = 3, score_type='
                         row.append(score[1])
                         row.append(score[2])
                         writer.writerow(row)
+
             elif score_type == 'avg_score':
                 avg_score = average([abs(score[2]) for score in item.scores])
                 if avg_score > threshold:
@@ -135,6 +136,7 @@ def write_top_outlier(lattice, filename = 'top_outlier.csv', num_outliers = 25, 
             writer.writerow(csv_header[0])
         
         #Calculate average scores.
+        # check sorting function TD
         avg_scores = [(average([abs(score[2]) for score in item.scores]), item) for item in lattice.items]
         avg_scores.sort(key=getScore, reverse=True)
 
@@ -232,4 +234,4 @@ class Structure:
     
     
 def getScore(item):
-    return item[0]
+    return float(item[0])

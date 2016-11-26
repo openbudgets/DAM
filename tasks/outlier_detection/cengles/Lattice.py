@@ -55,7 +55,8 @@ class Lattice():
     def __repr__ (self):
         return "root:\n" + self.root.__repr__() 
 
-#TODO: Implement iterator for lattice and remove get_children().    
+#TODO: Implement iterator for lattice and remove get_children().
+
         
 class Vertex():
     '''
@@ -128,7 +129,20 @@ class Vertex():
                 child_condition.append(additional_condition)  
                 self.children.append(Vertex(child_items, child_condition))
                 child_features = [feature for feature in branching_features if feature > additional_condition.feature]
-                self.children[-1].branch(child_features, iteration + 1, max_iteration, min_population_size)   
+                self.children[-1].branch(child_features, iteration + 1, max_iteration, min_population_size)
+
+                vset = set()
+                for i in range(len(child_condition)):
+                    vset |= {child_condition[i].value}
+
+                rset = {'"http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30"',
+                        '"http://data.openbudgets.eu/resource/codelist/budget-phase/approved"',
+                        '"http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412"',
+                        '"http://reference.data.gov.uk/id/year/2012"'}
+                if vset.issubset(rset):
+                    for item in self.items:
+                        if item.target == 640490.93:
+                            print("*self.items*", vset, item)
 
     def __str__ (self):    
         return "Conditions:\n{}\nItems:\n{}\nChildren:\n{}\n\n".format(

@@ -168,7 +168,7 @@ def get_results(job_key):
         #
         return job.result
     else:
-        return "Wait!"
+        return jsonify({"status":"Wait!"})
 
 
 @app.route('/observe_dim', methods=['GET'])

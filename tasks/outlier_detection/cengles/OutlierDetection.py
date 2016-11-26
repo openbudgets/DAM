@@ -45,6 +45,10 @@ def detect_outliers(vertex, method = None, score_id = 0, k=5):
     it = 0
     for item in vertex.items:
         item.add_score(score_id, vertex.conditions, vertex.scores[it])
+        cnd1 = '"http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412"'
+        cnd2 =  '"http://reference.data.gov.uk/id/year/2012"'
+        if vertex.scores[it] > 1000000 :
+            print(score_id, vertex.conditions, vertex.scores[it])
         it += 1
         
         
@@ -113,7 +117,8 @@ class Outlier_OneClassSVM(OutlierMethod):
     
     def get_scores(self, data):
         self.execute(data)
-        return self.classifier.decision_function(data)  
+        return self.classifier.decision_function(data)
+
     
 class Outlier_StandardDev(OutlierMethod):    
     '''

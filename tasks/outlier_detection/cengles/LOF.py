@@ -97,7 +97,8 @@ class LOF_Item():
         return self.lrd
         
     def lof(self):
-        return sum([float(n.get_lrd()) for n in self.neighbors]) / len(self.neighbors) / self.get_lrd()    
+        result = sum([float(n.get_lrd()) for n in self.neighbors]) / len(self.neighbors) / self.get_lrd()
+        return result
         
         
 def d(A,B):
