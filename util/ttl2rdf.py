@@ -13,12 +13,14 @@ trasveral all ttl in the <path>,
 
 ttl2rdf_jar = "/Users/tdong/git/DAM/util/rdf2rdf-1.0.1-2.3.1.jar"
 
+
 def replace_path_head(path0, head1, head2):
     '''
     head1 is the head of path0
     replace head2 with head1
     '''
     return os.path.join(head2, *pathlib.Path(path0).parts[len(pathlib.Path(head1).parts)-1:])
+
 
 def ttl2rdf(inpath, outpath):
     for root, dirs, fnlst in os.walk(inpath):
@@ -39,7 +41,6 @@ def ttl2rdf(inpath, outpath):
                 print('--')
                 call(["java", "-jar", ttl2rdf_jar, inputfile, outputfile])
                 ofile.close()
-        
 
 
 if __name__ == "__main__":

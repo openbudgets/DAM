@@ -401,12 +401,12 @@ function get_dam_result(jobID, dataset_name, visual_func, dimlst) {
 			beforeSend: function(){
 				$('#loaderDiv').show();
 			},
-			success: function(data) {
-				if (data !== "Wait!") {
-					console.log(data)
+			success: function(jsonData) {
+
+				if (jsonData['status'] !== "Wait!") {
+
 					$('#loaderDiv').hide();
 					clearTimeout(timeout);
-					var jsonData = JSON.parse(data);
 					if (jsonData['filename'] !== undefined)
 					{
 						var filename = jsonData['filename'],

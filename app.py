@@ -16,7 +16,6 @@ import tasks.outlier_detection.cengles.OutlierDetection_SubpopulationLattice as 
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.time_series.remote_OKFGR_server as time_series
-import tasks.rule_mining.remote_UEP_server as rule_mining
 import tasks.myutil as mutil
 import tasks.preprocessing.virtuoso as virtuoso
 
@@ -350,8 +349,9 @@ def do_time_series():
 @app.route('/rule_mining', methods=['GET'])
 def do_rule_mining():
     csvFile = request.args.get('rmdata')
-    job = q_dm.enqueue_call(func=rule_mining.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
-    print('statistics in job queue with id:', job.get_id())
+    import uep_dm
+    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
+    print('rule_mining in job queue with id:', job.get_id())
     return jsonify(jobid=job.get_id())
 
 
