@@ -90,12 +90,23 @@ DAM $ cd okfgr_dm
 uep_dm $ pip3 install .
 ```
 
-* Install wrapper to access OKFGR data-mining server
+* the source of UEP data-mining server can be deleted
 ```
 uep_dm $ cd ..
+DAM $ sudo rm -r uep_dm
+```
+
+* Install wrapper to access OKFGR data-mining server
+```
 DAM $ git clone https://github.com/openbudgets/okfgr_dm.git
 DAM $ cd okfgr_dm
 okfgr_dm $ pip3 install .
+```
+
+* the source of OKFGR data-mining server can be deleted
+```
+okfgr_dm $ cd ..
+DAM $ sudo rm -r okfgr_dm
 ```
 
 * Start your application by executing
