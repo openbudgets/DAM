@@ -117,10 +117,6 @@ def echo():
     return jsonify(ret_data)
 
 
-def say_hi(astring):
-    return astring
-
-
 def get_meta_data_of_algorithm(algo_id):
     """
     Parameters
@@ -341,7 +337,8 @@ def do_time_series():
     prediction_steps = request.args.get('prediction_steps')
     OKFGR_TS = os.environ['OKFGR_TS']
     tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
-    job = q_dm.enqueue_call(func=time_series.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
+    import okfgr_dm
+    job = q_dm.enqueue_call(func=okfgr_dm.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
     print('statistics in job queue with id:', job.get_id())
     return jsonify(jobid=job.get_id())
 

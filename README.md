@@ -31,7 +31,7 @@ To consistent with OpenSpending, we use Flask + Python at the backend, javascrip
     brew tap homebrew/science
     brew install r
 
-* Clone the GitHub repository: `git clone https://github.com/openbudgets/DAM` and `$ git checkout tiansi`
+* Clone the GitHub repository: `git clone https://github.com/openbudgets/DAM` and `$ git checkout staging`
 
 * Install and setup postgresql
 ```
@@ -81,6 +81,22 @@ export DATABASE_URL=localhost/openbudges # or whatever you used above as postgre
 
 * Install all application requirements by executing
 `pip install -r requirements.txt`
+
+
+* Install wrapper to access UEP data-mining server
+```
+DAM $ git clone https://github.com/openbudgets/uep_dm.git
+DAM $ cd okfgr_dm
+uep_dm $ pip3 install .
+```
+
+* Install wrapper to access OKFGR data-mining server
+```
+uep_dm $ cd ..
+DAM $ git clone https://github.com/openbudgets/okfgr_dm.git
+DAM $ cd okfgr_dm
+okfgr_dm $ pip3 install .
+```
 
 * Start your application by executing
 `python manage.py runserver`
