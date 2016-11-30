@@ -83,6 +83,19 @@ export DATABASE_URL=localhost/openbudges # or whatever you used above as postgre
 `pip install -r requirements.txt`
 
 
+* Install data-preprocessing package for data-mining
+```
+DAM $ git clone https://github.com/openbudgets/preprocessing_dm.git
+DAM $ cd preprocessing_dm
+preprocessing_dm $ pip3 install .
+```
+
+* the source of data-preprocessing package can be deleted
+```
+preprocessing_dm $ cd ..
+DAM $ sudo rm -r preprocessing_dm
+```
+
 * Install wrapper to access UEP data-mining server
 ```
 DAM $ git clone https://github.com/openbudgets/uep_dm.git

@@ -7,7 +7,6 @@ from rq.job import Job
 #from worker_3 import conn, conn_uep
 from worker import conn_dm
 import datasets as ds
-import tasks.preprocessing.util as pre_util
 import tasks.postprocessing.util as post_util
 
 import tasks.statistics as statis 
@@ -15,14 +14,9 @@ import tasks.outlier_detection.outlier_detection as outlier
 import tasks.outlier_detection.cengles.OutlierDetection_SubpopulationLattice as CE_outlier
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
-import tasks.time_series.remote_OKFGR_server as time_series
 import tasks.myutil as mutil
-import tasks.preprocessing.virtuoso as virtuoso
+import preprocessing_dm as ppdm
 
-import numpy as np 
-import matplotlib.pyplot as plt
-import mpld3
-import pandas as pd 
 import rdflib
 from json import dumps, loads, load
 
@@ -41,8 +35,6 @@ q_dm = Queue(connection=conn_dm)
 #q_uep = Queue(connection=conn_uep)
 
 currentRDFFile = ''
-
-print(os.environ['VIRTUOSO_ENDPOINT'])
 
 
 ##
@@ -64,27 +56,27 @@ def check_data_mining_request(func, useCache=True):
 @app.route('/graphname', methods=['GET','POST'])
 @app.route('/graphname/<useCache>', methods=['GET','POST'])
 def graph_name(useCache='True'):
-    nlst = virtuoso.get_all_names_of_named_graph(db,  GraphNames, use_cache=useCache)
+    nlst = ppdm.get_all_names_of_named_graph(db,  GraphNames, use_cache=useCache)
     return jsonify({'names': nlst})
 
 
 @app.route('/get_virtuoso_datasets', methods=['GET'])
 def get_dataset_name_in_triplestore():
-    nlst = virtuoso.list_dataset_name()
+    nlst = ppdm.list_dataset_name()
     return jsonify({'names': nlst})
 
 
 @app.route('/codelist', methods=['GET','POST'])
 @app.route('/codelist/<useCache>', methods=['GET','POST'])
 def code_list_name(useCache='True'):
-    nlst = virtuoso.get_all_codelists_of_named_graph(db,  GraphNames, use_cache=useCache)
+    nlst = ppdm.get_all_codelists_of_named_graph(db,  GraphNames, use_cache=useCache)
     return jsonify({'codelist': nlst})
 
 
 @app.route('/dataset', methods=['GET','POST'])
 @app.route('/dataset/<useCache>', methods=['GET','POST'])
 def dataset_name(useCache='True'):
-    nlst = virtuoso.get_all_dataset_of_named_graph(db,  GraphNames, use_cache=useCache)
+    nlst = ppdm.get_all_dataset_of_named_graph(db,  GraphNames, use_cache=useCache)
     return jsonify({'dataset': nlst})
 
 
@@ -136,24 +128,6 @@ def get_meta_data_of_algorithm(algo_id):
         return jsonify(info)
 
 
-@app.route('/queue/<num>', methods=['GET','POST'])
-def test_queue(num):
-    if num == '0':
-        job = q_dm.enqueue_call(func=say_hi, args=('hello from queue for local jobs',), result_ttl=5000)
-        print('test_queue in job queue with id:', job.get_id())
-        return job.get_id()
-    elif num == '1':
-        job = q_dm.enqueue_call(func=say_hi, args=('hello from main queue',), result_ttl=5000)
-        print('test_queue in job queue with id:', job.get_id())
-        return job.get_id()
-    elif num == '2':
-        job = q_dm.enqueue_call(func=say_hi, args=('hello from queue for uep jobs',), result_ttl=5000)
-        print('test_queue in job queue with id:', job.get_id())
-        return job.get_id()
-    print('Usage: http://localhost:5000/queue/[0-2]')
-    return jsonify({})
-
-
 @app.route("/results/<job_key>", methods=['GET'])
 def get_results(job_key):
     job = Job.fetch(job_key, connection=conn_dm)
@@ -184,7 +158,7 @@ def get_dimensions_of_observation():
 
     elif 'fuseki' in rdfDataset:
 
-        ret_data = virtuoso.get_dimensions_from_triple_store(rdfDataset)
+        ret_data = ppdm.get_dimensions_from_triple_store(rdfDataset)
 
         return jsonify(result=ret_data)
     else:
@@ -251,7 +225,7 @@ def do_outlier_detection_lof():
     """
     get/generate csv using filename
     """
-    inputCSVFileName = pre_util.ce_from_file_names_query_fuseki_output_csv(filename, debug=False)
+    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, debug=False)
     """
     post processing
     determine the directory where output file shall be saved
