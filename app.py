@@ -4,18 +4,17 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
 from rq import Queue
 from rq.job import Job
-#from worker_3 import conn, conn_uep
 from worker import conn_dm
 import datasets as ds
 import tasks.postprocessing.util as post_util
 
-import tasks.statistics as statis 
-import tasks.outlier_detection.outlier_detection as outlier
-import tasks.outlier_detection.cengles.OutlierDetection_SubpopulationLattice as CE_outlier
+import tasks.statistics as statis
 import tasks.trend_analysis as trend
 import tasks.clustering as cluster
 import tasks.myutil as mutil
+
 import preprocessing_dm as ppdm
+import outlier_dm
 
 import rdflib
 from json import dumps, loads, load
@@ -37,21 +36,10 @@ q_dm = Queue(connection=conn_dm)
 currentRDFFile = ''
 
 
-##
-## decorator function which checks whether the data-mining task alreadys cached in Datablase
-##
-def check_data_mining_request(func, useCache=True):
-    def wrapper(func, useCache=useCache):
-        if not useCache:
-            return func()
-        else:
-            result = None
-            #result = try_get_result_from_db()
-            if result == None:
-                return func()
-            else:
-                return result
 
+#
+# begin of DM routes
+#
 
 @app.route('/graphname', methods=['GET','POST'])
 @app.route('/graphname/<useCache>', methods=['GET','POST'])
@@ -78,6 +66,128 @@ def code_list_name(useCache='True'):
 def dataset_name(useCache='True'):
     nlst = ppdm.get_all_dataset_of_named_graph(db,  GraphNames, use_cache=useCache)
     return jsonify({'dataset': nlst})
+
+
+@app.route('/time_series', methods=['GET'])
+def do_time_series():
+    tsdata = request.args.get('tsdata')
+    prediction_steps = request.args.get('prediction_steps')
+    OKFGR_TS = os.environ['OKFGR_TS']
+    tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
+    import okfgr_dm
+    job = q_dm.enqueue_call(func=okfgr_dm.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
+    print('statistics in job queue with id:', job.get_id())
+    return jsonify(jobid=job.get_id())
+
+
+@app.route('/rule_mining', methods=['GET'])
+def do_rule_mining():
+    csvFile = request.args.get('rmdata')
+    import uep_dm
+    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
+    print('rule_mining in job queue with id:', job.get_id())
+    return jsonify(jobid=job.get_id())
+
+
+@app.route('/outlier_detection/LOF', methods=['GET'])
+def do_outlier_detection_lof():
+    """
+    outlier detectin based on LOF (local outlier factor).
+    Users choose one or more dataset names, a CSV file as input element will be created, and saved in Data/ directory.
+    Output is also a CSV file, and saved in static/output/ directory
+
+    Returns: {jobid = job.get_id()}
+    """
+    print('in outlier detection LOF')
+    tab = request.args.get('tab')
+    filename = request.args.get('filename')
+    output = request.args.get('output', 'Result')
+    if request.args.get('full_output', 'partial') == 'full_output':
+        full_output = True
+    else:
+       full_output = False
+
+    delimiter = request.args.get('delimiter', ',')
+    quotechar = request.args.get('quotechar', '|')
+    limit = request.args.get('limit', 25000)
+    min_population_size = request.args.get('min_population_size', 30)
+    threshold = request.args.get('threshold', 3)
+    threshold_avg = request.args.get('threshold_avg', 3)
+    num_outliers = request.args.get('num_outliers', 25)
+    k = request.args.get('k', 5)
+    print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
+              threshold_avg, num_outliers, k)
+    """
+    get/generate csv using filename
+    """
+    dataPath =  os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
+    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
+    """
+    post processing
+    determine the directory where output file shall be saved
+    """
+    output_path = post_util.get_output_data_path()
+    """
+    set function parameters
+    """
+    cekwargs = {'min_population_size':30,
+                    'full_output': full_output,
+                    'output_path': output_path}
+    """
+    send to the job queue
+    """
+    if inputCSVFileName:
+        job = q_dm.enqueue_call(func= outlier_dm.detect_outliers_subpopulation_lattice,
+                                # CE_outlier.detect_outliers_subpopulation_lattice,
+                                    args=[inputCSVFileName], kwargs=cekwargs, result_ttl=5000)
+        print('outlier detection with job id:', job.get_id())
+    else:
+        print('unvalid csv file')
+    return jsonify(jobid=job.get_id())
+
+
+
+@app.route("/results/<job_key>", methods=['GET'])
+def get_results(job_key):
+    """
+    route to get data-mining result
+
+    Parameters
+    ----------
+    job_key: a unique key of a data-mining job
+
+    Returns: (1) {"status":"Wait!"}, or (2) a json structure of data-mining result
+    -------
+
+    """
+    job = Job.fetch(job_key, connection=conn_dm)
+    if job.is_finished:
+        #
+        # job.result shall be stored in User query database
+        #
+        return jsonify(loads(job.result))
+    else:
+        return jsonify({"status":"Wait!"})
+
+
+#
+# end of DM routes
+#
+
+##
+## decorator function which checks whether the data-mining task alreadys cached in Datablase
+##
+def check_data_mining_request(func, useCache=True):
+    def wrapper(func, useCache=useCache):
+        if not useCache:
+            return func()
+        else:
+            result = None
+            #result = try_get_result_from_db()
+            if result == None:
+                return func()
+            else:
+                return result
 
 
 @app.route('/output/<path:filename>', methods=['GET', 'POST'])
@@ -128,18 +238,6 @@ def get_meta_data_of_algorithm(algo_id):
         return jsonify(info)
 
 
-@app.route("/results/<job_key>", methods=['GET'])
-def get_results(job_key):
-    job = Job.fetch(job_key, connection=conn_dm)
-    if job.is_finished:
-        #
-        # job.result shall be stored in User query database
-        #
-        return job.result
-    else:
-        return jsonify({"status":"Wait!"})
-
-
 @app.route('/observe_dim', methods=['GET'])
 def get_dimensions_of_observation():
     global currentRDFFile
@@ -182,71 +280,7 @@ def get_code_list_of_dimension():
         return jsonify(result='')
 
 
-@app.route('/outlier_detection/LOF', methods=['GET'])
-#@cache.cached(timeout=50, key_prefix='all_comments')
-def do_outlier_detection_lof():
-    """
-    first get the tab information
-    if tab == CE:
-        get parameter
-        create job
-        return job_id
-    elif tab == TD:
-        get parameter
-        create job
-        return job_id
-    elif tb == UEP:
-        get parameter
-        create job
-        return job_id
-    Returns {jobid = job.get_id()}
-    -------
 
-    """
-    print('in outlier detection LOF')
-    tab = request.args.get('tab')
-    filename = request.args.get('filename')
-    output = request.args.get('output', 'Result')
-    if request.args.get('full_output', 'partial') == 'full_output':
-        full_output = True
-    else:
-       full_output = False
-
-    delimiter = request.args.get('delimiter', ',')
-    quotechar = request.args.get('quotechar', '|')
-    limit = request.args.get('limit', 25000)
-    min_population_size = request.args.get('min_population_size', 30)
-    threshold = request.args.get('threshold', 3)
-    threshold_avg = request.args.get('threshold_avg', 3)
-    num_outliers = request.args.get('num_outliers', 25)
-    k = request.args.get('k', 5)
-    print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
-              threshold_avg, num_outliers, k)
-    """
-    get/generate csv using filename
-    """
-    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, debug=False)
-    """
-    post processing
-    determine the directory where output file shall be saved
-    """
-    output_path = post_util.get_output_data_path()
-    """
-    set function parameters
-    """
-    cekwargs = {'min_population_size':30,
-                    'full_output': full_output,
-                    'output_path': output_path}
-    """
-    send to the job queue
-    """
-    if inputCSVFileName:
-        job = q_dm.enqueue_call(func=CE_outlier.detect_outliers_subpopulation_lattice,
-                                    args=[inputCSVFileName], kwargs=cekwargs, result_ttl=5000)
-        print('outlier detection with job id:', job.get_id())
-    else:
-        print('unvalid csv file')
-    return jsonify(jobid=job.get_id())
 
 
 @app.route('/outlier_detection/SVM', methods=['GET'])
@@ -305,27 +339,6 @@ def do_statistics():
         return jsonify(jobid = 0)
 
 
-@app.route('/time_series', methods=['GET'])
-def do_time_series():
-    tsdata = request.args.get('tsdata')
-    prediction_steps = request.args.get('prediction_steps')
-    OKFGR_TS = os.environ['OKFGR_TS']
-    tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
-    import okfgr_dm
-    job = q_dm.enqueue_call(func=okfgr_dm.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
-    print('statistics in job queue with id:', job.get_id())
-    return jsonify(jobid=job.get_id())
-
-
-@app.route('/rule_mining', methods=['GET'])
-def do_rule_mining():
-    csvFile = request.args.get('rmdata')
-    import uep_dm
-    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
-    print('rule_mining in job queue with id:', job.get_id())
-    return jsonify(jobid=job.get_id())
-
-
 @app.route('/clustering', methods=['GET']) 
 @cache.cached(timeout=300, key_prefix='all_comments')
 def do_clustering(): 
@@ -345,7 +358,8 @@ def do_clustering():
     else:
         #ret_data = {}
         return jsonify(jobid = 0)
-    
+
+
  
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
