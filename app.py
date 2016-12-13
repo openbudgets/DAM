@@ -1,5 +1,5 @@
 import os 
-from flask import Flask, jsonify, render_template, request, send_from_directory
+from flask import Flask, jsonify, request, url_for, send_from_directory
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
 from rq import Queue
@@ -19,6 +19,8 @@ import outlier_dm
 import rdflib
 from json import dumps, loads, load
 
+import collections
+
 app = Flask(__name__)
 
 cache = Cache(config={'CACHE_TYPE':'simple'})
@@ -33,23 +35,48 @@ from models import GraphNames
 q_dm = Queue(connection=conn_dm)
 #q_uep = Queue(connection=conn_uep)
 
-currentRDFFile = ''
 
+def has_no_empty_params(rule):
+    defaults = rule.defaults if rule.defaults is not None else ()
+    arguments = rule.arguments if rule.arguments is not None else ()
+    return len(defaults) >= len(arguments)
+
+
+@app.route("/site-map")
+def site_map():
+    links = []
+    for rule in app.url_map.iter_rules():
+        # Filter out rules we can't navigate to in a browser
+        # and rules that require parameters
+        if "GET" in rule.methods and has_no_empty_params(rule):
+            url = url_for(rule.endpoint, **(rule.defaults or {}))
+            links.append((url, rule.endpoint))
+    return jsonify(links)
+
+
+@app.route('/')
+@app.route('/what-is-this')
+def index():
+    route = collections.OrderedDict()
+    route["what-is-this"]="DAM backend for Indigo"
+    route["graph_name"]= "list all graph names"
+    route["rule_mining"]= "rule mining request"
+    return jsonify(route)
 
 
 #
 # begin of DM routes
 #
 
-@app.route('/graphname', methods=['GET','POST'])
-@app.route('/graphname/<useCache>', methods=['GET','POST'])
+@app.route('/graph_name', methods=['GET'])
+@app.route('/graph_name/<useCache>', methods=['GET'])
 def graph_name(useCache='True'):
     nlst = ppdm.get_all_names_of_named_graph(db,  GraphNames, use_cache=useCache)
     return jsonify({'names': nlst})
 
 
-@app.route('/get_virtuoso_datasets', methods=['GET'])
-def get_dataset_name_in_triplestore():
+@app.route('/get_fdp_datasets', methods=['GET'])
+def get_fdp_dataset_name():
     nlst = ppdm.list_dataset_name()
     return jsonify({'names': nlst})
 
@@ -70,23 +97,39 @@ def dataset_name(useCache='True'):
 
 @app.route('/time_series', methods=['GET'])
 def do_time_series():
-    tsdata = request.args.get('tsdata')
-    prediction_steps = request.args.get('prediction_steps')
+    tsdata = request.args.get('tsdata', 'not given')
+    prediction_steps = request.args.get('prediction_steps', -1)
     OKFGR_TS = os.environ['OKFGR_TS']
     tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
     import okfgr_dm
     job = q_dm.enqueue_call(func=okfgr_dm.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
-    print('statistics in job queue with id:', job.get_id())
-    return jsonify(jobid=job.get_id())
+    res = {
+        "jobid": job.get_id(),
+        "param": {"tsdata": "<name of the file for time series>",
+                  "tsdata_value": tsdata,
+                  "tsdata_sample": 'Athens_draft_ts',
+                  "prediction_steps": "<number of steps for prediction>",
+                  "prediction_value": prediction_steps,
+                  "prediction_sample": 4,
+                  }
+    }
+    return jsonify(res)
 
 
-@app.route('/rule_mining', methods=['GET'])
+@app.route('/rule_mining', methods=['GET', 'POST'])
 def do_rule_mining():
-    csvFile = request.args.get('rmdata')
+    csvFile = request.args.get('rmdata', "not given")
     import uep_dm
     job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
     print('rule_mining in job queue with id:', job.get_id())
-    return jsonify(jobid=job.get_id())
+    res = {
+        "jobid": job.get_id(),
+        "param": {"rmdata": "<location of the csv file, which shall be sent to the UEP server>",
+                  "value_example": "./Data/esif.csv",
+                  "value": csvFile,
+                  }
+    }
+    return jsonify(res)
 
 
 @app.route('/outlier_detection/LOF', methods=['GET'])
@@ -195,10 +238,6 @@ def download_file(filename):
     return send_from_directory(directory='output', filename=filename)
 
 
-@app.route('/', methods=['GET','POST'])
-def index():
-    return render_template('dam_nov24.html')
-
 
 @app.route('/services/<algo_id>/meta', methods=['GET'])
 def algo_meta_data(algo_id):
@@ -211,12 +250,6 @@ def get_all_services():
         meta_dic = load(data_file)
         print(meta_dic)
         return jsonify(meta_dic['list'])
-
-
-@app.route('/echo', methods=['GET'])
-def echo():
-    ret_data = {"value": request.args.get('echoValue')}
-    return jsonify(ret_data)
 
 
 def get_meta_data_of_algorithm(algo_id):
@@ -236,129 +269,6 @@ def get_meta_data_of_algorithm(algo_id):
     else:
         info = meta_dic.get(algo_id, '')
         return jsonify(info)
-
-
-@app.route('/observe_dim', methods=['GET'])
-def get_dimensions_of_observation():
-    global currentRDFFile
-    cityName = request.args.get('city')
-    print(cityName)
-    rdfDataset = ds.datasets.get(cityName, '')[0]
-    currentRDFFile = rdfDataset
-
-    if cityName != 'None' and 'fuseki' not in rdfDataset:
-        print(rdfDataset)
-        myGraph = rdflib.Graph()
-        myGraph.parse(rdfDataset)
-        ret_data = mutil.get_dimensions_of_observations(myGraph)
-
-        return jsonify(result=ret_data)
-
-    elif 'fuseki' in rdfDataset:
-
-        ret_data = ppdm.get_dimensions_from_triple_store(rdfDataset)
-
-        return jsonify(result=ret_data)
-    else:
-        return jsonify(result='')
-
-
-@app.route('/code_list', methods=['GET'])
-def get_code_list_of_dimension():
-    global currentRDFFile
-    dimName = request.args.get('dim')
-    print(dimName, currentRDFFile)
-    
-    if dimName != '' and currentRDFFile != '' and 'fuseki' not in currentRDFFile:
-
-        myGraph = rdflib.Graph()
-        myGraph.parse(currentRDFFile)
-        ret_data = mutil.get_code_list_of_dim(myGraph, dimName)
-
-        return jsonify(result=ret_data)
-    else:
-        return jsonify(result='')
-
-
-
-
-
-@app.route('/outlier_detection/SVM', methods=['GET'])
-# @cache.cached(timeout=50, key_prefix='all_comments')
-def do_outlier_detection_svm():
-    dataset_name = request.args.get('dataset_name')
-    print('dataset name', dataset_name)
-
-    if dataset_name != 'None':
-            ttl_dataset = ds.datasets.get(dataset_name, '')[0]
-            dim_list = request.args.get('dim').split(',')
-            print(dim_list)
-            per = float(request.args.get('per'))/100
-            # ret_data = outlier.detect_outliers(dtable=ttl_dataset, dim=dim_list, outliers_fraction = per)
-            mykwargs = {'dtable':ttl_dataset, 'dim':dim_list, 'outliers_fraction':per}
-            job = q_dm.enqueue_call(func=outlier.detect_outliers, kwargs=mykwargs, result_ttl=5000)
-            print('outlier detection with job id:', job.get_id())
-            return jsonify(jobid = job.get_id())
-
-
-
-@app.route('/trend_analysis', methods=['GET'])
-# @cache.cached(timeout=50, key_prefix='all_comments')
-def do_trend_analysis():
-    print('in trend analysis')
-    dataset_name = request.args.get('dataset_name')
-    print('dataset name', dataset_name)
-    if dataset_name != 'None':
-        #dim_list = request.args.get('dim').split(',')
-        #print(dim_list)
-        #ret_data = trend.analyse_trend(dtable=dataset_name)
-        mykwargs = {'dtable': dataset_name}
-        job = q_dm.enqueue_call(func=trend.analyse_trend, kwargs=mykwargs, result_ttl=5000)
-        print('performing trend analysis with job id:', job.get_id())
-        return jsonify(jobid=job.get_id())
-    else:
-        return jsonify(jobid = 0)
-
-
-@app.route('/statistics', methods=['GET'])
-def do_statistics():
-    dataset_name = request.args.get('dataset_name')
-    print('dataset name',dataset_name)
-    if dataset_name != 'None':
-        ttlDataset = ds.datasets.get(dataset_name, '')[0]
-        print(ttlDataset)
-        mykwargs = {'dtable': ttlDataset}
-        # ret_data = statis.perform_statistics(dtable=ttlDataset)
-        job = q_dm.enqueue_call(func=statis.perform_statistics, kwargs=mykwargs, result_ttl=5000)
-        print('statistics in job queue with id:', job.get_id())
-        return jsonify(jobid=job.get_id())
-    else:
-        ret_data = {}
-        # print(ret_data)
-        # return ret_data #jsonify(result=ret_data)
-        return jsonify(jobid = 0)
-
-
-@app.route('/clustering', methods=['GET']) 
-@cache.cached(timeout=300, key_prefix='all_comments')
-def do_clustering(): 
-    print("in /clustering") 
-    dataset_name = request.args.get('dataset_name')
-    print('dataset name', dataset_name)
-    if dataset_name != 'None':
-        ttlDataset = ds.datasets.get(dataset_name, '')[0]
-        dimList = request.args.get('dim').split(',')
-        print(ttlDataset,dimList)
-        n_clusters = int(request.args.get('n_clusters'))
-        #ret_data = cluster.clustering(dtable=ttlDataset, dim=dimList, n_clusters = n_clusters)
-        mykwars = {'dtable': ttlDataset, 'dim': dimList, 'n_clusters':n_clusters}
-        job = q_dm.enqueue_call(func=cluster.clustering, kwargs=mykwars, result_ttl=5000)
-        print('performing clustering with job id:', job.get_id())
-        return jsonify(jobid=job.get_id())
-    else:
-        #ret_data = {}
-        return jsonify(jobid = 0)
-
 
  
 if __name__ == '__main__':
