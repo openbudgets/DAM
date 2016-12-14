@@ -1,27 +1,27 @@
 Item,Features,,,,Target,Score
-,"""economicClass""","""adminClass""","""year""","""budgetPhase""",,
-2111,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7312""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/approved""",1898192.46,6429108.78025
-891,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7322""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",3398368.58,5917706.86859
-1161,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6213""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/15""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",1200000.0,4800005.80714
-9012,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7321""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved""",1299968.45,4333067.12461
-2657,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7321""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/approved""",1273523.19,4254259.8044
-4050,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",1346292.88,2308040.59172
-9524,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6211""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/executed""",434198.69,2305067.99945
-2962,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6211""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/approved""",434198.69,2264581.58975
-6770,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/executed""",640490.93,2213478.79639
-118,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/approved""",640490.93,2213478.78549
-3308,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7322""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved""",1113531.68,2114577.93733
-226,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7322""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/approved""",1101590.58,2094158.43047
-9542,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7321""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved""",1119885.44,1982749.66947
-3198,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7323""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",1034425.16,1678187.83444
-8474,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6211""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",450000.0,1490275.77179
-1037,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",836839.93,1473351.67398
-4127,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7321""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/draft""",376487.1,1463643.01324
-3710,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6211""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/25""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/draft""",640000.0,1036871.39703
-1627,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7333""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/revised""",637711.89,1031674.16788
-9002,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7323""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/draft""",547209.94,932747.29307
-1203,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7333""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved""",445472.95,745107.064649
-224,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6021""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/15""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved""",432470.61,719694.98332
-1642,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/codelist/budget-phase/executed""",183119.78,695856.368731
-8952,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/7412""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/30""","""http://reference.data.gov.uk/id/year/2013""","""http://data.openbudgets.eu/resource/dataset/greek-municipalities/codelist/budget-phase/reserved""",183119.78,695856.272797
-3018,"""http://data.openbudgets.eu/resource/codelist/kae-ota-exodwn-2014/6471""","""http://data.openbudgets.eu/resource/codelist/kae-ota-administration-2014/15""","""http://reference.data.gov.uk/id/year/2012""","""http://data.openbudgets.eu/resource/codelist/budget-phase/approved""",176759.94,659991.884725
+, year , adminClass , economicClass , budgetPhase ,,
+8492, 2013 , 30 , 7321 , revised ,3827221.13,11464015.2817
+8469, 2013 , 30 , 7322 , revised ,3398368.58,10072260.5362
+8512, 2015 , 30 , 7322 , revised ,1389606.57,4588146.42976
+11634, 2015 , 30 , 7322 , draft ,1389606.57,4498202.60854
+8488, 2015 , 30 , 7323 , revised ,1485653.82,4450217.74526
+7824, 2013 , 30 , 7312 , revised ,2854596.39,4416652.82576
+20865, 2013 , 30 , 7321 , reserved ,1299968.45,4062584.1684
+19700, 2013 , 30 , 7321 , executed ,1273523.19,4011912.82492
+1769, 2013 , 30 , 7321 , approved ,1273523.19,4011912.82291
+20878, 2015 , 30 , 7323 , reserved ,1259456.01,3835300.35512
+19669, 2013 , 30 , 7322 , executed ,1101590.58,3597370.3267
+1809, 2013 , 30 , 7322 , approved ,1101590.58,3597370.32224
+20834, 2013 , 30 , 7322 , reserved ,1113531.68,3515776.98178
+8545, 2013 , 30 , 7323 , revised ,1034425.16,3134055.16319
+11521, 2015 , 30 , 7323 , draft ,1001682.22,3109829.55223
+2541, 2013 , 30 , 7312 , approved ,1898192.46,3103466.55762
+18848, 2013 , 30 , 7312 , executed ,1898192.46,3103466.55761
+21848, 2013 , 30 , 7312 , reserved ,1898192.46,3103466.37259
+21026, 2015 , 30 , 7322 , reserved ,909148.23,3069891.82639
+11558, 2014 , 30 , 7323 , draft ,983207.79,2913589.92592
+8538, 2014 , 30 , 7322 , revised ,849148.23,2744510.06235
+8459, 2014 , 30 , 7323 , revised ,853668.16,2632840.75498
+11132, 2013 , 30 , 7412 , revised ,836839.93,2496478.52974
+8487, 2014 , 30 , 7324 , revised ,699367.69,2116540.51029
+14896, 2013 , 30 , 7412 , draft ,671812.85,2037403.46035
