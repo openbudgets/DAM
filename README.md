@@ -1,37 +1,7 @@
-# DAM
-OBEU Data Analysis and Mining repository
+# How to run DAM for Indigo
 
-# Aim
 
-This repository hosts implementation of the OBEU Data Analysis and Mining (The ten tasks defined in D2.3).
-Currently, it has three branches: master, staging, and production.
-OBEU Partners are encouraged to create their own branches for doing testing (Python, Java, etc.), better just use their personal name as the branch name. 
-
-# Work flow
-<p align="center">
-  <img src="doc/pic/DAM_Arch.png" width="600"/>
-</p>
-
-# Three main sub-tasks
-
-* A OBEU lib for data analysis and mining
-
-* Web page development for each task
-
-* Communication with other modules/system (Visualization, Triple store, Openspending)
-
-# Code and Architecture
-
-To consistent with OpenSpending, we use Flask + Python at the backend, javascript(currently bootstrap) at the frontend.
-
-# How to run
-
-* install R
-** using brew
-    brew tap homebrew/science
-    brew install r
-
-* Clone the GitHub repository: `git clone https://github.com/openbudgets/DAM` and `$ git checkout staging`
+* Clone the GitHub repository: `git clone https://github.com/openbudgets/DAM` and `$ git checkout staging_indigo`
 
 * Install and setup postgresql
 ```
