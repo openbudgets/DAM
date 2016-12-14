@@ -49,48 +49,17 @@ export APP_SETTINGS=config.DevelopmentConfig # to tell the server to startup in 
 export DATABASE_URL=localhost/openbudges # or whatever you used above as postgres DB
 ```
 
-* Install all application requirements by executing
-`pip install -r requirements.txt`
-
-
-* Install data-preprocessing package for data-mining
+* install main backend
 ```
-DAM $ git clone https://github.com/openbudgets/preprocessing_dm.git
-DAM $ cd preprocessing_dm
-preprocessing_dm $ pip3 install .
+(env) $ make install
 ```
 
-* the source of data-preprocessing package can be deleted
+
+* remove installed packaged
 ```
-preprocessing_dm $ cd ..
-DAM $ sudo rm -r preprocessing_dm
+(env) $ make clean
 ```
 
-* Install wrapper to access UEP data-mining server
-```
-DAM $ git clone https://github.com/openbudgets/uep_dm.git
-DAM $ cd okfgr_dm
-uep_dm $ pip3 install .
-```
-
-* the source of UEP data-mining server can be deleted
-```
-uep_dm $ cd ..
-DAM $ sudo rm -r uep_dm
-```
-
-* Install wrapper to access OKFGR data-mining server
-```
-DAM $ git clone https://github.com/openbudgets/okfgr_dm.git
-DAM $ cd okfgr_dm
-okfgr_dm $ pip3 install .
-```
-
-* the source of OKFGR data-mining server can be deleted
-```
-okfgr_dm $ cd ..
-DAM $ sudo rm -r okfgr_dm
-```
 
 * Start your application by executing
 `python manage.py runserver`

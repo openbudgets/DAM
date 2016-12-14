@@ -6,14 +6,11 @@ from rq import Queue
 from rq.job import Job
 from worker import conn_dm
 import tasks.postprocessing.util as post_util
-
-
 import preprocessing_dm as ppdm
 import outlier_dm
 
 from json import loads, load
 
-import collections
 
 app = Flask(__name__)
 
@@ -100,8 +97,6 @@ def do_time_series():
     -------
 
     """
-    print(dir(request.args))
-    print(list(request.args.keys()))
     tsdata = request.args.get('tsdata', 'not given')
     prediction_steps = request.args.get('prediction_steps', '-1')
     OKFGR_TS = os.environ['OKFGR_TS']
@@ -136,9 +131,9 @@ def do_statistics():
     dimensions = request.args.get('dimensions', '-1')
     OKFGR_SAT = os.environ['OKFGR_SAT']
     amount= request.args.get('amount', 'not given')
-    coef_outl=request.args.get('coef.outl', 1.5)
-    box_outliers=request.args.get('box.outliers', 'not given')
-    box_wdth=request.args.get('box.wdth', 'not given')
+    coef_outl=float(request.args.get('coef.outl', 1.5))
+    box_outliers =  request.args.get('box.outliers', 'not_given')
+    box_wdth=float(request.args.get('box.wdth', 0.2))
     cor_method=request.args.get('cor.method', 'not given')
     satkwargs = {'json_data': json_data, 'dimensions': dimensions, 'amount':amount, 'coef.outl':coef_outl,
                  'box.outliers':box_outliers, 'box.wdth':box_wdth, 'cor.method':cor_method}
@@ -232,7 +227,7 @@ def do_outlier_detection_lof():
     get/generate csv using filename
     """
     dataPath =  os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
-    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
+    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
     """
     post processing
     determine the directory where output file shall be saved
@@ -260,7 +255,8 @@ def do_outlier_detection_lof():
                   "value_example": "+budget-kilkis-expenditure-2012+budget-kilkis-expenditure-2013",
                   "value": filename,
                   "sample curl":"""curl --request  POST 'http://localhost:5000/outlier_detection?filename=+budget-kilkis-expenditure-2012+budget-kilkis-expenditure-2013'""",
-                  "result link": "http://localhost:5000/results/"+job.get_id()
+                  "result link": "http://localhost:5000/results/"+job.get_id(),
+                  "output_path": output_path
                   }
     }
     return jsonify(res)
