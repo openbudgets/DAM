@@ -1,5 +1,4 @@
 alembic==0.8.6
-beautifulsoup4==4.4.1
 click==6.6
 cycler==0.10.0
 Cython==0.24
@@ -10,11 +9,13 @@ Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 isodate==0.5.4
 itsdangerous==0.24
+Jinja2==2.8
 keepalive==0.5
 Mako==1.0.4
 MarkupSafe==0.23
 mock==2.0.0
-mpld3==0.2
+numpy==1.11.2
+pandas==0.19.1
 patsy==0.4.1
 pbr==1.10.0
 psycopg2==2.6.1
@@ -26,10 +27,11 @@ rdflib==4.2.1
 redis==2.10.5
 requests==2.9.1
 rq==0.5.6
-scipy==0.17.1
-seaborn==0.7.1
+scikit-learn==0.18.1
+scipy==0.18.1
 six==1.10.0
-SPARQLWrapper==1.7.6
+sklearn==0.0
+SPARQLWrapper==1.8.0
 SQLAlchemy==1.0.13
 statsmodels==0.6.1
 Werkzeug==0.11.10
