@@ -107,7 +107,7 @@ def do_time_series():
         "jobid": job.get_id(),
         "param": {"curl" : 'curl --request POST  "http://localhost:5000/time_series?tsdata=Athens_draft_ts&prediction_steps=4"',
                   "remote-endpoint": OKFGR_TS,
-                "tsdata": "<name of the file for time series>",
+                   "tsdata": "<name of the file for time series>",
                   "tsdata_value": tsdata,
                   "tsdata_sample": 'Athens_draft_ts',
                   "prediction_steps": "<number of steps for prediction>",
