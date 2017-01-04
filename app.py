@@ -64,6 +64,19 @@ def index():
 @app.route('/cubes/<dataset>/<algorithm>', methods=['GET'])
 @app.route('/cubes/<dataset>/algo', methods=['GET'])
 def get_algorithm_data(dataset='', algorithm=''):
+    """
+    /cubes/algo/<algorithm>: return description of algorithm
+    /cubes/<dataset>/<algorithm>: return whether algorithm can be applied for dataset
+    /cubes/<dataset>/algo: return all algorithms which can be applied for dataset
+    Parameters
+    ----------
+    dataset : dataset name
+    algorithm : algorithm name
+
+    Returns
+    -------
+
+    """
     if dataset == '' and algorithm != '':
         des = ppdm.get_algo4data(algo=algorithm)
         return jsonify(des)

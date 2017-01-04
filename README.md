@@ -34,6 +34,12 @@ $ redis-server
 $ python3 worker.py
 ```
 
+# How to update functional module
+* to update pre-processing module
+```
+$ make update_pdm
+```
+
 
 # Trouble shooting
 
