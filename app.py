@@ -6,8 +6,7 @@ from rq import Queue
 from rq.job import Job
 from worker import conn_dm
 import tasks.postprocessing.util as post_util
-import preprocessing_dm as ppdm
-import outlier_dm
+import preprocessing_dm as ppdm 
 
 from json import loads, load
 
@@ -50,8 +49,7 @@ def index():
         "what-is-this": "DAM backend for Indigo",
         "graph_name": "list all graph names",
         "rule_mining": "rule mining request",
-        "outlier_detection": "outlier detection based on LOF",
-        "time_series": "Time series analysis",
+         "time_series": "Time series analysis",
         "statistics": "descriptive statistics",
         'site-map': "htt://localhost:5000/site-map",
     }
@@ -193,75 +191,7 @@ def do_rule_mining():
                   }
     }
     return jsonify(res)
-
-
-@app.route('/outlier_detection', methods=['GET', 'POST'])
-def do_outlier_detection_lof():
-    """
-    outlier detectin based on LOF (local outlier factor).
-    Users choose one or more dataset names, a CSV file as input element will be created, and saved in Data/ directory.
-    Output is also a CSV file, and saved in static/output/ directory
-
-    Returns: {jobid = job.get_id()}
-    """
-    print('in outlier detection LOF')
-    tab = request.args.get('tab')
-    filename = request.args.get('filename')
-    output = request.args.get('output', 'Result')
-    if request.args.get('full_output', 'partial') == 'full_output':
-        full_output = True
-    else:
-       full_output = False
-
-    delimiter = request.args.get('delimiter', ',')
-    quotechar = request.args.get('quotechar', '|')
-    limit = request.args.get('limit', 25000)
-    min_population_size = request.args.get('min_population_size', 30)
-    threshold = request.args.get('threshold', 3)
-    threshold_avg = request.args.get('threshold_avg', 3)
-    num_outliers = request.args.get('num_outliers', 25)
-    k = request.args.get('k', 5)
-    print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
-              threshold_avg, num_outliers, k)
-    """
-    get/generate csv using filename
-    """
-    dataPath =  os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
-    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
-    """
-    post processing
-    determine the directory where output file shall be saved
-    """
-    output_path = post_util.get_output_data_path()
-    """
-    set function parameters
-    """
-    cekwargs = {'min_population_size':30,
-                    'full_output': full_output,
-                    'output_path': output_path}
-    """
-    send to the job queue
-    """
-    if inputCSVFileName:
-        job = q_dm.enqueue_call(func= outlier_dm.detect_outliers_subpopulation_lattice,
-                                # CE_outlier.detect_outliers_subpopulation_lattice,
-                                    args=[inputCSVFileName], kwargs=cekwargs, result_ttl=5000)
-        print('outlier detection with job id:', job.get_id())
-    else:
-        print('unvalid csv file')
-    res = {
-            "jobid": job.get_id(),
-            "param": {"filename": "csv-filenames, concatnated by '+'",
-                  "value_example": "+budget-kilkis-expenditure-2012+budget-kilkis-expenditure-2013",
-                  "value": filename,
-                  "sample curl":"""curl --request  POST 'http://localhost:5000/outlier_detection?filename=+budget-kilkis-expenditure-2012+budget-kilkis-expenditure-2013'""",
-                  "result link": "http://localhost:5000/results/"+job.get_id(),
-                  "output_path": output_path
-                  }
-    }
-    return jsonify(res)
-
-
+ 
 
 @app.route("/results/<job_key>", methods=['GET'])
 def get_results(job_key):
