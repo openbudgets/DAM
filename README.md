@@ -35,4 +35,6 @@ $ python3 worker.py
 ```
 
 
+# Trouble shooting
 
+* if the system is installed in VM, it can happen that the system is not accessible outside of the VM. Try the instruction at: https://2buntu.com/articles/1513/accessing-your-virtualbox-guest-from-your-host-os/ or https://coderwall.com/p/yx23qw/access-your-virtualbox-guest-localhost-from-your-host-os
