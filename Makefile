@@ -20,6 +20,11 @@ dam:
 	pip3 install uep_dm/.
 	git clone https://github.com/openbudgets/okfgr_dm.git
 	pip3 install okfgr_dm/.
+update_pdm:
+	pip3 uninstall preprocessing_dm	
+	sudo rm -r preprocessing_dm
+	git clone https://github.com/openbudgets/preprocessing_dm.git
+	pip3 install preprocessing_dm/.	
 	 
 clean:
 	pip3 uninstall preprocessing_dm
