@@ -6,7 +6,7 @@ from rq import Queue
 from rq.job import Job
 from worker import conn_dm
 import tasks.postprocessing.util as post_util
-import preprocessing_dm as ppdm 
+import preprocessing_dm as ppdm
 
 from json import loads, load
 
@@ -59,6 +59,27 @@ def index():
 #
 # begin of DM routes
 #
+
+@app.route('/cubes/algo/<algorithm>', methods=['GET'])
+@app.route('/cubes/<dataset>/<algorithm>', methods=['GET'])
+@app.route('/cubes/<dataset>/algo', methods=['GET'])
+def get_algorithm_data(dataset='', algorithm=''):
+    if dataset == '' and algorithm != '':
+        des = ppdm.get_algo4data(algo=algorithm)
+        return jsonify(des)
+    elif dataset != '' and algorithm != '':
+        dic = ppdm.get_algo4data(algo=algorithm, data=dataset)
+        des = ppdm.get_algo4data(algo=algorithm)
+        print(dic)
+        return jsonify({'decision': dic.get('decision', 'unknown'),
+                    'description': des['description']})
+    elif dataset != '' and algorithm == '':
+        algos = ppdm.get_all_algorithms_of(dataset)
+        return jsonify(algos)
+
+
+
+
 
 @app.route('/graph_name', methods=['GET'])
 @app.route('/graph_name/<useCache>', methods=['GET'])
