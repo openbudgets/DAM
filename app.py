@@ -79,6 +79,8 @@ def get_algorithm_data(dataset='', algorithm=''):
     """
     if dataset == '' and algorithm != '':
         des = ppdm.get_algo4data(algo=algorithm)
+        desIO = ppdm.get_algoIO(algorithm)
+        des.update(desIO)
         return jsonify(des)
     elif dataset != '' and algorithm != '':
         dic = ppdm.get_algo4data(algo=algorithm, data=dataset)
