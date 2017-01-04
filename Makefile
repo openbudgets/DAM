@@ -12,6 +12,7 @@ venv:
 	sudo pip3 install autoenv
 	echo "source `which activate.sh`">> ~/.bashrc 
 dam:
+	source .env	
 	pip3 install -r requirements.txt
 	git clone https://github.com/openbudgets/preprocessing_dm.git
 	pip3 install preprocessing_dm/.
