@@ -11,7 +11,7 @@ $ git clone https://github.com/openbudgets/DAM
 $ git checkout staging_indigo
 ```
 
-* Step 2: go to the DAM directory
+* Step 2: go to the DAM directory, and install necessary libraries
 ```
 $ cd DAM
 $ make pre
