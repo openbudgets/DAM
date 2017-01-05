@@ -1,17 +1,20 @@
 # How to install DAM for Indigo on Ubuntu
 
-
-* Step 0: Install some tools, database, e.g. git, redis-server
+* Step 0: Install git (if not yet)
 ```
-$ make step0
+$ sudo apt-get install git
 ```
 
-* Step 1: Clone the GitHub repository: `$ git clone https://github.com/openbudgets/DAM` and `$ git checkout staging_indigo`
+* Step 1: Clone the GitHub repository, and check out staging_indigo branch:
+```
+$ git clone https://github.com/openbudgets/DAM
+$ git checkout staging_indigo
+```
 
 * Step 2: go to the DAM directory
 ```
 $ cd DAM
-$ make venv
+$ make pre
 $ source env/bin/activate
 
 ```
