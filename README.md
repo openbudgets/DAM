@@ -1,8 +1,9 @@
 # How to install DAM for Indigo on Ubuntu
 
-* Step 0: Install git (if not yet)
+* Step 0: Install git and make (if not yet)
 ```
 $ sudo apt-get install git
+$ sudo apt-get install build-essential
 ```
 
 * Step 1: Clone the GitHub repository, and check out staging_indigo branch:
