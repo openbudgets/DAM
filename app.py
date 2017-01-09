@@ -245,6 +245,7 @@ def get_results(job_key):
     else:
         return jsonify({"status":"Wait!"})
 
+
 @app.route('/outlier_detection/LOF/<sample>', methods=['GET'])
 def do_outlier_detection_lof(sample):
     """
@@ -269,14 +270,14 @@ def do_outlier_detection_lof(sample):
     num_outliers = request.args.get('num_outliers', 25)
     k = request.args.get('k', 5)
     print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
-              threshold_avg, num_outliers, k)
+          threshold_avg, num_outliers, k)
     """
     get/generate csv using filename
     """
     dataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
     if sample == "sample":
         inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
-    else:
+    elif sample == "real":
         inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
     """
     post processing
@@ -298,7 +299,6 @@ def do_outlier_detection_lof(sample):
         print('outlier detection with job id:', job.get_id())
     else:
         print('unvalid csv file')
-
     return jsonify(jobid=job.get_id())
 
 #
