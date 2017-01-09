@@ -43,6 +43,10 @@ $ python3 worker.py
 ```
 $ make update_pdm
 ```
+* to update outlier_dm module
+```
+$ make update_outlier_dm
+```
 
 
 # Trouble shooting
