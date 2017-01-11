@@ -81,10 +81,12 @@ def get_algorithm_data(dataset='', algorithm=''):
         return jsonify(des)
     elif dataset != '' and algorithm != '':
         dic = ppdm.get_algo4data(algo=algorithm, data=dataset)
-        des = ppdm.get_algo4data(algo=algorithm)
+        # des = ppdm.get_algo4data(algo=algorithm)
         print(dic)
-        return jsonify({'decision': dic.get('decision', 'unknown'),
-                    'description': des['description']})
+        # print(des)
+        return jsonify(dic)
+        # {'decision': dic.get('decision', 'unknown'),
+        #            'description': dic['description']})
     elif dataset != '' and algorithm == '':
         algos = ppdm.get_all_algorithms_of(dataset)
         return jsonify(algos)
@@ -155,23 +157,23 @@ def do_statistics():
     -------
 
     """
-    json_data = request.args.get('json_data', 'not given')
-    dimensions = request.args.get('dimensions', '-1')
+    json_data = request.args.get('json_data', 'sample_json_link_openspending')
+    dimensions = request.args.get('dimensions', '"functional_classification_2.Function|functional_classification_2.Code"')
     OKFGR_SAT = os.environ['OKFGR_SAT']
-    amount= request.args.get('amount', 'not given')
+    amount= request.args.get('amount', '"Revised"')
     coef_outl=float(request.args.get('coef.outl', 1.5))
-    box_outliers =  request.args.get('box.outliers', 'not_given')
+    box_outliers =  request.args.get('box.outliers', 'TRUE')
     box_wdth=float(request.args.get('box.wdth', 0.2))
-    cor_method=request.args.get('cor.method', 'not given')
+    cor_method=request.args.get('cor.method', '"spearman"')
     satkwargs = {'json_data': json_data, 'dimensions': dimensions, 'amount':amount, 'coef.outl':coef_outl,
                  'box.outliers':box_outliers, 'box.wdth':box_wdth, 'cor.method':cor_method}
     import okfgr_dm
     job = q_dm.enqueue_call(func=okfgr_dm.dm_okfgr, args=[OKFGR_SAT], kwargs=satkwargs, result_ttl=5000)
     res = {
         "jobid": job.get_id(),
-        "param": {"curl" : """curl --request POST  "http://localhost:5000/statistics?json_data=sample_json_link_openspending&dimensions='functional_classification_2.Function|functional_classification_2.Code'&amount='Revised'&coef.outl=0.8&box.outliers=TRUE&box.wdth=0.2&cor.method='spearman'""""",
-                    "remote-endpoint": OKFGR_SAT,
-                    "json_data": "<name of the file for statistic information>",
+        "remote-endpoint": OKFGR_SAT,
+        "param": {
+                  "json_data": "<name of the file for statistic information>",
                   "json_data": json_data,
                   "json_data_sample": 'sample_json_link_openspending',
                   "dimensions": "<number of steps for prediction>",
@@ -196,9 +198,9 @@ def do_statistics():
                   "cor.method": "Define the correlation method (cor.method), default is 'pearson'",
                   "cor.method_value": cor_method,
                   "cor.method_sample": "'spearman'",
-
-                  "result link": "http://localhost:5000/results/" + job.get_id()
-                  }
+                  },
+        "curl": """curl --request POST  "http://localhost:5000/statistics?json_data=sample_json_link_openspending&dimensions='functional_classification_2.Function|functional_classification_2.Code'&amount='Revised'&coef.outl=0.8&box.outliers=TRUE&box.wdth=0.2&cor.method='spearman'""""",
+        "result_link": "http://localhost:5000/results/" + job.get_id()
     }
     return jsonify(res)
 
@@ -206,7 +208,7 @@ def do_statistics():
 @app.route('/rule_mining', methods=['GET', 'POST'])
 def do_rule_mining():
     """curl -H "Content-Type:application/json; charset=UTF-8"  --requst POST 'http://localhost:5000/rule_mining?rmdata=./Data/esif.csv'"""
-    csvFile = request.args.get('rmdata', "not given")
+    csvFile = request.args.get('rmdata', "./Data/esif.csv")
     import uep_dm
     job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[csvFile], result_ttl=5000)
     print('rule_mining in job queue with id:', job.get_id())
