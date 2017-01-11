@@ -27,7 +27,7 @@ $ make dam
 # How to start DAM for Indigo backend
 * Step 0: 
 ```
-$ python3 manage.py runserver
+$ python3 manage.py runserver --host 0.0.0.0
 ```
 * Step 1: open a new terminal 
 ```
@@ -49,6 +49,3 @@ $ make update_outlier_dm
 ```
 
 
-# Trouble shooting
-
-* if the system is installed in VM, it can happen that the system is not accessible outside of the VM. Try the instruction at: https://2buntu.com/articles/1513/accessing-your-virtualbox-guest-from-your-host-os/ or https://coderwall.com/p/yx23qw/access-your-virtualbox-guest-localhost-from-your-host-os
