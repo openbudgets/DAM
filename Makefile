@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 pre:
 	sudo apt-get install idle3
 	sudo apt-get install -y redis-server
