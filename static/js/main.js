@@ -481,6 +481,23 @@ function make_columns(lst){
 	return col
 }
 
+function isNumber(str) {
+  return !isNaN(parseFloat(str));
+}
+
+function csvToArray (rows) {
+    return rows.map(function (row) {
+    	var lst = row.split(",");
+    	for (var j in lst){
+    	    if (isNumber(lst[j])){
+                lst[j] = parseFloat(lst[j])
+                console.log(lst[j])
+            }
+        }
+    	return lst
+    });
+};
+
 function csv_string_to_matrix(csvStr){
 	var matrix = [],
 		rows = csvStr.split('\n');
@@ -508,14 +525,19 @@ function show_remote_csv(url, vis_location){
             if(rawFile.readyState === 4)
                 if(rawFile.status === 200 || rawFile.status == 0)
                     allText = rawFile.responseText;
-					var dataSet = csv_string_to_matrix(allText), // data is the content of the csv file
-						titleList =  dataSet.shift(),
+                    console.log(allText)
+					var rows = allText.split('\n'),
+                        body = rows.slice(2,rows.length-1),
+                        dataSet = csvToArray(body), // data is the content of the csv file
+                        header = csvToArray(rows.slice(0,2)),
+						titleList =  header.shift(),
 						col = make_columns(titleList);
-
+                    console.log(dataSet)
 					$('#vis_table').DataTable(
 					{
 						data:dataSet,
-						columns : col
+						columns : col,
+                        "order": [[ 6, "desc" ]]
 					}
 				)
         };

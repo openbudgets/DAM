@@ -105,8 +105,7 @@ def do_outlier_detection_lof():
     if request.args.get('full_output', 'partial') == 'full_output':
         full_output = True
     else:
-       full_output = False
-
+        full_output = False
     delimiter = request.args.get('delimiter', ',')
     quotechar = request.args.get('quotechar', '|')
     limit = request.args.get('limit', 25000)
