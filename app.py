@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, request, url_for, send_from_directory
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
+from flask_cors import CORS, cross_origin
 from rq import Queue
 from rq.job import Job
 from worker import conn_dm
@@ -13,6 +14,7 @@ from json import loads, load
 
 
 app = Flask(__name__)
+CORS(app)
 
 cache = Cache(config={'CACHE_TYPE':'simple'})
 cache.init_app(app)
