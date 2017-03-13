@@ -258,7 +258,11 @@ def do_outlier_detection_lof(sample):
     Output is also a CSV file, and saved in static/output/ directory
     Returns: {jobid = job.get_id()}
     """
-    filename = request.args.get('filename', 'noname.csv')
+    ##
+    ## 'filename' shall be the variable storing the link from Indigo!!
+    ##
+    filename = request.args.get('filename', 'http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts')
+
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
         full_output = True
@@ -278,11 +282,13 @@ def do_outlier_detection_lof(sample):
     """
     get/generate csv using filename
     """
-    dataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
-    if sample == "sample":
-        inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
-    elif sample == "real":
-        inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
+    # dataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
+    # if sample == "sample":
+    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
+    # elif sample == "real":
+    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
+    inputCSVFileName = ppdm.construct_input_csv(filename)
+    print(inputCSVFileName)
     """
     post processing
     determine the directory where output file shall be saved
