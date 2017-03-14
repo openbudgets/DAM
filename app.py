@@ -159,7 +159,10 @@ def do_statistics():
     -------
 
     """
-    json_data = request.args.get('json_data', 'sample_json_link_openspending')
+    # json_data = request.args.get('json_data', 'sample_json_link_openspending')
+    json_data = request.args.get('BABBAGE_FACT_URI', '')
+    if json_data == '':
+        json_data = request.args.get('BABBAGE_AGGREGATE_URI', '')
     dimensions = request.args.get('dimensions', '"functional_classification_2.Function|functional_classification_2.Code"')
     OKFGR_SAT = os.environ['OKFGR_SAT']
     amount= request.args.get('amount', '"Revised"')
@@ -260,8 +263,14 @@ def do_outlier_detection_lof(sample):
     """
     ##
     ## 'filename' shall be the variable storing the link from Indigo!!
+    # http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts')
     ##
-    filename = request.args.get('filename', 'http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts')
+
+    filename = request.args.get('BABBAGE_FACT_URI', '')
+    if filename == '':
+        filename = request.args.get('BABBAGE_AGGREGATE_URI', '')
+    if filename == '':
+        filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts"
 
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
