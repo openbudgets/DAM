@@ -4,6 +4,7 @@ cycler==0.10.0
 Cython==0.24
 Flask==0.10.1
 Flask-Cache==0.13.1
+Flask-Cors=3.0.2
 Flask-Migrate==1.8.0
 Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
@@ -35,4 +36,3 @@ SPARQLWrapper==1.8.0
 SQLAlchemy==1.0.13
 statsmodels==0.6.1
 Werkzeug==0.11.10
-flask-cors=3.0.2
