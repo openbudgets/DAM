@@ -1,27 +1,27 @@
-Item,Features,,,,Target,Score
-, year , adminClass , economicClass , budgetPhase ,,
-8492, 2013 , 30 , 7321 , revised ,3827221.13,11464015.2817
-8469, 2013 , 30 , 7322 , revised ,3398368.58,10072260.5362
-8512, 2015 , 30 , 7322 , revised ,1389606.57,4588146.42976
-11634, 2015 , 30 , 7322 , draft ,1389606.57,4498202.60854
-8488, 2015 , 30 , 7323 , revised ,1485653.82,4450217.74526
-7824, 2013 , 30 , 7312 , revised ,2854596.39,4416652.82576
-20865, 2013 , 30 , 7321 , reserved ,1299968.45,4062584.1684
-19700, 2013 , 30 , 7321 , executed ,1273523.19,4011912.82492
-1769, 2013 , 30 , 7321 , approved ,1273523.19,4011912.82291
-20878, 2015 , 30 , 7323 , reserved ,1259456.01,3835300.35512
-19669, 2013 , 30 , 7322 , executed ,1101590.58,3597370.3267
-1809, 2013 , 30 , 7322 , approved ,1101590.58,3597370.32224
-20834, 2013 , 30 , 7322 , reserved ,1113531.68,3515776.98178
-8545, 2013 , 30 , 7323 , revised ,1034425.16,3134055.16319
-11521, 2015 , 30 , 7323 , draft ,1001682.22,3109829.55223
-2541, 2013 , 30 , 7312 , approved ,1898192.46,3103466.55762
-18848, 2013 , 30 , 7312 , executed ,1898192.46,3103466.55761
-21848, 2013 , 30 , 7312 , reserved ,1898192.46,3103466.37259
-21026, 2015 , 30 , 7322 , reserved ,909148.23,3069891.82639
-11558, 2014 , 30 , 7323 , draft ,983207.79,2913589.92592
-8538, 2014 , 30 , 7322 , revised ,849148.23,2744510.06235
-8459, 2014 , 30 , 7323 , revised ,853668.16,2632840.75498
-11132, 2013 , 30 , 7412 , revised ,836839.93,2496478.52974
-8487, 2014 , 30 , 7324 , revised ,699367.69,2116540.51029
-14896, 2013 , 30 , 7412 , draft ,671812.85,2037403.46035
+Item,Features,,,Target,Score
+,economicClassification.prefLabel,fundingClassification.prefLabel,administrativeClassification.prefLabel,,
+64,Lease of premises,INCOME. UNCONDITIONED FUNDING,Income of budget sections,10000.0,20996.8758809
+43,Other grants of public companies and other public bodies,INCOME. UNCONDITIONED FUNDING,Income of budget sections,1000.0,3000.47647321
+44,V.A.T. About internal operations,INCOME. UNCONDITIONED FUNDING,Income of budget sections,730958884.29,19.2833912312
+22,Ringing effects and other,INCOME. UNCONDITIONED FUNDING,Income of budget sections,234317071.0,15.309319555
+56,Agriculture - common agricultural policy,EAGF GUARANTEE,Income of budget sections,454074000.0,7.6934443844
+77,On manufactured tobacco,INCOME. UNCONDITIONED FUNDING,Income of budget sections,83642248.16,6.99687827466
+99,On certain means of transport,INCOME. UNCONDITIONED FUNDING,Income of budget sections,45856000.0,5.13810365366
+88,On retail sale of certain mineral oils,INCOME. UNCONDITIONED FUNDING,Income of budget sections,44320000.0,4.97602181014
+7,Information on social action,CONFERENCE SECTORAL SOCIAL SERVICES - INFORMATION ON SOCIAL ACTION,Income of budget sections,12020.0,3.43155112733
+76,Other land sales,INCOME. UNCONDITIONED FUNDING,Income of budget sections,21000000.0,2.04195240184
+65,Housing rentals,INCOME. UNCONDITIONED FUNDING,Income of budget sections,505000.0,1.72523064761
+54,European Social Fund - operational programme 2007-2013,EUROPEAN SOCIAL FUND 2007-2013 OPERATIONAL PROGRAMME,Income of budget sections,10028483.3,1.67882398477
+26,Books and libraries,SECTORAL CONFERENCE OF EDUCATION - SCHOOL LIBRARIES,Income of budget sections,141128.75,1.45831595114
+42,Idea for the promotion of energy diversification and saving,PROMOTION OF SAVING AND ENERGY DIVERSIFICATION,Income of budget sections,150000.0,1.45831595114
+18,Prevention of acquired immunodeficiency syndrome,PREVENTION PROGRAM AIDS,Income of budget sections,154000.0,1.45831595114
+34,Schools traveling,SCHOOLS TRAVELING,Income of budget sections,83565.6,1.45208241839
+14,Plan of action in favour of persons in situations of dependency,PLAN OF ACTION TO PLEASE PEOPLE. SITUATION DEPENDENCY,Income of budget sections,5250000.0,1.44517649748
+20,Prevention of emerging infectious diseases,PREVENTING EMERGING INFECTIOUS DISEASES,Income of budget sections,79000.0,1.43825612461
+80,AREAS INFLUENCE SOCIO-ECON. NATIONAL PARKS,SECTORAL CONFERENCE ENVIRONMENT - BIODIVERSITY CONSERVATION (WILDLIFE),Income of budget sections,16000.0,1.42785675324
+93,Animal health campaigns,SECTORAL CONFERENCE AGRICULTURE - ANIMAL HEALTH PROGRAM,Income of budget sections,40000.0,1.41857421868
+36,Literary routes,LITERARY ROUTES,Income of budget sections,43983.0,1.40417120045
+61,Of the courts of Aragon,INCOME. UNCONDITIONED FUNDING,Income of budget sections,210000.0,1.32356218229
+47,Transfers of the Diputación Provincial de Teruel,INCOME. UNCONDITIONED FUNDING,Income of budget sections,1304550.67,1.31415794242
+31,Science & education grants,SECTORAL CONFERENCE OF EDUCATION. INTERNET IN THE CLASSROOM PROGRAMME,Income of budget sections,54000.0,1.3076433523
+89,Other promotion grants,INCOME. UNCONDITIONED FUNDING,Income of budget sections,12000000.0,1.30238762456
