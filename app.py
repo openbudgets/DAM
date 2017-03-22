@@ -270,7 +270,8 @@ def do_outlier_detection_lof(sample):
     if filename == '':
         filename = request.args.get('BABBAGE_AGGREGATE_URI', '')
     if filename == '':
-        filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts"
+        # filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts"
+        filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/budget-kilkis-expenditure-2015__74025/aggregate?drilldown=administrativeClassification.prefLabel%7CeconomicClassification.prefLabel%7CbudgetPhase.prefLabel&aggregates=amount.sum"
 
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
