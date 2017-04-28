@@ -217,7 +217,7 @@ def do_rule_mining():
     apiURL = "https://br-dev.lmcloud.vse.cz/easyminercenter/api"
     apiKEY = request.args.get('apiKEY',"RuR4r60A18063xYpLcM5A84vyC637539zy14Txx6YerGvoxWLlc")
     outputFormat = 'json'
-    antecedentColumns = request.args.get('consequentColumns', [])
+    antecedentColumns = request.args.get('antecedentColumns', [])
     consequentColumns = request.args.get('consequentColumns', ["Technical_Assistance_5"])
     minConfidence = request.args.get('minConfidence', 0.7)
     minSupport = request.args.get('minSupport', 0.1)
