@@ -25,15 +25,19 @@ $ make dam
 
 ```
 # How to start DAM for Indigo backend
-* Step 0: 
+* Step 0:
+```
+source .env
+```
+* Step 1:
 ```
 $ python3 manage.py runserver --host 0.0.0.0
 ```
-* Step 1: open a new terminal 
+* Step 2: open a new terminal 
 ```
 $ redis-server
 ```
-* Step 2: open the third terminal
+* Step 3: open the third terminal
 ```
 $ python3 worker.py
 ```
