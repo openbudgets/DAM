@@ -213,27 +213,77 @@ def do_statistics():
 @app.route('/rule_mining', methods=['GET', 'POST'])
 def do_rule_mining():
     """curl -H "Content-Type:application/json; charset=UTF-8"  --requst POST 'http://localhost:5000/rule_mining?rmdata=./Data/esif.csv'"""
-    csvFile = request.args.get('rmdata', "./Data/esif.csv")
+    #csvFile = request.args.get('rmdata', "./Data/esif.csv")
     apiURL = "https://br-dev.lmcloud.vse.cz/easyminercenter/api"
     apiKEY = request.args.get('apiKEY',"RuR4r60A18063xYpLcM5A84vyC637539zy14Txx6YerGvoxWLlc")
     outputFormat = 'json'
     antecedentColumns = request.args.get('antecedentColumns', [])
-    consequentColumns = request.args.get('consequentColumns', ["Technical_Assistance_5"])
+    consequentColumns = request.args.get('consequentColumns', ["amount.sum"])
     minConfidence = request.args.get('minConfidence', 0.7)
     minSupport = request.args.get('minSupport', 0.1)
-    csvSeprator = request.args.get('csvSeprator', ";")
+    csvSeprator = request.args.get('csvSeprator', ",")
     csvEncoding =  request.args.get('csvEncoding',"utf8")
+
+
+    filename = request.args.get('BABBAGE_FACT_URI', '')
+    if filename == '':
+        filename = request.args.get('BABBAGE_AGGREGATE_URI', '')
+    if filename == '':
+        # filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts"
+        # filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/budget-kilkis-expenditure-2015__74025/aggregate?drilldown=administrativeClassification.prefLabel%7CeconomicClassification.prefLabel%7CbudgetPhase.prefLabel&aggregates=amount.sum"
+        filename = "http://wenxion.net/OBEU/aggregate.json"
+
+    output = request.args.get('output', 'Result')
+    if request.args.get('full_output', 'partial') == 'full_output':
+        full_output = True
+    else:
+        full_output = False
+
+    delimiter = request.args.get('delimiter', ',')
+    quotechar = request.args.get('quotechar', '|')
+    limit = request.args.get('limit', 25000)
+    min_population_size = request.args.get('min_population_size', 30)
+    threshold = request.args.get('threshold', 3)
+    threshold_avg = request.args.get('threshold_avg', 3)
+    num_outliers = request.args.get('num_outliers', 25)
+    k = request.args.get('k', 5)
+    print(filename, output, full_output, delimiter, quotechar, limit, min_population_size, threshold,
+          threshold_avg, num_outliers, k)
+    """
+    get/generate csv using filename
+    """
+    # dataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
+    # if sample == "sample":
+    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
+    # elif sample == "real":
+    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
+    inputCSVFileName = ppdm.construct_uep_input_csv(filename)
+    print(inputCSVFileName)
+    """
+    post processing
+    determine the directory where output file shall be saved
+    """
+    output_path = post_util.get_output_data_path()
+    """
+    set function parameters
+    """
+    cekwargs = {'min_population_size': 30,
+                'full_output': full_output,
+                'output_path': output_path}
+    """
+    send to the job queue
+    """
 
     import uep_dm
 
-    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[csvFile,apiURL,apiKEY,outputFormat,antecedentColumns,consequentColumns,minConfidence,minSupport,csvSeprator,csvEncoding], result_ttl=5000)
+    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[inputCSVFileName,apiURL,apiKEY,outputFormat,antecedentColumns,consequentColumns,minConfidence,minSupport,csvSeprator,csvEncoding], result_ttl=5000)
     print('rule_mining in job queue with id:', job.get_id())
     res = {
         "jobid": job.get_id(),
         "param": {"rmdata": "<location of the csv file, which shall be sent to the UEP server>",
                   "remote-server": "https://br-dev.lmcloud.vse.cz/easyminercenter/api",
                   "value_example": "./Data/esif.csv",
-                  "value": csvFile,
+                  "value": inputCSVFileName,
                   "sample curl": """curl -H "Content-Type:application/json; charset=UTF-8"  --requst POST 'http://localhost:5000/rule_mining?rmdata=./Data/esif.csv'""",
                   "result link": "http://localhost:5000/results/" + job.get_id()
                   }
@@ -310,6 +360,7 @@ def do_outlier_detection_lof(sample):
     # elif sample == "real":
     #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
     inputCSVFileName = ppdm.construct_input_csv(filename)
+    ppdm.uep_csv_check(inputCSVFileName)
     print(inputCSVFileName)
     """
     post processing
