@@ -360,7 +360,6 @@ def do_outlier_detection_lof(sample):
     # elif sample == "real":
     #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
     inputCSVFileName = ppdm.construct_input_csv(filename)
-    ppdm.uep_csv_check(inputCSVFileName)
     print(inputCSVFileName)
     """
     post processing
