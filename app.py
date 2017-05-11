@@ -216,6 +216,7 @@ def do_rule_mining():
     #csvFile = request.args.get('rmdata', "./Data/esif.csv")
     apiURL = "https://br-dev.lmcloud.vse.cz/easyminercenter/api"
     apiKEY = request.args.get('apiKEY',"RuR4r60A18063xYpLcM5A84vyC637539zy14Txx6YerGvoxWLlc")
+    taskName="simple"
     outputFormat = 'json'
     antecedentColumns = request.args.get('antecedentColumns', [])
     consequentColumns = request.args.get('consequentColumns', ["amount.sum"])
@@ -276,7 +277,10 @@ def do_rule_mining():
 
     import uep_dm
 
-    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[inputCSVFileName,apiURL,apiKEY,outputFormat,antecedentColumns,consequentColumns,minConfidence,minSupport,csvSeprator,csvEncoding], result_ttl=5000)
+    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[inputCSVFileName,taskName, apiURL,apiKEY,
+                                                                          outputFormat,antecedentColumns,
+                                                                          consequentColumns,minConfidence,
+                                                                          minSupport,csvSeprator,csvEncoding], result_ttl=5000)
     print('rule_mining in job queue with id:', job.get_id())
     res = {
         "jobid": job.get_id(),
