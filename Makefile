@@ -26,6 +26,11 @@ update_pdm:
 	sudo rm -r preprocessing_dm
 	git clone https://github.com/openbudgets/preprocessing_dm.git
 	pip3 install preprocessing_dm/.
+update_uep_dm:
+	pip3 uninstall uep_dm
+	sudo rm -r uep_dm
+	git clone https://github.com/openbudgets/uep_dm.git
+	pip3 install uep_dm/.
 update_outlier_dm:
 	pip3 uninstall outlier_dm
 	sudo rm -r outlier_dm
