@@ -317,9 +317,80 @@ def get_results(job_key):
     else:
         return jsonify({"status":"Wait!"})
 
+@app.route('/outlier_detection/FQR', methods=['GET', 'POST'])
+def do_outlier_detection_uep():
+
+    apiURL = "https://br-dev.lmcloud.vse.cz/easyminercenter/api"
+    apiKEY = request.args.get('apiKEY',"RuR4r60A18063xYpLcM5A84vyC637539zy14Txx6YerGvoxWLlc")
+    taskName="outlier"
+    outputFormat = 'json'
+    antecedentColumns = []
+    consequentColumns = []
+    minConfidence = request.args.get('minConfidence', 0.7)
+    minSupport = request.args.get('minSupport', 0.1)
+    csvSeprator = request.args.get('csvSeprator', ",")
+    csvEncoding =  request.args.get('csvEncoding',"utf8")
+
+
+    filename = request.args.get('BABBAGE_FACT_URI', '')
+    if filename == '':
+        filename = request.args.get('BABBAGE_AGGREGATE_URI', '')
+    if filename == '':
+        filename = "http://wenxion.net/OBEU/aggregate.json"
+
+    output = request.args.get('output', 'Result')
+    if request.args.get('full_output', 'partial') == 'full_output':
+        full_output = True
+    else:
+        full_output = False
+
+    """
+    get/generate csv using filename
+    """
+    # dataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
+    # if sample == "sample":
+    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
+    # elif sample == "real":
+    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
+    inputCSVFileName = ppdm.construct_uep_input_csv(filename)
+    print(inputCSVFileName)
+    """
+    post processing
+    determine the directory where output file shall be saved
+    """
+    output_path = post_util.get_output_data_path()
+    """
+    set function parameters
+    """
+    cekwargs = {'min_population_size': 30,
+                'full_output': full_output,
+                'output_path': output_path}
+    """
+    send to the job queue
+    """
+
+    import uep_dm
+
+    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[inputCSVFileName,taskName, apiURL,apiKEY,
+                                                                          outputFormat,antecedentColumns,
+                                                                          consequentColumns,minConfidence,
+                                                                          minSupport,csvSeprator,csvEncoding], result_ttl=5000)
+    print('outlier_detection in job queue with id:', job.get_id())
+    res = {
+        "jobid": job.get_id(),
+        "param": {"rmdata": "<location of the csv file, which shall be sent to the UEP server>",
+                  "remote-server": "https://br-dev.lmcloud.vse.cz/easyminercenter/api",
+                  "value_example": "./Data/esif.csv",
+                  "value": inputCSVFileName,
+                  "sample curl": """curl -H "Content-Type:application/json; charset=UTF-8"  --requst POST 'http://localhost:5000/outlier_detection?rmdata=./Data/esif.csv'""",
+                  "result link": "http://localhost:5000/results/" + job.get_id()
+                  }
+        }
+    return jsonify(res)
 
 @app.route('/outlier_detection/LOF/<sample>', methods=['GET'])
-def do_outlier_detection_lof(sample):
+@app.route('/outlier_detection/LOF', methods=['GET'])
+def do_outlier_detection_lof():
     """
     outlier detectin based on LOF (local outlier factor).
     Users choose one or more dataset names, a CSV file as input element will be created, and saved in Data/ directory.
@@ -358,11 +429,6 @@ def do_outlier_detection_lof(sample):
     """
     get/generate csv using filename
     """
-    # dataPath = os.path.abspath(os.path.join(os.path.dirname(__file__), 'Data'))
-    # if sample == "sample":
-    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=True)
-    # elif sample == "real":
-    #    inputCSVFileName = ppdm.ce_from_file_names_query_fuseki_output_csv(filename, dataPath, debug=False)
     inputCSVFileName = ppdm.construct_input_csv(filename)
     print(inputCSVFileName)
     """
