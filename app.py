@@ -522,6 +522,28 @@ def get_meta_data_of_algorithm(algo_id):
         info = meta_dic.get(algo_id, '')
         return jsonify(info)
 
+@app.route('/services/meta/<func>', methods=['GET'])
+def dam_meta_data(func):
+    return get_meta_data_of_dam(func)
+
+
+def get_meta_data_of_dam(func):
+    """
+    Parameters
+    ----------
+    algo_id: the id of algorithm. if algo_id == '', returns the list of all ids.
+
+    Returns:
+    -------
+    """
+    with open('tasks/dam.json') as data_file:
+        meta_dic = load(data_file)
+        print(meta_dic)
+    if func == "":
+        return meta_dic["list"]
+    else:
+        info = meta_dic.get(func, '')
+        return jsonify(info)
 #
 # End of the TO DO part
 #

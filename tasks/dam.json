@@ -1,0 +1,64 @@
+{
+  "outlier_detection": {
+    "configurations": {
+      "facts": {
+        "inputs": {
+          "BABBAGE_FACT_URI": {
+            "name": "BABBAGE_FACT_URI",
+            "title": "Data coming from an aggregation",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "URI pointing to a Babbage compliant facts API request"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "collection of objects"
+          }
+        },
+        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "method": 0,
+        "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
+        "name": "facts",
+        "title": "Facts outlier detection"
+      }
+    },
+    "name": "outlier_detection",
+    "title": "Outlier Detection",
+    "description": "In statistics, an outlier is an observation point that is distant from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set. Outliers can occur by chance in any distribution, but they often indicate either measurement error or that the population has a heavy-tailed distribution. In the former case one wishes to discard them or use statistics that are robust to outliers, while in the latter case they indicate that the distribution has high skewness and that one should be very cautious in using tools or intuitions that assume a normal distribution. A frequent cause of outliers is a mixture of two distributions, which may be two distinct sub-populations, or may indicate 'correct trial' versus 'measurement error'; this is modeled by a mixture model."
+  },
+  "rule_mining": {
+    "configurations": {
+      "facts": {
+        "inputs": {
+          "BABBAGE_FACT_URI": {
+            "name": "BABBAGE_FACT_URI",
+            "title": "Data coming from an aggregation",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "URI pointing to a Babbage compliant facts API request"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "collection of objects"
+          }
+        },
+        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "method": 0,
+        "endpoint": "http://dam-obeu.iais.fraunhofer.de/rule_mining",
+        "name": "facts",
+        "title": "Facts rule mining"
+      }
+    },
+    "name": "rule_mining",
+    "title": "Rule Mining",
+    "description": "Association rule learning is a rule-based machine learning method for discovering interesting relations between variables in large databases. It is intended to identify strong rules discovered in databases using some measures of interestingness.[1] Based on the concept of strong rules, Rakesh Agrawal, Tomasz Imielinski and Arun Swami [2] introduced association rules for discovering regularities between products in large-scale transaction data recorded by point-of-sale (POS) systems in supermarkets. For example, the rule {\\displaystyle \\{\\mathrm {onions,potatoes} \\}\\Rightarrow \\{\\mathrm {burger} \\}} \\{{\\mathrm  {onions,potatoes}}\\}\\Rightarrow \\{{\\mathrm  {burger}}\\} found in the sales data of a supermarket would indicate that if a customer buys onions and potatoes together, they are likely to also buy hamburger meat. Such information can be used as the basis for decisions about marketing activities such as, e.g., promotional pricing or product placements. In addition to the above example from market basket analysis association rules are employed today in many application areas including Web usage mining, intrusion detection, continuous production, and bioinformatics. In contrast with sequence mining, association rule learning typically does not consider the order of items either within a transaction or across transactions.\n\n"
+  }
+}
