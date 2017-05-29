@@ -541,6 +541,8 @@ def get_meta_data_of_dam(func):
         print(meta_dic)
     if func == "":
         return meta_dic["list"]
+    elif func == "all":
+        return jsonify(meta_dic)
     else:
         info = meta_dic.get(func, '')
         return jsonify(info)
