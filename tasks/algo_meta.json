@@ -1,83 +1,36 @@
 {
-  "status": "need improvement",
-  "list" : [
-    {
-      "name": "outlier-detection-lof",
-      "description": "Outlier detection based on Local Outlier Factor. This algorithm is implemented by Christiane Engles"
-    }
-  ],
-  "outlier-detection-lof" :{
-    "input" : [
+  "version": "v0.1",
+  "endpoints" : [
       {
-        "name" : "choice",
-        "cardinality": ["full output", "partial output"],
-        "tpye": "parameter",
-        "note": "a radio choice. Users will choose either 'full output' or 'partial output' "
+        "name" :"outlier-detection-lof",
+        "endpoint" : "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
+        "status" : "on"
       },
       {
-        "name":"delimiter",
-        "cardinality":  "character",
-        "tpye": "parameter",
-        "default" : ",",
-        "note" : "User can specify the delimiter of CSV file. The default value is ',' "
+        "name" :"outlier-detection-fqr",
+        "endpoint" :"http://dam-obeu.iais.fraunhofer.de/outlier_detection/FQR",
+        "status" : "on"
       },
       {
-        "name": "quotechar",
-        "cardinality": "character",
-        "tpye": "parameter",
-        "default" : "|",
-        "note" : "User can specify the quotechar of CSV file. The default value is '|' "
+        "name" :"statistics",
+        "endpoint" :"http://dam-obeu.iais.fraunhofer.de/statistics",
+        "status" : "off"
       },
       {
-        "name" :  "limit",
-        "cardinality": "number",
-        "tpye": "parameter",
-        "default" : 2500,
-        "note" : "Number of output records"
+        "name" :"time series",
+        "endpoint" :"http://dam-obeu.iais.fraunhofer.de/time_series",
+        "status" : "off"
       },
       {
-        "name":"min population size" ,
-        "cardinality": "number",
-        "tpye": "parameter",
-        "default" : 30,
-        "note" : "Minimum population size for a sub-population in the lattice."
+        "name" :"comparative analysis",
+        "endpoint" :"http://dam-obeu.iais.fraunhofer.de/KPI",
+        "status" : "off"
       },
       {
-        "name":"threshold",
-        "cardinality": "number",
-        "tpye": "parameter",
-        "default" : 3 ,
-        "note" : "Threshold for outputting an item as outlier (in a subpopulation)."
-      },
-      {
-        "name":"threshold average",
-        "cardinality": "number",
-        "tpye": "parameter",
-        "default" : 3 ,
-        "note" : "Threshold for outputting an item as outlier (average outlier score)."
-      },
-      {
-        "name":"number of outliers",
-        "cardinality": "number",
-        "tpye": "parameter",
-        "default" : 3 ,
-        "note" : "compute densities of each points, sort them, the first <n> numbers will be considered as outliers"
-      },
-      {
-        "name":"k",
-        "cardinality": "number",
-        "tpye": "parameter",
-        "default" : 5 ,
-        "note" : "LOF method specific parameter specifying the number of neighbors used to calculate the local densities."
+        "name" :"rule-mining",
+        "endpoint" :"http://dam-obeu.iais.fraunhofer.de/rule_mining",
+        "status" : "on"
       }
-    ],
-    "output": [
-      {
-        "name": "json",
-        "type": "csv data file",
-        "default": "{'filename': <csv file name>}",
-        "note": "the csv file with the name <csv file name> is located at '/static/output/' at the server side"
-      }
-      ]
-  }
+  ]
+
 }
