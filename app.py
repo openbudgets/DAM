@@ -362,31 +362,24 @@ def do_outlier_detection_uep():
     """
     set function parameters
     """
-    cekwargs = {'min_population_size': 30,
-                'full_output': full_output,
-                'output_path': output_path}
+    cekwargs = {'taskName': 30,
+                'apiURL': full_output,
+                'apiKEY': output_path}
     """
     send to the job queue
     """
 
     import uep_dm
-
-    job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[inputCSVFileName,taskName, apiURL,apiKEY,
+    if inputCSVFileName:
+        job = q_dm.enqueue_call(func=uep_dm.send_request_to_UEP_server, args=[inputCSVFileName,taskName, apiURL,apiKEY,
                                                                           outputFormat,antecedentColumns,
                                                                           consequentColumns,minConfidence,
                                                                           minSupport,csvSeprator,csvEncoding], result_ttl=5000)
-    print('outlier_detection in job queue with id:', job.get_id())
-    res = {
-        "jobid": job.get_id(),
-        "param": {"rmdata": "<location of the csv file, which shall be sent to the UEP server>",
-                  "remote-server": "https://br-dev.lmcloud.vse.cz/easyminercenter/api",
-                  "value_example": "./Data/esif.csv",
-                  "value": inputCSVFileName,
-                  "sample curl": """curl -H "Content-Type:application/json; charset=UTF-8"  --requst POST 'http://localhost:5000/outlier_detection?rmdata=./Data/esif.csv'""",
-                  "result link": "http://localhost:5000/results/" + job.get_id()
-                  }
-        }
-    return jsonify(res)
+        print('outlier_detection in job queue with id:', job.get_id())
+    else:
+        print('unvalid csv file')
+    return jsonify(jobid=job.get_id())
+
 
 @app.route('/outlier_detection/LOF/<sample>', methods=['GET'])
 @app.route('/outlier_detection/LOF', methods=['GET'])
