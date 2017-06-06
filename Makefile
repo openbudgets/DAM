@@ -4,7 +4,8 @@ pre:
 	sudo apt-get install -y redis-server
 	sudo apt-get install python3-dev build-essential python-psycopg2 libpq-dev
 	sudo apt-get install libblas-dev liblapack-dev
-	sudo apt-get install postgresql postgresql-contrib
+	sudo apt-get install postgresql=9.3.17
+	sudo apt-get install postgresql-contrib=9.3.17
 	sudo apt-get install python3-pip
 	sudo pip3 install virtualenv
 	virtualenv env
