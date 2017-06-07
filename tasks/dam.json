@@ -60,5 +60,221 @@
     "name": "rule_mining",
     "title": "Rule Mining",
     "description": "Association rule learning is a rule-based machine learning method for discovering interesting relations between variables in large databases. It is intended to identify strong rules discovered in databases using some measures of interestingness.[1] Based on the concept of strong rules, Rakesh Agrawal, Tomasz Imielinski and Arun Swami [2] introduced association rules for discovering regularities between products in large-scale transaction data recorded by point-of-sale (POS) systems in supermarkets. For example, the rule {\\displaystyle \\{\\mathrm {onions,potatoes} \\}\\Rightarrow \\{\\mathrm {burger} \\}} \\{{\\mathrm  {onions,potatoes}}\\}\\Rightarrow \\{{\\mathrm  {burger}}\\} found in the sales data of a supermarket would indicate that if a customer buys onions and potatoes together, they are likely to also buy hamburger meat. Such information can be used as the basis for decisions about marketing activities such as, e.g., promotional pricing or product placements. In addition to the above example from market basket analysis association rules are employed today in many application areas including Web usage mining, intrusion detection, continuous production, and bioinformatics. In contrast with sequence mining, association rule learning typically does not consider the order of items either within a transaction or across transactions.\n\n"
+  },
+  "time_series": {
+    "configurations": {
+      "aggregate": {
+        "inputs": {
+          "json_data": {
+            "name": "json_data",
+            "title": "Data coming from an aggregation",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "URI pointing to a Babbage compliant aggregates API request"
+          },
+          "time": {
+            "name": "time",
+            "title": "Time dimension",
+            "cardinality": "1",
+            "guess": true,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "amount": {
+            "name": "amount",
+            "title": "Amount aggregate",
+            "cardinality": "1",
+            "guess": true,
+            "required": true,
+            "type": "Cube Aggregate"
+          },
+          "prediction_steps": {
+            "name": "prediction_steps",
+            "title": "Prediction Steps",
+            "cardinality": "1",
+            "guess": false,
+            "default_value": 4,
+            "required": false,
+            "data_type": "number",
+            "type": "Algorithm parameter"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "table"
+          }
+        },
+        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "method": 1,
+        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/TimeSeries.OBeu/R/open_spending.ts/print",
+        "name": "aggregate",
+        "title": "Timeseries of aggregated data"
+      }
+    },
+    "name": "time_series",
+    "title": "Time Series",
+    "description": "Time series analysis comprises methods for analyzing time series data in order to extract meaningful statistics and other characteristics of the data. Time series forecasting is the use of a model to predict future values based on previously observed values. While regression analysis is often employed in such a way as to test theories that the current values of one or more independent time series affect the current value of another time series, this type of analysis of time series is not called \"time series analysis\", which focuses on comparing values of a single time series or multiple dependent time series at different points in time."
+  },
+  "descriptive_statistics": {
+    "configurations": {
+      "facts": {
+        "inputs": {
+          "json_data": {
+            "name": "json_data",
+            "title": "Tabular data",
+            "cardinality": "1",
+            "guess": false,
+            "type": "URI pointing to a Babbage compliant facts API request"
+          },
+          "dimensions": {
+            "name": "dimensions",
+            "title": "Analyzed dimensions",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "amounts": {
+            "name": "amounts",
+            "title": "Amount measure",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Measure"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "table"
+          }
+        },
+        "prompt": "Build an budget facts subset, by selecting at least the dimension that is to be analyzed.",
+        "method": 1,
+        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/DescriptiveStats.OBeu/R/open_spending.ds",
+        "name": "facts",
+        "title": "Descriptive statistics from facts"
+      }
+    },
+    "name": "descriptive_statistics",
+    "title": "Descriptive Statistics",
+    "description": "Descriptive statistics provide simple summaries about the sample and about the observations that have been made. Such summaries may be either quantitative, i.e. summary statistics, or visual, i.e. simple-to-understand graphs. These summaries may either form the basis of the initial description of the data as part of a more extensive statistical analysis, or they may be sufficient in and of themselves for a particular investigation."
+  },
+  "clustering": {
+    "configurations": {
+      "facts": {
+        "inputs": {
+          "json_data": {
+            "name": "json_data",
+            "title": "Tabular data",
+            "cardinality": "1",
+            "guess": false,
+            "type": "URI pointing to a Babbage compliant facts API request"
+          },
+          "dimensions": {
+            "name": "dimensions",
+            "title": "Analyzed dimensions",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "cl.method": {
+            "name": "cl.method",
+            "title": "Clustering Method",
+            "cardinality": "1",
+            "guess": false,
+            "default_value": "pam",
+            "required": false,
+            "data_type": "string",
+            "type": "Algorithm parameter"
+          },
+          "amounts": {
+            "name": "amounts",
+            "title": "Amount measure",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Measure"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "table"
+          }
+        },
+        "prompt": "Build an budget facts subset, by selecting at least the dimension that is to be analyzed.",
+        "method": 1,
+        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/Cluster.OBeu/R/open_spending.cl",
+        "name": "facts",
+        "title": "Clustering facts"
+      },
+      "aggregates": {
+        "inputs": {
+          "json_data": {
+            "name": "json_data",
+            "title": "Aggregate",
+            "cardinality": "1",
+            "guess": false,
+            "type": "URI pointing to a Babbage compliant aggregates API request"
+          },
+          "dimensions": {
+            "name": "dimensions",
+            "title": "Analyzed dimensions",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "measured.dim": {
+            "name": "measured.dim",
+            "title": "Aggregate modifier dimension",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "cl.method": {
+            "name": "cl.method",
+            "title": "Clustering Method",
+            "cardinality": "1",
+            "guess": false,
+            "default_value": "pam",
+            "required": false,
+            "data_type": "string",
+            "type": "Algorithm parameter"
+          },
+          "amounts": {
+            "name": "amounts",
+            "title": "Amount aggregate",
+            "cardinality": "n",
+            "guess": false,
+            "required": true,
+            "type": "Cube Aggregate"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "table"
+          }
+        },
+        "prompt": "Build an budget aggregate, by selecting at least the dimension that is to be analyzed.",
+        "method": 1,
+        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/Cluster.OBeu/R/open_spending.cl",
+        "name": "aggregates",
+        "title": "Clustering aggregates"
+      }
+    },
+    "name": "clustering",
+    "title": "Clustering",
+    "description": "Cluster analysis or clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar (in some sense or another) to each other than to those in other groups (clusters). It is a main task of exploratory data mining, and a common technique for statistical data analysis, used in many fields, including machine learning, pattern recognition, image analysis, information retrieval, bioinformatics, data compression, and computer graphics."
   }
 }
