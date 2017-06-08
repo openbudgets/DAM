@@ -54,6 +54,15 @@ def index():
     }
     return jsonify(welcome)
 
+@app.route('/sample-data/<dataset>', methods=['GET'])
+def get_sample(dataset=''):
+    sample_data = None
+    try:
+        with open('./sample-data/'+dataset) as json_data:
+            sample_data = load(json_data)
+    except Exception as e:
+        print(e)
+    return jsonify(sample_data)
 
 #
 # begin of DM routes
