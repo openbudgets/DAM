@@ -54,7 +54,7 @@ def index():
     }
     return jsonify(welcome)
 
-@app.route('./sample-data/<dataset>', methods=['GET'])
+@app.route('/sample-data/<dataset>', methods=['GET'])
 def get_sample(dataset=''):
     sample_data = None
     try:
