@@ -313,7 +313,15 @@ def get_results(job_key):
         #
         # job.result shall be stored in User query database
         #
-        return jsonify(loads(job.result))
+
+        meta_dic = loads(job.result)
+        outdic = meta_dic["outliersTask"]
+        if(outdic==""):
+            print("task result is empty")
+        elif(outdic!=""):
+            res = outlier_data_formater(meta_dic)
+
+        return jsonify({"result":res})
     else:
         return jsonify({"status":"Wait!"})
 
@@ -539,6 +547,17 @@ def get_meta_data_of_dam(func):
     else:
         info = meta_dic.get(func, '')
         return jsonify(info)
+
+def outlier_data_formater(jsonFile):
+    meta_dic = jsonFile["outlier"]
+    for x in range(0, len(meta_dic)):
+        temp_row=meta_dic[x]
+        new_row = temp_row["attributeValues"]
+        new_row["Item"]=str(temp_row["id"])
+        new_row["Score"] = temp_row["score"]
+        meta_dic[x]=new_row
+
+    return meta_dic
 #
 # End of the TO DO part
 #
