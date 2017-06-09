@@ -324,12 +324,14 @@ def get_results(job_key):
         #
 
         meta_dic = loads(job.result)
-        outdic = meta_dic["outliersTask"]
-        if(outdic==""):
-            print("task result is empty")
-        elif(outdic!=""):
-            res = outlier_data_formater(meta_dic)
-
+        if('outliersTask' in meta_dic) :
+            outdic = meta_dic["outliersTask"]
+            if (outdic == ""):
+                res = meta_dic
+            elif (outdic != ""):
+                res = outlier_data_formater(meta_dic)
+        else:
+            res=meta_dic
         return jsonify({"result":res})
     else:
         return jsonify({"status":"Wait!"})
