@@ -43,6 +43,10 @@ $ python3 worker.py
 ```
 
 # How to update functional module
+* into env first
+```
+$ source env/bin/activate
+```
 * to update pre-processing module
 ```
 $ make update_pdm
