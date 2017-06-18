@@ -1,7 +1,7 @@
 {
   "outlier_detection": {
     "configurations": {
-      "facts": {
+      "LOF": {
         "inputs": {
           "BABBAGE_FACT_URI": {
             "name": "BABBAGE_FACT_URI",
@@ -22,8 +22,32 @@
         "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
-        "name": "facts",
-        "title": "Facts outlier detection"
+        "name": "LOF",
+        "title": "Local Outlier Factor outlier detection"
+      },
+      "FQR": {
+        "inputs": {
+          "BABBAGE_FACT_URI": {
+            "name": "BABBAGE_FACT_URI",
+            "title": "Data coming from an aggregation",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "URI pointing to a Babbage compliant facts API request"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "collection of objects"
+          }
+        },
+        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "method": 0,
+        "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/FQR",
+        "name": "FQR",
+        "title": "FQR outlier detection"
       }
     },
     "name": "outlier_detection",
