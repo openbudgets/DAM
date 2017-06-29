@@ -227,8 +227,9 @@ def do_rule_mining():
     apiKEY = request.args.get('apiKEY',"RuR4r60A18063xYpLcM5A84vyC637539zy14Txx6YerGvoxWLlc")
     taskName="simple"
     outputFormat = 'json'
-    antecedentColumns = request.args.get('antecedentColumns', [])
-    consequentColumns = request.args.get('consequentColumns', ["amount.sum"])
+    form = request.args
+    consequentColumns=form.getlist('consequentColumns[]')
+    antecedentColumns = form.getlist('antecedentColumns[]')
     minConfidence = request.args.get('minConfidence', 0.7)
     minSupport = request.args.get('minSupport', 0.1)
     csvSeprator = request.args.get('csvSeprator', ",")
