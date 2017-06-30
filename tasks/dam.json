@@ -165,7 +165,7 @@
         },
         "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
         "method": 1,
-        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/TimeSeries.OBeu/R/open_spending.ts/print",
+        "endpoint": "http://dam-obeu.iais.fraunhofer.de/time_series",
         "name": "aggregate",
         "title": "Timeseries of aggregated data"
       }
