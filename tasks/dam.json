@@ -239,7 +239,7 @@
             "required": true,
             "type": "Cube Dimension Attribute"
           },
-          "cl.method": {
+          "cl.meth": {
             "name": "cl.method",
             "title": "Clustering Method",
             "cardinality": "1",
@@ -247,6 +247,17 @@
             "default_value": "pam",
             "required": false,
             "data_type": "string",
+            "type": "Algorithm parameter",
+            "options": {"pam": "PAM", "hierarchical": "Hierarchical"}
+          },
+          "cl.num": {
+            "name": "cl.num",
+            "title": "Clustering Num",
+            "cardinality": "1",
+            "guess": false,
+            "default_value": 3,
+            "required": false,
+            "data_type": "number",
             "type": "Algorithm parameter"
           },
           "amounts": {
@@ -296,7 +307,7 @@
             "required": true,
             "type": "Cube Dimension Attribute"
           },
-          "cl.method": {
+          "cl.meth": {
             "name": "cl.method",
             "title": "Clustering Method",
             "cardinality": "1",
@@ -304,6 +315,17 @@
             "default_value": "pam",
             "required": false,
             "data_type": "string",
+            "type": "Algorithm parameter",
+            "options": {"pam": "PAM", "hierarchical": "Hierarchical"}
+          },
+          "cl.num": {
+            "name": "cl.num",
+            "title": "Clustering Num",
+            "cardinality": "1",
+            "guess": false,
+            "default_value": 3,
+            "required": false,
+            "data_type": "number",
             "type": "Algorithm parameter"
           },
           "amounts": {
