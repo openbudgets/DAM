@@ -240,7 +240,7 @@
             "type": "Cube Dimension Attribute"
           },
           "cl.meth": {
-            "name": "cl.method",
+            "name": "cl.meth",
             "title": "Clustering Method",
             "cardinality": "1",
             "guess": false,
@@ -308,7 +308,7 @@
             "type": "Cube Dimension Attribute"
           },
           "cl.meth": {
-            "name": "cl.method",
+            "name": "cl.meth",
             "title": "Clustering Method",
             "cardinality": "1",
             "guess": false,
