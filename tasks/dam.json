@@ -1,15 +1,31 @@
 {
   "outlier_detection": {
     "configurations": {
-      "LOF": {
+      "LOF_FACTS": {
         "inputs": {
           "BABBAGE_FACT_URI": {
             "name": "BABBAGE_FACT_URI",
-            "title": "Data coming from an aggregation",
+            "title": "Data coming from raw facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
             "type": "URI pointing to a Babbage compliant facts API request"
+          },
+          "groupingAttribute": {
+            "name": "groupingAttribute",
+            "title": "Grouping attribute",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "coloringAttribute": {
+            "name": "groupingAttribute",
+            "title": "Grouping attribute",
+            "cardinality": "1",
+            "guess": false,
+            "required": false,
+            "type": "Cube Dimension Attribute"
           }
         },
         "outputs": {
@@ -22,8 +38,48 @@
         "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
-        "name": "LOF",
-        "title": "Local Outlier Factor outlier detection"
+        "name": "LOF_FACTS",
+        "title": "Local Outlier Factor outlier detection for facts"
+      },
+      "LOF_AGGREGATE": {
+        "inputs": {
+          "BABBAGE_AGGREGATE_URI": {
+            "name": "BABBAGE_AGGREGATE_URI",
+            "title": "Data coming from an aggregation",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "URI pointing to a Babbage compliant aggregates API request"
+          },
+          "groupingAttribute": {
+            "name": "groupingAttribute",
+            "title": "Grouping attribute",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "coloringAttribute": {
+            "name": "groupingAttribute",
+            "title": "Grouping attribute",
+            "cardinality": "1",
+            "guess": false,
+            "required": false,
+            "type": "Cube Dimension Attribute"
+          }
+        },
+        "outputs": {
+          "output": {
+            "name": "output",
+            "cardinality": 1,
+            "type": "collection of objects"
+          }
+        },
+        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "method": 0,
+        "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
+        "name": "LOF_FACTS",
+        "title": "Local Outlier Factor outlier detection for facts"
       },
       "FQR": {
         "inputs": {
@@ -248,7 +304,10 @@
             "required": false,
             "data_type": "string",
             "type": "Algorithm parameter",
-            "options": {"pam": "PAM", "hierarchical": "Hierarchical"}
+            "options": {
+              "pam": "PAM",
+              "hierarchical": "Hierarchical"
+            }
           },
           "cl.num": {
             "name": "cl.num",
@@ -316,7 +375,10 @@
             "required": false,
             "data_type": "string",
             "type": "Algorithm parameter",
-            "options": {"pam": "PAM", "hierarchical": "Hierarchical"}
+            "options": {
+              "pam": "PAM",
+              "hierarchical": "Hierarchical"
+            }
           },
           "cl.num": {
             "name": "cl.num",
