@@ -20,8 +20,8 @@
             "type": "Cube Dimension Attribute"
           },
           "coloringAttribute": {
-            "name": "groupingAttribute",
-            "title": "Grouping attribute",
+            "name": "coloringAttribute",
+            "title": "Coloring attribute",
             "cardinality": "1",
             "guess": false,
             "required": false,
@@ -60,8 +60,8 @@
             "type": "Cube Dimension Attribute"
           },
           "coloringAttribute": {
-            "name": "groupingAttribute",
-            "title": "Grouping attribute",
+            "name": "coloringAttribute",
+            "title": "Coloring attribute",
             "cardinality": "1",
             "guess": false,
             "required": false,
