@@ -79,7 +79,7 @@
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
         "name": "LOF_AGGREGATE",
-        "title": "Local Outlier Factor outlier detection for facts"
+        "title": "Local Outlier Factor outlier detection for aggregates"
       },
       "FQR": {
         "inputs": {
