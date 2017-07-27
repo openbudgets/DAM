@@ -85,11 +85,27 @@
         "inputs": {
           "BABBAGE_FACT_URI": {
             "name": "BABBAGE_FACT_URI",
-            "title": "Data coming from an aggregation",
+            "title": "Data coming from raw facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
             "type": "URI pointing to a Babbage compliant facts API request"
+          },
+           "groupingAttribute": {
+            "name": "groupingAttribute",
+            "title": "Grouping attribute",
+            "cardinality": "1",
+            "guess": false,
+            "required": true,
+            "type": "Cube Dimension Attribute"
+          },
+          "coloringAttribute": {
+            "name": "coloringAttribute",
+            "title": "Coloring attribute",
+            "cardinality": "1",
+            "guess": false,
+            "required": false,
+            "type": "Cube Dimension Attribute"
           }
         },
         "outputs": {
