@@ -263,7 +263,8 @@
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "bount": "json_data"
           },
           "amounts": {
             "name": "amounts",
@@ -271,7 +272,8 @@
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Measure"
+            "type": "Cube Measure",
+            "bount": "json_data"
           }
         },
         "outputs": {
