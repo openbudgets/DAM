@@ -374,7 +374,8 @@
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "bount": "json_data"
           },
           "measured.dim": {
             "name": "measured.dim",
@@ -382,7 +383,8 @@
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "bount": "json_data"
           },
           "cl.meth": {
             "name": "cl.meth",
@@ -414,7 +416,8 @@
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Aggregate"
+            "type": "Cube Aggregate",
+            "bount": "json_data"
           }
         },
         "outputs": {
