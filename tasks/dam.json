@@ -264,7 +264,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bount": "json_data"
+            "bound": "json_data"
           },
           "amounts": {
             "name": "amounts",
@@ -273,7 +273,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Measure",
-            "bount": "json_data"
+            "bound": "json_data"
           }
         },
         "outputs": {
@@ -375,7 +375,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bount": "json_data"
+            "bound": "json_data"
           },
           "measured.dim": {
             "name": "measured.dim",
@@ -384,7 +384,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bount": "json_data"
+            "bound": "json_data"
           },
           "cl.meth": {
             "name": "cl.meth",
@@ -417,7 +417,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Aggregate",
-            "bount": "json_data"
+            "bound": "json_data"
           }
         },
         "outputs": {
