@@ -315,7 +315,7 @@
             "type": "table"
           }
         },
-        "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use for grouping and coloring.",
+        "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and a dimension to analyse.",
         "method": 1,
         "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/DescriptiveStats.OBeu/R/open_spending.ds",
         "name": "facts",
