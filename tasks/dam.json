@@ -5,27 +5,32 @@
         "inputs": {
           "BABBAGE_FACT_URI": {
             "name": "BABBAGE_FACT_URI",
-            "title": "Data coming from raw facts",
+            "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "URI pointing to a Babbage compliant facts API request"
+            "type": "URI pointing to a Babbage compliant facts API request",
+            "description": "The main data source of the algorithm, containing fiscal facts. "
           },
           "groupingAttribute": {
+            "bound": "BABBAGE_FACT_URI",
             "name": "groupingAttribute",
             "title": "Grouping attribute",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The fiscal facts attribute to group the results in the visualization."
           },
           "coloringAttribute": {
+            "bound": "BABBAGE_FACT_URI",
             "name": "coloringAttribute",
             "title": "Coloring attribute",
             "cardinality": "1",
             "guess": false,
             "required": false,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The fiscal facts attribute to color the results in the visualization."
           }
         },
         "outputs": {
@@ -35,37 +40,42 @@
             "type": "collection of objects"
           }
         },
-        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use for grouping and coloring.",
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
         "name": "LOF_FACTS",
-        "title": "Local Outlier Factor outlier detection for facts"
+        "title": "Local Outlier Factor detection for fiscal data"
       },
       "LOF_AGGREGATE": {
         "inputs": {
           "BABBAGE_AGGREGATE_URI": {
             "name": "BABBAGE_AGGREGATE_URI",
-            "title": "Data coming from an aggregation",
+            "title": "Aggregated view of fiscal facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "URI pointing to a Babbage compliant aggregates API request"
+            "type": "URI pointing to a Babbage compliant aggregates API request",
+            "description": "The main data source of the algorithm, containing an aggregation of fiscal facts. "
           },
           "groupingAttribute": {
+            "bound": "BABBAGE_AGGREGATE_URI",
             "name": "groupingAttribute",
             "title": "Grouping attribute",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The fiscal facts attribute to group the results in the visualization."
           },
           "coloringAttribute": {
+            "bound": "BABBAGE_AGGREGATE_URI",
             "name": "coloringAttribute",
             "title": "Coloring attribute",
             "cardinality": "1",
             "guess": false,
             "required": false,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The fiscal facts attribute to color the results in the visualization."
           }
         },
         "outputs": {
@@ -75,37 +85,42 @@
             "type": "collection of objects"
           }
         },
-        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "prompt": "Start by building an aggregated subset of the fiscal data. Define two drill-down dimensions to use them for grouping and coloring. ",
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
         "name": "LOF_AGGREGATE",
-        "title": "Local Outlier Factor outlier detection for aggregates"
+        "title": "Local Outlier Factor detection for aggregated fiscal data"
       },
       "FQR": {
         "inputs": {
           "BABBAGE_FACT_URI": {
             "name": "BABBAGE_FACT_URI",
-            "title": "Data coming from raw facts",
+            "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "URI pointing to a Babbage compliant facts API request"
+            "type": "URI pointing to a Babbage compliant facts API request",
+            "description": "The main data source of the algorithm, containing fiscal facts. "
           },
-           "groupingAttribute": {
+          "groupingAttribute": {
+            "bound": "BABBAGE_FACT_URI",
             "name": "groupingAttribute",
             "title": "Grouping attribute",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The fiscal facts attribute to group the results in the visualization."
           },
           "coloringAttribute": {
+            "bound": "BABBAGE_FACT_URI",
             "name": "coloringAttribute",
             "title": "Coloring attribute",
             "cardinality": "1",
             "guess": false,
             "required": false,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The fiscal facts attribute to color the results in the visualization."
           }
         },
         "outputs": {
@@ -115,16 +130,16 @@
             "type": "collection of objects"
           }
         },
-        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use for grouping and coloring.",
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/FQR",
         "name": "FQR",
-        "title": "FQR outlier detection"
+        "title": "FQR outlier detection for fiscal data"
       }
     },
     "name": "outlier_detection",
     "title": "Outlier Detection",
-    "description": "In statistics, an outlier is an observation point that is distant from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set. Outliers can occur by chance in any distribution, but they often indicate either measurement error or that the population has a heavy-tailed distribution. In the former case one wishes to discard them or use statistics that are robust to outliers, while in the latter case they indicate that the distribution has high skewness and that one should be very cautious in using tools or intuitions that assume a normal distribution. A frequent cause of outliers is a mixture of two distributions, which may be two distinct sub-populations, or may indicate 'correct trial' versus 'measurement error'; this is modeled by a mixture model."
+    "description": "In statistics, an outlier is an observation point that is distant from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set. Outliers can occur by chance in any distribution, but they often indicate either measurement error or that the population has a heavy-tailed distribution. \nIn the former case one wishes to discard them or use statistics that are robust to outliers, while in the latter case they indicate that the distribution has high skewness and that one should be very cautious in using tools or intuitions that assume a normal distribution."
   },
   "rule_mining": {
     "configurations": {
@@ -132,27 +147,32 @@
         "inputs": {
           "BABBAGE_FACT_URI": {
             "name": "BABBAGE_FACT_URI",
-            "title": "Data coming from an aggregation",
+            "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "URI pointing to a Babbage compliant facts API request"
+            "type": "URI pointing to a Babbage compliant facts API request",
+            "description": "The main data source of the algorithm, containing fiscal facts. "
           },
           "antecedentColumns": {
+            "bound": "BABBAGE_FACT_URI",
             "name": "antecedentColumns",
             "title": "Antecedent Columns",
             "cardinality": "n",
             "guess": false,
-            "required": false,
-            "type": "Cube Dimension Attribute"
+            "required": true,
+            "type": "Cube Dimension Attribute",
+            "description": "The (if) part of the rule"
           },
           "consequentColumns": {
+            "bound": "BABBAGE_FACT_URI",
             "name": "consequentColumns",
             "title": "Consequent Columns",
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The (then) part of the rule"
           },
           "minConfidence": {
             "name": "minConfidence",
@@ -160,7 +180,8 @@
             "cardinality": "1",
             "guess": false,
             "required": false,
-            "type": "Algorithm parameter"
+            "type": "Algorithm parameter",
+            "description": "The minimum number of times the if/then statements have been found to be true"
           },
           "minSupport": {
             "name": "minSupport ",
@@ -168,7 +189,8 @@
             "cardinality": "1",
             "guess": false,
             "required": false,
-            "type": "Algorithm parameter"
+            "type": "Algorithm parameter",
+            "description": "An indication of how frequently, at minimum, the items appear in the dataset"
           }
         },
         "outputs": {
@@ -178,11 +200,11 @@
             "type": "collection of objects"
           }
         },
-        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use as antecedent and consequent columns.",
         "method": 0,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/rule_mining",
         "name": "facts",
-        "title": "Facts rule mining"
+        "title": "Fiscal facts association rule mining"
       }
     },
     "name": "rule_mining",
@@ -195,26 +217,31 @@
         "inputs": {
           "json_data": {
             "name": "json_data",
-            "title": "Data coming from an aggregation",
+            "title": "Aggregated view of fiscal facts",
             "cardinality": "1",
             "guess": false,
             "required": true,
-            "type": "URI pointing to a Babbage compliant aggregates API request"
+            "type": "URI pointing to a Babbage compliant aggregates API request",
+            "description": "The main data source of the algorithm, containing an aggregation of fiscal facts. "
           },
           "time": {
+            "bound": "json_data",
             "name": "time",
             "title": "Time dimension",
             "cardinality": "1",
             "guess": true,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "description": "The time dimension used for analysis. It should be an integer number representing the fiscal."
           },
           "amount": {
+            "bound": "json_data",
             "name": "amount",
             "title": "Amount aggregate",
             "cardinality": "1",
             "guess": true,
             "required": true,
+            "description": "The aggregated measure of the view.",
             "type": "Cube Aggregate"
           },
           "prediction_steps": {
@@ -225,7 +252,8 @@
             "default_value": 4,
             "required": false,
             "data_type": "number",
-            "type": "Algorithm parameter"
+            "type": "Algorithm parameter",
+            "description": "The prediction steps the algorithm will use to predict following years performance."
           }
         },
         "outputs": {
@@ -235,16 +263,16 @@
             "type": "table"
           }
         },
-        "prompt": "Build an aggregate, with a time-related drilldown and then enter the prediction steps parameter from the left and click on the execute button on top right.",
+        "prompt": "Start by building an aggregated view of the fiscal data, with a time-related drill-down dimension and then enter the prediction steps parameter.",
         "method": 1,
         "endpoint": "http://dam-obeu.iais.fraunhofer.de/time_series",
         "name": "aggregate",
-        "title": "Timeseries of aggregated data"
+        "title": "Timeseries of aggregated fiscal data"
       }
     },
     "name": "time_series",
     "title": "Time Series",
-    "description": "Time series analysis comprises methods for analyzing time series data in order to extract meaningful statistics and other characteristics of the data. Time series forecasting is the use of a model to predict future values based on previously observed values. While regression analysis is often employed in such a way as to test theories that the current values of one or more independent time series affect the current value of another time series, this type of analysis of time series is not called \"time series analysis\", which focuses on comparing values of a single time series or multiple dependent time series at different points in time."
+    "description": "Time series analysis comprises methods for analyzing time series data in order to extract meaningful statistics and other characteristics of the data. Time series forecasting is the use of a model to predict future values based on previously observed values. \nWhile regression analysis is often employed in such a way as to test theories that the current values of one or more independent time series affect the current value of another time series, this type of analysis of time series is not called time series analysis, which focuses on comparing values of a single time series or multiple dependent time series at different points in time."
   },
   "descriptive_statistics": {
     "configurations": {
@@ -252,10 +280,12 @@
         "inputs": {
           "json_data": {
             "name": "json_data",
-            "title": "Tabular data",
+            "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
-            "type": "URI pointing to a Babbage compliant facts API request"
+            "type": "URI pointing to a Babbage compliant facts API request",
+            "description": "The main data source of the algorithm, containing fiscal facts. ",
+            "required": true
           },
           "dimensions": {
             "name": "dimensions",
@@ -264,7 +294,8 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bound": "json_data"
+            "bound": "json_data",
+            "description": "One or more dimensions to perform extra analysis"
           },
           "amounts": {
             "name": "amounts",
@@ -273,7 +304,8 @@
             "guess": false,
             "required": true,
             "type": "Cube Measure",
-            "bound": "json_data"
+            "bound": "json_data",
+            "description": "The measure of the fiscal data to analyze"
           }
         },
         "outputs": {
@@ -283,11 +315,11 @@
             "type": "table"
           }
         },
-        "prompt": "Build an budget facts subset, by selecting at least the dimension that is to be analyzed.",
+        "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use for grouping and coloring.",
         "method": 1,
         "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/DescriptiveStats.OBeu/R/open_spending.ds",
         "name": "facts",
-        "title": "Descriptive statistics from facts"
+        "title": "Descriptive statistics for fiscal facts"
       }
     },
     "name": "descriptive_statistics",
@@ -300,10 +332,12 @@
         "inputs": {
           "json_data": {
             "name": "json_data",
-            "title": "Tabular data",
+            "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
-            "type": "URI pointing to a Babbage compliant facts API request"
+            "type": "URI pointing to a Babbage compliant facts API request",
+            "description": "The main data source of the algorithm, containing fiscal facts. ",
+            "required": true
           },
           "dimensions": {
             "name": "dimensions",
@@ -311,7 +345,9 @@
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Dimension Attribute"
+            "type": "Cube Dimension Attribute",
+            "bound": "json_data",
+            "description": "These dimensions will be used for clustering"
           },
           "cl.meth": {
             "name": "cl.meth",
@@ -321,6 +357,7 @@
             "default_value": "pam",
             "required": false,
             "data_type": "string",
+            "description": "The method to be used for building the clusters",
             "type": "Algorithm parameter",
             "options": {
               "pam": "PAM",
@@ -335,15 +372,19 @@
             "default_value": 3,
             "required": false,
             "data_type": "number",
-            "type": "Algorithm parameter"
+            "type": "Algorithm parameter",
+            "description": "Clustering number"
           },
           "amounts": {
+            "minimum_cardinality": 2,
             "name": "amounts",
             "title": "Amount measure",
             "cardinality": "n",
             "guess": false,
             "required": true,
-            "type": "Cube Measure"
+            "type": "Cube Measure",
+            "description": "These measures will be used for clustering",
+            "bound": "json_data"
           }
         },
         "outputs": {
@@ -353,7 +394,7 @@
             "type": "table"
           }
         },
-        "prompt": "Build an budget facts subset, by selecting at least the dimension that is to be analyzed.",
+        "prompt": "Start by building a facts subset, by selecting at least the dimension that is to be analyzed and two measures.",
         "method": 1,
         "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/Cluster.OBeu/R/open_spending.cl",
         "name": "facts",
@@ -366,7 +407,9 @@
             "title": "Aggregate",
             "cardinality": "1",
             "guess": false,
-            "type": "URI pointing to a Babbage compliant aggregates API request"
+            "type": "URI pointing to a Babbage compliant aggregates API request",
+            "required": true,
+            "description": "The main data source of the algorithm, containing an aggregation of fiscal facts. "
           },
           "dimensions": {
             "name": "dimensions",
@@ -375,7 +418,8 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bound": "json_data"
+            "bound": "json_data",
+            "description": "These dimensions will be used for clustering"
           },
           "measured.dim": {
             "name": "measured.dim",
@@ -384,7 +428,8 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bound": "json_data"
+            "bound": "json_data",
+            "description": "A dimension that gets combined with the measure to generate an extra aggregate for clustering."
           },
           "cl.meth": {
             "name": "cl.meth",
@@ -394,6 +439,7 @@
             "default_value": "pam",
             "required": false,
             "data_type": "string",
+            "description": "The method to be used for building the clusters",
             "type": "Algorithm parameter",
             "options": {
               "pam": "PAM",
@@ -405,6 +451,7 @@
             "title": "Clustering Num",
             "cardinality": "1",
             "guess": false,
+            "description": "Clustering number",
             "default_value": 3,
             "required": false,
             "data_type": "number",
@@ -417,7 +464,8 @@
             "guess": false,
             "required": true,
             "type": "Cube Aggregate",
-            "bound": "json_data"
+            "bound": "json_data",
+            "description": "These measures will be used for clustering"
           }
         },
         "outputs": {
@@ -427,7 +475,7 @@
             "type": "table"
           }
         },
-        "prompt": "Build an budget aggregate, by selecting at least the dimension that is to be analyzed.",
+        "prompt": "Start by building an aggregated view of fiscal facts. Build an budg aggregate, by selecting at least the dimension that is to be analyzed. Select an aggregate modifier to generate more than one artificial amount measures to be used for clustering.",
         "method": 1,
         "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/Cluster.OBeu/R/open_spending.cl",
         "name": "aggregates",
