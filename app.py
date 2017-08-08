@@ -139,7 +139,7 @@ def do_time_series():
 
     """
     tsdata = request.args.get('tsdata', 'not given')
-    prediction_steps = request.args.get('prediction_steps', '-1')
+    prediction_steps = request.args.get('prediction_steps', '4')
     OKFGR_TS = os.environ['OKFGR_TS']
     tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
     import okfgr_dm
@@ -324,7 +324,10 @@ def get_results(job_key):
         # job.result shall be stored in User query database
         #
 
-        meta_dic = loads(job.result)
+        if(type(job.result) is str):
+            meta_dic = loads(job.result)
+        else:
+            meta_dic='task failed'
         if('outliersTask' in meta_dic) :
             outdic = meta_dic["outliersTask"]
             if (outdic == ""):

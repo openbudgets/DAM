@@ -1,27 +1,27 @@
 Item,Features,,,Target,Score
-,economicClassification.prefLabel,fundingClassification.prefLabel,administrativeClassification.prefLabel,,
-64,Lease of premises,INCOME. UNCONDITIONED FUNDING,Income of budget sections,10000.0,20996.8758809
-43,Other grants of public companies and other public bodies,INCOME. UNCONDITIONED FUNDING,Income of budget sections,1000.0,3000.47647321
-44,V.A.T. About internal operations,INCOME. UNCONDITIONED FUNDING,Income of budget sections,730958884.29,19.2833912312
-22,Ringing effects and other,INCOME. UNCONDITIONED FUNDING,Income of budget sections,234317071.0,15.309319555
-56,Agriculture - common agricultural policy,EAGF GUARANTEE,Income of budget sections,454074000.0,7.6934443844
-77,On manufactured tobacco,INCOME. UNCONDITIONED FUNDING,Income of budget sections,83642248.16,6.99687827466
-99,On certain means of transport,INCOME. UNCONDITIONED FUNDING,Income of budget sections,45856000.0,5.13810365366
-88,On retail sale of certain mineral oils,INCOME. UNCONDITIONED FUNDING,Income of budget sections,44320000.0,4.97602181014
-7,Information on social action,CONFERENCE SECTORAL SOCIAL SERVICES - INFORMATION ON SOCIAL ACTION,Income of budget sections,12020.0,3.43155112733
-76,Other land sales,INCOME. UNCONDITIONED FUNDING,Income of budget sections,21000000.0,2.04195240184
-65,Housing rentals,INCOME. UNCONDITIONED FUNDING,Income of budget sections,505000.0,1.72523064761
-54,European Social Fund - operational programme 2007-2013,EUROPEAN SOCIAL FUND 2007-2013 OPERATIONAL PROGRAMME,Income of budget sections,10028483.3,1.67882398477
-26,Books and libraries,SECTORAL CONFERENCE OF EDUCATION - SCHOOL LIBRARIES,Income of budget sections,141128.75,1.45831595114
-42,Idea for the promotion of energy diversification and saving,PROMOTION OF SAVING AND ENERGY DIVERSIFICATION,Income of budget sections,150000.0,1.45831595114
-18,Prevention of acquired immunodeficiency syndrome,PREVENTION PROGRAM AIDS,Income of budget sections,154000.0,1.45831595114
-34,Schools traveling,SCHOOLS TRAVELING,Income of budget sections,83565.6,1.45208241839
-14,Plan of action in favour of persons in situations of dependency,PLAN OF ACTION TO PLEASE PEOPLE. SITUATION DEPENDENCY,Income of budget sections,5250000.0,1.44517649748
-20,Prevention of emerging infectious diseases,PREVENTING EMERGING INFECTIOUS DISEASES,Income of budget sections,79000.0,1.43825612461
-80,AREAS INFLUENCE SOCIO-ECON. NATIONAL PARKS,SECTORAL CONFERENCE ENVIRONMENT - BIODIVERSITY CONSERVATION (WILDLIFE),Income of budget sections,16000.0,1.42785675324
-93,Animal health campaigns,SECTORAL CONFERENCE AGRICULTURE - ANIMAL HEALTH PROGRAM,Income of budget sections,40000.0,1.41857421868
-36,Literary routes,LITERARY ROUTES,Income of budget sections,43983.0,1.40417120045
-61,Of the courts of Aragon,INCOME. UNCONDITIONED FUNDING,Income of budget sections,210000.0,1.32356218229
-47,Transfers of the Diputación Provincial de Teruel,INCOME. UNCONDITIONED FUNDING,Income of budget sections,1304550.67,1.31415794242
-31,Science & education grants,SECTORAL CONFERENCE OF EDUCATION. INTERNET IN THE CLASSROOM PROGRAMME,Income of budget sections,54000.0,1.3076433523
-89,Other promotion grants,INCOME. UNCONDITIONED FUNDING,Income of budget sections,12000000.0,1.30238762456
+,administrativeClassification.prefLabel,economicClassification.prefLabel,budgetPhase.prefLabel,,
+794,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Λοιπός εξοπλισμός,Revised,335084.9,1773601.63934
+389,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση Δημοσίου Δικαίου,Reserved,27793.32,151002.906992
+509,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Reserved,12917.47,75564.0249779
+171,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Μισθώματα κτιρίων - Τεχνικών έργων ακινήτων,Revised,8224.0,50219.3582092
+917,ΥΠΗΡΕΣΙΕΣ ΠΡΑΣΙΝΟΥ,Μηχανήματα και λοιπός εξοπλισμός,Executed,8523.9,45990.384371
+460,ΥΠΗΡΕΣΙΕΣ ΠΡΑΣΙΝΟΥ,Λοιπές προμήθειες αναλωσίμων,Approved,8275.69,44865.2876245
+435,ΥΠΗΡΕΣΙΑ ΝΕΚΡΟΤΑΦΕΙΩΝ,Λοιπές εγκαταστάσεις κοινής χρήσης,Draft,4886.64,29234.0501381
+500,ΥΠΗΡΕΣΙΑ ΝΕΚΡΟΤΑΦΕΙΩΝ,Λοιπές εγκαταστάσεις κοινής χρήσης,Revised,4886.64,29233.9521246
+755,ΥΠΗΡΕΣΙΑ ΝΕΚΡΟΤΑΦΕΙΩΝ,Συντήρηση και επισκευή λοιπών μονίμων εγκαταστάσεων (πλην κτιρίων έργων),Revised,4597.74,27760.5213725
+398,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Έπιπλα - Σκεύη,Reserved,2410.8,26221.5217602
+559,ΥΠΗΡΕΣΙΕΣ ΠΡΑΣΙΝΟΥ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Draft,3830.0,24216.8263585
+745,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Μεταφορές εν γένει,Approved,3813.0,18996.0443958
+856,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Δημοσίευση προκηρύξεων,Draft,1500.0,17333.0927715
+396,ΟΙΚΟΝΟΜΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Προμήθεια ειδών καθαριότητας και ευπρεπισμού,Reserved,3000.0,15360.1218968
+760,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Οδοιπορικά έξοδα και αποζημίωση μετακινούμενων υπαλλήλων,Revised,3000.0,15117.0285394
+14,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Reserved,1216.53,14411.9115036
+750,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Revised,1778.73,11858.8764809
+99,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Ανταλλακτικά λοιπών μηχανημάτων,Draft,2000.0,11822.4818337
+603,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Revised,2216.53,11414.1565526
+557,ΥΠΗΡΕΣΙΑ ΤΕΧΝΙΚΩΝ ΕΡΓΩΝ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Draft,1000.0,11073.605123
+700,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Approved,657.26,9054.75761132
+884,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Executed,657.26,8376.37874397
+442,ΟΙΚΟΝΟΜΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Συντήρηση και επισκευή λοιπών μηχανημάτων,Approved,1389.9,8334.0139686
+567,ΟΙΚΟΝΟΜΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Λοιπά ασφάλιστρα,Draft,1000.0,5910.34600093
+886,ΓΕΝΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Δαπάνες επιμόρφωσης προσωπικού και συμμετοχής σε συνέδρια και σεμινάρια,Executed,1000.0,5555.05651126
