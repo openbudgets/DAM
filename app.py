@@ -138,10 +138,13 @@ def do_time_series():
     -------
 
     """
-    tsdata = request.args.get('tsdata', 'not given')
+    #tsdata = request.args.get('tsdata', 'not given')
+    json_data = request.args.get('json_data')
+    time = request.args.get('time')
+    amount = request.args.get('amount')
     prediction_steps = request.args.get('prediction_steps', '4')
     OKFGR_TS = os.environ['OKFGR_TS']
-    tskwargs = {'tsdata': tsdata, 'prediction_steps': prediction_steps}
+    tskwargs = { 'json_data': json_data, 'time': time, 'amount': amount, 'prediction_steps': prediction_steps}
     import okfgr_dm
     job = q_dm.enqueue_call(func=okfgr_dm.dm_okfgr, args=[OKFGR_TS], kwargs=tskwargs, result_ttl=5000)
     res = {
@@ -149,7 +152,7 @@ def do_time_series():
         "param": {"curl" : 'curl --request POST  "http://localhost:5000/time_series?tsdata=Athens_draft_ts&prediction_steps=4"',
                   "remote-endpoint": OKFGR_TS,
                    "tsdata": "<name of the file for time series>",
-                  "tsdata_value": tsdata,
+                  "tsdata_value": json_data,
                   "tsdata_sample": 'Athens_draft_ts',
                   "prediction_steps": "<number of steps for prediction>",
                   "prediction_value": prediction_steps,
