@@ -22,9 +22,8 @@ pre:
 dam:
 	source .env
 	virtualenv flask
-	cd flask
-	source bin/activate
-	pip install flask
+	cd flask && source bin/activate
+	cd flask && pip3 install flask
 	python3 manage.py syncdb
 	pip3 install -r requirements.txt
 	git clone https://github.com/openbudgets/preprocessing_dm.git
