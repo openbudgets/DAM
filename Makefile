@@ -21,6 +21,7 @@ pre:
 	echo "source `which activate.sh`">> ~/.bashrc 
 dam:
 	source .env	
+	python3 manage.py syncdb
 	pip3 install -r requirements.txt
 	git clone https://github.com/openbudgets/preprocessing_dm.git
 	pip3 install preprocessing_dm/.
