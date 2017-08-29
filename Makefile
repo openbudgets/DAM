@@ -20,7 +20,11 @@ pre:
 	sudo pip3 install autoenv
 	echo "source `which activate.sh`">> ~/.bashrc 
 dam:
-	source .env	
+	source .env
+	virtualenv flask
+	cd flask
+	source bin/activate
+	pip install flask
 	python3 manage.py syncdb
 	pip3 install -r requirements.txt
 	git clone https://github.com/openbudgets/preprocessing_dm.git
