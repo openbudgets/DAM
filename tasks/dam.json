@@ -42,7 +42,7 @@
         },
         "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use for grouping and coloring.",
         "method": 0,
-        "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
+        "endpoint": "https://apps.openbudgets.eu/dam/outlier_detection/LOF",
         "name": "LOF_FACTS",
         "title": "Local Outlier Factor detection for fiscal data"
       },
@@ -87,7 +87,7 @@
         },
         "prompt": "Start by building an aggregated subset of the fiscal data. Define two drill-down dimensions to use them for grouping and coloring. ",
         "method": 0,
-        "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/LOF",
+        "endpoint": "https://apps.openbudgets.eu/dam/outlier_detection/LOF",
         "name": "LOF_AGGREGATE",
         "title": "Local Outlier Factor detection for aggregated fiscal data"
       },
@@ -132,7 +132,7 @@
         },
         "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use for grouping and coloring.",
         "method": 0,
-        "endpoint": "http://dam-obeu.iais.fraunhofer.de/outlier_detection/FQR",
+        "endpoint": "https://apps.openbudgets.eu/dam/outlier_detection/FQR",
         "name": "FQR",
         "title": "FQR outlier detection for fiscal data"
       }
@@ -202,7 +202,7 @@
         },
         "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and two dimensions to use as antecedent and consequent columns.",
         "method": 0,
-        "endpoint": "http://dam-obeu.iais.fraunhofer.de/rule_mining",
+        "endpoint": "https://apps.openbudgets.eu/dam/rule_mining",
         "name": "facts",
         "title": "Fiscal facts association rule mining"
       }
@@ -265,7 +265,7 @@
         },
         "prompt": "Start by building an aggregated view of the fiscal data, with a time-related drill-down dimension and then enter the prediction steps parameter.",
         "method": 1,
-        "endpoint": "http://dam-obeu.iais.fraunhofer.de/time_series",
+        "endpoint": "https://apps.openbudgets.eu/dam/time_series",
         "name": "aggregate",
         "title": "Timeseries of aggregated fiscal data"
       }
