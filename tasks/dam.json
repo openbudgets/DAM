@@ -278,8 +278,8 @@
     "configurations": {
       "facts": {
         "inputs": {
-          "json_data": {
-            "name": "json_data",
+          "BABBAGE_FACT_URI": {
+            "name": "BABBAGE_FACT_URI",
             "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
