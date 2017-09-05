@@ -294,7 +294,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bound": "json_data",
+            "bound": "BABBAGE_FACT_URI",
             "description": "One or more dimensions to perform extra analysis"
           },
           "amount": {
@@ -304,7 +304,7 @@
             "guess": false,
             "required": true,
             "type": "Cube Measure",
-            "bound": "json_data",
+            "bound": "BABBAGE_FACT_URI",
             "description": "The measure of the fiscal data to analyze"
           }
         },
