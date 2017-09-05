@@ -297,8 +297,8 @@
             "bound": "json_data",
             "description": "One or more dimensions to perform extra analysis"
           },
-          "amounts": {
-            "name": "amounts",
+          "amount": {
+            "name": "amount",
             "title": "Amount measure",
             "cardinality": "n",
             "guess": false,
