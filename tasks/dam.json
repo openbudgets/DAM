@@ -317,7 +317,7 @@
         },
         "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and a dimension to analyse.",
         "method": 1,
-        "endpoint": "https://apps.openbudgets.eu/dam/statistics",
+        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/DescriptiveStats.OBeu/R/open_spending.ds",
         "name": "facts",
         "title": "Descriptive statistics for fiscal facts"
       }
