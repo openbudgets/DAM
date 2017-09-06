@@ -275,11 +275,11 @@
     "description": "Time series analysis comprises methods for analyzing time series data in order to extract meaningful statistics and other characteristics of the data. Time series forecasting is the use of a model to predict future values based on previously observed values. \nWhile regression analysis is often employed in such a way as to test theories that the current values of one or more independent time series affect the current value of another time series, this type of analysis of time series is not called time series analysis, which focuses on comparing values of a single time series or multiple dependent time series at different points in time."
   },
   "descriptive_statistics": {
-    "configurations": {
+     "configurations": {
       "facts": {
         "inputs": {
-          "BABBAGE_FACT_URI": {
-            "name": "BABBAGE_FACT_URI",
+          "json_data": {
+            "name": "json_data",
             "title": "Subset of fiscal facts",
             "cardinality": "1",
             "guess": false,
@@ -294,17 +294,17 @@
             "guess": false,
             "required": true,
             "type": "Cube Dimension Attribute",
-            "bound": "BABBAGE_FACT_URI",
+            "bound": "json_data",
             "description": "One or more dimensions to perform extra analysis"
           },
-          "amount": {
-            "name": "amount",
+          "amounts": {
+            "name": "amounts",
             "title": "Amount measure",
             "cardinality": "n",
             "guess": false,
             "required": true,
             "type": "Cube Measure",
-            "bound": "BABBAGE_FACT_URI",
+            "bound": "json_data",
             "description": "The measure of the fiscal data to analyze"
           }
         },
