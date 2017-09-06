@@ -265,7 +265,7 @@
         },
         "prompt": "Start by building an aggregated view of the fiscal data, with a time-related drill-down dimension and then enter the prediction steps parameter.",
         "method": 1,
-        "endpoint": "https://apps.openbudgets.eu/dam/time_series",
+        "endpoint": "http://okfnrg.math.auth.gr/ocpu//library/TimeSeries.OBeu/R/open_spending.ts/print",
         "name": "aggregate",
         "title": "Timeseries of aggregated fiscal data"
       }
