@@ -1,5 +1,5 @@
 import os 
-from flask import Flask, jsonify, request, url_for, send_from_directory
+from flask import Flask, jsonify, request, url_for, send_from_directory,json as fjson
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
 from flask_cors import CORS, cross_origin
@@ -9,6 +9,10 @@ from worker import conn_dm
 import tasks.postprocessing.util as post_util
 import preprocessing_dm as ppdm
 import outlier_dm
+import redis
+import json
+import config
+import re
 
 from json import loads, load
 
@@ -25,6 +29,16 @@ db = SQLAlchemy(app)
 from models import GraphNames
 
 q_dm = Queue(connection=conn_dm)
+
+
+if config.Config.USE_DOCKER_REDIS:
+    redis_url_dm = os.getenv('REDISTOGO_URL', 'redis://192.168.99.100:6379')
+else:
+    redis_url_dm = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
+
+r = redis.StrictRedis(host='localhost', port=6379, db=8)
+
+r.flushdb()
 
 
 def has_no_empty_params(rule):
@@ -339,6 +353,13 @@ def get_results(job_key):
                 res = outlier_data_formater(meta_dic)
         else:
             res=meta_dic
+
+        #save file
+        print("saving file as test.json")
+        file = open(os.getenv("CACHE_FILE_PATH")+job_key+'.json', 'w')
+        fjson.dump({"result":res},file)
+        file.close()
+
         return jsonify({"result":res})
     else:
         return jsonify({"status":"Wait!"})
@@ -363,6 +384,25 @@ def do_outlier_detection_uep():
         filename = request.args.get('BABBAGE_AGGREGATE_URI', '')
     if filename == '':
         filename = "http://wenxion.net/OBEU/aggregate.json"
+
+    p=re.compile('__(.){5}')
+    pFilename = p.sub('',filename)
+
+    path = request.path + "/" + pFilename
+
+    if r.exists(path):
+        print('already cached')
+        cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
+        #cached_file="/home/wang/c55038a1-d699-47fb-af3a-862c1f64c010.json"
+        print(cached_file)
+
+        job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                args=[cached_file], result_ttl=5000)
+
+        #update filename
+        r.set(path, (job.get_id() + ".json").encode('utf-8'))
+
+        return jsonify(jobid=job.get_id())
 
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
@@ -404,6 +444,9 @@ def do_outlier_detection_uep():
         print('outlier_detection in job queue with id:', job.get_id())
     else:
         print('unvalid csv file')
+
+    r.set(path,(job.get_id()+".json").encode('utf-8'))
+
     return jsonify(jobid=job.get_id())
 
 
@@ -425,10 +468,28 @@ def do_outlier_detection_lof():
     if filename == '':
         filename = request.args.get('BABBAGE_AGGREGATE_URI', '')
     if filename == '':
-        # filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts"
-        #filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/budget-kilkis-expenditure-2015__74025/aggregate?drilldown=administrativeClassification.prefLabel%7CeconomicClassification.prefLabel%7CbudgetPhase.prefLabel&aggregates=amount.sum"
         filename = "http://wenxion.net/OBEU/aggregate.json"
-        
+
+    p=re.compile('__(.){5}')
+    pFilename = p.sub('',filename)
+
+    path = request.path + "/" + pFilename
+
+    if r.exists(path):
+        print('already cached')
+        cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
+        #cached_file="/home/wang/c55038a1-d699-47fb-af3a-862c1f64c010.json"
+        print(cached_file)
+
+        job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                args=[cached_file], result_ttl=5000)
+
+        #update filename
+        r.set(path, (job.get_id() + ".json").encode('utf-8'))
+
+        return jsonify(jobid=job.get_id())
+
+
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
         full_output = True
@@ -470,6 +531,10 @@ def do_outlier_detection_lof():
         print('outlier detection with job id:', job.get_id())
     else:
         print('unvalid csv file')
+
+
+    r.set(path,(job.get_id()+".json").encode('utf-8'))
+
     return jsonify(jobid=job.get_id())
 
 #
