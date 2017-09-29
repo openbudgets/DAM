@@ -265,7 +265,7 @@
         },
         "prompt": "Start by building an aggregated view of the fiscal data, with a time-related drill-down dimension and then enter the prediction steps parameter.",
         "method": 1,
-        "endpoint": "http://apps.openbudgets.eu/ocpu/ocpu/library/TimeSeries.OBeu/R/open_spending.ts/print",
+        "endpoint": "http://apps.openbudgets.eu/ocpu/library/TimeSeries.OBeu/R/open_spending.ts/print",
         "name": "aggregate",
         "title": "Timeseries of aggregated fiscal data"
       }
@@ -317,7 +317,7 @@
         },
         "prompt": "Start by building a subset of the fiscal facts. If you leave it as-is, it will contain the measures together with all the attribute labels. Otherwise, select at least a measure and a dimension to analyse.",
         "method": 1,
-        "endpoint": "http://apps.openbudgets.eu/ocpu/ocpu/library/DescriptiveStats.OBeu/R/open_spending.ds",
+        "endpoint": "http://apps.openbudgets.eu/ocpu/library/DescriptiveStats.OBeu/R/open_spending.ds",
         "name": "facts",
         "title": "Descriptive statistics for fiscal facts"
       }
@@ -396,7 +396,7 @@
         },
         "prompt": "Start by building a facts subset, by selecting at least the dimension that is to be analyzed and two measures.",
         "method": 1,
-        "endpoint": "http://apps.openbudgets.eu/ocpu/ocpu/library/Cluster.OBeu/R/open_spending.cl",
+        "endpoint": "http://apps.openbudgets.eu/ocpu/library/Cluster.OBeu/R/open_spending.cl",
         "name": "facts",
         "title": "Clustering facts"
       },
@@ -477,7 +477,7 @@
         },
         "prompt": "Start by building an aggregated view of fiscal facts. Build an budg aggregate, by selecting at least the dimension that is to be analyzed. Select an aggregate modifier to generate more than one artificial amount measures to be used for clustering.",
         "method": 1,
-        "endpoint": "http://apps.openbudgets.eu/ocpu/ocpu/library/Cluster.OBeu/R/open_spending.cl",
+        "endpoint": "http://apps.openbudgets.eu/ocpu/library/Cluster.OBeu/R/open_spending.cl",
         "name": "aggregates",
         "title": "Clustering aggregates"
       }
