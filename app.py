@@ -393,16 +393,16 @@ def do_outlier_detection_uep():
     if r.exists(path):
         print('already cached')
         cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
-        #cached_file="/home/wang/c55038a1-d699-47fb-af3a-862c1f64c010.json"
         print(cached_file)
 
-        job = q_dm.enqueue_call(func=ppdm.cached_file,
-                                args=[cached_file], result_ttl=5000)
+        my_file = os.path(cached_file)
+        if my_file.is_file():
+            job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                    args=[cached_file], result_ttl=5000)
+            #update filename
+            r.set(path, (job.get_id() + ".json").encode('utf-8'))
 
-        #update filename
-        r.set(path, (job.get_id() + ".json").encode('utf-8'))
-
-        return jsonify(jobid=job.get_id())
+            return jsonify(jobid=job.get_id())
 
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
@@ -478,16 +478,16 @@ def do_outlier_detection_lof():
     if r.exists(path):
         print('already cached')
         cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
-        #cached_file="/home/wang/c55038a1-d699-47fb-af3a-862c1f64c010.json"
         print(cached_file)
 
-        job = q_dm.enqueue_call(func=ppdm.cached_file,
-                                args=[cached_file], result_ttl=5000)
+        my_file = os.path(cached_file)
+        if my_file.is_file():
+            job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                    args=[cached_file], result_ttl=5000)
+            #update filename
+            r.set(path, (job.get_id() + ".json").encode('utf-8'))
 
-        #update filename
-        r.set(path, (job.get_id() + ".json").encode('utf-8'))
-
-        return jsonify(jobid=job.get_id())
+            return jsonify(jobid=job.get_id())
 
 
     output = request.args.get('output', 'Result')
