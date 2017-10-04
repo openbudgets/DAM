@@ -30,7 +30,7 @@ from models import GraphNames
 
 q_dm = Queue(connection=conn_dm)
 
-
+#setting up redis-server for cache
 if config.Config.USE_DOCKER_REDIS:
     redis_url_dm = os.getenv('REDISTOGO_URL', 'redis://192.168.99.100:6379')
 else:
@@ -40,6 +40,7 @@ r = redis.StrictRedis(host='localhost', port=6379, db=8)
 
 r.flushdb()
 
+#create cache folder
 if(not os.path.isdir(os.getenv('CACHE_FILE_PATH'))):
     os.mkdir(os.getenv('CACHE_FILE_PATH'),0o755)
     #os.mkdir("/home/wang/test", 0o755)
