@@ -1,4 +1,4 @@
-import os 
+import os
 from flask import Flask, jsonify, request, url_for, send_from_directory,json as fjson
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.cache import Cache
@@ -30,7 +30,7 @@ from models import GraphNames
 
 q_dm = Queue(connection=conn_dm)
 
-
+#setting up redis-server for cache
 if config.Config.USE_DOCKER_REDIS:
     redis_url_dm = os.getenv('REDISTOGO_URL', 'redis://192.168.99.100:6379')
 else:
@@ -40,6 +40,10 @@ r = redis.StrictRedis(host='localhost', port=6379, db=8)
 
 r.flushdb()
 
+#create cache folder
+if(not os.path.isdir(os.getenv('CACHE_FILE_PATH'))):
+    os.mkdir(os.getenv('CACHE_FILE_PATH'),0o755)
+    #os.mkdir("/home/wang/test", 0o755)
 
 def has_no_empty_params(rule):
     defaults = rule.defaults if rule.defaults is not None else ()
@@ -395,8 +399,7 @@ def do_outlier_detection_uep():
         cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
         print(cached_file)
 
-        my_file = os.path(cached_file)
-        if my_file.is_file():
+        if os.path.isfile(cached_file):
             job = q_dm.enqueue_call(func=ppdm.cached_file,
                                     args=[cached_file], result_ttl=5000)
             #update filename
@@ -480,8 +483,7 @@ def do_outlier_detection_lof():
         cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
         print(cached_file)
 
-        my_file = os.path(cached_file)
-        if my_file.is_file():
+        if os.path.isfile(cached_file):
             job = q_dm.enqueue_call(func=ppdm.cached_file,
                                     args=[cached_file], result_ttl=5000)
             #update filename
