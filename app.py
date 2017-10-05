@@ -158,6 +158,26 @@ def do_time_series():
     """
     #tsdata = request.args.get('tsdata', 'not given')
     json_data = request.args.get('json_data')
+
+    p=re.compile('__(.){5}')
+    pFilename = p.sub('',json_data)
+
+    path = request.path + "/" + pFilename
+
+    if r.exists(path):
+        print('already cached')
+        cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
+        print(cached_file)
+
+        if os.path.isfile(cached_file):
+            job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                    args=[cached_file], result_ttl=5000)
+            #update filename
+            r.set(path, (job.get_id() + ".json").encode('utf-8'))
+
+            return jsonify(jobid=job.get_id())
+
+
     time = request.args.get('time')
     amount = request.args.get('amount')
     prediction_steps = request.args.get('prediction_steps', '4')
@@ -178,6 +198,7 @@ def do_time_series():
                   "result link": "http://localhost:5000/results/" + job.get_id()
                   }
     }
+    r.set(path, (job.get_id() + ".json").encode('utf-8'))
     return jsonify(res)
 
 
@@ -193,6 +214,25 @@ def do_statistics():
     json_data = request.args.get('BABBAGE_FACT_URI', '')
     if json_data == '':
         json_data = request.args.get('BABBAGE_AGGREGATE_URI', '')
+
+    p=re.compile('__(.){5}')
+    pFilename = p.sub('',json_data)
+
+    path = request.path + "/" + pFilename
+
+    if r.exists(path):
+        print('already cached')
+        cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
+        print(cached_file)
+
+        if os.path.isfile(cached_file):
+            job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                    args=[cached_file], result_ttl=5000)
+            #update filename
+            r.set(path, (job.get_id() + ".json").encode('utf-8'))
+
+            return jsonify(jobid=job.get_id())
+
     dimensions = request.args.get('dimensions', '"functional_classification_2.Function|functional_classification_2.Code"')
     OKFGR_SAT = os.environ['OKFGR_SAT']
     amount= request.args.get('amount', '"Revised"')
@@ -237,6 +277,8 @@ def do_statistics():
         "curl": """curl --request POST  "http://localhost:5000/statistics?json_data=sample_json_link_openspending&dimensions='functional_classification_2.Function|functional_classification_2.Code'&amount='Revised'&coef.outl=0.8&box.outliers=TRUE&box.wdth=0.2&cor.method='spearman'""""",
         "result_link": "http://localhost:5000/results/" + job.get_id()
     }
+
+    r.set(path, (job.get_id() + ".json").encode('utf-8'))
     return jsonify(res)
 
 
@@ -264,6 +306,24 @@ def do_rule_mining():
         # filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/aragon-2008-income__568a8/facts"
         # filename = "http://ws307.math.auth.gr/rudolf/public/api/3/cubes/budget-kilkis-expenditure-2015__74025/aggregate?drilldown=administrativeClassification.prefLabel%7CeconomicClassification.prefLabel%7CbudgetPhase.prefLabel&aggregates=amount.sum"
         filename = "http://wenxion.net/OBEU/aggregate.json"
+
+    p=re.compile('__(.){5}')
+    pFilename = p.sub('',filename)
+
+    path = request.path + "/" + pFilename
+
+    if r.exists(path):
+        print('already cached')
+        cached_file = os.getenv("CACHE_FILE_PATH")+r.get(path).decode('utf-8')
+        print(cached_file)
+
+        if os.path.isfile(cached_file):
+            job = q_dm.enqueue_call(func=ppdm.cached_file,
+                                    args=[cached_file], result_ttl=5000)
+            #update filename
+            r.set(path, (job.get_id() + ".json").encode('utf-8'))
+
+            return jsonify(jobid=job.get_id())
 
     output = request.args.get('output', 'Result')
     if request.args.get('full_output', 'partial') == 'full_output':
@@ -323,6 +383,7 @@ def do_rule_mining():
                   "result link": "http://localhost:5000/results/" + job.get_id()
                   }
         }
+    r.set(path, (job.get_id() + ".json").encode('utf-8'))
     return jsonify(res)
  
 
