@@ -1,27 +1,27 @@
-Item,Features,,,Target,Score
-,administrativeClassification.prefLabel,economicClassification.prefLabel,budgetPhase.prefLabel,,
-794,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Λοιπός εξοπλισμός,Revised,335084.9,1773601.63934
-389,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση Δημοσίου Δικαίου,Reserved,27793.32,151002.906992
-509,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Reserved,12917.47,75564.0249779
-171,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Μισθώματα κτιρίων - Τεχνικών έργων ακινήτων,Revised,8224.0,50219.3582092
-917,ΥΠΗΡΕΣΙΕΣ ΠΡΑΣΙΝΟΥ,Μηχανήματα και λοιπός εξοπλισμός,Executed,8523.9,45990.384371
-460,ΥΠΗΡΕΣΙΕΣ ΠΡΑΣΙΝΟΥ,Λοιπές προμήθειες αναλωσίμων,Approved,8275.69,44865.2876245
-435,ΥΠΗΡΕΣΙΑ ΝΕΚΡΟΤΑΦΕΙΩΝ,Λοιπές εγκαταστάσεις κοινής χρήσης,Draft,4886.64,29234.0501381
-500,ΥΠΗΡΕΣΙΑ ΝΕΚΡΟΤΑΦΕΙΩΝ,Λοιπές εγκαταστάσεις κοινής χρήσης,Revised,4886.64,29233.9521246
-755,ΥΠΗΡΕΣΙΑ ΝΕΚΡΟΤΑΦΕΙΩΝ,Συντήρηση και επισκευή λοιπών μονίμων εγκαταστάσεων (πλην κτιρίων έργων),Revised,4597.74,27760.5213725
-398,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Έπιπλα - Σκεύη,Reserved,2410.8,26221.5217602
-559,ΥΠΗΡΕΣΙΕΣ ΠΡΑΣΙΝΟΥ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Draft,3830.0,24216.8263585
-745,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Μεταφορές εν γένει,Approved,3813.0,18996.0443958
-856,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Δημοσίευση προκηρύξεων,Draft,1500.0,17333.0927715
-396,ΟΙΚΟΝΟΜΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Προμήθεια ειδών καθαριότητας και ευπρεπισμού,Reserved,3000.0,15360.1218968
-760,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Οδοιπορικά έξοδα και αποζημίωση μετακινούμενων υπαλλήλων,Revised,3000.0,15117.0285394
-14,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Reserved,1216.53,14411.9115036
-750,ΛΟΙΠΕΣ ΥΠΗΡΕΣΙΕΣ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Revised,1778.73,11858.8764809
-99,ΥΠΗΡΕΣΙΕΣ ΚΑΘΑΡΙΟΤΗΤΑΣ ΚΑΙ ΗΛΕΚΤΡΟΦΩΤΙΣΜΟΥ,Ανταλλακτικά λοιπών μηχανημάτων,Draft,2000.0,11822.4818337
-603,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Revised,2216.53,11414.1565526
-557,ΥΠΗΡΕΣΙΑ ΤΕΧΝΙΚΩΝ ΕΡΓΩΝ,Αποζημιώση υπερωριακής εργασίας και για εξαιρέσιμες ημέρες και νυκτερινές ώρες και λοιπές πρόσθετες αμοιβές,Draft,1000.0,11073.605123
-700,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Approved,657.26,9054.75761132
-884,ΥΠΗΡΕΣΙΑ ΠΟΛΕΟΔΟΜΙΑΣ,Εργοδοτικές εισφορές προσωπικού με συμβαση αορίστου χρόνου,Executed,657.26,8376.37874397
-442,ΟΙΚΟΝΟΜΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Συντήρηση και επισκευή λοιπών μηχανημάτων,Approved,1389.9,8334.0139686
-567,ΟΙΚΟΝΟΜΙΚΕΣ ΚΑΙ ΔΙΟΙΚΗΤΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Λοιπά ασφάλιστρα,Draft,1000.0,5910.34600093
-886,ΓΕΝΙΚΕΣ ΥΠΗΡΕΣΙΕΣ,Δαπάνες επιμόρφωσης προσωπικού και συμμετοχής σε συνέδρια και σεμινάρια,Executed,1000.0,5555.05651126
+Item,Features,,,,,,,,,,,Target,Score
+,economicClassification.prefLabel,currency.currency,budgetPhase.prefLabel,operationCharacter.prefLabel,organization.organization,functionalClassification.prefLabel,profitCenter.prefLabel,businessArea.prefLabel,costCenter.prefLabel,fiscalYear.prefLabel,administrativeClassification.prefLabel,,
+6318,Verrechnung zentrale Erträge,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Internal Invoicing,http://dbpedia.org/resource/Bonn,Bereitstellung u. Betrieb v.Sportanlagen,Ber./Betr.v.Sp-anl.a,Verwaltung übergreifend,BKST Sportanlagen,2022,Sport- und Bäderamt,-859482.0,329012790.939
+4753,Bezüge der Beamten,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,PB01 Innere Verwaltung,Amt 10 TE-übergr.,Amt für Organisation und IT,n.a.,2022,Personal- und Organisationsamt,-61868.4,70279456.6645
+448,Beitr. Z. gesetzl.SV f. tarifl. Beschäf.,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,ProduktbereichsĂźbergreifend,Amt 50 PB-übergr.,Amt für Soziales und Wohnen,Privatrecht,2022,Amt für Soziales und Wohnen,-271.82,6884573.90598
+4982,Zuf. zu Rückst. für Altersteilzeit,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Personalmanagement,Personalmanagement,Personalamt,Zentralbudget,2022,Amt 11,2200000.0,2933334.82562
+8382,Bezüge der Beamten,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,PB01 Innere Verwaltung,Amt 21 TE-übergr.,Kassen- und Steueramt,Amtsleiterin 21,2022,Kassen- und Steueramt,-3315.83,2257911.31179
+6708,Beihilfen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Zahlungsabwicklung,2022,Kassen- und Steueramt,-733.919,1746740.74147
+641,Aufl. SoPo aus Zuweisungen Land,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Stadtbibliothek,Stadtbibliothek,LZ Stadtbibliothek,Auerberg,2022,Leistungszentrum Stadtbibliothek,-7.05,546887.525856
+6712,Beihilfen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Anlagenbuchhaltung,2022,Kassen- und Steueramt,-1468.08,545640.61744
+6707,Beihilfen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Vorbuch Kreditoren,2022,Kassen- und Steueramt,-1284.36,528546.912524
+6710,Beihilfen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Vollstreckung in Ah,2022,Kassen- und Steueramt,-917.52,494460.451946
+6301,Zuf. zu Beihilferückst.f.Pensionsrückst.,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Personalmanagement,Personalmanagement,Personalamt,Pensionszahlungen/Rückstellungen,2022,Amt 11,-188958.0,481000.306075
+6375,Erstattungen von privaten Unternehmen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Zahlungsabwicklung,2022,Kassen- und Steueramt,3.36,405920.014386
+7059,Fürsorge- Unterst.leist f. Beschäftigte,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Zahlungsabwicklung,2022,Kassen- und Steueramt,-19.56,265408.58177
+6378,Erstattungen von privaten Unternehmen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Anlagenbuchhaltung,2022,Kassen- und Steueramt,6.96,193620.701854
+6374,Erstattungen von privaten Unternehmen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Vorbuch Kreditoren,2022,Kassen- und Steueramt,6.0,185273.92536
+6376,Erstattungen von privaten Unternehmen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Vollstreckung in Ah,2022,Kassen- und Steueramt,4.32,173589.507801
+2965,Aufl. SoPo aus Zuweisungen Land,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Bezirksverwaltungsstelle Bad Godesberg,BezVSt Bad Godesberg,Verwaltung übergreifend,BKST Bezirksverwaltungsst. Bad Godesberg,2022,Bezirksverwaltungsstelle Bad Godesberg,-2000.0,154840.275785
+2968,Aufl. SoPo aus Zuweisungen Land,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Bezirksverwaltungsstelle Bonn,BezVSt Bonn,Verwaltung übergreifend,BKST Bezirksverwaltungsstelle Bonn,2022,Bezirksverwaltungsstelle Bonn,-2000.0,152347.460217
+6386,Erstattungen von privaten Unternehmen,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,Zentrale Vergabedienstleistungen,Zentr.Vergabedienstl,Zentrales Vergabeamt,Sammler Freistellungen,2022,Referat Vergabedienste,-14.88,147922.220195
+2970,Aufl. SoPo aus Zuweisungen Land,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Revenue,http://dbpedia.org/resource/Bonn,IT-Betrieb,IT-Betrieb,Verwaltung übergreifend,BKST IT-Betrieb,2022,IT-Betrieb,-3800.0,116009.722451
+8435,Vergütungen der tariflich Beschäftigten,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,PB01 Innere Verwaltung,Amt 21 TE-übergr.,Kassen- und Steueramt,Amtsleiterin 21,2022,Kassen- und Steueramt,900.174,115536.563494
+7062,Fürsorge- Unterst.leist f. Beschäftigte,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Anlagenbuchhaltung,2022,Kassen- und Steueramt,-39.24,114265.189872
+7058,Fürsorge- Unterst.leist f. Beschäftigte,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Vorbuch Kreditoren,2022,Kassen- und Steueramt,-34.2,110555.057056
+7060,Fürsorge- Unterst.leist f. Beschäftigte,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,Finanzbuchhaltung,Finanzbuchhaltung,Kassen- und Steueramt,Vollstreckung in Ah,2022,Kassen- und Steueramt,-24.48,103568.728779
+8508,Beitr. Z. gesetzl.SV f. tarifl. Beschäf.,http://data.openbudgets.eu/codelist/currency/EUR,Approved,Expenditure,http://dbpedia.org/resource/Bonn,PB01 Innere Verwaltung,Amt 21 TE-übergr.,Kassen- und Steueramt,Amtsleiterin 21,2022,Kassen- und Steueramt,283.8,97847.1402224
