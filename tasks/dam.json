@@ -214,6 +214,20 @@
   "time_series": {
     "configurations": {
       "aggregate": {
+	      "conditions": {
+          "Facts": {
+            "dimension": "datetime",
+            "numberRestriction": "3+",
+            "formatRestriction": "",
+            "description": "at least one dimension of type \"datetime\" with three or more different values available"
+          },
+          "Aggregates": {
+            "dimension": "datetime",
+            "numberRestriction": "",
+            "formatRestriction": "drilldown",
+            "description":"at least one time dimension as drilldown"
+          }
+        },
         "inputs": {
           "json_data": {
             "name": "json_data",
@@ -268,21 +282,7 @@
         "endpoint": "http://apps.openbudgets.eu/ocpu/library/TimeSeries.OBeu/R/open_spending.ts/print",
         "name": "aggregate",
         "title": "Timeseries of aggregated fiscal data"
-      },
-      "conditions": {
-          "Facts": {
-            "dimension": "datetime",
-            "numberRestriction": "3+",
-            "formatRestriction": "",
-            "description": "at least one dimension of type \"datetime\" with three or more different values available"
-          },
-          "Aggregates": {
-            "dimension": "datetime",
-            "numberRestriction": "",
-            "formatRestriction": "drilldown",
-            "description":"at least one time dimension as drilldown"
-          }
-        }
+      }
     },
     "name": "time_series",
     "title": "Time Series",
