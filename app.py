@@ -420,9 +420,12 @@ def get_results(job_key):
             res=meta_dic
 
         #save file
-        print("saving file as test.json")
+        print("saving result as json file")
         file = open(os.getenv("CACHE_FILE_PATH")+job_key+'.json', 'w')
-        fjson.dump({"result":res},file)
+        if "result" not in res.keys():
+            fjson.dump({"result":res},file)
+        else:
+            fjson.dump(res, file)
         file.close()
 
         return jsonify({"result":res})
