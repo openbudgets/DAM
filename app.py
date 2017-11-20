@@ -421,12 +421,14 @@ def get_results(job_key):
 
         #save file
         print("saving result as json file")
-        file = open(os.getenv("CACHE_FILE_PATH")+job_key+'.json', 'w')
-        if "result" not in res.keys():
-            fjson.dump({"result":res},file)
-        else:
-            fjson.dump(res, file)
-        file.close()
+        with open(os.getenv("CACHE_FILE_PATH")+job_key+'.json', 'w') as file:
+            if "result" not in res:
+                print(res)
+                fjson.dump({"result":res},file)
+            else:
+                print(res)
+                fjson.dump(res, file)
+                return jsonify(res)
 
         return jsonify({"result":res})
     else:
