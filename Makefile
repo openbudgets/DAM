@@ -2,6 +2,7 @@ SHELL := /bin/bash
 pre:
 	sudo apt-get install idle3
 	sudo apt-get install -y redis-server
+	sudo apt-get -y upgrade
 	sudo apt-get install python3-dev build-essential python-psycopg2 libpq-dev
 	sudo apt-get install libblas-dev liblapack-dev
 	sudo apt-get install wget 
