@@ -5,15 +5,9 @@ pre:
 	sudo apt-get update
 	sudo apt-get install python3-dev build-essential python-psycopg2 libpq-dev
 	sudo apt-get install libblas-dev liblapack-dev
-	sudo apt-get install wget 
-	wget http://us.archive.ubuntu.com/ubuntu/pool/main/p/postgresql-9.3/postgresql-9.3_9.3.20-0ubuntu0.14.04_amd64.deb
-	wget http://us.archive.ubuntu.com/ubuntu/pool/main/p/postgresql-9.3/postgresql-contrib-9.3_9.3.20-0ubuntu0.14.04_amd64.deb
-	sudo dpkg -i postgresql-9.3_9.3.20-0ubuntu0.14.04_amd64.deb
+	sudo apt-get install wget postgresql postgresql-contrib
 	sudo apt-get install libossp-uuid16
 	sudo apt-get install libxslt1.1
-	sudo dpkg -i postgresql-contrib-9.3_9.3.20-0ubuntu0.14.04_amd64.deb
-	sudo rm postgresql-9.3_9.3.20-0ubuntu0.14.04_amd64.deb
-	sudo rm postgresql-contrib-9.3_9.3.20-0ubuntu0.14.04_amd64.deb
 	sudo apt-get install python3-pip
 	sudo pip3 install virtualenv
 	virtualenv env
